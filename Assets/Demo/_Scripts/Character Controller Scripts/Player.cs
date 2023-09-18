@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -40,7 +38,8 @@ public class Player : MonoBehaviour
         float currentSpeedY = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Horizontal") : 0;
 
         float movementDirectionY = moveDirection.y;
-        moveDirection = (forward * currentSpeedX) + (right * currentSpeedY);
+        Vector3 desiredMove = (forward * currentSpeedX) + (right * currentSpeedY);
+        moveDirection = desiredMove.normalized * (isRunning ? runningSpeed : walkingSpeed);
 
         if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
         {
@@ -62,7 +61,7 @@ public class Player : MonoBehaviour
         // Move the controller
         characterController.Move(moveDirection * Time.deltaTime);
 
-        // Player and camera rotation
+        // Player's camera rotation
         if (canMove)
         {
             rotationX += Input.GetAxis("Mouse Y") * lookSpeed;
