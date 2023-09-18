@@ -10,9 +10,9 @@ public class Key : MonoBehaviour, IInteractable
 
     public void OnInteract()
     {
-        GameManager.Instance.isKeyCollected = true;
-        txtInteractMessage.text = "Collected Key";
-        txtMissionUpdate.text = "Use key to open Door.";
+        GameManager.Instance.isDoorUnlocked = true;
+        GameManager.Instance.txtInteractMessage.text = "Collected Key";
+        GameManager.Instance.txtMissionUpdate.text = "Use key to open Door.";
         gameObject.SetActive(false);
         
     }
@@ -21,7 +21,7 @@ public class Key : MonoBehaviour, IInteractable
     {
         if (actor.CompareTag("Player"))
         {
-            txtInteractMessage.text = "Press [E] to collect.";
+            GameManager.Instance.txtInteractMessage.text = "Press [E] to collect.";
         }
     }
 
@@ -29,7 +29,7 @@ public class Key : MonoBehaviour, IInteractable
     {
         if (actor.CompareTag("Player"))
         {
-            txtInteractMessage.text = "";
+            GameManager.Instance.txtInteractMessage.text = "";
         }
     }
 }

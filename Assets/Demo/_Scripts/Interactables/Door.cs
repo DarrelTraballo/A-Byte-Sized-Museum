@@ -10,15 +10,15 @@ public class Door : MonoBehaviour, IInteractable
 
     public void OnInteract()
     {
-        if (!GameManager.Instance.isKeyCollected) 
+        if (!GameManager.Instance.isDoorUnlocked) 
         {
-            txtInteractMessage.text = "A key is needed to open this door.";
-            txtMissionUpdate.text = "Look for a Key";
+            GameManager.Instance.txtInteractMessage.text = "Door is locked.\nA key is needed to open this door.";
+            GameManager.Instance.txtMissionUpdate.text = "Look for a Key";
         }
         else
         {
-            txtInteractMessage.text = "Door opened";
-            txtMissionUpdate.text = "Level Complete!";
+            GameManager.Instance.txtInteractMessage.text = "Door opened";
+            GameManager.Instance.txtMissionUpdate.text = "Level Complete!";
         }
     }
 
@@ -26,7 +26,7 @@ public class Door : MonoBehaviour, IInteractable
     {
         if (actor.CompareTag("Player"))
         {
-            txtInteractMessage.text = "Press [E] to interact.";
+            GameManager.Instance.txtInteractMessage.text = "Press [E] to interact.";
         }
     }
 
@@ -34,7 +34,7 @@ public class Door : MonoBehaviour, IInteractable
     {
         if (actor.CompareTag("Player"))
         {
-            txtInteractMessage.text = "";
+            // GameManager.Instance.txtInteractMessage.text = "";
         }
     }
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,24 +16,30 @@ public class GameManager : MonoBehaviour
 
     }
 
+    [Header("Levels")]
+    public List<Level> levels;
+
     [Header("Level Info")]
-    public int currentLevel;
+    public int currentLevelIndex = 1;
     public TextMeshProUGUI txtMissionUpdate;
     public TextMeshProUGUI txtInteractMessage;
 
-    [Header("Level 1")]
-    public bool isKeyCollected = false;
+    [Header("Level Elements")]
+    public bool isDoorUnlocked;
 
-    private void Update() 
+    private void Start() 
     {
-        switch (currentLevel)
-        {
-            case 1:
-                // no condition
-                // just check if key is collected
-                break;
-            default:
-                break;
-        }    
+        LoadNextLevel(currentLevelIndex); 
+        Debug.Log($"from scriptableObect: {levels[currentLevelIndex].isDoorUnlocked}");
+        Debug.Log($"from gameManager: {isDoorUnlocked}");
+    }
+
+    // TODO: make something for moving to the next level
+
+    public void LoadNextLevel(int levelNumber)
+    {
+        var currentLevel = levels[levelNumber];
+        Instantiate(currentLevel.levelPrefab);
+        isDoorUnlocked = currentLevel.isDoorUnlocked;
     }
 }
