@@ -1,12 +1,10 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-
-interface IInteractable
-{
-    public void OnInteract();
-}
 
 public class Interactor : MonoBehaviour
 {
+    [Header("Player variables")]
     public Transform interactorSource;
     public float interactRange;
 
@@ -17,12 +15,11 @@ public class Interactor : MonoBehaviour
             Ray r = new Ray(interactorSource.position, interactorSource.forward);
             if (Physics.Raycast(r, out RaycastHit hitInfo, interactRange))
             {
-                if (hitInfo.collider.gameObject.TryGetComponent(out IInteractable interactObj))
+                if (hitInfo.collider.gameObject.TryGetComponent(out InteractableBase interactObj))
                 {
                     interactObj.OnInteract();
                 }
             }
         }    
     }
-    
 }

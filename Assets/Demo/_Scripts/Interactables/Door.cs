@@ -1,12 +1,16 @@
 using UnityEngine;
 using TMPro;
 
-public class Door : MonoBehaviour, IInteractable
+public class Door : InteractableBase
 {
-    public TextMeshProUGUI txtMissionUpdate;
-    public TextMeshProUGUI txtInteractMessage;
+    public string doorInteractMessage = "Press [E] to interact.";
+    
+    private void Start()
+    {
+        onEnterInteractMessage = doorInteractMessage;
+    }
 
-    public void OnInteract()
+    public override void OnInteract()
     {
         if (!GameManager.Instance.isDoorUnlocked) 
         {
@@ -18,22 +22,6 @@ public class Door : MonoBehaviour, IInteractable
             GameManager.Instance.txtInteractMessage.text = "Door opened";
             GameManager.Instance.txtMissionUpdate.text = "Level Complete!\nLoading Next Level";
             GameManager.Instance.Invoke("LoadNextLevel", 5f);
-        }
-    }
-
-    private void OnTriggerEnter(Collider actor) 
-    {
-        if (actor.CompareTag("Player"))
-        {
-            GameManager.Instance.txtInteractMessage.text = "Press [E] to interact.";
-        }
-    }
-
-    private void OnTriggerExit(Collider actor) 
-    {
-        if (actor.CompareTag("Player"))
-        {
-            // GameManager.Instance.txtInteractMessage.text = "";
         }
     }
 }

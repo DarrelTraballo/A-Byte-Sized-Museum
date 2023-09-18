@@ -51,10 +51,20 @@ public class GameManager : MonoBehaviour
             Debug.Log("No more levels to load");
             return;
         }
+        // GameObject player = GameObject.FindGameObjectWithTag("Player");
 
         var levelToLoad = levels[levelIndex];
         currentLevelPrefab = Instantiate(levelToLoad.levelPrefab);
         isDoorUnlocked = levelToLoad.isDoorUnlocked;
+
+        if (player == null) 
+        {
+            Debug.Log("no player found");
+            return;
+        }
+
+        // TODO: fix player spawning on specified coords when loading next level.
+        // Debug.Log($"Setting player to position {levelToLoad.playerPosition}");
         player.transform.position = levelToLoad.playerPosition;
     }
 }

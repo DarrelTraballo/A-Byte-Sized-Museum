@@ -1,33 +1,21 @@
 using UnityEngine;
 using TMPro;
 
-public class Key : MonoBehaviour, IInteractable
+public class Key : InteractableBase
 {
-    public TextMeshProUGUI txtMissionUpdate;
-    public TextMeshProUGUI txtInteractMessage;
+    public string keyInteractMessage = "Press [E] to pick up.";
 
-    public void OnInteract()
+    private void Start()
+    {
+        onEnterInteractMessage = keyInteractMessage;
+    }
+
+    public override void OnInteract()
     {
         GameManager.Instance.isDoorUnlocked = true;
         GameManager.Instance.txtInteractMessage.text = "Collected Key";
         GameManager.Instance.txtMissionUpdate.text = "Use key to open Door.";
         gameObject.SetActive(false);
         
-    }
-
-    private void OnTriggerEnter(Collider actor) 
-    {
-        if (actor.CompareTag("Player"))
-        {
-            GameManager.Instance.txtInteractMessage.text = "Press [E] to collect.";
-        }
-    }
-
-    private void OnTriggerExit(Collider actor) 
-    {
-        if (actor.CompareTag("Player"))
-        {
-            GameManager.Instance.txtInteractMessage.text = "";
-        }
     }
 }
