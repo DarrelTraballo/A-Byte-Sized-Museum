@@ -1,12 +1,12 @@
+using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
     // Singleton reference
     public static GameManager Instance { get; private set; }
-
     private void Awake() 
     {
         if (Instance != null && Instance != this)
@@ -26,20 +26,35 @@ public class GameManager : MonoBehaviour
 
     [Header("Level Elements")]
     public bool isDoorUnlocked;
+    [SerializeField] private Player player;
+    private GameObject currentLevelPrefab;
 
     private void Start() 
     {
-        LoadNextLevel(currentLevelIndex); 
-        Debug.Log($"from scriptableObect: {levels[currentLevelIndex].isDoorUnlocked}");
-        Debug.Log($"from gameManager: {isDoorUnlocked}");
+        LoadLevel(currentLevelIndex); 
     }
 
-    // TODO: make something for moving to the next level
-
-    public void LoadNextLevel(int levelNumber)
+    // TODO: LEVEL 1 prompt to players you can use spacebar to jump when approaching the platforms
+    public void LoadNextLevel()
     {
-        var currentLevel = levels[levelNumber];
-        Instantiate(currentLevel.levelPrefab);
-        isDoorUnlocked = currentLevel.isDoorUnlocked;
+        currentLevelIndex++;
+        if (currentLevelIndex >= levels.Count) return;
+
+        Destroy(currentLevelPrefab);
+        LoadLevel(currentLevelIndex);
+    }
+
+    public void LoadLevel(int levelIndex)
+    {
+        if (levelIndex >= levels.Count) 
+        {
+            Debug.Log("No more levels to load");
+            return;
+        }
+
+        var levelToLoad = levels[levelIndex];
+        currentLevelPrefab = Instantiate(levelToLoad.levelPrefab);
+        isDoorUnlocked = levelToLoad.isDoorUnlocked;
+        player.transform.position = levelToLoad.playerPosition;
     }
 }

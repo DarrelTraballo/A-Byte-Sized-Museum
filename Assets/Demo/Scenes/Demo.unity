@@ -189,8 +189,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -417,7 +417,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -646,6 +646,7 @@ MonoBehaviour:
   txtMissionUpdate: {fileID: 377303012}
   txtInteractMessage: {fileID: 1543367847}
   isDoorUnlocked: 0
+  player: {fileID: 1411934212}
 --- !u!1 &1411934210
 GameObject:
   m_ObjectHideFlags: 0
@@ -825,7 +826,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -972,7 +973,7 @@ GameObject:
   - component: {fileID: 2113272940}
   - component: {fileID: 2113272939}
   - component: {fileID: 2113272938}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1105,6 +1106,6 @@ SceneRoots:
   - {fileID: 1477523136}
   - {fileID: 1381320048}
   - {fileID: 2127377111}
+  - {fileID: 1245850551}
   - {fileID: 705507995}
   - {fileID: 1411934211}
-  - {fileID: 1245850551}

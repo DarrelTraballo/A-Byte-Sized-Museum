@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -18,7 +16,8 @@ public class Door : MonoBehaviour, IInteractable
         else
         {
             GameManager.Instance.txtInteractMessage.text = "Door opened";
-            GameManager.Instance.txtMissionUpdate.text = "Level Complete!";
+            GameManager.Instance.txtMissionUpdate.text = "Level Complete!\nLoading Next Level";
+            GameManager.Instance.Invoke("LoadNextLevel", 5f);
         }
     }
 
