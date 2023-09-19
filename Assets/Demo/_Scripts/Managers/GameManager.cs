@@ -42,7 +42,9 @@ public class GameManager : MonoBehaviour
         
     }
 
-    // TODO: LEVEL 1 prompt to players you can use spacebar to jump when approaching the platforms
+    // TODO: LEVEL 4
+    //          NEED TO COMPLETE MULTIPLE PUZZLES/COLLECT N KEYS FOR DOOR TO UNLOCK
+
     public void LoadNextLevel()
     {
         currentLevelIndex++;
@@ -75,9 +77,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        // TODO: fix player spawning on specified coords when loading next level.
-        // Debug.Log($"Setting player to position {levelToLoad.playerPosition}");
-        Player.transform.position = levelToLoad.playerPosition;
+        Player.transform.SetPositionAndRotation(levelToLoad.playerPosition, Quaternion.identity);
     }
 
     public void SetCursorState(CursorLockMode cursorLockMode)

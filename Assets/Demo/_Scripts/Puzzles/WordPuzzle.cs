@@ -53,10 +53,10 @@ public class WordPuzzle : MonoBehaviour
     {
         if (answer == "KEY") 
         {
-            // COnnect this bullshit wihth the door opening thingy
-            Debug.Log("Correct");
             wallPuzzle.ClosePuzzle();
             GameManager.Instance.isDoorUnlocked = true;
+            GameManager.Instance.txtInteractMessage.text = "Puzzle Solved!";
+            GameManager.Instance.txtMissionUpdate.text = "Door Unlocked!";
         }
         else 
         {
