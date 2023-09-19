@@ -1,27 +1,36 @@
 using UnityEngine;
-using TMPro;
 
 public class Door : InteractableBase
 {
-    public string doorInteractMessage = "Press [E] to interact.";
-    
+    [Header("Door variables")]
+    public Color locekdColor;
+    public Color unlockedColor;
+    public string doorOnInteractMessage;
+    public string doorOnInteractMission;
+
+    private new Renderer renderer;
     private void Start()
     {
-        onEnterInteractMessage = doorInteractMessage;
+        renderer = GetComponent<Renderer>();
+        renderer.material.color = locekdColor;
     }
 
     public override void OnInteract()
     {
+        // if door is locked
         if (!GameManager.Instance.isDoorUnlocked) 
         {
-            GameManager.Instance.txtInteractMessage.text = "Door is locked.\nA key is needed to open this door.";
-            GameManager.Instance.txtMissionUpdate.text = "Look for a Key";
+            GameManager.Instance.txtInteractMessage.text = doorOnInteractMessage;
+            GameManager.Instance.txtMissionUpdate.text = doorOnInteractMission;
         }
+        // else if door has been unlocked
         else
         {
-            GameManager.Instance.txtInteractMessage.text = "Door opened";
-            GameManager.Instance.txtMissionUpdate.text = "Level Complete!\nLoading Next Level";
-            GameManager.Instance.Invoke("LoadNextLevel", 5f);
+            renderer.material.color = unlockedColor;
+            GameManager.Instance.txtInteractMessage.text = "Door opened.";
+            GameManager.Instance.txtMissionUpdate.text = "Door Unlocked!";
+
+            GameManager.Instance.Invoke("LoadNextLevel", 2.5f);
         }
     }
 }

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Level", menuName = "Scriptable Objects/Level")]
-public class Level : ScriptableObject
+public class LevelData : ScriptableObject
 {
     public int levelNumber;
     public string levelName;

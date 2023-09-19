@@ -1,10 +1,13 @@
 using UnityEngine;
+using TMPro;
 
+// Script needed 
 public class InteractableBase : MonoBehaviour
 {
-    [Header("Interactable Messages")]
+    [Header("Interactable Prompts")]
     public string onEnterInteractMessage = "Press [E] to interact.";
     public string onExitInteractMessage = "";
+    public string interactableObjName = "";
 
     protected virtual void OnTriggerEnter(Collider actor) 
     {

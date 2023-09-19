@@ -17,28 +17,40 @@ public class GameManager : MonoBehaviour
     }
 
     [Header("Levels")]
-    public List<Level> levels;
+    public List<LevelData> levels;
 
     [Header("Level Info")]
     public int currentLevelIndex = 1;
     public TextMeshProUGUI txtMissionUpdate;
     public TextMeshProUGUI txtInteractMessage;
+    public TextMeshProUGUI crossHairText;
 
     [Header("Level Elements")]
     public bool isDoorUnlocked;
-    [SerializeField] private Player player;
+    public Player Player { get; private set; }
     private GameObject currentLevelPrefab;
 
     private void Start() 
     {
-        LoadLevel(currentLevelIndex); 
+        Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        SetCursorState(CursorLockMode.Locked);
+        LoadLevel(currentLevelIndex);
+    }
+
+    private void Update() 
+    {
+        
     }
 
     // TODO: LEVEL 1 prompt to players you can use spacebar to jump when approaching the platforms
     public void LoadNextLevel()
     {
         currentLevelIndex++;
-        if (currentLevelIndex >= levels.Count) return;
+        if (currentLevelIndex >= levels.Count)
+        {
+            Debug.Log("No more levels to load");
+            return;
+        }
 
         Destroy(currentLevelPrefab);
         LoadLevel(currentLevelIndex);
@@ -57,7 +69,7 @@ public class GameManager : MonoBehaviour
         currentLevelPrefab = Instantiate(levelToLoad.levelPrefab);
         isDoorUnlocked = levelToLoad.isDoorUnlocked;
 
-        if (player == null) 
+        if (Player == null) 
         {
             Debug.Log("no player found");
             return;
@@ -65,6 +77,24 @@ public class GameManager : MonoBehaviour
 
         // TODO: fix player spawning on specified coords when loading next level.
         // Debug.Log($"Setting player to position {levelToLoad.playerPosition}");
-        player.transform.position = levelToLoad.playerPosition;
+        Player.transform.position = levelToLoad.playerPosition;
+    }
+
+    public void SetCursorState(CursorLockMode cursorLockMode)
+    {
+        Cursor.lockState = cursorLockMode;
+        switch (cursorLockMode)
+        {
+            case CursorLockMode.Locked:
+                Cursor.visible = false;
+                break;
+
+            case CursorLockMode.Confined:
+                Cursor.visible = true;
+                break;
+
+            default:
+                break;
+        }
     }
 }
