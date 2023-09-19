@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7384859585735476627}
+  - component: {fileID: 5303570584715302201}
   - component: {fileID: 7697579708849643070}
   - component: {fileID: 3924686114907988727}
   - component: {fileID: 4027766138559131863}
   - component: {fileID: 683954656245349421}
-  - component: {fileID: 5303570584715302201}
   m_Layer: 0
   m_Name: Key
   m_TagString: Untagged
@@ -36,6 +36,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5303570584715302201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2926337598877187753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 230fa46660bbc114c8a0342842e3010e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onEnterInteractMessage: Press [E] to pickup.
+  onExitInteractMessage: 
+  interactableObjName: Key
+  keyPrefab: {fileID: 0}
 --- !u!33 &7697579708849643070
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -128,18 +144,3 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5303570584715302201
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2926337598877187753}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 230fa46660bbc114c8a0342842e3010e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onEnterInteractMessage: Press [E] to pickup.
-  onExitInteractMessage: 
-  interactableObjName: Key

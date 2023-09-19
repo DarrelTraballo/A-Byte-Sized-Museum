@@ -27,23 +27,29 @@ public class GameManager : MonoBehaviour
 
     [Header("Level Elements")]
     public bool isDoorUnlocked;
-    public Player Player { get; private set; }
     private GameObject currentLevelPrefab;
+    public Player Player { get; private set; }
+    private CharacterController characterController;
 
     private void Start() 
     {
         Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        characterController = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>();
         SetCursorState(CursorLockMode.Locked);
         LoadLevel(currentLevelIndex);
     }
 
     private void Update() 
     {
-        
+
     }
 
     // TODO: LEVEL 4
     //          NEED TO COMPLETE MULTIPLE PUZZLES/COLLECT N KEYS FOR DOOR TO UNLOCK
+
+    // TODO: FIX PROMPTS
+
+    // TODO: REFACTOR EVERYTHING AND USE UnityEvents
 
     public void LoadNextLevel()
     {
@@ -65,7 +71,6 @@ public class GameManager : MonoBehaviour
             Debug.Log("No more levels to load");
             return;
         }
-        // GameObject player = GameObject.FindGameObjectWithTag("Player");
 
         var levelToLoad = levels[levelIndex];
         currentLevelPrefab = Instantiate(levelToLoad.levelPrefab);
@@ -77,7 +82,9 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        characterController.enabled = false;
         Player.transform.SetPositionAndRotation(levelToLoad.playerPosition, Quaternion.identity);
+        characterController.enabled = true;
     }
 
     public void SetCursorState(CursorLockMode cursorLockMode)

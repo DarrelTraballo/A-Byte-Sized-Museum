@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7971217420171959035}
+  - component: {fileID: 503453918234021669}
   - component: {fileID: 5675267076717397396}
   - component: {fileID: 5333633747433855154}
-  - component: {fileID: 503453918234021669}
   - component: {fileID: 656954906839830266}
   - component: {fileID: 3977712586083117680}
   m_Layer: 0
@@ -29,13 +29,30 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1709255238793924117}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &503453918234021669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1709255238793924117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7164cb6cfe087cc43a7cc6678323d137, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onEnterInteractMessage: Press [E] to interact.
+  onExitInteractMessage: 
+  interactableObjName: Puzzle
+  puzzlePrefab: {fileID: 1264106325956390583, guid: 4b9d9fad0aaa87f43b967598e6987781, type: 3}
+  isPuzzleOpen: 0
 --- !u!33 &5675267076717397396
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -86,23 +103,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &503453918234021669
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1709255238793924117}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7164cb6cfe087cc43a7cc6678323d137, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onEnterInteractMessage: Press [E] to interact.
-  onExitInteractMessage: 
-  interactableObjName: Puzzle
-  puzzlePrefab: {fileID: 1264106325956390583, guid: 4b9d9fad0aaa87f43b967598e6987781, type: 3}
-  isPuzzleOpen: 0
 --- !u!65 &656954906839830266
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -143,5 +143,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.017086, y: 1.743892, z: 1.3406029}
-  m_Center: {x: -0.508543, y: 0.04061854, z: 0.053955078}
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}

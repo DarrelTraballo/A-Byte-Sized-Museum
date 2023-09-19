@@ -11,10 +11,12 @@ public class WordPuzzle : MonoBehaviour
     private int currentIndex = 0;
     private string answer = "";
     private WallPuzzle wallPuzzle;
+    private Door door;
 
     private void Start() 
     {
         wallPuzzle = FindObjectOfType<WallPuzzle>();
+        door = FindObjectOfType<Door>();
     }
 
     private void Update()
@@ -54,9 +56,9 @@ public class WordPuzzle : MonoBehaviour
         if (answer == "KEY") 
         {
             wallPuzzle.ClosePuzzle();
-            GameManager.Instance.isDoorUnlocked = true;
+            door.doorUnlockCounter++;
             GameManager.Instance.txtInteractMessage.text = "Puzzle Solved!";
-            GameManager.Instance.txtMissionUpdate.text = "Door Unlocked!";
+            // GameManager.Instance.txtMissionUpdate.text = "Door Unlocked!";
         }
         else 
         {

@@ -4,7 +4,7 @@ using TMPro;
 // Script needed 
 public class InteractableBase : MonoBehaviour
 {
-    [Header("Interactable Prompts")]
+    [Header("Interactable Base Variables")]
     public string onEnterInteractMessage = "Press [E] to interact.";
     public string onExitInteractMessage = "";
     public string interactableObjName = "";
