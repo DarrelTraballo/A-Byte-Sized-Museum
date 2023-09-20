@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+// TODO: add close icon
 public class WordPuzzle : MonoBehaviour
 {
     [SerializeField]
@@ -53,7 +54,7 @@ public class WordPuzzle : MonoBehaviour
 
     public void SubmitAnswer()
     {
-        if (answer == "KEY") 
+        if (answer == "YES") 
         {
             wallPuzzle.ClosePuzzle();
             door.doorUnlockCounter++;

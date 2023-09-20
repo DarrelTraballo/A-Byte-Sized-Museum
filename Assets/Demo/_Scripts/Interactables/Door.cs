@@ -7,7 +7,7 @@ public class Door : InteractableBase
     public Color unlockedColor;
     public string doorOnInteractMessage;
     public string doorOnInteractMission;
-    public int doorUnlockProgress;
+    public int doorUnlockProgress;  // lipat sa LevelData
     public int doorUnlockCounter;
 
     private new Renderer renderer;
@@ -17,10 +17,10 @@ public class Door : InteractableBase
         renderer.material.color = locekdColor;
     }
 
+    // overriden method from InteractableBase class
     public override void OnInteract()
     {
         // if door is locked
-        Debug.Log($"All unlock conditions met? {doorUnlockCounter == doorUnlockProgress}");
         if (!GameManager.Instance.isDoorUnlocked) 
         {
             if (doorUnlockCounter == doorUnlockProgress) GameManager.Instance.isDoorUnlocked = true;

@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using Unity.VisualScripting;
 
+// Manages the entire game
 public class GameManager : MonoBehaviour
 {
-    // Singleton reference
+    // Singleton reference, para isang instance lang ang nirereference pag need i-reference from another script
     public static GameManager Instance { get; private set; }
     private void Awake() 
     {
@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
 
     [Header("Level Elements")]
     public bool isDoorUnlocked;
+    [SerializeField]
+    private int unlockProgress;
     private GameObject currentLevelPrefab;
     public Player Player { get; private set; }
     private CharacterController characterController;
@@ -46,10 +48,12 @@ public class GameManager : MonoBehaviour
 
     // TODO: LEVEL 4
     //          NEED TO COMPLETE MULTIPLE PUZZLES/COLLECT N KEYS FOR DOOR TO UNLOCK
+    //          > LevelManager?                
 
     // TODO: FIX PROMPTS
+    //         > UIManager for UI elements? idk
 
-    // TODO: REFACTOR EVERYTHING AND USE UnityEvents
+    // TODO: REFACTOR EVERYTHING AND USE UnityEvents :>
 
     public void LoadNextLevel()
     {
@@ -66,12 +70,6 @@ public class GameManager : MonoBehaviour
 
     public void LoadLevel(int levelIndex)
     {
-        if (levelIndex >= levels.Count) 
-        {
-            Debug.Log("No more levels to load");
-            return;
-        }
-
         var levelToLoad = levels[levelIndex];
         currentLevelPrefab = Instantiate(levelToLoad.levelPrefab);
         isDoorUnlocked = levelToLoad.isDoorUnlocked;

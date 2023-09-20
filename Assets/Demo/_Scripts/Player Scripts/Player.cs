@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// If can, completely refactor playerControllers
 [RequireComponent(typeof(CharacterController))]
 public class Player : MonoBehaviour
 {
