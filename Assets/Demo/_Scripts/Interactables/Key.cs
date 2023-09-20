@@ -5,18 +5,17 @@ public class Key : InteractableBase
 {
     // [SerializeField]
     // // private GameObject keyPrefab;
-    private Door door;
-    private void Start() 
+    private void Start()
     {
-        door = FindObjectOfType<Door>();
+        gameManager = GameManager.Instance;
     }
 
     public override void OnInteract()
     {
-        door.doorUnlockCounter++;
-        GameManager.Instance.txtInteractMessage.text = "Collected Key";
-        GameManager.Instance.txtMissionUpdate.text = "Use key to open Door.";
-        GameManager.Instance.crossHairText.text = "";
+        gameManager.levelUnlockCounter++;
+        gameManager.txtInteractMessage.text = "Collected Key!";     // TODO: make disappear after a delay.
+        gameManager.txtMissionUpdate.text = "Use key to open Door.";
+        gameManager.crossHairText.text = "";
         gameObject.SetActive(false);
     }
 

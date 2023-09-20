@@ -5,7 +5,7 @@ using TMPro;
 // Manages the entire game
 public class GameManager : MonoBehaviour
 {
-    // Singleton reference, para isang instance lang ang nirereference pag need i-reference from another script
+    // Singleton reference, para isang instance lang ang kinukuha pag need i-reference from another script
     public static GameManager Instance { get; private set; }
     private void Awake() 
     {
@@ -28,7 +28,8 @@ public class GameManager : MonoBehaviour
     [Header("Level Elements")]
     public bool isDoorUnlocked;
     [SerializeField]
-    private int unlockProgress;
+    public int levelUnlockProgress;
+    public int levelUnlockCounter;
     private GameObject currentLevelPrefab;
     public Player Player { get; private set; }
     private CharacterController characterController;
@@ -73,6 +74,11 @@ public class GameManager : MonoBehaviour
         var levelToLoad = levels[levelIndex];
         currentLevelPrefab = Instantiate(levelToLoad.levelPrefab);
         isDoorUnlocked = levelToLoad.isDoorUnlocked;
+        levelUnlockProgress = levelToLoad.unlockConditions;
+        levelUnlockCounter = 0;
+
+        txtMissionUpdate.text = levelToLoad.levelMissionText;
+        txtInteractMessage.text = levelToLoad.levelInteractText;
 
         if (Player == null) 
         {

@@ -7,13 +7,18 @@ public class InteractableBase : MonoBehaviour
     public string onEnterInteractMessage = "Press [E] to interact.";
     public string onExitInteractMessage = "";
     public string interactableObjName = "";
+    protected GameManager gameManager;
+    private void Start() 
+    {
+        gameManager = GameManager.Instance;
+    }
 
     // what happens if player enters interactable object collider
     protected virtual void OnTriggerEnter(Collider actor) 
     {
         if (actor.CompareTag("Player"))
         {
-            GameManager.Instance.txtInteractMessage.text = onEnterInteractMessage;
+            gameManager.txtInteractMessage.text = onEnterInteractMessage;
         }
     }
 
@@ -22,7 +27,7 @@ public class InteractableBase : MonoBehaviour
     {
         if (actor.CompareTag("Player"))
         {
-            GameManager.Instance.txtInteractMessage.text = onExitInteractMessage;
+            gameManager.txtInteractMessage.text = onExitInteractMessage;
         }
     }
 

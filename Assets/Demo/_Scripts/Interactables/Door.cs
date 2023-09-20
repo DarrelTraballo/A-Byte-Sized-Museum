@@ -7,37 +7,46 @@ public class Door : InteractableBase
     public Color unlockedColor;
     public string doorOnInteractMessage;
     public string doorOnInteractMission;
-    public int doorUnlockProgress;  // lipat sa LevelData
-    public int doorUnlockCounter;
-
     private new Renderer renderer;
+
     private void Start()
     {
         renderer = GetComponent<Renderer>();
         renderer.material.color = locekdColor;
+        gameManager = GameManager.Instance;
     }
 
     // overriden method from InteractableBase class
     public override void OnInteract()
     {
         // if door is locked
-        if (!GameManager.Instance.isDoorUnlocked) 
+        if (!gameManager.isDoorUnlocked) 
         {
-            if (doorUnlockCounter == doorUnlockProgress) GameManager.Instance.isDoorUnlocked = true;
+            gameManager.txtInteractMessage.text = doorOnInteractMessage;
+            gameManager.txtMissionUpdate.text = doorOnInteractMission;
+
+            if (gameManager.levelUnlockCounter == gameManager.levelUnlockProgress) 
+            {
+                gameManager.isDoorUnlocked = true;
+                OnInteract();
+                return;
+            }
+            else
+            {
+                int diff = gameManager.levelUnlockProgress - gameManager.levelUnlockCounter;
+                gameManager.txtInteractMessage.text = $"Door is still locked.\nYou still need {diff} key{(diff > 1 ? "s" : "" )}.";
+            }
             
-            GameManager.Instance.txtInteractMessage.text = doorOnInteractMessage;
-            GameManager.Instance.txtMissionUpdate.text = doorOnInteractMission;
         }
         // else if door has been unlocked
         else 
-        // else if (GameManager.Instance.isDoorUnlocked && (doorUnlockCounter == doorUnlockProgress))
         {
-            GameManager.Instance.isDoorUnlocked = true;
+            gameManager.isDoorUnlocked = true;
             renderer.material.color = unlockedColor;
-            GameManager.Instance.txtInteractMessage.text = "Door opened.";
-            GameManager.Instance.txtMissionUpdate.text = "Door Unlocked!";
+            gameManager.txtInteractMessage.text = "Door opened.";
+            gameManager.txtMissionUpdate.text = "Door Unlocked!";
 
-            GameManager.Instance.Invoke("LoadNextLevel", 2.5f);
+            gameManager.Invoke("LoadNextLevel", 2.5f);
         }
     }
 }

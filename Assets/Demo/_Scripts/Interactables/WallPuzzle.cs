@@ -8,6 +8,10 @@ public class WallPuzzle : InteractableBase
     [SerializeField]
     private bool isPuzzleOpen;
 
+    private void Start()
+    {
+        gameManager = GameManager.Instance;
+    }
     // Simple word puzzle lang muna
     private void Update()
     {
@@ -33,8 +37,8 @@ public class WallPuzzle : InteractableBase
             return;
         }
 
-        GameManager.Instance.Player.canMove = false;
-        GameManager.Instance.SetCursorState(CursorLockMode.Confined);
+        gameManager.Player.canMove = false;
+        gameManager.SetCursorState(CursorLockMode.Confined);
 
         if (puzzlePrefabInstance == null) 
         {
@@ -51,8 +55,8 @@ public class WallPuzzle : InteractableBase
 
     public void ClosePuzzle()
     {
-        GameManager.Instance.Player.canMove = true;
-        GameManager.Instance.SetCursorState(CursorLockMode.Locked);
+        gameManager.Player.canMove = true;
+        gameManager.SetCursorState(CursorLockMode.Locked);
 
         puzzlePrefabInstance.SetActive(false);
         isPuzzleOpen = false;

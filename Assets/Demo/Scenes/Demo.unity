@@ -123,6 +123,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &86967938
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 86967939}
+  m_Layer: 0
+  m_Name: Level Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &86967939
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86967938}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &377303010
 GameObject:
   m_ObjectHideFlags: 0
@@ -932,7 +963,7 @@ GameObject:
   - component: {fileID: 1381320048}
   - component: {fileID: 1381320049}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: Game Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -972,11 +1003,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1920bd36067e37c44966c0458cd360b5, type: 2}
   - {fileID: 11400000, guid: d5cfd44b085154e44b5fa77535e27101, type: 2}
   - {fileID: 11400000, guid: 030687f4ad459c540af6d4017adaf5cf, type: 2}
-  currentLevelIndex: 5
+  currentLevelIndex: 2
   txtMissionUpdate: {fileID: 377303012}
   txtInteractMessage: {fileID: 1543367847}
   crossHairText: {fileID: 780978864}
   isDoorUnlocked: 0
+  levelUnlockProgress: 0
+  levelUnlockCounter: 0
 --- !u!1 &1411934210
 GameObject:
   m_ObjectHideFlags: 0
@@ -1031,7 +1064,7 @@ MonoBehaviour:
   gravity: 20
   playerCamera: {fileID: 963194227}
   lookSpeed: 2
-  lookXLimit: 45
+  lookXLimit: 90
   canMove: 1
 --- !u!143 &1411934213
 CharacterController:
@@ -1319,6 +1352,37 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
+--- !u!1 &1952976197
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1952976198}
+  m_Layer: 0
+  m_Name: UI Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1952976198
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1952976197}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2113272937
 GameObject:
   m_ObjectHideFlags: 0
@@ -1461,6 +1525,8 @@ SceneRoots:
   m_Roots:
   - {fileID: 1477523136}
   - {fileID: 1381320048}
+  - {fileID: 86967939}
+  - {fileID: 1952976198}
   - {fileID: 2127377111}
   - {fileID: 1245850551}
   - {fileID: 705507995}
