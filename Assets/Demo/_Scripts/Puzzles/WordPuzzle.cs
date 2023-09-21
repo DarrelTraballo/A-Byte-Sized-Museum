@@ -66,4 +66,9 @@ public class WordPuzzle : MonoBehaviour
             puzzleRemarks.text = "Wrong";
         }
     }
+
+    public void ClosePuzzle()
+    {
+        wallPuzzle.ClosePuzzle();
+    }
 }
