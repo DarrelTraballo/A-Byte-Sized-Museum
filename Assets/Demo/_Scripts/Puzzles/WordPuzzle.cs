@@ -13,6 +13,8 @@ public class WordPuzzle : MonoBehaviour
     private string answer = "";
     private WallPuzzle wallPuzzle;
     private GameManager gameManager;
+    private bool isPuzzleSolved;
+
 
     private void Start() 
     {
@@ -57,8 +59,14 @@ public class WordPuzzle : MonoBehaviour
         if (answer == "KEY") 
         {
             wallPuzzle.ClosePuzzle();
+            if (isPuzzleSolved)
+            {
+                gameManager.txtInteractMessage.text = "Puzzle already solved!";    // TODO: make disappear after a delay
+                return;
+            }
             gameManager.levelUnlockCounter++;
             gameManager.txtInteractMessage.text = "Collected Key!";    // TODO: make disappear after a delay
+            isPuzzleSolved = true;
             // GameManager.Instance.txtMissionUpdate.text = "Door Unlocked!";
         }
         else 
