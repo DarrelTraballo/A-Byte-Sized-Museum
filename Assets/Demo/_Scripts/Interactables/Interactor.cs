@@ -26,7 +26,7 @@ namespace KaChow.Demo {
             } 
             else 
             {
-                GameManager.Instance.crossHairText.text = "";
+                // GameManager.Instance.crossHairText.text = "";
             }
         }
     }
