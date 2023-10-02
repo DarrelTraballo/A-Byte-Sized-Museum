@@ -17,6 +17,7 @@ namespace KaChow.WFC {
 
         [Header("Grid Variables")]
         public Cell cellObj;
+        [HideInInspector]
         public List<Cell> gridComponents;
 
         int iterations = 0;
@@ -93,38 +94,14 @@ namespace KaChow.WFC {
             CollapseCell(tempGrid);        
         }
 
-        // private void CollapseCell(List<Cell> tempGrid)
-        // {
-        //     int randIndex = UnityEngine.Random.Range(0, tempGrid.Count);
-
-        //     Cell cellToCollapse = tempGrid[randIndex];
-
-        //     cellToCollapse.isCollapsed = true;
-        //     Tile selectedTile = cellToCollapse.tileOptions[UnityEngine.Random.Range(0, cellToCollapse.tileOptions.Length-1)];
-        //     cellToCollapse.tileOptions = new Tile[] { selectedTile };
-
-        //     Tile foundTile = cellToCollapse.tileOptions[0];
-        //     Instantiate(foundTile, cellToCollapse.transform.position, Quaternion.identity, cellToCollapse.transform);
-
-        //     UpdateGeneration();
-        // }
-
         private void CollapseCell(List<Cell> tempGrid)
         {
-            // Create a list of cells that have tile options
-            List<Cell> cellsWithTileOptions = tempGrid.Where(cell => cell.tileOptions.Length > 0).ToList();
+            int randIndex = UnityEngine.Random.Range(0, tempGrid.Count);
 
-            // if (cellsWithTileOptions.Count == 0)
-            // {
-            //     // Handle the case where there are no cells with tile options
-            //     return;
-            // }
-
-            int randIndex = UnityEngine.Random.Range(0, cellsWithTileOptions.Count);
-            Cell cellToCollapse = cellsWithTileOptions[randIndex];
+            Cell cellToCollapse = tempGrid[randIndex];
 
             cellToCollapse.isCollapsed = true;
-            Tile selectedTile = cellToCollapse.tileOptions[UnityEngine.Random.Range(0, cellToCollapse.tileOptions.Length)];
+            Tile selectedTile = cellToCollapse.tileOptions[UnityEngine.Random.Range(0, cellToCollapse.tileOptions.Length-1)];
             cellToCollapse.tileOptions = new Tile[] { selectedTile };
 
             Tile foundTile = cellToCollapse.tileOptions[0];
@@ -132,6 +109,30 @@ namespace KaChow.WFC {
 
             UpdateGeneration();
         }
+
+        // private void CollapseCell(List<Cell> tempGrid)
+        // {
+        //     // Create a list of cells that have tile options
+        //     List<Cell> cellsWithTileOptions = tempGrid.Where(cell => cell.tileOptions.Length > 0).ToList();
+
+        //     // if (cellsWithTileOptions.Count == 0)
+        //     // {
+        //     //     // Handle the case where there are no cells with tile options
+        //     //     return;
+        //     // }
+
+        //     int randIndex = UnityEngine.Random.Range(0, cellsWithTileOptions.Count);
+        //     Cell cellToCollapse = cellsWithTileOptions[randIndex];
+
+        //     cellToCollapse.isCollapsed = true;
+        //     Tile selectedTile = cellToCollapse.tileOptions[UnityEngine.Random.Range(0, cellToCollapse.tileOptions.Length)];
+        //     cellToCollapse.tileOptions = new Tile[] { selectedTile };
+
+        //     Tile foundTile = cellToCollapse.tileOptions[0];
+        //     Instantiate(foundTile, cellToCollapse.transform.position, Quaternion.identity, cellToCollapse.transform);
+
+        //     UpdateGeneration();
+        // }
 
         private void UpdateGeneration()
         {
