@@ -2,81 +2,82 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-// TODO: add close icon
-public class WordPuzzle : MonoBehaviour
-{
-    [SerializeField]
-    private List<TextMeshProUGUI> letters;
-    [SerializeField]
-    private TextMeshProUGUI puzzleRemarks;
-    private int currentIndex = 0;
-    private string answer = "";
-    private WallPuzzle wallPuzzle;
-    private GameManager gameManager;
-    private bool isPuzzleSolved;
-
-
-    private void Start() 
+namespace KaChow.Demo {
+    public class WordPuzzle : MonoBehaviour
     {
-        gameManager = GameManager.Instance;
-        wallPuzzle = FindObjectOfType<WallPuzzle>();
-    }
+        [SerializeField]
+        private List<TextMeshProUGUI> letters;
+        [SerializeField]
+        private TextMeshProUGUI puzzleRemarks;
+        private int currentIndex = 0;
+        private string answer = "";
+        private WallPuzzle wallPuzzle;
+        private GameManager gameManager;
+        private bool isPuzzleSolved;
 
-    private void Update()
-    {
-        // on key press, lalabas sa mga blanks yung tinype na letter
-        if (Input.anyKeyDown)
+
+        private void Start() 
         {
-            foreach (char c in Input.inputString)
-            {
-                // Check if the character is a letter and within the array bounds
-                if (char.IsLetter(c) && currentIndex < letters.Count)
-                {
-                    // Assign the character to the current TextMeshProUGUI
-                    var nextLetter = char.ToUpper(c).ToString();
-                    letters[currentIndex].text = nextLetter;
-                    answer += nextLetter;
+            gameManager = GameManager.Instance;
+            wallPuzzle = FindObjectOfType<WallPuzzle>();
+        }
 
-                    // Move to the next TextMeshProUGUI
-                    currentIndex++;
+        private void Update()
+        {
+            // on key press, lalabas sa mga blanks yung tinype na letter
+            if (Input.anyKeyDown)
+            {
+                foreach (char c in Input.inputString)
+                {
+                    // Check if the character is a letter and within the array bounds
+                    if (char.IsLetter(c) && currentIndex < letters.Count)
+                    {
+                        // Assign the character to the current TextMeshProUGUI
+                        var nextLetter = char.ToUpper(c).ToString();
+                        letters[currentIndex].text = nextLetter;
+                        answer += nextLetter;
+
+                        // Move to the next TextMeshProUGUI
+                        currentIndex++;
+                    }
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.Backspace))
+            {
+                if (currentIndex > 0) 
+                {
+                    currentIndex--;
+                    answer = answer.Remove(answer.Length - 1);
+                    letters[currentIndex].text = "";
                 }
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Backspace))
+        public void SubmitAnswer()
         {
-            if (currentIndex > 0) 
+            if (answer == "KEY") 
             {
-                currentIndex--;
-                answer = answer.Remove(answer.Length - 1);
-                letters[currentIndex].text = "";
+                wallPuzzle.ClosePuzzle();
+                if (isPuzzleSolved)
+                {
+                    gameManager.txtInteractMessage.text = "Puzzle already solved!";    // TODO: make disappear after a delay
+                    return;
+                }
+                gameManager.levelUnlockCounter++;
+                gameManager.txtInteractMessage.text = "Collected Key!";    // TODO: make disappear after a delay
+                isPuzzleSolved = true;
+                // GameManager.Instance.txtMissionUpdate.text = "Door Unlocked!";
+            }
+            else 
+            {
+                puzzleRemarks.text = "Wrong";
             }
         }
-    }
 
-    public void SubmitAnswer()
-    {
-        if (answer == "KEY") 
+        public void ClosePuzzle()
         {
             wallPuzzle.ClosePuzzle();
-            if (isPuzzleSolved)
-            {
-                gameManager.txtInteractMessage.text = "Puzzle already solved!";    // TODO: make disappear after a delay
-                return;
-            }
-            gameManager.levelUnlockCounter++;
-            gameManager.txtInteractMessage.text = "Collected Key!";    // TODO: make disappear after a delay
-            isPuzzleSolved = true;
-            // GameManager.Instance.txtMissionUpdate.text = "Door Unlocked!";
         }
-        else 
-        {
-            puzzleRemarks.text = "Wrong";
-        }
-    }
-
-    public void ClosePuzzle()
-    {
-        wallPuzzle.ClosePuzzle();
     }
 }

@@ -2,30 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Interactor : MonoBehaviour
-{
-    [Header("Player variables")]
-    public Transform interactorSource;
-    public float interactRange;
-
-    private void Update() 
+namespace KaChow.Demo {
+    public class Interactor : MonoBehaviour
     {
-        Ray r = new Ray(interactorSource.position, interactorSource.forward);
-        if (Physics.Raycast(r, out RaycastHit hitInfo, interactRange))
+        [Header("Player variables")]
+        public Transform interactorSource;
+        public float interactRange;
+
+        private void Update() 
         {
-            var hit = hitInfo.collider.gameObject.TryGetComponent(out InteractableBase interactObj);
-            if (hit)
+            Ray r = new Ray(interactorSource.position, interactorSource.forward);
+            if (Physics.Raycast(r, out RaycastHit hitInfo, interactRange))
             {
-                GameManager.Instance.crossHairText.text = interactObj.interactableObjName;
-                if (Input.GetKeyDown(KeyCode.E))
+                var hit = hitInfo.collider.gameObject.TryGetComponent(out InteractableBase interactObj);
+                if (hit)
                 {
-                    interactObj.OnInteract();
+                    GameManager.Instance.crossHairText.text = interactObj.interactableObjName;
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        interactObj.OnInteract();
+                    }
                 }
+            } 
+            else 
+            {
+                GameManager.Instance.crossHairText.text = "";
             }
-        } 
-        else 
-        {
-            GameManager.Instance.crossHairText.text = "";
         }
     }
 }

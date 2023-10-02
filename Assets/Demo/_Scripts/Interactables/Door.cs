@@ -1,52 +1,55 @@
 using UnityEngine;
 
-public class Door : InteractableBase
-{
-    [Header("Door variables")]
-    public Color locekdColor;
-    public Color unlockedColor;
-    public string doorOnInteractMessage;
-    public string doorOnInteractMission;
-    private new Renderer renderer;
+namespace KaChow.Demo {
 
-    private void Start()
+    public class Door : InteractableBase
     {
-        renderer = GetComponent<Renderer>();
-        renderer.material.color = locekdColor;
-        gameManager = GameManager.Instance;
-    }
+        [Header("Door variables")]
+        public Color locekdColor;
+        public Color unlockedColor;
+        public string doorOnInteractMessage;
+        public string doorOnInteractMission;
+        private new Renderer renderer;
 
-    // overriden method from InteractableBase class
-    public override void OnInteract()
-    {
-        // if door is locked
-        if (!gameManager.isDoorUnlocked) 
+        private void Start()
         {
-            gameManager.txtInteractMessage.text = doorOnInteractMessage;
-            gameManager.txtMissionUpdate.text = doorOnInteractMission;
+            renderer = GetComponent<Renderer>();
+            renderer.material.color = locekdColor;
+            gameManager = GameManager.Instance;
+        }
 
-            if (gameManager.levelUnlockCounter == gameManager.levelUnlockProgress) 
+        // overriden method from InteractableBase class
+        public override void OnInteract()
+        {
+            // if door is locked
+            if (!gameManager.isDoorUnlocked) 
+            {
+                gameManager.txtInteractMessage.text = doorOnInteractMessage;
+                gameManager.txtMissionUpdate.text = doorOnInteractMission;
+
+                if (gameManager.levelUnlockCounter == gameManager.levelUnlockProgress) 
+                {
+                    gameManager.isDoorUnlocked = true;
+                    OnInteract();
+                    return;
+                }
+                else
+                {
+                    int diff = gameManager.levelUnlockProgress - gameManager.levelUnlockCounter;
+                    gameManager.txtInteractMessage.text = $"Door is still locked.\nYou still need {diff} key{(diff > 1 ? "s" : "" )}.";
+                }
+                
+            }
+            // else if door has been unlocked
+            else 
             {
                 gameManager.isDoorUnlocked = true;
-                OnInteract();
-                return;
-            }
-            else
-            {
-                int diff = gameManager.levelUnlockProgress - gameManager.levelUnlockCounter;
-                gameManager.txtInteractMessage.text = $"Door is still locked.\nYou still need {diff} key{(diff > 1 ? "s" : "" )}.";
-            }
-            
-        }
-        // else if door has been unlocked
-        else 
-        {
-            gameManager.isDoorUnlocked = true;
-            renderer.material.color = unlockedColor;
-            gameManager.txtInteractMessage.text = "Door opened.";
-            gameManager.txtMissionUpdate.text = "Door Unlocked!";
+                renderer.material.color = unlockedColor;
+                gameManager.txtInteractMessage.text = "Door opened.";
+                gameManager.txtMissionUpdate.text = "Door Unlocked!";
 
-            gameManager.Invoke("LoadNextLevel", 2.5f);
+                gameManager.Invoke("LoadNextLevel", 2.5f);
+            }
         }
     }
 }

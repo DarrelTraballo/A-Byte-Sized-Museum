@@ -1,64 +1,66 @@
 using UnityEngine;
 
-public class WallPuzzle : InteractableBase
-{
-    [SerializeField]
-    private GameObject puzzlePrefab;
-    private GameObject puzzlePrefabInstance;
-    [SerializeField]
-    private bool isPuzzleOpen;
+namespace KaChow.Demo {
+    public class WallPuzzle : InteractableBase
+    {
+        [SerializeField]
+        private GameObject puzzlePrefab;
+        private GameObject puzzlePrefabInstance;
+        [SerializeField]
+        private bool isPuzzleOpen;
 
-    private void Start()
-    {
-        gameManager = GameManager.Instance;
-    }
-    // Simple word puzzle lang muna
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape) && isPuzzleOpen)
+        private void Start()
         {
-           ClosePuzzle();
+            gameManager = GameManager.Instance;
         }
-    }
-
-    public override void OnInteract()
-    {
-        if (!isPuzzleOpen)
+        // Simple word puzzle lang muna
+        private void Update()
         {
-            OpenPuzzle();
-        }
-    }
-
-    private void OpenPuzzle() 
-    {
-        if (puzzlePrefab == null) 
-        {
-            Debug.Log("Puzzle Prefab not set");
-            return;
+            if (Input.GetKeyDown(KeyCode.Escape) && isPuzzleOpen)
+            {
+            ClosePuzzle();
+            }
         }
 
-        gameManager.Player.canMove = false;
-        gameManager.SetCursorState(CursorLockMode.Confined);
-
-        if (puzzlePrefabInstance == null) 
+        public override void OnInteract()
         {
-            puzzlePrefabInstance = Instantiate(puzzlePrefab);
-            puzzlePrefabInstance.transform.SetParent(GameObject.Find("Canvas").transform, false);
-            isPuzzleOpen = true;
+            if (!isPuzzleOpen)
+            {
+                OpenPuzzle();
+            }
         }
-        else
+
+        private void OpenPuzzle() 
         {
-            isPuzzleOpen = !isPuzzleOpen;
-            puzzlePrefabInstance.SetActive(isPuzzleOpen);
+            if (puzzlePrefab == null) 
+            {
+                Debug.Log("Puzzle Prefab not set");
+                return;
+            }
+
+            gameManager.Player.canMove = false;
+            gameManager.SetCursorState(CursorLockMode.Confined);
+
+            if (puzzlePrefabInstance == null) 
+            {
+                puzzlePrefabInstance = Instantiate(puzzlePrefab);
+                puzzlePrefabInstance.transform.SetParent(GameObject.Find("Canvas").transform, false);
+                isPuzzleOpen = true;
+            }
+            else
+            {
+                isPuzzleOpen = !isPuzzleOpen;
+                puzzlePrefabInstance.SetActive(isPuzzleOpen);
+            }
         }
-    }
 
-    public void ClosePuzzle()
-    {
-        gameManager.Player.canMove = true;
-        gameManager.SetCursorState(CursorLockMode.Locked);
+        public void ClosePuzzle()
+        {
+            gameManager.Player.canMove = true;
+            gameManager.SetCursorState(CursorLockMode.Locked);
 
-        puzzlePrefabInstance.SetActive(false);
-        isPuzzleOpen = false;
+            puzzlePrefabInstance.SetActive(false);
+            isPuzzleOpen = false;
+        }
     }
 }
