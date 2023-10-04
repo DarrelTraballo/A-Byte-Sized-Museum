@@ -1,13 +1,11 @@
-using System.CodeDom.Compiler;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Video;
+using KaChow.WFC;
 
 namespace KaChow.AByteSizedMuseum
 {
     public class ExhibitGenerator : MonoBehaviour
     {
+        [Header("WFC Variables")]
         [SerializeField]
         [Range(15, 30)]
         private int minGridSize;
@@ -16,74 +14,83 @@ namespace KaChow.AByteSizedMuseum
         [Range(15, 30)]
         private int maxGridSize;
 
+        [SerializeField]
+        private int rows;
+        [SerializeField]
+        private int cols;
+
+        [Space]
         [SerializeField] 
-        private GameObject gridCellPrefab;
+        private Tile[] gridTilePrefabs;
+
+        [Header("Wall")]
         [SerializeField]
         private GameObject wallPrefab;
 
+        // TODO: 
+        //      GENERATE A BUNCH OF THEM AT THE SAME TIME, 
         private void Start() 
         {
-            int x = Random.Range(minGridSize, maxGridSize + 1);
-            int z = Random.Range(minGridSize, maxGridSize + 1);
+            rows = Random.Range(minGridSize, maxGridSize + 1);
+            cols = Random.Range(minGridSize, maxGridSize + 1);
+            Debug.Log($"Generating {rows} x {cols} grid");
 
-            GameObject exhibit = new GameObject("Exhibit");
-
-            GenerateGrid(x, z, exhibit);
-            GenerateGrid(x, z, exhibit, isFloor: false);
-
-            GenerateWalls(x, z, exhibit);
-            Debug.Log($"Generating {x} x {z} grid");
+            GenerateExhibit(rows, cols);
         }
 
+        public void GenerateExhibit(int rows, int columns) 
+        {
+            GameObject exhibit = new GameObject("Exhibit");
+
+            GenerateGrid(rows, columns, exhibit);
+
+            // TODO: Generate ceiling, one prefab nalang i-initialize then stretch or something
+            // GenerateGrid(x, z, exhibit, isFloor: false);
+
+            GenerateWalls(rows, columns, exhibit);
+        }
 
         private void GenerateGrid(int rows, int columns,  GameObject parent, bool isFloor = true)
-        {
-            // insert WFC generation code here
+        {           
             GameObject floor = new GameObject(isFloor ? "Floor" : "Ceiling");
 
-            int height = isFloor ? 0 : 6;
-
-            for (int x = 0; x < rows; x++) 
-            {
-                for (int z = 0; z < columns; z++)
-                {
-                    Vector3 position = new Vector3(x, height, z);
-
-                    var gridCell = Instantiate(gridCellPrefab, position, Quaternion.identity, floor.transform);
-                }
-            }
+            GameManager.Instance.WFC.InitializeGrid(rows, columns, floor, gridTilePrefabs);
 
             floor.transform.parent = parent.transform;
         }
 
         // Try if it is possible to have just one wall for each face, and just scale it depending on row and col size
+        // Doors where?
         private void GenerateWalls(int rows, int columns, GameObject parent)
         {
             GameObject walls = new GameObject("Walls");
 
+            float tileSize = 2f;
+
             // corners
-            InstantiateWall(new Vector3(-1, 0, -1), walls);
-            InstantiateWall(new Vector3(rows, 0, -1), walls);
-            InstantiateWall(new Vector3(-1, 0, columns), walls);
-            InstantiateWall(new Vector3(rows, 0, columns), walls);
+            InstantiateWall(new Vector3(-tileSize, 0, -tileSize), walls);
+            InstantiateWall(new Vector3(rows * tileSize, 0, -tileSize), walls);
+            InstantiateWall(new Vector3(-tileSize, 0, columns * tileSize), walls);
+            InstantiateWall(new Vector3(rows * tileSize, 0, columns * tileSize), walls);
 
             for (int x = 0; x < rows; x++)
             {
                 // Left Wall
-                InstantiateWall(new Vector3(x, 0, -1), walls);
+                InstantiateWall(new Vector3(x * tileSize, 0, -tileSize), walls);
 
                 // Right Wall
-                InstantiateWall(new Vector3(x, 0, columns), walls);
+                InstantiateWall(new Vector3(x * tileSize, 0, columns * tileSize), walls);
             }
 
             for (int z = 0; z < columns; z++)
             {
                 // Left Wall
-                InstantiateWall(new Vector3(-1, 0, z), walls);
+                InstantiateWall(new Vector3(-tileSize, 0, z * tileSize), walls);
 
                 // Right Wall
-                InstantiateWall(new Vector3(rows, 0, z), walls);
+                InstantiateWall(new Vector3(rows * tileSize, 0, z * tileSize), walls);
             }
+
             walls.transform.parent = parent.transform;
         }
 

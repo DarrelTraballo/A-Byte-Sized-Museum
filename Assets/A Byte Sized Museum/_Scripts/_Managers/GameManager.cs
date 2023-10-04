@@ -1,5 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+using KaChow.WFC;
+using KaChow.Demo;
 using UnityEngine;
 
 namespace KaChow.AByteSizedMuseum 
@@ -24,5 +24,45 @@ namespace KaChow.AByteSizedMuseum
         //          - Do something about tilesets
         //       - Exhibit Generation using WFC
         //       - 
+        
+        // Exhibit Generator variables
+        // [Header("Exhibit Generator variables")]
+
+
+        public WaveFunctionCollapse WFC { get; private set; }
+        public Player Player { get ; private set; }
+        private CharacterController characterController;
+
+        private void Start()
+        {
+            WFC = GetComponent<WaveFunctionCollapse>();
+            Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+            characterController = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>();
+
+            SetCursorState(CursorLockMode.Locked);
+        }
+
+        private void GenerateExhibit() 
+        {
+
+        }
+
+        public void SetCursorState(CursorLockMode cursorLockMode)
+        {
+            Cursor.lockState = cursorLockMode;
+            switch (cursorLockMode)
+            {
+                case CursorLockMode.Locked:
+                    Cursor.visible = false;
+                    break;
+
+                case CursorLockMode.Confined:
+                    Cursor.visible = true;
+                    break;
+
+                default:
+                    break;
+            }
+        }
     }
 }

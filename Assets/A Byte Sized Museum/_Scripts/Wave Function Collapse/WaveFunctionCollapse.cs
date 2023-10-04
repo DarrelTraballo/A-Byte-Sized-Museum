@@ -9,29 +9,32 @@ namespace KaChow.WFC {
     public class WaveFunctionCollapse : MonoBehaviour
     {
         [Header("Algorithm Variables")]
-        public int dimensions;
-        [SerializeField] private float generationSpeed;
+        private int rows;
+        private int cols;
+        private int dimensions;
+        // [SerializeField] private float generationSpeed;
+
 
         [Header("Tiles")]
-        public Tile[] tileObjects;
+        [SerializeField]
+        private Tile[] tileObjects;
 
         [Header("Grid Variables")]
         public Cell cellObj;
-        [HideInInspector]
+
+        // [HideInInspector]
         public List<Cell> gridComponents;
 
-        int iterations = 0;
+        private int iterations = 0;
 
-        [SerializeField] public static bool IsDoneGenerating;
+
+        public int Rows { get; set; }
+        public int Cols { get; set; }
 
         private void Awake()
         {
             gridComponents = new List<Cell>();
 
-            // AdjustCamera();
-
-            InitializeGrid();
-            IsDoneGenerating = false;
         }
 
         private void AdjustCamera() 
@@ -46,25 +49,30 @@ namespace KaChow.WFC {
             Camera.main.transform.rotation = newRotation;
         }
 
-        private void InitializeGrid()
+        public void InitializeGrid(int rows, int cols, GameObject parent, Tile[] tileObjects)
         {
-            GameObject map = new GameObject("Map");
+            // GameObject map = new GameObject("Map");
+            this.rows = rows;
+            this.cols = cols;
+            this.tileObjects = tileObjects;
+            dimensions = rows * cols;
 
-            for (int y = 0; y < dimensions; y++)
+            for (int x = 0; x < rows; x++)
             {
-                for (int x = 0; x < dimensions; x++)
+                for (int z = 0; z < cols; z++)
                 {
-                    Cell newCell = Instantiate(cellObj, new Vector3(x, 0, y), Quaternion.identity, map.transform);
+                    Cell newCell = Instantiate(cellObj, new Vector3(x * 2, 0, z * 2), Quaternion.identity, parent.transform);
                     newCell.CreateCell(false, tileObjects);
                     gridComponents.Add(newCell);
                 }
             }
 
-            StartCoroutine(CheckEntropy());
+            // StartCoroutine(CheckEntropy());
+            CheckEntropy();
         }
 
-
-        private IEnumerator CheckEntropy()
+        // private IEnumerator CheckEntropy()
+        private void CheckEntropy()
         {
             List<Cell> tempGrid = new List<Cell>(gridComponents);
 
@@ -89,7 +97,7 @@ namespace KaChow.WFC {
                 tempGrid.RemoveRange(stopIndex, tempGrid.Count - stopIndex);
             }
 
-            yield return new WaitForSeconds(generationSpeed);
+            // yield return new WaitForSeconds(generationSpeed);
 
             CollapseCell(tempGrid);        
         }
@@ -101,6 +109,7 @@ namespace KaChow.WFC {
             Cell cellToCollapse = tempGrid[randIndex];
 
             cellToCollapse.isCollapsed = true;
+            // IndexOutOfRangeException: Index was outside the bounds of the array.
             Tile selectedTile = cellToCollapse.tileOptions[UnityEngine.Random.Range(0, cellToCollapse.tileOptions.Length-1)];
             cellToCollapse.tileOptions = new Tile[] { selectedTile };
 
@@ -110,39 +119,17 @@ namespace KaChow.WFC {
             UpdateGeneration();
         }
 
-        // private void CollapseCell(List<Cell> tempGrid)
-        // {
-        //     // Create a list of cells that have tile options
-        //     List<Cell> cellsWithTileOptions = tempGrid.Where(cell => cell.tileOptions.Length > 0).ToList();
-
-        //     // if (cellsWithTileOptions.Count == 0)
-        //     // {
-        //     //     // Handle the case where there are no cells with tile options
-        //     //     return;
-        //     // }
-
-        //     int randIndex = UnityEngine.Random.Range(0, cellsWithTileOptions.Count);
-        //     Cell cellToCollapse = cellsWithTileOptions[randIndex];
-
-        //     cellToCollapse.isCollapsed = true;
-        //     Tile selectedTile = cellToCollapse.tileOptions[UnityEngine.Random.Range(0, cellToCollapse.tileOptions.Length)];
-        //     cellToCollapse.tileOptions = new Tile[] { selectedTile };
-
-        //     Tile foundTile = cellToCollapse.tileOptions[0];
-        //     Instantiate(foundTile, cellToCollapse.transform.position, Quaternion.identity, cellToCollapse.transform);
-
-        //     UpdateGeneration();
-        // }
-
         private void UpdateGeneration()
         {
             List<Cell> newGenerationCell = new List<Cell>(gridComponents);
 
-            for (int y = 0; y < dimensions; y++)
+            for (int x = 0; x < rows; x++)
             {
-                for (int x = 0; x < dimensions; x++)
+                for (int z = 0; z < cols; z++)
                 {
-                    var index = x + y * dimensions;
+                    var index = z + x * ((rows >= cols) ? rows : cols);
+                    // fix index out of range shenanigans somewhere here, idk\
+                    // ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
                     if (gridComponents[index].isCollapsed)
                     {
                         newGenerationCell[index] = gridComponents[index];
@@ -156,9 +143,9 @@ namespace KaChow.WFC {
                         }
 
                         //update above
-                        if (y > 0)
+                        if (x > 0)
                         {
-                            Cell up = gridComponents[x + (y - 1) * dimensions];
+                            Cell up = gridComponents[z + (x - 1) * rows];
                             List<Tile> validOptions = new List<Tile>();
 
                             foreach (Tile possibleOptions in up.tileOptions)
@@ -173,9 +160,9 @@ namespace KaChow.WFC {
                         }
 
                         //update right
-                        if (x < dimensions - 1)
+                        if (z < rows - 1)
                         {
-                            Cell right = gridComponents[x + 1 + y * dimensions];
+                            Cell right = gridComponents[z + 1 + x * cols];
                             List<Tile> validOptions = new List<Tile>();
 
                             foreach (Tile possibleOptions in right.tileOptions)
@@ -190,9 +177,9 @@ namespace KaChow.WFC {
                         }
 
                         //look down
-                        if (y < dimensions - 1)
+                        if (x < cols - 1)
                         {
-                            Cell down = gridComponents[x + (y + 1) * dimensions];
+                            Cell down = gridComponents[z + (x + 1) * rows];
                             List<Tile> validOptions = new List<Tile>();
 
                             foreach (Tile possibleOptions in down.tileOptions)
@@ -207,9 +194,9 @@ namespace KaChow.WFC {
                         }
 
                         //look left
-                        if (x > 0)
+                        if (z > 0)
                         {
-                            Cell left = gridComponents[x - 1 + y * dimensions];
+                            Cell left = gridComponents[z - 1 + x * cols];
                             List<Tile> validOptions = new List<Tile>();
 
                             foreach (Tile possibleOptions in left.tileOptions)
@@ -238,14 +225,10 @@ namespace KaChow.WFC {
             gridComponents = newGenerationCell;
             iterations++;
 
-            if(iterations < dimensions * dimensions)
+            if(iterations < rows * cols)
             {
-                StartCoroutine(CheckEntropy());
-            }
-
-            else
-            {
-                IsDoneGenerating = !IsDoneGenerating;
+                // StartCoroutine(CheckEntropy());
+                CheckEntropy();
             }
         }
 
