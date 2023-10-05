@@ -109,7 +109,7 @@ namespace KaChow.WFC {
             Cell cellToCollapse = tempGrid[randIndex];
 
             cellToCollapse.isCollapsed = true;
-            // IndexOutOfRangeException: Index was outside the bounds of the array.
+            // FIXME: IndexOutOfRangeException: Index was outside the bounds of the array.
             Tile selectedTile = cellToCollapse.tileOptions[UnityEngine.Random.Range(0, cellToCollapse.tileOptions.Length-1)];
             cellToCollapse.tileOptions = new Tile[] { selectedTile };
 
@@ -128,7 +128,7 @@ namespace KaChow.WFC {
                 for (int z = 0; z < cols; z++)
                 {
                     var index = z + x * ((rows >= cols) ? rows : cols);
-                    // fix index out of range shenanigans somewhere here, idk\
+                    // FIXME: fix index out of range shenanigans somewhere here, idk\
                     // ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
                     if (gridComponents[index].isCollapsed)
                     {
