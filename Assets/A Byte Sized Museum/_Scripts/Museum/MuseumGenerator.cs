@@ -1,13 +1,14 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 namespace KaChow.AByteSizedMuseum
 {
     public class MuseumGenerator : MonoBehaviour
     {
-        [Header("Exhibit Generator variables")]
+        [Header("Exhibit Generator Variables")]
         [SerializeField] private ExhibitGenerator exhibitGenerator;
+        [SerializeField] private Transform exhibitParent;
         [SerializeField] private int exhibitCount = 1;
 
         [Space]
@@ -27,9 +28,9 @@ namespace KaChow.AByteSizedMuseum
         [SerializeField] private float minSeparation = 10f;
 
         [Space]
-        [Header("Exhibit Parent GameObject")]
-        [SerializeField] private Transform exhibitParent;
-
+        [SerializeField] private GameObject hallwayPrefab;
+        [SerializeField] private Transform hallwayParent;
+        [SerializeField] private float hallwayHeight = 0.1f;
 
         // 2. Place exhibits randomly inside the defined area
         public void GenerateExhibits() 
@@ -43,7 +44,9 @@ namespace KaChow.AByteSizedMuseum
             Vector3 exhibitStartPos;
             GameObject exhibit;
             List<Bounds> existingExhibitBounds = new List<Bounds>();
-            int maxAttempts = 50;
+            List<Vector3> roomCenters = new List<Vector3>();
+
+            int maxAttempts = 100;
 
             for (int i = 0; i < exhibitCount; i++)
             {
@@ -60,10 +63,10 @@ namespace KaChow.AByteSizedMuseum
                     // TODO: align to the middle of museum lobby
                     if (i == 0) 
                         exhibitStartPos = new Vector3(0f, 0f, -(rows / 2));
-                    else if (i == exhibitCount - 1)
-                    {
-                        exhibitStartPos = new Vector3(70f, 0f, -(rows / 2));
-                    }
+                    // else if (i == exhibitCount - 1)
+                    // {
+                    //     exhibitStartPos = new Vector3(70f, 0f, -(rows / 2));
+                    // }
                     else
                     {
                         float randomX = Mathf.Ceil(Random.Range(minBounds.x, maxBounds.x));
@@ -84,6 +87,8 @@ namespace KaChow.AByteSizedMuseum
                         // Update the list of existing exhibit bounds
                         Bounds newExhibitBounds = new Bounds(exhibitStartPos, new Vector3(rows, 1f, cols));
                         existingExhibitBounds.Add(newExhibitBounds);
+
+                        roomCenters.Add(exhibitStartPos + new Vector3(rows / 2f, 0f, cols / 2f));
                         break;
                     }
                     else 
@@ -103,6 +108,8 @@ namespace KaChow.AByteSizedMuseum
                 }
                 while (true);
             }
+
+            GenerateHallways(roomCenters);
         }
 
         // 3. Check if generated exhibit overlaps an already generated exhibit
@@ -134,7 +141,39 @@ namespace KaChow.AByteSizedMuseum
             return false;
         }
 
-        // 4. Create paths
-        //      how???
+        // 4. Create hallways
+        private void GenerateHallways(List<Vector3> roomCenters)
+        {
+            for (int i = 0; i < roomCenters.Count; i++)
+            {
+                for (int j = i + 1; j < roomCenters.Count; j++)
+                {
+                    // Calculate hallway points (you can modify this based on your needs)
+                    Vector3 startPoint = roomCenters[i];
+                    Vector3 endPoint = roomCenters[j];
+
+                    // Instantiate the hallway prefab
+                    var hallway = Instantiate(hallwayPrefab, Vector3.zero, Quaternion.identity);
+                    hallway.transform.parent = hallwayParent;
+                    hallway.name = $"Hallway ({i} -> {j})";
+
+                    // Calculate the midpoint between the start and end points
+                    Vector3 midpoint = (startPoint + endPoint) / 2f * 2f;
+
+                    // Position path at the midpoint
+                    hallway.transform.SetLocalPositionAndRotation(midpoint, Quaternion.LookRotation(endPoint - startPoint, Vector3.up));
+
+                    Debug.Log($"{hallway.name} midpoint: {midpoint}", hallway);
+                    Debug.Log($"{hallway.name} position: {hallway.transform.position}", hallway);
+
+                    // Scale the object to stretch between the start and end points
+                    float distance = Vector3.Distance(startPoint, endPoint);
+                    hallway.transform.localScale = new Vector3(hallway.transform.localScale.x * 5, hallwayHeight, distance * 2);
+
+                    // Adjust the position to align with the midpoint
+                    // hallway.transform.Translate(Vector3.forward * (distance * 0.5f));
+                }
+            }
+        }
     }
 }
