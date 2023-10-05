@@ -28,13 +28,13 @@ namespace KaChow.AByteSizedMuseum
 
         [Space]
         [Header("Exhibit Parent GameObject")]
-        [SerializeField] private Transform museumBounds;
+        [SerializeField] private Transform exhibitParent;
 
 
         // 2. Place exhibits randomly inside the defined area
         public void GenerateExhibits() 
         {
-            if (museumBounds == null) 
+            if (exhibitParent == null) 
             {
                 Debug.LogError("Unassigned Museum Bounds.");
                 return;
@@ -42,50 +42,66 @@ namespace KaChow.AByteSizedMuseum
 
             Vector3 exhibitStartPos;
             GameObject exhibit;
-            // List<GameObject> existingExhibits = new List<GameObject>();
             List<Bounds> existingExhibitBounds = new List<Bounds>();
+            int maxAttempts = 50;
 
             for (int i = 0; i < exhibitCount; i++)
             {
+                int attempts = 0;
+                // bool isOverlapping = true;
+
                 // maybe have pre-defined room sizes
                 // but the floors will still depend on wfc
                 rows = (int) Mathf.Ceil(Random.Range(minGridSize, maxGridSize + 1));
                 cols = (int) Mathf.Ceil(Random.Range(minGridSize, maxGridSize + 1));
 
-                // TODO: align to the middle of museum lobby
-                if (i == 0) 
-                    exhibitStartPos = new Vector3(0f, 0f, -(rows / 2));
-                else if (i == exhibitCount - 1)
+                do 
                 {
-                    exhibitStartPos = new Vector3(70f, 0f, -(rows / 2));
-                }
-                else
-                {
-                    float randomX = Mathf.Ceil(Random.Range(minBounds.x, maxBounds.x));
-                    float randomZ = Mathf.Ceil(Random.Range(minBounds.z, maxBounds.z));
-                    exhibitStartPos = new Vector3(randomX, 0f, randomZ);
-                }
-                    
-                // overlap check here
-                bool isOverlapping = CheckOverlap(exhibitStartPos, rows, cols, existingExhibitBounds, minSeparation);
-                Debug.Log($"isOverlapping: {isOverlapping}");
-                if (!isOverlapping)
-                {
-                    // GenerateExhibit(Vector3 startPos, int rows, int cols, int id)
-                    exhibit = exhibitGenerator.GenerateExhibit(exhibitStartPos, rows, cols, i);
-                    exhibit.transform.parent = museumBounds;
+                    // TODO: align to the middle of museum lobby
+                    if (i == 0) 
+                        exhibitStartPos = new Vector3(0f, 0f, -(rows / 2));
+                    else if (i == exhibitCount - 1)
+                    {
+                        exhibitStartPos = new Vector3(70f, 0f, -(rows / 2));
+                    }
+                    else
+                    {
+                        float randomX = Mathf.Ceil(Random.Range(minBounds.x, maxBounds.x));
+                        float randomZ = Mathf.Ceil(Random.Range(minBounds.z, maxBounds.z));
+                        exhibitStartPos = new Vector3(randomX, 0f, randomZ);
+                    }
 
-                    // Update the list of existing exhibit bounds
-                    Bounds newExhibitBounds = new Bounds(exhibitStartPos, new Vector3(rows, 1f, cols));
-                    existingExhibitBounds.Add(newExhibitBounds);
+                    bool isOverlapping = CheckOverlap(exhibitStartPos, rows, cols, existingExhibitBounds, minSeparation);
+
+                    // overlap check here
+                    Debug.Log($"isOverlapping: {isOverlapping}");
+                    if (!isOverlapping)
+                    {
+                        // GenerateExhibit(Vector3 startPos, int rows, int cols, int id)
+                        exhibit = exhibitGenerator.GenerateExhibit(exhibitStartPos, rows, cols, i);
+                        exhibit.transform.parent = exhibitParent;
+
+                        // Update the list of existing exhibit bounds
+                        Bounds newExhibitBounds = new Bounds(exhibitStartPos, new Vector3(rows, 1f, cols));
+                        existingExhibitBounds.Add(newExhibitBounds);
+                        break;
+                    }
+                    else 
+                    {
+                        attempts++;
+
+                        if (attempts >= maxAttempts)
+                        {
+                            Debug.LogWarning("Could not place exhibit without overlap after " + attempts + " attempts.");
+                            break;
+                        }
+
+                        float randomX = Mathf.Ceil(Random.Range(minBounds.x, maxBounds.x));
+                        float randomZ = Mathf.Ceil(Random.Range(minBounds.z, maxBounds.z));
+                        exhibitStartPos = new Vector3(randomX, 0f, randomZ);
+                    }
                 }
-                else
-                {
-                    float randomX = Mathf.Ceil(Random.Range(minBounds.x, maxBounds.x));
-                    float randomZ = Mathf.Ceil(Random.Range(minBounds.z, maxBounds.z));
-                    exhibitStartPos = new Vector3(randomX, 0f, randomZ);
-                    i--;
-                }                
+                while (true);
             }
         }
 
