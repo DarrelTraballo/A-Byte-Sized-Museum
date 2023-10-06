@@ -62,6 +62,7 @@ namespace KaChow.AByteSizedMuseum
 
             // GenerateExhibits();
 
+            museumGenerator.Initialize();
             museumGenerator.GenerateExhibits();
         }
 

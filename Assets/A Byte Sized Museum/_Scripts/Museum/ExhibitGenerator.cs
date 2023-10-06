@@ -14,6 +14,13 @@ namespace KaChow.AByteSizedMuseum
         [SerializeField] private Transform museumTransform;
         private float tileSize;
 
+        public Tile[] GridTilePrefabs { get => gridTilePrefabs; set => gridTilePrefabs = value; }
+
+        public void Initialize()
+        {
+            tileSize = gridTilePrefabs[0].transform.localScale.x;
+        }
+
         public GameObject GenerateExhibit(Vector3 startPos, int rows, int columns, int id) 
         {
             // Debug.Log($"Generated {rows} x {columns} Exhibit");
@@ -23,8 +30,6 @@ namespace KaChow.AByteSizedMuseum
                 tag = "Exhibit"
             };
             exhibit.transform.position = startPos;
-
-            tileSize = gridTilePrefabs[0].transform.localScale.x;
 
             GenerateGrid(startPos, rows, columns, exhibit);
 

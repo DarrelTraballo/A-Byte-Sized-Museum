@@ -695,6 +695,7 @@ GameObject:
   m_Component:
   - component: {fileID: 830370059}
   - component: {fileID: 830370058}
+  - component: {fileID: 830370060}
   m_Layer: 0
   m_Name: Museum Generator
   m_TagString: Untagged
@@ -716,12 +717,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   exhibitGenerator: {fileID: 1428992912}
   exhibitParent: {fileID: 708426498}
-  exhibitCount: 4
-  minGridSize: 20
-  maxGridSize: 25
-  minBounds: {x: 0, y: 0, z: -75}
-  maxBounds: {x: 75, y: 0, z: 75}
-  minSeparation: 5
+  exhibitCount: 8
+  minGridSize: 15
+  maxGridSize: 23
+  minBounds: {x: 0, y: 0, z: -60}
+  maxBounds: {x: 120, y: 0, z: 60}
+  minSeparation: 15
   hallwayPrefab: {fileID: 262909372122036930, guid: 3f6922e1ebaebb54aaa70d7eae09b8d8, type: 3}
   hallwayParent: {fileID: 1226340966}
   hallwayHeight: 0.1
@@ -740,6 +741,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &830370060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 830370057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 843ffb668ab9b214badedc3d295d9cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &917319712
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1183,7 +1196,7 @@ GameObject:
   m_Layer: 0
   m_Name: Museum Lobby
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1839,7 +1852,7 @@ GameObject:
   m_Layer: 0
   m_Name: Floor
   m_TagString: Untagged
-  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
