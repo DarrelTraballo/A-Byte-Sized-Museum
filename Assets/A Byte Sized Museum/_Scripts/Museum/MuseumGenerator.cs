@@ -28,6 +28,7 @@ namespace KaChow.AByteSizedMuseum
         }
  
         // TODO: set up code structure for Exhibits
+        // TODO: Specify where the generation should start (in front of museum lobby)
         // TODO: pseudocode for museum layout generation
         // Generate using WFC
         // Choose which rooms to use

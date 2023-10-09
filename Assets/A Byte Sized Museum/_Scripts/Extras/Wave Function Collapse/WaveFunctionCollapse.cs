@@ -54,12 +54,12 @@ namespace KaChow.WFC {
                 }
             }
 
-            // StartCoroutine(CheckEntropy());
-            CheckEntropy();
+            StartCoroutine(CheckEntropy());
+            // CheckEntropy();
         }
 
-        // private IEnumerator CheckEntropy()
-        private void CheckEntropy()
+        private IEnumerator CheckEntropy()
+        // private void CheckEntropy()
         {
             List<Cell> tempGrid = new List<Cell>(gridComponents);
 
@@ -84,7 +84,7 @@ namespace KaChow.WFC {
                 tempGrid.RemoveRange(stopIndex, tempGrid.Count - stopIndex);
             }
 
-            // yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.01f);
 
             CollapseCell(tempGrid);        
         }
@@ -214,8 +214,8 @@ namespace KaChow.WFC {
 
             if(iterations < dimensions * dimensions)
             {
-                // StartCoroutine(CheckEntropy());
-                CheckEntropy();
+                StartCoroutine(CheckEntropy());
+                // CheckEntropy();
             }
         }
 
