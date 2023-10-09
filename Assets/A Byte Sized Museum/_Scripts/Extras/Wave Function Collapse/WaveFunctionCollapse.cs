@@ -2,18 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-// using Unity.Mathematics;
 using UnityEngine;
+using static KaChow.AByteSizedMuseum.MuseumGenerator;
 
 namespace KaChow.WFC {
     public class WaveFunctionCollapse : MonoBehaviour
     {
         [Header("Algorithm Variables")]
-        private int rows;
-        private int cols;
         private int dimensions;
-        // [SerializeField] private float generationSpeed;
-
 
         [Header("Tiles")]
         [SerializeField]
@@ -22,47 +18,38 @@ namespace KaChow.WFC {
         [Header("Grid Variables")]
         public Cell cellObj;
 
-        // [HideInInspector]
+        [HideInInspector]
         public List<Cell> gridComponents;
 
         private int iterations = 0;
 
-
-        public int Rows { get; set; }
-        public int Cols { get; set; }
-
-        private void Awake()
+        public void InitializeGrid(Museum museum, GameObject parent, Tile[] tileObjects)
         {
             gridComponents = new List<Cell>();
-
-        }
-
-        private void AdjustCamera() 
-        {
-            Vector3 center = new Vector3((dimensions - 1) / 2f, dimensions + 1, (dimensions - 1) / 2f);
-            Camera.main.transform.position = center;
-
-            Vector3 currentRotation = Camera.main.transform.rotation.eulerAngles;
-            float newXRotation = 90f;
-            Quaternion newRotation = Quaternion.Euler(newXRotation, currentRotation.y, currentRotation.z);
-
-            Camera.main.transform.rotation = newRotation;
-        }
-
-        public void InitializeGrid(int rows, int cols, GameObject parent, Tile[] tileObjects)
-        {
-            // GameObject map = new GameObject("Map");
-            this.rows = rows;
-            this.cols = cols;
+            dimensions = (int) museum.museumSize;
             this.tileObjects = tileObjects;
-            dimensions = rows * cols;
 
-            for (int x = 0; x < rows; x++)
+            float exhibitSize = tileObjects[0].gameObject.transform.GetChild(0).localScale.x;
+
+            // Calculate center position
+            float cellCenterZ = (museum.museumExhibitSize / 2f) + 5f;
+            float cellCenterX = (museum.museumExhibitSize / 2f) + 5f;
+
+            // Calculate offset
+            float offsetX = (museum.museumExhibitSize - exhibitSize) / 2f;
+            float offsetZ = (museum.museumExhibitSize - exhibitSize) / 2f;
+
+            // Align to the center of the grid cells
+            Vector3 gridOffset = new Vector3(0, 0, -(museum.museumSize * museum.museumExhibitSize / 2));
+
+            for (int x = 0; x < museum.museumSize; x++)
             {
-                for (int z = 0; z < cols; z++)
+                for (int z = 0; z < museum.museumSize; z++)
                 {
-                    Cell newCell = Instantiate(cellObj, new Vector3(x * 2, 0, z * 2), Quaternion.identity, parent.transform);
+                    Vector3 position = new Vector3(x * museum.museumExhibitSize + cellCenterX - offsetX, -1, z * museum.museumExhibitSize + cellCenterZ - offsetZ) + gridOffset;
+                    Cell newCell = Instantiate(cellObj, position, Quaternion.identity, parent.transform);
                     newCell.CreateCell(false, tileObjects);
+                    newCell.name = "Exhibit";
                     gridComponents.Add(newCell);
                 }
             }
@@ -97,7 +84,7 @@ namespace KaChow.WFC {
                 tempGrid.RemoveRange(stopIndex, tempGrid.Count - stopIndex);
             }
 
-            // yield return new WaitForSeconds(generationSpeed);
+            // yield return new WaitForSeconds(0.1f);
 
             CollapseCell(tempGrid);        
         }
@@ -123,11 +110,11 @@ namespace KaChow.WFC {
         {
             List<Cell> newGenerationCell = new List<Cell>(gridComponents);
 
-            for (int x = 0; x < rows; x++)
+            for (int x = 0; x < dimensions; x++)
             {
-                for (int z = 0; z < cols; z++)
+                for (int z = 0; z < dimensions; z++)
                 {
-                    var index = z + x * ((rows >= cols) ? rows : cols);
+                    var index = z + x * dimensions;
                     // FIXME: fix index out of range shenanigans somewhere here, idk\
                     // ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
                     if (gridComponents[index].isCollapsed)
@@ -145,7 +132,7 @@ namespace KaChow.WFC {
                         //update above
                         if (x > 0)
                         {
-                            Cell up = gridComponents[z + (x - 1) * rows];
+                            Cell up = gridComponents[z + (x - 1) * dimensions];
                             List<Tile> validOptions = new List<Tile>();
 
                             foreach (Tile possibleOptions in up.tileOptions)
@@ -160,9 +147,9 @@ namespace KaChow.WFC {
                         }
 
                         //update right
-                        if (z < rows - 1)
+                        if (z < dimensions - 1)
                         {
-                            Cell right = gridComponents[z + 1 + x * cols];
+                            Cell right = gridComponents[z + 1 + x * dimensions];
                             List<Tile> validOptions = new List<Tile>();
 
                             foreach (Tile possibleOptions in right.tileOptions)
@@ -177,9 +164,9 @@ namespace KaChow.WFC {
                         }
 
                         //look down
-                        if (x < cols - 1)
+                        if (x < dimensions - 1)
                         {
-                            Cell down = gridComponents[z + (x + 1) * rows];
+                            Cell down = gridComponents[z + (x + 1) * dimensions];
                             List<Tile> validOptions = new List<Tile>();
 
                             foreach (Tile possibleOptions in down.tileOptions)
@@ -196,7 +183,7 @@ namespace KaChow.WFC {
                         //look left
                         if (z > 0)
                         {
-                            Cell left = gridComponents[z - 1 + x * cols];
+                            Cell left = gridComponents[z - 1 + x * dimensions];
                             List<Tile> validOptions = new List<Tile>();
 
                             foreach (Tile possibleOptions in left.tileOptions)
@@ -225,7 +212,7 @@ namespace KaChow.WFC {
             gridComponents = newGenerationCell;
             iterations++;
 
-            if(iterations < rows * cols)
+            if(iterations < dimensions * dimensions)
             {
                 // StartCoroutine(CheckEntropy());
                 CheckEntropy();
@@ -242,6 +229,18 @@ namespace KaChow.WFC {
                     optionList.RemoveAt(x);
                 }
             }
+        }        
+
+        private void AdjustCamera() 
+        {
+            Vector3 center = new Vector3((dimensions - 1) / 2f, dimensions + 1, (dimensions - 1) / 2f);
+            Camera.main.transform.position = center;
+
+            Vector3 currentRotation = Camera.main.transform.rotation.eulerAngles;
+            float newXRotation = 90f;
+            Quaternion newRotation = Quaternion.Euler(newXRotation, currentRotation.y, currentRotation.z);
+
+            Camera.main.transform.rotation = newRotation;
         }
     }
 }

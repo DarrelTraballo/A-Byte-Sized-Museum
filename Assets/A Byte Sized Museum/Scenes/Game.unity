@@ -552,12 +552,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f248180df1afd49beff93ae26e7392, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  exhibitGenerator: {fileID: 1428992912}
   exhibitParent: {fileID: 708426498}
-  exhibitPrefabs:
-  - {fileID: 5995404055193659014, guid: bf46d729b3b383548bd6fb2f480bee85, type: 3}
-  museumSize: 7
-  museumCellSize: 40
+  museum:
+    museumSize: 5
+    museumExhibitSize: 40
+    exhibitPrefabs:
+    - {fileID: 5885526311898145354, guid: bf46d729b3b383548bd6fb2f480bee85, type: 3}
+    exhibitSize: {x: 0, y: 0, z: 0}
 --- !u!4 &830370059
 Transform:
   m_ObjectHideFlags: 0

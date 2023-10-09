@@ -60,8 +60,6 @@ namespace KaChow.AByteSizedMuseum
 
             SetCursorState(CursorLockMode.Locked);
 
-            // GenerateExhibits();
-
             museumGenerator.Initialize();
             museumGenerator.GenerateExhibits();
         }
