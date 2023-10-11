@@ -36,6 +36,7 @@ namespace KaChow.AByteSizedMuseum
         {
             // WFC
             GameManager.Instance.WFC.InitializeGrid(museum, exhibitParent.gameObject, museum.exhibitPrefabs);
+            // GenerateExhibitsNoWFC();
         }
 
         private void GenerateExhibitsNoWFC()

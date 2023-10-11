@@ -20,27 +20,6 @@ namespace KaChow.AByteSizedMuseum
         }
         #endregion
 
-        // TODO: - Level Generation using WFC
-        //          - Do something about tilesets
-        //       - Exhibit Generation using WFC
-        //       - 
-        
-        // Exhibit Generator variables
-        // [Header("Exhibit Generator variables")]
-        // [SerializeField] private ExhibitGenerator exhibitGenerator;
-        // [SerializeField] private int exhibitCount = 1;
-
-        // [Space]
-        // [Range(15, 30)]
-        // [SerializeField] private int minGridSize;
-
-        // [Range(15, 30)]
-        // [SerializeField] private int maxGridSize;
-
-        // [Space]
-        // [SerializeField] private int rows;
-        // [SerializeField] private int cols;
-
         [Header("Museum Generator Variables")]
         [SerializeField] private MuseumGenerator museumGenerator;
 
