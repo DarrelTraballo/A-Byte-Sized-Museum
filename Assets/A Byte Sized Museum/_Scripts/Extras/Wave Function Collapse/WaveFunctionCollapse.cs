@@ -51,7 +51,7 @@ namespace KaChow.WFC {
                     Vector3 position = new Vector3(x * museum.museumExhibitSize + cellCenterX - offsetX, -1, z * museum.museumExhibitSize + cellCenterZ - offsetZ) + gridOffset;
                     Cell newCell = Instantiate(cellObj, position, Quaternion.identity, parent.transform);
                     newCell.CreateCell(false, tileObjects);
-                    newCell.name = $"Exhibit ({position.x}, {position.z})";
+                    newCell.name = $"Exhibit ({x}, {z})";
                     gridComponents.Add(newCell);
                 }
             }
@@ -60,14 +60,18 @@ namespace KaChow.WFC {
             // CheckEntropy();
         }
 
-        private IEnumerator CheckEntropy()
         // private void CheckEntropy()
+        private IEnumerator CheckEntropy()
         {
+            // creates a copy of gridComponents List
             List<Cell> tempGrid = new List<Cell>(gridComponents);
 
+            // removes all collapsed Cells
             tempGrid.RemoveAll(c => c.isCollapsed);
 
+            // sorts the List in ascending order based on how many Tile Options each cell has left
             tempGrid.Sort((a, b) => { return a.tileOptions.Length - b.tileOptions.Length; });
+
 
             int arrLength = tempGrid[0].tileOptions.Length;
             int stopIndex = default;
@@ -93,15 +97,34 @@ namespace KaChow.WFC {
 
         private void CollapseCell(List<Cell> tempGrid)
         {
-            // TODO: make first collapse always in front of lobby
-            int randIndex = UnityEngine.Random.Range(0, tempGrid.Count);
+            Cell cellToCollapse;
+            Tile selectedTile;
 
-            Cell cellToCollapse = tempGrid[randIndex];
+            // if first collapse, collapse tile in front of start exhibit to 4-way tile
+            if (firstCall)
+            {
+                int centerCellIndex = (int)(0.5f * dimensions * dimensions - 1.5f * dimensions + dimensions); 
+                cellToCollapse = gridComponents[centerCellIndex];
+                selectedTile = cellToCollapse.tileOptions[0];
+                firstCall = false;
+            }
+            // else, collapses cells randomly based on entropy
+            else
+            {
+                // picks which cell to collapse from tempGrid
+                int randIndex = UnityEngine.Random.Range(0, tempGrid.Count);
+                cellToCollapse = tempGrid[randIndex];
+                selectedTile = cellToCollapse.tileOptions[UnityEngine.Random.Range(0, cellToCollapse.tileOptions.Length-1)];
+            }
 
+            // sets selected cell's isCollapsed to true
+            // basically collapsing the cell
             cellToCollapse.isCollapsed = true;
-            Tile selectedTile = cellToCollapse.tileOptions[UnityEngine.Random.Range(0, cellToCollapse.tileOptions.Length-1)];
+
+            // selects a random tile from the selected cell's tileOptions
             cellToCollapse.tileOptions = new Tile[] { selectedTile };
 
+            // sets cell to the selected tile
             Tile foundTile = cellToCollapse.tileOptions[0];
             Instantiate(foundTile, cellToCollapse.transform.position, Quaternion.identity, cellToCollapse.transform);
 

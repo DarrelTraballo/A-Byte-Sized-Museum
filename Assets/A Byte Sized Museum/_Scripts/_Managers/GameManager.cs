@@ -28,12 +28,12 @@ namespace KaChow.AByteSizedMuseum
         public Player Player { get ; private set; }
 
 
-        public WaveFunctionCollapse WFC { get; private set; }
+        // public WaveFunctionCollapse WFC { get; private set; }
         private CharacterController characterController;
 
         private void Start()
         {
-            WFC = GetComponent<WaveFunctionCollapse>();
+            // WFC = GetComponent<WaveFunctionCollapse>();
             Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
             characterController = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>();
 

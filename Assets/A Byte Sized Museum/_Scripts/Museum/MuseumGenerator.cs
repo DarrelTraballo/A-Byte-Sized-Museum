@@ -11,20 +11,24 @@ namespace KaChow.AByteSizedMuseum
             public float museumSize;
             public float museumExhibitSize = 40f;
             public Tile[] exhibitPrefabs;
+            [Tooltip("WFC Tiles")]
             [HideInInspector] public Vector3 exhibitSize;
         }
 
+        
+
         [Header("Museum Layout Generation")]
-        [Tooltip("WFC Tiles")]
         [SerializeField] private Transform exhibitParent;
         [SerializeField] private Museum museum;
-        // [SerializeField] private Tile[] exhibitPrefabs;
+
+        private WaveFunctionCollapse WFC;
 
         private Vector3 exhibitSize;
 
         public void Initialize() 
         {
             exhibitSize = museum.exhibitPrefabs[0].gameObject.transform.localScale;
+            WFC = GetComponent<WaveFunctionCollapse>();
         }
  
         // TODO: set up code structure for Exhibits
@@ -35,7 +39,7 @@ namespace KaChow.AByteSizedMuseum
         public void GenerateExhibits()
         {
             // WFC
-            GameManager.Instance.WFC.InitializeGrid(museum, exhibitParent.gameObject, museum.exhibitPrefabs);
+            WFC.InitializeGrid(museum, exhibitParent.gameObject, museum.exhibitPrefabs);
             // GenerateExhibitsNoWFC();
         }
 
