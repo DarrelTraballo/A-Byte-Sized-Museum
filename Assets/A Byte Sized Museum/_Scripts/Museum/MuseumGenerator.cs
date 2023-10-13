@@ -1,3 +1,4 @@
+using KaChow.Extras;
 using KaChow.WFC;
 using UnityEngine;
 
@@ -15,7 +16,7 @@ namespace KaChow.AByteSizedMuseum
             [HideInInspector] public Vector3 exhibitSize;
         }
 
-        
+        // make singleton
 
         [Header("Museum Layout Generation")]
         [SerializeField] private Transform exhibitParent;
@@ -32,15 +33,31 @@ namespace KaChow.AByteSizedMuseum
         }
  
         // TODO: set up code structure for Exhibits
-        // TODO: Specify where the generation should start (in front of museum lobby)
-        // TODO: pseudocode for museum layout generation
-        // Generate using WFC
-        // Choose which rooms to use
         public void GenerateExhibits()
         {
-            // WFC
+            // Generate Museum Layout using WFC
             WFC.InitializeGrid(museum, exhibitParent.gameObject, museum.exhibitPrefabs);
             // GenerateExhibitsNoWFC();
+
+            int startExhibitIndex = (int)(0.5f * WFC.dimensions * WFC.dimensions - 1.5f * WFC.dimensions + WFC.dimensions);
+            int finalExhibitIndex = startExhibitIndex + WFC.dimensions - 1;
+
+            var startExhibitNode = WFC.gridComponents[startExhibitIndex].transform.GetChild(0).GetComponent<Node>();
+            var finalExhibitNode = WFC.gridComponents[finalExhibitIndex].transform.GetChild(0).GetComponent<Node>();
+
+            var pathExists = AStarPathfinding.PathExists(startExhibitNode, finalExhibitNode);
+
+            Debug.Log($"path Exists? : {pathExists}");
+
+            // TODO: A* pathfinding to check if there is a path towards final exhibit or 
+            //              one of the non-corner rooms in the opposite side of the grid.
+            //       if no path is found, generate again
+            //      maybe make final exhibit not fixed in one position
+            //      could just have position.x fixed and position.z to be random
+
+            // TODO: Generate Hallways from path generated from A*
+
+            // TODO: Probably 
         }
 
         private void GenerateExhibitsNoWFC()

@@ -1,15 +1,16 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 using static KaChow.AByteSizedMuseum.MuseumGenerator;
 
 namespace KaChow.WFC {
     public class WaveFunctionCollapse : MonoBehaviour
     {
         [Header("Algorithm Variables")]
-        private int dimensions;
+        [HideInInspector]
+        public int dimensions;
 
         [Header("Tiles")]
         [SerializeField]
@@ -56,12 +57,12 @@ namespace KaChow.WFC {
                 }
             }
 
-            StartCoroutine(CheckEntropy());
-            // CheckEntropy();
+            // StartCoroutine(CheckEntropy());
+            CheckEntropy();
         }
 
-        // private void CheckEntropy()
-        private IEnumerator CheckEntropy()
+        private void CheckEntropy()
+        // private IEnumerator CheckEntropy()
         {
             // creates a copy of gridComponents List
             List<Cell> tempGrid = new List<Cell>(gridComponents);
@@ -90,7 +91,7 @@ namespace KaChow.WFC {
                 tempGrid.RemoveRange(stopIndex, tempGrid.Count - stopIndex);
             }
 
-            yield return new WaitForSeconds(0.01f);
+            // yield return new WaitForSeconds(0.01f);
 
             CollapseCell(tempGrid);        
         }
@@ -103,8 +104,8 @@ namespace KaChow.WFC {
             // if first collapse, collapse tile in front of start exhibit to 4-way tile
             if (firstCall)
             {
-                int centerCellIndex = (int)(0.5f * dimensions * dimensions - 1.5f * dimensions + dimensions); 
-                cellToCollapse = gridComponents[centerCellIndex];
+                int startExhibitCellIndex = (int)(0.5f * dimensions * dimensions - 1.5f * dimensions + dimensions); 
+                cellToCollapse = gridComponents[startExhibitCellIndex];
                 selectedTile = cellToCollapse.tileOptions[0];
                 firstCall = false;
             }
@@ -112,9 +113,9 @@ namespace KaChow.WFC {
             else
             {
                 // picks which cell to collapse from tempGrid
-                int randIndex = UnityEngine.Random.Range(0, tempGrid.Count);
+                int randIndex = Random.Range(0, tempGrid.Count);
                 cellToCollapse = tempGrid[randIndex];
-                selectedTile = cellToCollapse.tileOptions[UnityEngine.Random.Range(0, cellToCollapse.tileOptions.Length-1)];
+                selectedTile = cellToCollapse.tileOptions[Random.Range(0, cellToCollapse.tileOptions.Length-1)];
             }
 
             // sets selected cell's isCollapsed to true
@@ -238,8 +239,8 @@ namespace KaChow.WFC {
 
             if(iterations < dimensions * dimensions)
             {
-                StartCoroutine(CheckEntropy());
-                // CheckEntropy();
+                // StartCoroutine(CheckEntropy());
+                CheckEntropy();
             }
         }
 
@@ -253,6 +254,20 @@ namespace KaChow.WFC {
                     optionList.RemoveAt(x);
                 }
             }
+        }
+
+        public void ClearGrid()
+        {
+            foreach (var parent in gridComponents)
+            {
+                Transform parentTransform = parent.transform;
+
+                foreach (Transform child in parentTransform)
+                {
+                    Destroy(child.gameObject);
+                }
+            }
+            gridComponents.Clear();
         }
     }
 }
