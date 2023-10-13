@@ -6,6 +6,17 @@ namespace KaChow.Extras
 {
     public class AStarPathfinding : MonoBehaviour
     {
+        // List<Node> openList;
+        // List<Node> closedList;
+
+        // public List<Node> FindPath(Node startNode, Node targetNode)
+        // {
+        //     openList = new List<Node>() { startNode };
+        //     closedList = new List<Node>();
+
+
+        // }
+
         // TODO: FIGURE THIS SHIT OUT
         public static bool PathExists(Node startNode, Node targetNode)
         {
@@ -30,10 +41,10 @@ namespace KaChow.Extras
 
                 foreach (Node neighbor in currentNode.neighbors)
                 {
-                    if (!neighbor.upPassable && neighbor.transform.position.y > currentNode.transform.position.y) continue;
-                    if (!neighbor.downPassable && neighbor.transform.position.y < currentNode.transform.position.y) continue;
-                    if (!neighbor.leftPassable && neighbor.transform.position.x < currentNode.transform.position.x) continue;
-                    if (!neighbor.rightPassable && neighbor.transform.position.x > currentNode.transform.position.x) continue;
+                    if (!neighbor.upPassable && neighbor.y > currentNode.y) continue;
+                    if (!neighbor.downPassable && neighbor.y < currentNode.y) continue;
+                    if (!neighbor.leftPassable && neighbor.x < currentNode.x) continue;
+                    if (!neighbor.rightPassable && neighbor.x > currentNode.x) continue;
 
                     float tentativeGScore = gScore[currentNode] + Distance(currentNode, neighbor);
 

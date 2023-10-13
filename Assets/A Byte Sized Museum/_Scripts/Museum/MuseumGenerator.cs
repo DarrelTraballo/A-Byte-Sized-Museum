@@ -45,9 +45,9 @@ namespace KaChow.AByteSizedMuseum
             var startExhibitNode = WFC.gridComponents[startExhibitIndex].transform.GetChild(0).GetComponent<Node>();
             var finalExhibitNode = WFC.gridComponents[finalExhibitIndex].transform.GetChild(0).GetComponent<Node>();
 
-            var pathExists = AStarPathfinding.PathExists(startExhibitNode, finalExhibitNode);
+            // var pathExists = AStarPathfinding.PathExists(startExhibitNode, finalExhibitNode);
 
-            Debug.Log($"path Exists? : {pathExists}");
+            // Debug.Log($"path Exists? : {pathExists}");
 
             // TODO: A* pathfinding to check if there is a path towards final exhibit or 
             //              one of the non-corner rooms in the opposite side of the grid.

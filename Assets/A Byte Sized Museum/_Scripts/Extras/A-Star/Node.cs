@@ -11,7 +11,14 @@ namespace KaChow.Extras
         [HideInInspector] public float gScore;
         [HideInInspector] public float fScore;
         [HideInInspector] public float cost;
+
+
         [HideInInspector] public float x, y;
+        [HideInInspector] public int gCost;
+        [HideInInspector] public int hCost;
+        [HideInInspector] public int fCost;
+
+        [HideInInspector] public Node cameFromNode;
 
         public bool upPassable;
         public bool rightPassable;
@@ -20,6 +27,9 @@ namespace KaChow.Extras
 
         private void Awake()
         {
+            // x = transform.position.x;
+            // y = transform.position.z;
+
             neighbors = new List<Node>();
             gScore = Mathf.Infinity;
             fScore = Mathf.Infinity;
