@@ -572,7 +572,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6476168336606724661}
-  - component: {fileID: 7381240510958271063}
   - component: {fileID: 5885526311898145354}
   m_Layer: 0
   m_Name: Exhibit Right Path
@@ -598,32 +597,6 @@ Transform:
   - {fileID: 818570655124810942}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7381240510958271063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5995404055193659014}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a1ba0b32c414ac43a506496d22f549f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  neighbors: []
-  gScore: 0
-  fScore: 0
-  cost: 0
-  x: 0
-  y: 0
-  gCost: 0
-  hCost: 0
-  fCost: 0
-  cameFromNode: {fileID: 0}
-  upPassable: 1
-  rightPassable: 1
-  downPassable: 1
-  leftPassable: 0
 --- !u!114 &5885526311898145354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -649,17 +622,17 @@ MonoBehaviour:
   - {fileID: 5885526311898145354, guid: 47df602f53820c24eba10101fa146bca, type: 3}
   - {fileID: 5885526311898145354, guid: c04a376612151f843aa621e639261cef, type: 3}
   downNeighbors:
-  - {fileID: 5885526311898145354, guid: bf46d729b3b383548bd6fb2f480bee85, type: 3}
-  - {fileID: 5885526311898145354, guid: 480e08192e4b34b49bffe6096c668b35, type: 3}
-  - {fileID: 5885526311898145354, guid: c04a376612151f843aa621e639261cef, type: 3}
-  - {fileID: 5885526311898145354, guid: bf46d729b3b383548bd6fb2f480bee85, type: 3}
-  - {fileID: 5885526311898145354, guid: bf46d729b3b383548bd6fb2f480bee85, type: 3}
-  leftNeighbors:
   - {fileID: 5885526311898145354, guid: bb33b5ce54742e64a9b024db297d06f8, type: 3}
   - {fileID: 5885526311898145354, guid: 480e08192e4b34b49bffe6096c668b35, type: 3}
   - {fileID: 5885526311898145354, guid: c04a376612151f843aa621e639261cef, type: 3}
-  - {fileID: 5885526311898145354}
   - {fileID: 5885526311898145354, guid: 64f42e342409a2047b9b4cec050355ec, type: 3}
+  - {fileID: 5885526311898145354, guid: c04a376612151f843aa621e639261cef, type: 3}
+  leftNeighbors:
+  - {fileID: 5885526311898145354, guid: bf46d729b3b383548bd6fb2f480bee85, type: 3}
+  - {fileID: 5885526311898145354, guid: 480e08192e4b34b49bffe6096c668b35, type: 3}
+  - {fileID: 5885526311898145354, guid: c04a376612151f843aa621e639261cef, type: 3}
+  - {fileID: 5885526311898145354, guid: bf46d729b3b383548bd6fb2f480bee85, type: 3}
+  - {fileID: 5885526311898145354, guid: bf46d729b3b383548bd6fb2f480bee85, type: 3}
 --- !u!1 &6435180520428640545
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -6,34 +7,39 @@ using Random = UnityEngine.Random;
 using static KaChow.AByteSizedMuseum.MuseumGenerator;
 
 namespace KaChow.WFC {
-    public class WaveFunctionCollapse : MonoBehaviour
+    public class WaveFunctionCollapse
     {
-        [Header("Algorithm Variables")]
-        [HideInInspector]
         public int dimensions;
+        private readonly Tile[] tileObjects;
+        private readonly Museum museum;
+        private readonly Cell cellObj;
+        private readonly GameObject parentGO;
 
-        [Header("Tiles")]
-        [SerializeField]
-        private Tile[] tileObjects;
-
-        [Header("Grid Variables")]
-        public Cell cellObj;
-
-        [HideInInspector]
         public List<Cell> gridComponents;
 
         private int iterations = 0;
+        private readonly float exhibitSize;
 
+        private bool isDoneGenerating = false;
         private bool firstCall = true;
+        private bool secondCall = false;
 
-        public void InitializeGrid(Museum museum, GameObject parent, Tile[] tileObjects)
+        public WaveFunctionCollapse(Museum museum, Cell cellObj, GameObject parentGO, Tile[] tileObjects)
         {
             gridComponents = new List<Cell>();
             dimensions = (int) museum.museumSize;
+            this.museum = museum;
+            this.cellObj = cellObj;
+            this.parentGO = parentGO;
             this.tileObjects = tileObjects;
 
-            float exhibitSize = tileObjects[0].gameObject.transform.GetChild(0).localScale.x;
+            exhibitSize = tileObjects[0].gameObject.transform.GetChild(0).localScale.x;
+        }
 
+        // TODO: a lot of paths point to edges, fix
+        // public void InitializeGrid(Museum museum, GameObject parent, Tile[] tileObjects)
+        public void InitializeGrid()
+        {
             // Calculate center position
             float cellCenterZ = (museum.museumExhibitSize / 2f) + 5f;
             float cellCenterX = (museum.museumExhibitSize / 2f) + 5f;
@@ -50,14 +56,14 @@ namespace KaChow.WFC {
                 for (int x = 0; x < museum.museumSize; x++)
                 {
                     Vector3 position = new Vector3(x * museum.museumExhibitSize + cellCenterX - offsetX, -1, z * museum.museumExhibitSize + cellCenterZ - offsetZ) + gridOffset;
-                    Cell newCell = Instantiate(cellObj, position, Quaternion.identity, parent.transform);
+                    Cell newCell = GameObject.Instantiate(cellObj, position, Quaternion.identity, parentGO.transform);
                     newCell.CreateCell(false, tileObjects);
                     newCell.name = $"Exhibit ({x}, {z})";
                     gridComponents.Add(newCell);
                 }
             }
 
-            // StartCoroutine(CheckEntropy());
+            // MonoBehaviour.StartCoroutine(CheckEntropy());
             CheckEntropy();
         }
 
@@ -108,6 +114,17 @@ namespace KaChow.WFC {
                 cellToCollapse = gridComponents[startExhibitCellIndex];
                 selectedTile = cellToCollapse.tileOptions[0];
                 firstCall = false;
+                secondCall = true;
+            }
+            else if (secondCall)
+            {
+                int finalExhibitCellIndex = (int)(0.5f * dimensions * dimensions - 1.5f * dimensions + dimensions) + dimensions - 1;
+                cellToCollapse = gridComponents[finalExhibitCellIndex];
+                // select randomly between indices 3, 4, 5
+                int randIndex = Random.Range(3, 6);
+                // selectedTile = cellToCollapse.tileOptions[randIndex];
+                selectedTile = cellToCollapse.tileOptions[4];
+                secondCall = false;
             }
             // else, collapses cells randomly based on entropy
             else
@@ -127,7 +144,7 @@ namespace KaChow.WFC {
 
             // sets cell to the selected tile
             Tile foundTile = cellToCollapse.tileOptions[0];
-            Instantiate(foundTile, cellToCollapse.transform.position, Quaternion.identity, cellToCollapse.transform);
+            GameObject.Instantiate(foundTile, cellToCollapse.transform.position, Quaternion.identity, cellToCollapse.transform);
 
             UpdateGeneration();
         }
@@ -237,10 +254,14 @@ namespace KaChow.WFC {
             gridComponents = newGenerationCell;
             iterations++;
 
-            if(iterations < dimensions * dimensions)
+            if(!isDoneGenerating && iterations < dimensions * dimensions)
             {
                 // StartCoroutine(CheckEntropy());
                 CheckEntropy();
+            }
+            else 
+            {
+                isDoneGenerating = true;
             }
         }
 
@@ -256,7 +277,17 @@ namespace KaChow.WFC {
             }
         }
 
-        public void ClearGrid()
+        public void Clear()
+        {
+            isDoneGenerating = false;
+            firstCall = true;
+            secondCall = false;
+
+            ClearGrid();
+            ClearExhibits();
+        }
+
+        private void ClearGrid()
         {
             foreach (var parent in gridComponents)
             {
@@ -264,10 +295,18 @@ namespace KaChow.WFC {
 
                 foreach (Transform child in parentTransform)
                 {
-                    Destroy(child.gameObject);
+                    GameObject.Destroy(child.gameObject);
                 }
             }
             gridComponents.Clear();
+        }
+
+        private void ClearExhibits()
+        {
+            foreach (Transform child in parentGO.transform)
+            {
+                GameObject.Destroy(child.gameObject);
+            }
         }
     }
 }

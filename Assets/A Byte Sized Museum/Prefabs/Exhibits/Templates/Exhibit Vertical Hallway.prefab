@@ -957,7 +957,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6476168336606724661}
-  - component: {fileID: -7723848755385497769}
   - component: {fileID: 5885526311898145354}
   m_Layer: 0
   m_Name: Exhibit Vertical Hallway
@@ -990,32 +989,6 @@ Transform:
   - {fileID: 5498552700429408689}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-7723848755385497769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5995404055193659014}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a1ba0b32c414ac43a506496d22f549f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  neighbors: []
-  gScore: 0
-  fScore: 0
-  cost: 0
-  x: 0
-  y: 0
-  gCost: 0
-  hCost: 0
-  fCost: 0
-  cameFromNode: {fileID: 0}
-  upPassable: 1
-  rightPassable: 0
-  downPassable: 1
-  leftPassable: 0
 --- !u!114 &5885526311898145354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1209,7 +1182,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8614939324179471951
 Transform:
   m_ObjectHideFlags: 0

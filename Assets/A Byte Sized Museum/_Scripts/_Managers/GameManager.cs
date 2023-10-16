@@ -20,8 +20,7 @@ namespace KaChow.AByteSizedMuseum
         }
         #endregion
 
-        [Header("Museum Generator Variables")]
-        [SerializeField] private MuseumGenerator museumGenerator;
+        private MuseumGenerator museumGenerator;
 
         [Header("Player variables")]
         [SerializeField] private Vector3 playerStartPosition;
@@ -39,8 +38,9 @@ namespace KaChow.AByteSizedMuseum
 
             SetCursorState(CursorLockMode.Locked);
 
+            museumGenerator = MuseumGenerator.Instance;
             museumGenerator.Initialize();
-            museumGenerator.GenerateExhibits();
+            // museumGenerator.GenerateExhibits();
         }
 
         public void SetCursorState(CursorLockMode cursorLockMode)

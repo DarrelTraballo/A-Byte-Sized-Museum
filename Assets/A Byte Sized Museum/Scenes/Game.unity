@@ -936,7 +936,6 @@ GameObject:
   m_Component:
   - component: {fileID: 830370059}
   - component: {fileID: 830370058}
-  - component: {fileID: 830370060}
   m_Layer: 0
   m_Name: Museum Generator
   m_TagString: Untagged
@@ -970,6 +969,7 @@ MonoBehaviour:
     - {fileID: 5885526311898145354, guid: ecfc72ecbf799024aa2e0174a74363eb, type: 3}
     - {fileID: 5885526311898145354, guid: 480e08192e4b34b49bffe6096c668b35, type: 3}
     exhibitSize: {x: 0, y: 0, z: 0}
+  cellObj: {fileID: 9014216318830560861, guid: d90f9d6e05dc4d74d8eae5c64355608e, type: 3}
 --- !u!4 &830370059
 Transform:
   m_ObjectHideFlags: 0
@@ -985,22 +985,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &830370060
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 830370057}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01a92b163ae7b9a45a6404db2e2101d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dimensions: 0
-  tileObjects: []
-  cellObj: {fileID: 9014216318830560861, guid: d90f9d6e05dc4d74d8eae5c64355608e, type: 3}
-  gridComponents: []
 --- !u!1001 &835120979
 PrefabInstance:
   m_ObjectHideFlags: 0
