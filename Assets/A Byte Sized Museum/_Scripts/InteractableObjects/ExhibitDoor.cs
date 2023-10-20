@@ -12,7 +12,8 @@ namespace KaChow.AByteSizedMuseum
 
         private bool isOpen = false;
 
-        // 
+        // Should have an idea what exhibit it is in??
+
         private void Start()
         {
             leftDoor = transform.Find("GlassDoor");

@@ -26,5 +26,10 @@ namespace KaChow.AByteSizedMuseum
         {
 
         }
+
+        /*  Puzzles
+            
+
+        */
     }
 }
