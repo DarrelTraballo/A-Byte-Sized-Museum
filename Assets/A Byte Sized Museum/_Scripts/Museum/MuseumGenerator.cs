@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using KaChow.WFC;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace KaChow.AByteSizedMuseum
@@ -33,19 +35,21 @@ namespace KaChow.AByteSizedMuseum
         [SerializeField] private Museum museum;
         [SerializeField] private Cell cellObj;
 
+        private float exhibitSize;
+
         private WaveFunctionCollapse WFC;
+
+        [Space]
+        [SerializeField]
+        private List<GameObject> exhibitList;
+        private int currentRoomIndex;
 
         public void Initialize() 
         {
+            exhibitSize = museum.exhibitPrefabs[0].gameObject.transform.GetChild(0).localScale.x;
             WFC = new WaveFunctionCollapse(museum, cellObj, exhibitParent.gameObject, museum.exhibitPrefabs);
-        }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Q))
-                GenerateExhibits();
-            else if (Input.GetKeyDown(KeyCode.E))
-                WFC.Clear();
+            currentRoomIndex = (int)(0.5f * museum.museumSize * museum.museumSize - 1.5f * museum.museumSize + museum.museumSize);
         }
  
         // TODO: set up code structure for Exhibits
@@ -53,8 +57,38 @@ namespace KaChow.AByteSizedMuseum
         {
             // Generate Museum Layout using WFC
             WFC.InitializeGrid();
+
+            // for testing purposes
+            // GenerateExhibitsNoWFC();
         }
-       
+
+        private void GenerateExhibitsNoWFC()
+        {
+            // Calculate center position
+            float cellCenterZ = (museum.museumExhibitSize / 2f) + 5f;
+            float cellCenterX = (museum.museumExhibitSize / 2f) + 5f;
+
+            // Calculate offset
+            float offsetX = (museum.museumExhibitSize - exhibitSize) / 2f;
+            float offsetZ = (museum.museumExhibitSize - exhibitSize) / 2f;
+
+            // Align to the center of the grid cells
+            Vector3 gridOffset = new Vector3(0, 0, -(museum.museumSize * museum.museumExhibitSize / 2));
+
+            for (int z = 0; z < museum.museumSize; z++)
+            {
+                for (int x = 0; x < museum.museumSize; x++)
+                {
+                    Vector3 position = new Vector3(x * museum.museumExhibitSize + cellCenterX - offsetX, -1, z * museum.museumExhibitSize + cellCenterZ - offsetZ) + gridOffset;
+                    GameObject spawnedExhibit = Instantiate(museum.exhibitPrefabs[0].gameObject, position, Quaternion.identity, exhibitParent);
+                    spawnedExhibit.name = $"Exhibit {z * museum.museumSize + x}";
+
+                    exhibitList.Add(spawnedExhibit);
+                }
+            }
+        }
+
+        #region OnDrawGizmos()
         #if UNITY_EDITOR
         private void OnDrawGizmos()
         {
@@ -89,5 +123,8 @@ namespace KaChow.AByteSizedMuseum
             }
         }
         #endif
+        #endregion
     }
 }
+
+

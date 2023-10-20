@@ -9,12 +9,13 @@ using static KaChow.AByteSizedMuseum.MuseumGenerator;
 namespace KaChow.WFC {
     public class WaveFunctionCollapse
     {
-        public int dimensions;
+        private readonly int dimensions;
         private readonly Tile[] tileObjects;
         private readonly Museum museum;
         private readonly Cell cellObj;
         private readonly GameObject parentGO;
 
+        // list of rooms generated. starts bottom left, goes upwards until top right
         public List<Cell> gridComponents;
 
         private int iterations = 0;
@@ -23,6 +24,7 @@ namespace KaChow.WFC {
         private bool isDoneGenerating = false;
         private bool firstCall = true;
         private bool secondCall = false;
+        private bool thirdCall = false;
 
         public WaveFunctionCollapse(Museum museum, Cell cellObj, GameObject parentGO, Tile[] tileObjects)
         {
@@ -58,7 +60,8 @@ namespace KaChow.WFC {
                     Vector3 position = new Vector3(x * museum.museumExhibitSize + cellCenterX - offsetX, -1, z * museum.museumExhibitSize + cellCenterZ - offsetZ) + gridOffset;
                     Cell newCell = GameObject.Instantiate(cellObj, position, Quaternion.identity, parentGO.transform);
                     newCell.CreateCell(false, tileObjects);
-                    newCell.name = $"Exhibit ({x}, {z})";
+                    // newCell.name = $"Exhibit ({x}, {z})";
+                    newCell.name = $"Exhibit {z * museum.museumSize + x}";
                     gridComponents.Add(newCell);
                 }
             }
@@ -125,6 +128,15 @@ namespace KaChow.WFC {
                 // selectedTile = cellToCollapse.tileOptions[randIndex];
                 selectedTile = cellToCollapse.tileOptions[4];
                 secondCall = false;
+                thirdCall = true;
+            }
+            else if (thirdCall)
+            {
+                int selectedExhibitCellIndex = dimensions - 2;
+                cellToCollapse = gridComponents[selectedExhibitCellIndex];
+                int randIndex = Random.Range(3, 6);
+                selectedTile = cellToCollapse.tileOptions[3];
+                thirdCall = false;
             }
             // else, collapses cells randomly based on entropy
             else

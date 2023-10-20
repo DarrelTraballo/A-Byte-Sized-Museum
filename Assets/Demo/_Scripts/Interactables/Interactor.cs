@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace KaChow.Demo {
+namespace KaChow.AByteSizedMuseum {
     public class Interactor : MonoBehaviour
     {
         [Header("Player variables")]
@@ -17,7 +17,6 @@ namespace KaChow.Demo {
                 var hit = hitInfo.collider.gameObject.TryGetComponent(out InteractableBase interactObj);
                 if (hit)
                 {
-                    GameManager.Instance.crossHairText.text = interactObj.interactableObjName;
                     if (Input.GetKeyDown(KeyCode.E))
                     {
                         interactObj.OnInteract();

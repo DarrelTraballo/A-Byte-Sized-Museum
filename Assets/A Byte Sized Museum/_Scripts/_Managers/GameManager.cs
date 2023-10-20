@@ -26,13 +26,10 @@ namespace KaChow.AByteSizedMuseum
         [SerializeField] private Vector3 playerStartPosition;
         public Player Player { get ; private set; }
 
-
-        // public WaveFunctionCollapse WFC { get; private set; }
         private CharacterController characterController;
 
         private void Start()
         {
-            // WFC = GetComponent<WaveFunctionCollapse>();
             Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
             characterController = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>();
 
@@ -40,7 +37,7 @@ namespace KaChow.AByteSizedMuseum
 
             museumGenerator = MuseumGenerator.Instance;
             museumGenerator.Initialize();
-            // museumGenerator.GenerateExhibits();
+            museumGenerator.GenerateExhibits();
         }
 
         public void SetCursorState(CursorLockMode cursorLockMode)
