@@ -12,6 +12,12 @@ namespace KaChow.AByteSizedMuseum
         // TODO: Try to put tile adjacency constraints here somehow
         // para ida-drag and drop nalang yung prefab na gagamitin
         [Header("WFC Adjacency Rules")]
-        public Tile rules;
+        // public Tile rules;
+        public Tile[] upNeighbors;
+        public Tile[] rightNeighbors;
+        public Tile[] downNeighbors;
+        public Tile[] leftNeighbors;
+
+        public GameObject tilePrefab;
     }
 }

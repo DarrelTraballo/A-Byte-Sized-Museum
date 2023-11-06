@@ -3648,6 +3648,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6476168336606724661}
+  - component: {fileID: -5135668845708429316}
   m_Layer: 0
   m_Name: Exhibit 4-Way
   m_TagString: Untagged
@@ -3668,8 +3669,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 597313411127928810}
   - {fileID: 5416815042548058238}
+  - {fileID: 597313411127928810}
   - {fileID: 818570655124810942}
   - {fileID: 8583578044726148661}
   - {fileID: 5262842117324078961}
@@ -3687,6 +3688,22 @@ Transform:
   - {fileID: 3824443223992653972}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-5135668845708429316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5995404055193659014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71e735d82fba10f4b8b6343212dbb26f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upNeighbors: []
+  rightNeighbors: []
+  downNeighbors: []
+  leftNeighbors: []
 --- !u!1 &6231070510178004825
 GameObject:
   m_ObjectHideFlags: 0

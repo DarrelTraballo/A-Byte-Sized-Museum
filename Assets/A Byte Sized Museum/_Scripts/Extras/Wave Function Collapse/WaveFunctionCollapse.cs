@@ -16,7 +16,7 @@ namespace KaChow.WFC {
         private readonly Cell cellObj;
         private readonly GameObject parentGO;
 
-        private ExhibitData[] exhibits;
+        // private ExhibitData[] exhibits;
 
         // list of rooms generated. starts bottom left, goes upwards until top right
         public List<Cell> gridComponents;
@@ -29,7 +29,7 @@ namespace KaChow.WFC {
         private bool secondCall = false;
         private bool thirdCall = false;
 
-        public WaveFunctionCollapse(Museum museum, Cell cellObj, GameObject parentGO, ExhibitData[] exhibits)
+        public WaveFunctionCollapse(Museum museum, Cell cellObj, GameObject parentGO, Tile[] tileObjects)
         {
             gridComponents = new List<Cell>();
             dimensions = (int) museum.museumSize;
@@ -37,14 +37,14 @@ namespace KaChow.WFC {
             this.cellObj = cellObj;
             this.parentGO = parentGO;
             // this.tileObjects = tileObjects;
-            this.exhibits = exhibits;
+            // this.exhibits = exhibits;
 
-            for (int i = 0; i < exhibits.Length; i++)
-            {
-                tileObjects[i] = exhibits[i].rules;
-            }
+            // for (int i = 0; i < exhibits.Length; i++)
+            // {
+            //     tileObjects[i] = exhibits[i].rules;
+            // }
 
-            exhibitSize = exhibits[0].rules.tilePrefab.transform.GetChild(0).localScale.x;
+            exhibitSize = tileObjects[0].gameObject.transform.GetChild(0).localScale.x;
         }
 
         // public void InitializeGrid(Museum museum, GameObject parent, Tile[] tileObjects)
@@ -166,7 +166,7 @@ namespace KaChow.WFC {
             // sets cell to the selected tile
             Tile foundTile = cellToCollapse.tileOptions[0];
             // TODO: 
-            GameObject.Instantiate(foundTile.tilePrefab, cellToCollapse.transform.position, Quaternion.identity, cellToCollapse.transform);
+            GameObject.Instantiate(foundTile, cellToCollapse.transform.position, Quaternion.identity, cellToCollapse.transform);
 
             UpdateGeneration();
         }
