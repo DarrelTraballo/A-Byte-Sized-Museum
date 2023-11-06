@@ -33,7 +33,7 @@ namespace KaChow.AByteSizedMuseum
             Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
             characterController = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>();
 
-            SetCursorState(CursorLockMode.Locked);
+            // SetCursorState(CursorLockMode.Locked);
 
             museumGenerator = MuseumGenerator.Instance;
             museumGenerator.Initialize();

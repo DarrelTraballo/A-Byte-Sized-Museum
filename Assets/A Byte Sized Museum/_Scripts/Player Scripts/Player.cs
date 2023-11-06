@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace KaChow.Demo {
+namespace KaChow.AByteSizedMuseum {
     // If can, completely refactor playerControllers
     [RequireComponent(typeof(CharacterController))]
     public class Player : MonoBehaviour
@@ -13,16 +13,29 @@ namespace KaChow.Demo {
         public float lookSpeed = 2.0f;
         public float lookXLimit = 45.0f;
 
+        public PlayerControls playerControls;
+
         private CharacterController characterController;
         private Vector3 moveDirection = Vector3.zero;
         private float rotationX = 0f;
 
-        [HideInInspector]
+        // [HideInInspector]
         public bool canMove = true;
 
-        private void Start() 
+        private void Awake() 
         {
+            playerControls = new PlayerControls();
             characterController = GetComponent<CharacterController>();
+        }
+
+        private void OnEnable()
+        {
+            playerControls.Enable();
+        }
+
+        private void OnDisable()
+        {
+            playerControls.Disable();
         }
 
         private void Update() 
@@ -31,18 +44,20 @@ namespace KaChow.Demo {
             Vector3 forward = transform.TransformDirection(Vector3.forward);
             Vector3 right = transform.TransformDirection(Vector3.right);
 
+            Vector2 moveInput = playerControls.Player.Move.ReadValue<Vector2>();
+            Vector2 lookInput = playerControls.Player.Look.ReadValue<Vector2>();
+
             // Press Left Shift to run
             bool isRunning = Input.GetKey(KeyCode.LeftShift);
-            float currentSpeedX = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Vertical") : 0;
-            float currentSpeedY = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Horizontal") : 0;
+            float currentSpeedX = canMove ? (isRunning ? runningSpeed : walkingSpeed) * moveInput.y : 0;
+            float currentSpeedY = canMove ? (isRunning ? runningSpeed : walkingSpeed) * moveInput.x : 0;
 
-            // Vector2 input
 
             float movementDirectionY = moveDirection.y;
             Vector3 desiredMove = (forward * currentSpeedX) + (right * currentSpeedY);
             moveDirection = desiredMove.normalized * (isRunning ? runningSpeed : walkingSpeed);
 
-            if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
+            if (playerControls.Player.Jump.triggered && canMove && characterController.isGrounded)
             {
                 moveDirection.y = jumpSpeed;
             }
@@ -65,10 +80,10 @@ namespace KaChow.Demo {
             // Player's camera rotation
             if (canMove)
             {
-                rotationX += Input.GetAxis("Mouse Y") * lookSpeed;
+                rotationX += lookInput.y * lookSpeed;
                 rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
                 playerCamera.transform.localRotation = Quaternion.Euler(-rotationX, 0, 0);
-                transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);        
+                transform.rotation *= Quaternion.Euler(0, lookInput.x * lookSpeed, 0);        
             }
         }
     }
