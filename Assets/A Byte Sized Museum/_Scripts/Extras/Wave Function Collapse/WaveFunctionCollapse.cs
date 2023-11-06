@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using static KaChow.AByteSizedMuseum.MuseumGenerator;
+using KaChow.AByteSizedMuseum;
 
 namespace KaChow.WFC {
     public class WaveFunctionCollapse
@@ -14,6 +15,8 @@ namespace KaChow.WFC {
         private readonly Museum museum;
         private readonly Cell cellObj;
         private readonly GameObject parentGO;
+
+        private ExhibitData[] exhibits;
 
         // list of rooms generated. starts bottom left, goes upwards until top right
         public List<Cell> gridComponents;
@@ -26,19 +29,24 @@ namespace KaChow.WFC {
         private bool secondCall = false;
         private bool thirdCall = false;
 
-        public WaveFunctionCollapse(Museum museum, Cell cellObj, GameObject parentGO, Tile[] tileObjects)
+        public WaveFunctionCollapse(Museum museum, Cell cellObj, GameObject parentGO, ExhibitData[] exhibits)
         {
             gridComponents = new List<Cell>();
             dimensions = (int) museum.museumSize;
             this.museum = museum;
             this.cellObj = cellObj;
             this.parentGO = parentGO;
-            this.tileObjects = tileObjects;
+            // this.tileObjects = tileObjects;
+            this.exhibits = exhibits;
 
-            exhibitSize = tileObjects[0].gameObject.transform.GetChild(0).localScale.x;
+            for (int i = 0; i < exhibits.Length; i++)
+            {
+                tileObjects[i] = exhibits[i].rules;
+            }
+
+            exhibitSize = exhibits[0].rules.tilePrefab.transform.GetChild(0).localScale.x;
         }
 
-        // TODO: a lot of paths point to edges, fix
         // public void InitializeGrid(Museum museum, GameObject parent, Tile[] tileObjects)
         public void InitializeGrid()
         {
@@ -119,6 +127,7 @@ namespace KaChow.WFC {
                 firstCall = false;
                 secondCall = true;
             }
+            // TODO: if can, do secondCall and thirdCall on firstCall
             else if (secondCall)
             {
                 int finalExhibitCellIndex = (int)(0.5f * dimensions * dimensions - 1.5f * dimensions + dimensions) + dimensions - 1;
@@ -156,7 +165,8 @@ namespace KaChow.WFC {
 
             // sets cell to the selected tile
             Tile foundTile = cellToCollapse.tileOptions[0];
-            GameObject.Instantiate(foundTile, cellToCollapse.transform.position, Quaternion.identity, cellToCollapse.transform);
+            // TODO: 
+            GameObject.Instantiate(foundTile.tilePrefab, cellToCollapse.transform.position, Quaternion.identity, cellToCollapse.transform);
 
             UpdateGeneration();
         }

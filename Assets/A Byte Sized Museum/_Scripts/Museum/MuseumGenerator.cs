@@ -14,6 +14,7 @@ namespace KaChow.AByteSizedMuseum
             public float museumExhibitSize = 40f;
             [Tooltip("WFC Tiles")]
             public Tile[] exhibitPrefabs;
+            public ExhibitData[] exhibits;
             [HideInInspector] public Vector3 exhibitSize;
         }
 
@@ -46,8 +47,9 @@ namespace KaChow.AByteSizedMuseum
 
         public void Initialize() 
         {
-            exhibitSize = museum.exhibitPrefabs[0].gameObject.transform.GetChild(0).localScale.x;
-            WFC = new WaveFunctionCollapse(museum, cellObj, exhibitParent.gameObject, museum.exhibitPrefabs);
+            // exhibitSize = museum.exhibitPrefabs[0].gameObject.transform.GetChild(0).localScale.x;
+            exhibitSize = museum.exhibits[0].rules.tilePrefab.transform.GetChild(0).localScale.x;
+            WFC = new WaveFunctionCollapse(museum, cellObj, exhibitParent.gameObject, museum.exhibits);
 
             currentRoomIndex = (int)(0.5f * museum.museumSize * museum.museumSize - 1.5f * museum.museumSize + museum.museumSize);
         }
@@ -56,10 +58,10 @@ namespace KaChow.AByteSizedMuseum
         public void GenerateExhibits()
         {
             // Generate Museum Layout using WFC
-            WFC.InitializeGrid();
+            // WFC.InitializeGrid();
 
             // for testing purposes
-            // GenerateExhibitsNoWFC();
+            GenerateExhibitsNoWFC();
         }
 
         private void GenerateExhibitsNoWFC()
@@ -80,7 +82,7 @@ namespace KaChow.AByteSizedMuseum
                 for (int x = 0; x < museum.museumSize; x++)
                 {
                     Vector3 position = new Vector3(x * museum.museumExhibitSize + cellCenterX - offsetX, -1, z * museum.museumExhibitSize + cellCenterZ - offsetZ) + gridOffset;
-                    GameObject spawnedExhibit = Instantiate(museum.exhibitPrefabs[0].gameObject, position, Quaternion.identity, exhibitParent);
+                    GameObject spawnedExhibit = Instantiate(museum.exhibits[0].rules.tilePrefab, position, Quaternion.identity, exhibitParent);
                     spawnedExhibit.name = $"Exhibit {z * museum.museumSize + x}";
 
                     exhibitList.Add(spawnedExhibit);
