@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace KaChow.Demo {
+namespace KaChow.AByteSizedMuseum {
 // Base script for interactable objects in the game
     public class InteractableBase : MonoBehaviour
     {
@@ -19,7 +19,7 @@ namespace KaChow.Demo {
         {
             if (actor.CompareTag("Player"))
             {
-                gameManager.txtInteractMessage.text = onEnterInteractMessage;
+                // gameManager.txtInteractMessage.text = onEnterInteractMessage;
             }
         }
 
@@ -28,7 +28,7 @@ namespace KaChow.Demo {
         {
             if (actor.CompareTag("Player"))
             {
-                gameManager.txtInteractMessage.text = onExitInteractMessage;
+                // gameManager.txtInteractMessage.text = onExitInteractMessage;
             }
         }
 

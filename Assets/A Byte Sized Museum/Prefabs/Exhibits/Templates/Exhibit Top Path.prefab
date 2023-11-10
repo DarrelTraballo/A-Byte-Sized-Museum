@@ -1584,11 +1584,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71e735d82fba10f4b8b6343212dbb26f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upNeighbors: []
-  rightNeighbors: []
-  downNeighbors: []
-  leftNeighbors: []
-  tilePrefab: {fileID: 0}
+  upNeighbors:
+  - {fileID: -5135668845708429316, guid: 61a0eddd43e7d6048a40fd65fecad654, type: 3}
+  - {fileID: -7416507269541812059, guid: 480e08192e4b34b49bffe6096c668b35, type: 3}
+  - {fileID: -1865038976076503354, guid: c04a376612151f843aa621e639261cef, type: 3}
+  - {fileID: -4788526153583319991, guid: b86716e535a84164d8657221dc2c80e1, type: 3}
+  - {fileID: 1225158810576762053, guid: 971b62a9c2e44cd459e128f103c94669, type: 3}
+  rightNeighbors:
+  - {fileID: -5135668845708429316, guid: 61a0eddd43e7d6048a40fd65fecad654, type: 3}
+  - {fileID: 9115549660130418069}
+  - {fileID: 1225158810576762053, guid: 971b62a9c2e44cd459e128f103c94669, type: 3}
+  - {fileID: -4891442072424816954, guid: ecfc72ecbf799024aa2e0174a74363eb, type: 3}
+  - {fileID: -1865038976076503354, guid: c04a376612151f843aa621e639261cef, type: 3}
+  downNeighbors:
+  - {fileID: 112269932417135242, guid: bf46d729b3b383548bd6fb2f480bee85, type: 3}
+  - {fileID: -4891442072424816954, guid: ecfc72ecbf799024aa2e0174a74363eb, type: 3}
+  - {fileID: 1225158810576762053, guid: 971b62a9c2e44cd459e128f103c94669, type: 3}
+  - {fileID: -4891442072424816954, guid: ecfc72ecbf799024aa2e0174a74363eb, type: 3}
+  - {fileID: 1225158810576762053, guid: 971b62a9c2e44cd459e128f103c94669, type: 3}
+  leftNeighbors:
+  - {fileID: -5135668845708429316, guid: 61a0eddd43e7d6048a40fd65fecad654, type: 3}
+  - {fileID: -4891442072424816954, guid: ecfc72ecbf799024aa2e0174a74363eb, type: 3}
+  - {fileID: 1225158810576762053, guid: 971b62a9c2e44cd459e128f103c94669, type: 3}
+  - {fileID: 9115549660130418069}
+  - {fileID: -4788526153583319991, guid: b86716e535a84164d8657221dc2c80e1, type: 3}
 --- !u!1 &6185371103315434326
 GameObject:
   m_ObjectHideFlags: 0

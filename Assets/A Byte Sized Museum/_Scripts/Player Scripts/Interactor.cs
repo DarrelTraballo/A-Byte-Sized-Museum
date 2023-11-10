@@ -9,6 +9,23 @@ namespace KaChow.AByteSizedMuseum {
         public Transform interactorSource;
         public float interactRange;
 
+        private PlayerControls playerControls;
+
+        private void Awake()
+        {
+            playerControls = new PlayerControls();
+        }
+
+        private void OnEnable()
+        {
+            playerControls.Enable();
+        }
+
+        private void OnDisable()
+        {
+            playerControls.Disable();
+        }
+
         private void Update() 
         {
             Ray r = new Ray(interactorSource.position, interactorSource.forward);
@@ -20,6 +37,7 @@ namespace KaChow.AByteSizedMuseum {
                     if (Input.GetKeyDown(KeyCode.E))
                     {
                         interactObj.OnInteract();
+                        Debug.Log("Pressed");
                     }
                 }
             } 

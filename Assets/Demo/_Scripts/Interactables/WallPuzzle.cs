@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace KaChow.Demo {
+namespace KaChow.AByteSizedMuseum {
     public class WallPuzzle : InteractableBase
     {
         [SerializeField]
@@ -39,7 +39,7 @@ namespace KaChow.Demo {
             }
 
             gameManager.Player.canMove = false;
-            gameManager.SetCursorState(CursorLockMode.Confined);
+            // gameManager.SetCursorState(CursorLockMode.Confined);
 
             if (puzzlePrefabInstance == null) 
             {
@@ -57,7 +57,7 @@ namespace KaChow.Demo {
         public void ClosePuzzle()
         {
             gameManager.Player.canMove = true;
-            gameManager.SetCursorState(CursorLockMode.Locked);
+            // gameManager.SetCursorState(CursorLockMode.Locked);
 
             puzzlePrefabInstance.SetActive(false);
             isPuzzleOpen = false;

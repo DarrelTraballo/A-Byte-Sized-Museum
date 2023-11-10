@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-namespace KaChow.Demo {
+namespace KaChow.AByteSizedMuseum {
     public class WordPuzzle : MonoBehaviour
     {
         [SerializeField]
@@ -61,11 +61,11 @@ namespace KaChow.Demo {
                 wallPuzzle.ClosePuzzle();
                 if (isPuzzleSolved)
                 {
-                    gameManager.txtInteractMessage.text = "Puzzle already solved!";    // TODO: make disappear after a delay
+                    // gameManager.txtInteractMessage.text = "Puzzle already solved!";    // TODO: make disappear after a delay
                     return;
                 }
-                gameManager.levelUnlockCounter++;
-                gameManager.txtInteractMessage.text = "Collected Key!";    // TODO: make disappear after a delay
+                // gameManager.levelUnlockCounter++;
+                // gameManager.txtInteractMessage.text = "Collected Key!";    // TODO: make disappear after a delay
                 isPuzzleSolved = true;
                 // GameManager.Instance.txtMissionUpdate.text = "Door Unlocked!";
             }

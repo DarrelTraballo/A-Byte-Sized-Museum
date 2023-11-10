@@ -57,17 +57,17 @@ namespace KaChow.AByteSizedMuseum
         public void GenerateExhibits()
         {
             // Generate Museum Layout using WFC
-            // WFC.InitializeGrid();
+            WFC.InitializeGrid();
 
             // for testing purposes
-            GenerateExhibitsNoWFC();
+            // GenerateExhibitsNoWFC();
         }
 
         private void GenerateExhibitsNoWFC()
         {
             // Calculate center position
-            float cellCenterZ = (museum.museumExhibitSize / 2f);
-            float cellCenterX = (museum.museumExhibitSize / 2f);
+            float cellCenterZ = (museum.museumExhibitSize / 2f) + 5f;
+            float cellCenterX = (museum.museumExhibitSize / 2f) + 5f;
 
             // Calculate offset
             float offsetX = (museum.museumExhibitSize - exhibitSize) / 2f;
