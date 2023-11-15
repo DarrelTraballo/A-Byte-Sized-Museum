@@ -1,8 +1,8 @@
 using UnityEngine;
 using TMPro;
 
-namespace KaChow.AB {
-    public class Key
+namespace KaChow.Demo {
+    public class Key : MonoBehaviour
     {
         // // [SerializeField]
         // // // private GameObject keyPrefab;

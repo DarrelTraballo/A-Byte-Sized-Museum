@@ -34,10 +34,11 @@ namespace KaChow.AByteSizedMuseum {
                 var hit = hitInfo.collider.gameObject.TryGetComponent(out InteractableBase interactObj);
                 if (hit)
                 {
-                    if (Input.GetKeyDown(KeyCode.E))
+                    interactObj.OnLookEnter();
+
+                    if (playerControls.Player.Interact.triggered)
                     {
                         interactObj.OnInteract();
-                        Debug.Log("Pressed");
                     }
                 }
             } 
