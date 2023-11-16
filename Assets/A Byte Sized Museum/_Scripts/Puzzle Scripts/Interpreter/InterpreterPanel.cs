@@ -1,25 +1,21 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace KaChow.AByteSizedMuseum
 {
-    public class Interpreter : InteractableBase
+    public class InterpreterPanel : InteractableBase
     {
-        [HideInInspector]
-        public List<ICodeBlock> codeBlocks;
-
         [Header("UI")]
         [SerializeField]
         private GameObject interpreterUI;
         private GameObject interpreterUIInstance;
 
-        [SerializeField]
         private bool isInterpreterOpen;
 
         public override void Start()
         {
             base.Start();
-            codeBlocks = new List<ICodeBlock>();    
         }
 
         private void Update()
@@ -27,6 +23,14 @@ namespace KaChow.AByteSizedMuseum
             if (Input.GetKeyDown(KeyCode.Escape) && isInterpreterOpen)
             {
                 CloseInterpreter();
+            }
+        }
+
+        public override void OnInteract()
+        {
+            if (!isInterpreterOpen)
+            {
+                OpenInterpreter();
             }
         }
 
@@ -59,23 +63,6 @@ namespace KaChow.AByteSizedMuseum
 
             interpreterUIInstance.SetActive(false);
             isInterpreterOpen = false;
-        }
-
-        private void ExecuteCodeBlocks()
-        {
-            foreach (var codeBlock in codeBlocks)
-            {
-                // do something
-            }
-        }
-
-        public override void OnInteract()
-        {
-            Debug.Log("Interacted with Interpreter");
-            if (!isInterpreterOpen)
-            {
-                OpenInterpreter();
-            }
         }
     }
 }

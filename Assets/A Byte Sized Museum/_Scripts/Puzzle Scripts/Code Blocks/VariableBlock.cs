@@ -4,23 +4,11 @@ using UnityEngine;
 
 namespace KaChow.AByteSizedMuseum
 {
-    public class VariableBlock : InteractableBase, ICodeBlock
+    public class VariableBlock : CodeBlock
     {
-        [Header("Variable Block Variables")]
-        public string variableName;
-        public int variableValue;
-
-        [Header("UI Prefab")]
-        public GameObject UIPrefab;
-
-        public override void Start()
+        public override void ExecuteBlock()
         {
-            base.Start();
-        }
-
-        public void ExecuteBlock()
-        {
-            throw new System.NotImplementedException();
+            Debug.Log("Variable Block");
         }
     }
 }

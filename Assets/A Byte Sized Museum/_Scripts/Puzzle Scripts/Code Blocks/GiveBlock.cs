@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace KaChow.AByteSizedMuseum
 {
-    public class ForLoopBlock : CodeBlock
+    public class GiveBlock : CodeBlock
     {
         public override void ExecuteBlock()
         {
-            Debug.Log("For Loop Block");
+            Debug.Log("Give Block");
         }
     }
 }

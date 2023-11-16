@@ -31,14 +31,14 @@ namespace KaChow.AByteSizedMuseum
 
         public virtual void OnLookEnter()
         {
-            Debug.Log("Looking at Interactor");
+            // Debug.Log("Looking at Interactor");
         }
 
         // base method for interactable object specific interactions
         // just leave empty 
         public virtual void OnInteract()
         {
-            Debug.Log("Interacted");
+            // Debug.Log("Interacted");
         }
 
         /*  Puzzles
