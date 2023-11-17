@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace KaChow.AByteSizedMuseum {
+namespace KaChow.Demo {
     public class WallPuzzle : InteractableBase
     {
         [SerializeField]

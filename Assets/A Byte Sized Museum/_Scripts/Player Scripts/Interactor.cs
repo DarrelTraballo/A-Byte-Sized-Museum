@@ -9,21 +9,11 @@ namespace KaChow.AByteSizedMuseum {
         public Transform interactorSource;
         public float interactRange;
 
-        private PlayerControls playerControls;
+        private InputManager inputManager;
 
-        private void Awake()
+        private void Start()
         {
-            playerControls = new PlayerControls();
-        }
-
-        private void OnEnable()
-        {
-            playerControls.Enable();
-        }
-
-        private void OnDisable()
-        {
-            playerControls.Disable();
+            inputManager = InputManager.Instance;
         }
 
         private void Update() 
@@ -34,10 +24,11 @@ namespace KaChow.AByteSizedMuseum {
                 var hit = hitInfo.collider.gameObject.TryGetComponent(out InteractableBase interactObj);
                 if (hit)
                 {
-                    if (Input.GetKeyDown(KeyCode.E))
+                    interactObj.OnLookEnter();
+
+                    if (inputManager.PlayerInteractedThisFrame())
                     {
                         interactObj.OnInteract();
-                        Debug.Log("Pressed");
                     }
                 }
             } 

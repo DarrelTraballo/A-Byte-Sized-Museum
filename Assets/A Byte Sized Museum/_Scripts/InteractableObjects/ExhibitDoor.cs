@@ -14,7 +14,7 @@ namespace KaChow.AByteSizedMuseum
 
         // Should have an idea what exhibit it is in??
 
-        private void Start()
+        public override void Start()
         {
             leftDoor = transform.Find("GlassDoor");
             rightDoor = transform.Find("GlassDoor.001");

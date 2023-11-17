@@ -51,10 +51,10 @@ namespace KaChow.WFC {
         public void InitializeGrid()
         {
             // Calculate center position
-            // float cellCenterZ = (museum.museumExhibitSize / 2f) + 5f;
-            // float cellCenterX = (museum.museumExhibitSize / 2f) + 5f;
-            float cellCenterZ = (museum.museumExhibitSize / 2f);
-            float cellCenterX = (museum.museumExhibitSize / 2f);
+            float cellCenterZ = (museum.museumExhibitSize / 2f) + 5f;
+            float cellCenterX = (museum.museumExhibitSize / 2f) + 5f;
+            // float cellCenterZ = (museum.museumExhibitSize / 2f);
+            // float cellCenterX = (museum.museumExhibitSize / 2f);
 
             // Calculate offset
             float offsetX = (museum.museumExhibitSize - exhibitSize) / 2f;

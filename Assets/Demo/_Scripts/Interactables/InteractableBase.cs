@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace KaChow.AByteSizedMuseum {
+namespace KaChow.Demo {
 // Base script for interactable objects in the game
     public class InteractableBase : MonoBehaviour
     {
