@@ -9,21 +9,11 @@ namespace KaChow.AByteSizedMuseum {
         public Transform interactorSource;
         public float interactRange;
 
-        private PlayerControls playerControls;
+        private InputManager inputManager;
 
-        private void Awake()
+        private void Start()
         {
-            playerControls = new PlayerControls();
-        }
-
-        private void OnEnable()
-        {
-            playerControls.Enable();
-        }
-
-        private void OnDisable()
-        {
-            playerControls.Disable();
+            inputManager = InputManager.Instance;
         }
 
         private void Update() 
@@ -36,7 +26,7 @@ namespace KaChow.AByteSizedMuseum {
                 {
                     interactObj.OnLookEnter();
 
-                    if (playerControls.Player.Interact.triggered)
+                    if (inputManager.PlayerInteractedThisFrame())
                     {
                         interactObj.OnInteract();
                     }

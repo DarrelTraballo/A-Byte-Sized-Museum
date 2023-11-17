@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 
 namespace KaChow.AByteSizedMuseum
@@ -7,6 +8,9 @@ namespace KaChow.AByteSizedMuseum
     [CreateAssetMenu(menuName = "Code Block", fileName = "CodeBlock")]
     public class CodeBlockData : ScriptableObject
     {
-        // public string 
+        public Image interpreterImage;
+        public Image inventoryImage;
+
+        
     }
 }

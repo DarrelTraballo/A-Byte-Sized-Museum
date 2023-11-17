@@ -36,6 +36,9 @@ namespace KaChow.AByteSizedMuseum
         [SerializeField] private Museum museum;
         [SerializeField] private Cell cellObj;
 
+        [Space]
+        [SerializeField] private bool enableWFC;
+
         private float exhibitSize;
 
         private WaveFunctionCollapse WFC;
@@ -57,7 +60,8 @@ namespace KaChow.AByteSizedMuseum
         public void GenerateExhibits()
         {
             // Generate Museum Layout using WFC
-            // WFC.InitializeGrid();
+            if (enableWFC)
+                WFC.InitializeGrid();
 
             // for testing purposes
             // GenerateExhibitsNoWFC();

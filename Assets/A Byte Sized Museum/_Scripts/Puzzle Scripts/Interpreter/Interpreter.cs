@@ -51,7 +51,7 @@ namespace KaChow.AByteSizedMuseum
                 CodeBlock codeBlock = interpreterLine.GetComponentInChildren<CodeBlock>();
 
                 if (codeBlock == null)
-                    return;
+                    continue;
                 else
                 {
                     codeBlock.ExecuteBlock();
