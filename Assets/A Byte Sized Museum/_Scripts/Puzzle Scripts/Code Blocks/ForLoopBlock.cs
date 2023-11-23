@@ -1,14 +1,14 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace KaChow.AByteSizedMuseum
 {
     public class ForLoopBlock : CodeBlock
     {
-        public override void ExecuteBlock()
+        public override IEnumerator ExecuteBlock()
         {
             Debug.Log("For Loop Block");
+            yield return new WaitForSeconds(0.5f);
         }
     }
 }

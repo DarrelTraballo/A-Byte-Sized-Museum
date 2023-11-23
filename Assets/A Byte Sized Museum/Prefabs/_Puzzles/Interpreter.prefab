@@ -43,6 +43,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2937963713107577853}
   - component: {fileID: 8018811190380336484}
+  - component: {fileID: 7850657179336797067}
   - component: {fileID: 3551294520673090506}
   - component: {fileID: 590326533670431746}
   - component: {fileID: 4073983880482063089}
@@ -81,6 +82,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interpreterUI: {fileID: 1264106325956390583, guid: 3179bdd4eae0471459e1c867eb2b1ec9, type: 3}
+--- !u!114 &7850657179336797067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2844448894945202190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86e171c6f8676ee42a4585aa2f52c4e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 008092882e488bb41a6306dfdea92ec3, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8018811190380336484}
+        m_TargetAssemblyTypeName: KaChow.AByteSizedMuseum.InterpreterPanel, Assembly-CSharp
+        m_MethodName: CloseInterpreter
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!33 &3551294520673090506
 MeshFilter:
   m_ObjectHideFlags: 0

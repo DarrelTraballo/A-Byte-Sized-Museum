@@ -43,7 +43,7 @@ namespace KaChow.AByteSizedMuseum
             }
 
             gameManager.Player.canMove = false;
-            gameManager.SetCursorState(CursorLockMode.Confined);
+            // gameManager.SetCursorState(CursorLockMode.Confined);
 
             if (interpreterUIInstance == null)
             {
@@ -58,10 +58,10 @@ namespace KaChow.AByteSizedMuseum
             }
         }
 
-        private void CloseInterpreter()
+        public void CloseInterpreter()
         {
             gameManager.Player.canMove = true;
-            gameManager.SetCursorState(CursorLockMode.Locked);
+            // gameManager.SetCursorState(CursorLockMode.Locked);
 
             interpreterUIInstance.SetActive(false);
             isInterpreterOpen = false;

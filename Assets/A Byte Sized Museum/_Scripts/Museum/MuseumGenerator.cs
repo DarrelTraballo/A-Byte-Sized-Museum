@@ -61,10 +61,10 @@ namespace KaChow.AByteSizedMuseum
         {
             // Generate Museum Layout using WFC
             if (enableWFC)
-                WFC.InitializeGrid();
+                // WFC.InitializeGrid();
+                GenerateExhibitsNoWFC();
 
             // for testing purposes
-            // GenerateExhibitsNoWFC();
         }
 
         private void GenerateExhibitsNoWFC()

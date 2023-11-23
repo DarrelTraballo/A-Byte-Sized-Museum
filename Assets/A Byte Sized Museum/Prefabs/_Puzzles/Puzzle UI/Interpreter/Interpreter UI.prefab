@@ -522,6 +522,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2251687509138692175, guid: a6b54036bb00da04f80d255ad25ce906, type: 3}
+      propertyPath: onInterpreterClose
+      value: 
+      objectReference: {fileID: 11400000, guid: 008092882e488bb41a6306dfdea92ec3, type: 2}
+    - target: {fileID: 2251687509138692175, guid: a6b54036bb00da04f80d255ad25ce906, type: 3}
       propertyPath: interpreterLines.Array.size
       value: 10
       objectReference: {fileID: 0}
@@ -933,7 +937,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4070975692887685982, guid: 06685ab8ef3b7224d866d39e555a019b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ExecuteCodeBlocks
+      value: ExecuteLines
       objectReference: {fileID: 0}
     - target: {fileID: 4070975692887685982, guid: 06685ab8ef3b7224d866d39e555a019b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName

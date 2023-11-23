@@ -6,9 +6,10 @@ namespace KaChow.AByteSizedMuseum
 {
     public class GiveBlock : CodeBlock
     {
-        public override void ExecuteBlock()
+        public override IEnumerator ExecuteBlock()
         {
             Debug.Log("Give Block");
+            yield return new WaitForSeconds(1f);
         }
     }
 }

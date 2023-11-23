@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -6,7 +7,7 @@ namespace KaChow.AByteSizedMuseum
 {
     public abstract class CodeBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
-        public abstract void ExecuteBlock();
+        public abstract IEnumerator ExecuteBlock();
 
         [HideInInspector]
         public Transform parentAfterDrag;
