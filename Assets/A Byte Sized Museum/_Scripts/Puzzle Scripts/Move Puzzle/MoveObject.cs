@@ -12,9 +12,10 @@ namespace KaChow.AByteSizedMuseum
         public void Move()
         {
             Debug.Log("Moving");
+            transform.Translate(Vector3.forward);
             // Vector3 targetPosition = transform.position + transform.forward;
             // transform.position = Vector3.Lerp(transform.position, targetPosition, speed * Time.deltaTime);
-            transform.Translate(Vector3.forward);
+            // transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
         }
 
         public void Rotate(Component sender, object data)
@@ -23,9 +24,9 @@ namespace KaChow.AByteSizedMuseum
             if (data is RotateDirection rotateDirection)
             {
                 if (rotateDirection == RotateDirection.Clockwise)
-                    transform.Rotate(0f, 90f, 0f);
-                else if (rotateDirection == RotateDirection.CounterClockwise)
                     transform.Rotate(0f, -90f, 0f);
+                else if (rotateDirection == RotateDirection.CounterClockwise)
+                    transform.Rotate(0f, 90f, 0f);
             }
         }
     }

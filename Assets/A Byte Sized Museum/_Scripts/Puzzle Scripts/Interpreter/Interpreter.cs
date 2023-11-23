@@ -77,7 +77,7 @@ namespace KaChow.AByteSizedMuseum
 
                 if (codeBlock == null)
                 {
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(0.25f);
                     interpreterLine.DisableHighlight();
                     continue;
                 }
