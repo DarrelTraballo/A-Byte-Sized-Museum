@@ -64,7 +64,6 @@ namespace KaChow.AByteSizedMuseum
         */
         public void ExecuteLines()
         {
-            onInterpreterClose.Raise(this, name);
             StartCoroutine(ExecuteAllLines());
         }
 
@@ -87,6 +86,11 @@ namespace KaChow.AByteSizedMuseum
 
                 interpreterLine.DisableHighlight();
             }
+        }
+
+        public void CloseInterpreter()
+        {
+            onInterpreterClose.Raise(this, name);
         }
     }
 }
