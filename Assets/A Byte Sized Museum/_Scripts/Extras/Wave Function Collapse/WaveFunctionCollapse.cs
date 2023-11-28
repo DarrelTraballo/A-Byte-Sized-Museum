@@ -331,7 +331,8 @@ namespace KaChow.WFC {
             foreach (var exhibit in gridComponents)
             {
                 Tile tile = exhibit.GetComponentInChildren<Tile>();
-                tile.gameObject.SetActive(false);
+                var tileContents = tile.transform.Find("Contents");
+                tileContents.gameObject.SetActive(false);
             }
         }
     }
