@@ -5,20 +5,14 @@ namespace KaChow.AByteSizedMuseum
     public class ExhibitDoor : InteractableBase
     {
         [Header("Events")]
-        public GameEvent onDoorInteract;
+        // public GameEvent onDoorInteract;
 
-        private Transform leftDoor;
-        private Transform rightDoor;
+        [SerializeField]
+        private Transform[] doors;
 
         private bool isOpen = false;
 
         // Should have an idea what exhibit it is in??
-
-        public override void Start()
-        {
-            leftDoor = transform.Find("GlassDoor");
-            rightDoor = transform.Find("GlassDoor.001");
-        }
 
         protected override void OnTriggerExit(Collider actor)
         {
@@ -26,8 +20,10 @@ namespace KaChow.AByteSizedMuseum
 
             if (isOpen)
             {
-                leftDoor.gameObject.SetActive(true);
-                rightDoor.gameObject.SetActive(true);
+                foreach (var door in doors)
+                {
+                    door.gameObject.SetActive(true);
+                }
                 isOpen = false;
             }
         }
@@ -35,12 +31,14 @@ namespace KaChow.AByteSizedMuseum
         public override void OnInteract()
         {
             base.OnInteract();
-            onDoorInteract.Raise(this, name);
+            // onDoorInteract.Raise(this, name);
 
             if (!isOpen)
             {
-                leftDoor.gameObject.SetActive(false);
-                rightDoor.gameObject.SetActive(false);
+                foreach (var door in doors)
+                {
+                    door.gameObject.SetActive(false);
+                }
                 isOpen = true;
             }
         }

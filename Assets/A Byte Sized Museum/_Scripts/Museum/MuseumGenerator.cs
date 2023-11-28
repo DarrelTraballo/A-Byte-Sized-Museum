@@ -36,7 +36,10 @@ namespace KaChow.AByteSizedMuseum
         [SerializeField] private Cell cellObj;
 
         [Space]
+        [Header("Debugging")]
         [SerializeField] private bool enableWFC;
+        [SerializeField] private bool showExhibitsOnPlay; 
+
 
         private float exhibitSize;
 
@@ -46,6 +49,19 @@ namespace KaChow.AByteSizedMuseum
         [SerializeField]
         private List<GameObject> exhibitList;
         private int currentRoomIndex;
+
+        // for Debugging
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                WFC.DisableExhibits();
+            }
+            else if (Input.GetKeyDown(KeyCode.X))
+            {
+                WFC.EnableExhibits();
+            } 
+        }
 
         public void Initialize() 
         {
@@ -62,8 +78,10 @@ namespace KaChow.AByteSizedMuseum
             if (enableWFC)
             {
                 WFC.InitializeGrid();
-                WFC.DisableExhibits();
             }
+
+            if (!showExhibitsOnPlay)
+                WFC.DisableExhibits();
                 // GenerateExhibitsNoWFC();
         }
 

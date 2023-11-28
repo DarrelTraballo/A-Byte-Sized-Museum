@@ -335,5 +335,15 @@ namespace KaChow.WFC {
                 tileContents.gameObject.SetActive(false);
             }
         }
+
+        public void EnableExhibits()
+        {
+            foreach (var exhibit in gridComponents)
+            {
+                Tile tile = exhibit.GetComponentInChildren<Tile>();
+                var tileContents = tile.transform.Find("Contents");
+                tileContents.gameObject.SetActive(true);
+            }
+        }
     }
 }

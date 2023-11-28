@@ -1211,11 +1211,10 @@ MonoBehaviour:
     museumExhibitSize: 40
     exhibitPrefabs:
     - {fileID: -5528231922914340875, guid: 9d666134c91ce204da0539857add20ad, type: 3}
-    - {fileID: 8572151404337286140, guid: 9f0ca718bb9a41b4eb8c32ed846ced1a, type: 3}
-    - {fileID: 760429974862850253, guid: c04a376612151f843aa621e639261cef, type: 3}
     - {fileID: 112269932417135242, guid: bf46d729b3b383548bd6fb2f480bee85, type: 3}
     - {fileID: 1225158810576762053, guid: 971b62a9c2e44cd459e128f103c94669, type: 3}
-    - {fileID: -4788526153583319991, guid: b86716e535a84164d8657221dc2c80e1, type: 3}
+    - {fileID: 8572151404337286140, guid: 9f0ca718bb9a41b4eb8c32ed846ced1a, type: 3}
+    - {fileID: 760429974862850253, guid: c04a376612151f843aa621e639261cef, type: 3}
     - {fileID: 9115549660130418069, guid: 64f42e342409a2047b9b4cec050355ec, type: 3}
     - {fileID: -7416507269541812059, guid: 480e08192e4b34b49bffe6096c668b35, type: 3}
     exhibitSize: {x: 0, y: 0, z: 0}
@@ -1771,8 +1770,8 @@ Camera:
   m_GameObject: {fileID: 1007989577}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -4627,7 +4626,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 757534651170363485, guid: 579edc701d1ad4440b128ee62767e477, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4605209269976665582, guid: 579edc701d1ad4440b128ee62767e477, type: 3}
       propertyPath: m_LocalPosition.x
