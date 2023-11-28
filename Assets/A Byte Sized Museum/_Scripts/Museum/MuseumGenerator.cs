@@ -36,10 +36,8 @@ namespace KaChow.AByteSizedMuseum
         [SerializeField] private Cell cellObj;
 
         [Space]
-        [Header("Debugging")]
+        [Header("For Debugging")]
         [SerializeField] private bool enableWFC;
-        [SerializeField] private bool showExhibitsOnPlay; 
-
 
         private float exhibitSize;
 
@@ -48,7 +46,6 @@ namespace KaChow.AByteSizedMuseum
         [Space]
         [SerializeField]
         private List<GameObject> exhibitList;
-        private int currentRoomIndex;
 
         // for Debugging
         private void Update()
@@ -67,8 +64,6 @@ namespace KaChow.AByteSizedMuseum
         {
             exhibitSize = museum.exhibitPrefabs[0].gameObject.transform.GetChild(0).localScale.x;
             WFC = new WaveFunctionCollapse(museum, cellObj, exhibitParent.gameObject, museum.exhibitPrefabs);
-
-            currentRoomIndex = (int)(0.5f * museum.museumSize * museum.museumSize - 1.5f * museum.museumSize + museum.museumSize);
         }
  
         // TODO: set up code structure for Exhibits
@@ -78,11 +73,8 @@ namespace KaChow.AByteSizedMuseum
             if (enableWFC)
             {
                 WFC.InitializeGrid();
-            }
-
-            if (!showExhibitsOnPlay)
                 WFC.DisableExhibits();
-                // GenerateExhibitsNoWFC();
+            }
         }
 
         private void GenerateExhibitsNoWFC()
