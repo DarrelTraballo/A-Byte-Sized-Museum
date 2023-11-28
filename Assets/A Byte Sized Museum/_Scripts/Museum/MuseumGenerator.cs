@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using KaChow.WFC;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace KaChow.AByteSizedMuseum
@@ -61,10 +60,11 @@ namespace KaChow.AByteSizedMuseum
         {
             // Generate Museum Layout using WFC
             if (enableWFC)
-                // WFC.InitializeGrid();
-                GenerateExhibitsNoWFC();
-
-            // for testing purposes
+            {
+                WFC.InitializeGrid();
+                WFC.DisableExhibits();
+            }
+                // GenerateExhibitsNoWFC();
         }
 
         private void GenerateExhibitsNoWFC()

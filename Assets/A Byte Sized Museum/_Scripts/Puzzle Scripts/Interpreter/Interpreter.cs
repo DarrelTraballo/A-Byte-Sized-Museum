@@ -7,7 +7,6 @@ namespace KaChow.AByteSizedMuseum
     /* TODO: Interpreter UI: may line numbers sa left side, similar sa mga code editors (like vscode)
 <- these things
 
-
        TODO: make for loop block expandable or something
              like if you try to put another code block inside the for loop, it expands (take up the bottom 1-2 InterpreterLines)
              OR
@@ -24,7 +23,12 @@ namespace KaChow.AByteSizedMuseum
                     > field for what item to give
                     > when interpreter reads, Instantiate the item set to give block
                         > make it launch from the output panel or something, idk
-
+                
+                - For Loop Block
+                    > very similar functionality to Interpreter.ExecuteAllLines();
+    */
+    #region MoveBlock Done
+    /*
                 [Require(objects for it to control)]
                 - move block
                     > no parameters
@@ -41,12 +45,15 @@ namespace KaChow.AByteSizedMuseum
                         > figure out how to make interpreter and controlled object communicate with each other
 
     */
+    #endregion
 
     /* TODO: pickup-able items
                 > allow players to pick up certain items and store them in their inventory
                 > 
 
     */
+
+    
 
     public class Interpreter : MonoBehaviour
     {

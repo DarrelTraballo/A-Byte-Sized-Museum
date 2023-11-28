@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
 
 namespace KaChow.AByteSizedMuseum
 {
@@ -12,11 +13,17 @@ namespace KaChow.AByteSizedMuseum
         [HideInInspector]
         public Transform parentAfterDrag;
 
+        public TextMeshProUGUI countText;
         private Image image;
 
         private void Start()
         {
             image = GetComponentInChildren<Image>();
+        }
+
+        public void RefreshCount()
+        {
+            
         }
 
         public void OnBeginDrag(PointerEventData eventData)

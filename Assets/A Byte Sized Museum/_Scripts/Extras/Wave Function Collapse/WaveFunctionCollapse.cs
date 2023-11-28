@@ -37,12 +37,6 @@ namespace KaChow.WFC {
             this.cellObj = cellObj;
             this.parentGO = parentGO;
             this.tileObjects = tileObjects;
-            // this.exhibits = exhibits;
-
-            // for (int i = 0; i < exhibits.Length; i++)
-            // {
-            //     tileObjects[i] = exhibits[i].rules;
-            // }
 
             exhibitSize = tileObjects[0].gameObject.transform.GetChild(0).localScale.x;
         }
@@ -70,7 +64,6 @@ namespace KaChow.WFC {
                     Vector3 position = new Vector3(x * museum.museumExhibitSize + cellCenterX - offsetX, -1, z * museum.museumExhibitSize + cellCenterZ - offsetZ) + gridOffset;
                     Cell newCell = GameObject.Instantiate(cellObj, position, Quaternion.identity, parentGO.transform);
                     newCell.CreateCell(false, tileObjects);
-                    // newCell.name = $"Exhibit ({x}, {z})";
                     newCell.name = $"Exhibit {z * museum.museumSize + x}";
                     gridComponents.Add(newCell);
                 }
@@ -330,6 +323,15 @@ namespace KaChow.WFC {
             foreach (Transform child in parentGO.transform)
             {
                 GameObject.Destroy(child.gameObject);
+            }
+        }
+
+        public void DisableExhibits()
+        {
+            foreach (var exhibit in gridComponents)
+            {
+                Tile tile = exhibit.GetComponentInChildren<Tile>();
+                tile.gameObject.SetActive(false);
             }
         }
     }
