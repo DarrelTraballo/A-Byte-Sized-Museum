@@ -1,18 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
+/*
+    Spiderman PS4 circuit voltage puzzles 
+
+    logic gates
+
+    final puzzle sa pinaka dulo, lightbot puzzles can give items that can help solving the final puzzle
+*/
 
 namespace KaChow.AByteSizedMuseum
 {
-    public class MoveObject : MonoBehaviour
+    public class HelperBot : MonoBehaviour
     {
-        [SerializeField]
-        private float speed = 10.0f;
-
-        [SerializeField]
-        private GameObject raycastSource;
-        [SerializeField]
-        private float raycastRange;
+        [Header("Bot Variables")]
+        [SerializeField] private float speed = 10.0f;
+        [SerializeField] private float moveDistance = 1f;
+        
+        [Header("Bot Raycast Variables")]
+        [SerializeField] private GameObject raycastSource;
+        [SerializeField] private float raycastRange;
 
         private Vector3 initialPosition;
         private Quaternion initialRotation;
@@ -28,7 +34,7 @@ namespace KaChow.AByteSizedMuseum
             if (!FireRaycast(out string hitObjectTag))
             {
                 Debug.Log("Moving");
-                transform.Translate(Vector3.forward);
+                transform.Translate(Vector3.forward * moveDistance);
             }
             
             // Vector3 targetPosition = transform.position + transform.forward;

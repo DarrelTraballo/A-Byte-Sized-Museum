@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
-using UnityEditor.Experimental.GraphView;
 
 namespace KaChow.AByteSizedMuseum
 {
@@ -22,7 +21,7 @@ namespace KaChow.AByteSizedMuseum
         {
             Debug.Log("Rotate Block");
             onRotate.Raise(this, rotateDirection);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(delay);
         }
 
         public void OnPointerClick(PointerEventData eventData)

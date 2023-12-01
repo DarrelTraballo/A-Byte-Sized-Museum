@@ -4,19 +4,9 @@ using UnityEngine;
 
 namespace KaChow.AByteSizedMuseum
 {
+    // programatically place final exhibit at the opposite side of museum    
     public class MuseumGenerator : MonoBehaviour
     {
-        [System.Serializable]
-        public class Museum
-        {
-            public float museumSize;
-            public float museumExhibitSize = 40f;
-            [Tooltip("WFC Tiles")]
-            public Tile[] exhibitPrefabs;
-            // public ExhibitData[] exhibits;
-            [HideInInspector] public Vector3 exhibitSize;
-        }
-
         // MuseumGenerator.Instance to access MuseumGenerator variables
         public static MuseumGenerator Instance { get; private set; }
         #region Singleton
@@ -35,29 +25,33 @@ namespace KaChow.AByteSizedMuseum
         [SerializeField] private Museum museum;
         [SerializeField] private Cell cellObj;
 
-        [Space]
-        [Header("For Debugging")]
-        [SerializeField] private bool enableWFC;
+        private WaveFunctionCollapse WFC;
 
         private float exhibitSize;
-
-        private WaveFunctionCollapse WFC;
 
         [Space]
         [SerializeField]
         private List<GameObject> exhibitList;
 
+        [Space]
+        [Header("For Debugging")]
+        [SerializeField] private bool enableWFC;
+        [SerializeField] private bool enableDebugging;
+
         // for Debugging
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Z))
+            if (enableDebugging)
             {
-                WFC.DisableExhibits();
+                if (Input.GetKeyDown(KeyCode.Z))
+                {
+                    WFC.DisableExhibits();
+                }
+                else if (Input.GetKeyDown(KeyCode.X))
+                {
+                    WFC.EnableExhibits();
+                } 
             }
-            else if (Input.GetKeyDown(KeyCode.X))
-            {
-                WFC.EnableExhibits();
-            } 
         }
 
         public void Initialize() 

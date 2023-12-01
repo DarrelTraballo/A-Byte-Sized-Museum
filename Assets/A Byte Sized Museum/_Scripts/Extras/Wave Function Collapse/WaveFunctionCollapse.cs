@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
-using static KaChow.AByteSizedMuseum.MuseumGenerator;
 using KaChow.AByteSizedMuseum;
 
 namespace KaChow.WFC {
@@ -132,7 +131,7 @@ namespace KaChow.WFC {
                 // selectedTile = cellToCollapse.tileOptions[randIndex];
                 selectedTile = cellToCollapse.tileOptions[4];
                 secondCall = false;
-                thirdCall = true;
+                thirdCall = false;
             }
             else if (thirdCall)
             {

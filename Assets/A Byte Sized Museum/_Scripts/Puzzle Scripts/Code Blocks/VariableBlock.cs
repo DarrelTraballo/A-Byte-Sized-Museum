@@ -8,7 +8,7 @@ namespace KaChow.AByteSizedMuseum
         public override IEnumerator ExecuteBlock()
         {
             Debug.Log("Variable Block");
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(delay);
         }
     }
 }

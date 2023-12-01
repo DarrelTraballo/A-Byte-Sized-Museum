@@ -6,9 +6,10 @@ namespace KaChow.AByteSizedMuseum {
     public class Player : MonoBehaviour
     {
         public float walkingSpeed = 7.5f;
-        public float runningSpeed = 11.5f;
-        public float jumpSpeed = 8.0f;
-        public float gravity = 20.0f;
+        public float runningSpeed;
+        public float crouchSpeed;
+        public float jumpSpeed = 10.0f;
+        public float gravity = 25.0f;
         public Camera playerCamera;
         public float lookSpeed;
         public float lookXLimit = 45.0f;
@@ -16,6 +17,7 @@ namespace KaChow.AByteSizedMuseum {
         private CharacterController characterController;
         private Vector3 moveDirection = Vector3.zero;
         private float rotationX = 0f;
+        private InputManager inputManager;
 
         [HideInInspector]
         public bool canMove = true;
@@ -23,9 +25,10 @@ namespace KaChow.AByteSizedMuseum {
         private void Awake() 
         {
             characterController = GetComponent<CharacterController>();
+            runningSpeed = walkingSpeed * 1.3f;
+            crouchSpeed = walkingSpeed * 0.322f;
         }
         
-        private InputManager inputManager;
 
         private void Start()
         {
@@ -34,24 +37,34 @@ namespace KaChow.AByteSizedMuseum {
 
         private void Update() 
         {
+            HandleMovementInput();
+            HandleJumpInput();
+            HandleGravity();
+            MoveController();
+            HandleCameraRotation();
+        }
+
+        private void HandleMovementInput()
+        {
+            if (!canMove) return;
+        
             // We are grounded, so recalculate move direction based on axes
             Vector3 forward = transform.TransformDirection(Vector3.forward);
             Vector3 right = transform.TransformDirection(Vector3.right);
 
             Vector2 moveInput = inputManager.GetPlayerMovement();
-            Vector2 lookInput = inputManager.GetMouseDelta();
 
             // Press Left Shift to run
             bool isRunning = inputManager.IsPlayerRunning();
-            float currentSpeedX = canMove ? (isRunning ? runningSpeed : walkingSpeed) * moveInput.y : 0;
-            float currentSpeedY = canMove ? (isRunning ? runningSpeed : walkingSpeed) * moveInput.x : 0;
-
+            
+            float currentSpeedX = (isRunning ? runningSpeed : walkingSpeed) * moveInput.y;
+            float currentSpeedY = (isRunning ? runningSpeed : walkingSpeed) * moveInput.x;
 
             float movementDirectionY = moveDirection.y;
             Vector3 desiredMove = (forward * currentSpeedX) + (right * currentSpeedY);
             moveDirection = desiredMove.normalized * (isRunning ? runningSpeed : walkingSpeed);
 
-            if (inputManager.PlayerJumpedThisFrame() && canMove && characterController.isGrounded)
+            if (inputManager.PlayerJumpedThisFrame() && characterController.isGrounded)
             {
                 moveDirection.y = jumpSpeed;
             }
@@ -59,7 +72,20 @@ namespace KaChow.AByteSizedMuseum {
             {
                 moveDirection.y = movementDirectionY;
             }
+        }
 
+        private void HandleJumpInput()
+        {
+            if (!canMove || !characterController.isGrounded) return;
+
+            if (inputManager.PlayerJumpedThisFrame())
+            {
+                moveDirection.y = jumpSpeed;
+            }
+        }
+
+        private void HandleGravity()
+        {
             // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
             // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
             // as an acceleration (ms^-2)
@@ -67,18 +93,24 @@ namespace KaChow.AByteSizedMuseum {
             {
                 moveDirection.y -= gravity * Time.deltaTime;
             }
+        }
 
+        private void MoveController()
+        {
             // Move the controller
             characterController.Move(moveDirection * Time.deltaTime);
+        }
 
-            // Player's camera rotation
-            if (canMove)
-            {
-                rotationX += lookInput.y * lookSpeed;
-                rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
-                playerCamera.transform.localRotation = Quaternion.Euler(-rotationX, 0, 0);
-                transform.rotation *= Quaternion.Euler(0, lookInput.x * lookSpeed, 0);        
-            }
+        private void HandleCameraRotation()
+        {
+            if (!canMove) return;
+
+            Vector2 lookInput = inputManager.GetMouseDelta();
+            rotationX += lookInput.y * lookSpeed;
+            rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
+
+            playerCamera.transform.localRotation = Quaternion.Euler(-rotationX, 0, 0);
+            transform.rotation *= Quaternion.Euler(0, lookInput.x * lookSpeed, 0);
         }
     }
 }

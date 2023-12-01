@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace KaChow.AByteSizedMuseum
 {
@@ -18,12 +19,38 @@ namespace KaChow.AByteSizedMuseum
                     > fields for variable name and value
                     > when interpreter reads, just Debug.Log() name and value for now
 
-                [Require(allow player to pickup shit in game and store it in inventory)]
-                - give block
-                    > field for what item to give
-                    > when interpreter reads, Instantiate the item set to give block
-                        > make it launch from the output panel or something, idk
-                
+                - Pickup Block
+                    > picks up object directly in front of it
+                        ```
+                        if bot is not holding an object: 
+                            use raycast to check if object in front of it is pickup-able
+                            if raycast.hit == pickup-able object:
+                                pickup object
+                            else: 
+                                do nothing
+                        else: 
+                            do nothing
+                        ```
+                    
+                - Drop Block
+                    > drops held object directly in front of it
+                        ```
+                        if bot is holding an object:
+                            raycast to check if object in front is occupied
+                            if raycast.hit == true:
+                                do nothing
+                            else:
+                                drop object
+                        else:
+                            do nothing
+                        ```
+
+                - Function block
+                    > Lets players define a series of commands as a function. 
+                    > should have another UI for telling what's inside the function block
+                    > when clicked, a part of inventory side gets covered by the function block UI
+                    > functionality should be very similar to how interpreter reads lines.
+
                 - For Loop Block
                     > very similar functionality to Interpreter.ExecuteAllLines();
     */
@@ -53,7 +80,9 @@ namespace KaChow.AByteSizedMuseum
 
     */
 
-    
+    // gagawing texture ang camera?
+    //   > material
+    // 
 
     public class Interpreter : MonoBehaviour
     {
@@ -62,6 +91,11 @@ namespace KaChow.AByteSizedMuseum
 
         [Header("Game Events")]
         public GameEvent onInterpreterClose;
+
+        [SerializeField] private Button executeButton;
+
+        // [Space]
+        // [Header("Debugging")]
 
         /*
             if execute is pressed:
@@ -76,6 +110,7 @@ namespace KaChow.AByteSizedMuseum
 
         private IEnumerator ExecuteAllLines()
         {
+            DisableButton(executeButton);
             foreach (var interpreterLine in interpreterLines)
             {
                 interpreterLine.EnableHighlight();
@@ -88,16 +123,22 @@ namespace KaChow.AByteSizedMuseum
                     interpreterLine.DisableHighlight();
                     continue;
                 }
-                // ExecuteBlock() should be coroutines
+
                 yield return StartCoroutine(codeBlock.ExecuteBlock());
 
                 interpreterLine.DisableHighlight();
             }
+            EnableButton(executeButton);
         }
 
         public void CloseInterpreter()
         {
+            // currently does not reset code block execution
             onInterpreterClose.Raise(this, name);
         }
+
+        public void DisableButton(Button button) => button.interactable = false;
+
+        public void EnableButton(Button button) => button.interactable = true;
     }
 }

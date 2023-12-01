@@ -13,7 +13,7 @@ namespace KaChow.AByteSizedMuseum
         {
             Debug.Log("Move Block");
             onMove.Raise(this, name);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(delay);
         }
     }
 }
