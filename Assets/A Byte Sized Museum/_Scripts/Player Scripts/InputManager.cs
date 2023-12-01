@@ -42,7 +42,7 @@ namespace KaChow.AByteSizedMuseum
 
         public bool PlayerJumpedThisFrame()
         {
-            return playerControls.Player.Jump.triggered;
+            return playerControls.Player.Jump.IsPressed();
         }
 
         public bool PlayerInteractedThisFrame()
