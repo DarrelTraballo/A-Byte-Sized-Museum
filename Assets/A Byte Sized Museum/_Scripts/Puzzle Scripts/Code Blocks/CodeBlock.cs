@@ -24,6 +24,7 @@ namespace KaChow.AByteSizedMuseum
     public abstract class CodeBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         protected float delay = 0.5f;
+        public bool canDrag = true;
         public abstract IEnumerator ExecuteBlock();
 
         [HideInInspector]

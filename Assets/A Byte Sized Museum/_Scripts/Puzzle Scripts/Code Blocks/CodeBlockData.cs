@@ -11,6 +11,8 @@ namespace KaChow.AByteSizedMuseum
         public Image interpreterImage;
         public Image inventoryImage;
 
+        // TODO: 
+        // data to be displayed sa bottom right panel ng interpreter
         
     }
 }

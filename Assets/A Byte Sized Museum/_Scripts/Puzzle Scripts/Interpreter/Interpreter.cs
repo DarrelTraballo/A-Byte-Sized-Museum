@@ -103,6 +103,7 @@ namespace KaChow.AByteSizedMuseum
                 execute blocks after a delay?
                     (use Coroutines?)
         */
+
         public void ExecuteLines()
         {
             StartCoroutine(ExecuteAllLines());
@@ -135,6 +136,7 @@ namespace KaChow.AByteSizedMuseum
         {
             // currently does not reset code block execution
             onInterpreterClose.Raise(this, name);
+            EnableButton(executeButton);
         }
 
         public void DisableButton(Button button) => button.interactable = false;

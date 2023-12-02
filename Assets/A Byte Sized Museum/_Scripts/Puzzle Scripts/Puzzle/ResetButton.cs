@@ -11,7 +11,6 @@ namespace KaChow.AByteSizedMuseum
 
         public override void OnInteract()
         {
-            Debug.Log("Reset button pressed");
             onReset.Raise(this, name);
         }
 
