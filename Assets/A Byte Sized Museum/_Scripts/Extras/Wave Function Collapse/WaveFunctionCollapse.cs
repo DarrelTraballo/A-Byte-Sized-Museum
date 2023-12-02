@@ -84,6 +84,8 @@ namespace KaChow.WFC {
             // sorts the List in ascending order based on how many Tile Options each cell has left
             tempGrid.Sort((a, b) => { return a.tileOptions.Length - b.tileOptions.Length; });
 
+            tempGrid.RemoveAll(a => a.tileOptions.Length != tempGrid[0].tileOptions.Length);
+
 
             int arrLength = tempGrid[0].tileOptions.Length;
             int stopIndex = default;
