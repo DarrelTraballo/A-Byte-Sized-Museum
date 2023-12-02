@@ -9,6 +9,7 @@ namespace KaChow.AByteSizedMuseum
         // Singleton reference, para isang instance lang ang kinukuha pag need i-reference from another script
         // can only access GameManager by using GameManager.Instance
         public static GameManager Instance { get; private set; }
+        private WaveFunctionCollapse waveFunctionCollapse;
         #region Singleton
         private GameManager() {}
         private void Awake() 
@@ -39,7 +40,33 @@ namespace KaChow.AByteSizedMuseum
             museumGenerator = MuseumGenerator.Instance;
             museumGenerator.Initialize();
             museumGenerator.GenerateExhibits();
+
+            waveFunctionCollapse= GetComponent<WaveFunctionCollapse>();
+
+            if (waveFunctionCollapse != null)
+            {
+                // Subscribe to the InitializationCompleteEvent
+                Debug.Log("Intialization DONE");
+                waveFunctionCollapse.InitializationCompleteEvent.AddListener(OnInitializationComplete);
+            }
+            else
+            {
+                // Subscribe to the InitializationCompleteEvent
+                Debug.Log("Intialization IS NOT DONE");
+                //waveFunctionCollapse.InitializationCompleteEvent.AddListener(OnInitializationComplete);
+            }
+
         }
+
+        /// //////////////////////////////////////////////////////////////////////////////
+
+        private void OnInitializationComplete()
+        {
+            // Your code to execute after initialization is complete
+            waveFunctionCollapse.DisableExhibits();
+            Debug.Log("Disabling EXHIBIT DONE");
+        }
+        //////////////////////////////////////////////////////////////////////////////////
 
         public void SetCursorState(CursorLockMode cursorLockMode)
         {
