@@ -5,8 +5,10 @@ using UnityEngine.EventSystems;
 
 namespace KaChow.AByteSizedMuseum
 {
-    public class RotateBlock : CodeBlock, IPointerClickHandler
+    public class RotateBlock : CodeBlock
     {
+        [TextArea] public string parameters; 
+
         [Header("Game Event")]
         public GameEvent onRotate;
 
@@ -24,9 +26,12 @@ namespace KaChow.AByteSizedMuseum
             yield return new WaitForSeconds(delay);
         }
 
-        public void OnPointerClick(PointerEventData eventData)
+        public override void OnPointerClick(PointerEventData eventData)
         {
-            Debug.Log("Clicked!");
+            base.OnPointerClick(eventData);
+
+            codeBlockName = $"Rotate Block ({rotateDirection})";
+
             SetDirection();
         }
 

@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using TMPro;
 
 namespace KaChow.AByteSizedMuseum
 {
@@ -12,6 +11,7 @@ namespace KaChow.AByteSizedMuseum
                 - unlimited number of each code block, player just has to drag and drop the code block to where they choose to.
                 - cannot drag and drop to the player's own inventory. picked up code block simply resets position
                 > quick, temporary (?) solution
+                > ITO NALANG MUNA
 
             2. each code block has their own count
                 - players will have to look around the level to find more of these blocks
@@ -21,16 +21,19 @@ namespace KaChow.AByteSizedMuseum
                 > 
     */
     
-    public abstract class CodeBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+    public abstract class CodeBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
     {
+        [Header("Code Block Details")]
+        public string codeBlockName;
+        [TextArea] public string codeBlockDescription;
+        [SerializeField] protected GameEvent onCodeBlockClick;
+
         protected float delay = 0.5f;
-        public bool canDrag = true;
+        [HideInInspector] public bool canDrag = true;
         public abstract IEnumerator ExecuteBlock();
 
-        [HideInInspector]
-        public Transform parentAfterDrag;
+        [HideInInspector] public Transform parentAfterDrag;
 
-        // public TextMeshProUGUI countText;
         private Image image;
 
         private void Start()
@@ -38,7 +41,7 @@ namespace KaChow.AByteSizedMuseum
             image = GetComponentInChildren<Image>();
         }
 
-        public void RefreshCount()
+        public void InitializeCodeBlock()
         {
             
         }
@@ -62,5 +65,9 @@ namespace KaChow.AByteSizedMuseum
             image.raycastTarget = true;
         }
 
+        public virtual void OnPointerClick(PointerEventData eventData)
+        {
+            onCodeBlockClick.Raise(this, this);
+        }
     }
 }
