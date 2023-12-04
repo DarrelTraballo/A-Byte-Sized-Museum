@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -92,6 +93,10 @@ namespace KaChow.AByteSizedMuseum
         [Header("Game Events")]
         public GameEvent onInterpreterClose;
 
+        [Header("Code Block Details Panel")]
+        [SerializeField] private GameObject codeBlockDetailsPanel;
+
+        [Header("Buttons")]
         [SerializeField] private Button executeButton;
 
         // [Space]
@@ -142,5 +147,19 @@ namespace KaChow.AByteSizedMuseum
         public void DisableButton(Button button) => button.interactable = false;
 
         public void EnableButton(Button button) => button.interactable = true;
+
+        public void ShowCodeBlockDetails(Component sender, object data)
+        {
+            if (data is CodeBlock codeBlock)
+            {
+                var codeBlockName = codeBlockDetailsPanel.transform.Find("Code Block Name").GetComponent<TextMeshProUGUI>();
+                var codeBlockDescription = codeBlockDetailsPanel.transform.Find("Code Block Description").GetComponent<TextMeshProUGUI>();
+
+                codeBlockName.text = codeBlock.codeBlockName;
+                codeBlockDescription.text = codeBlock.codeBlockDescription;
+
+            }
+        }
+
     }
 }

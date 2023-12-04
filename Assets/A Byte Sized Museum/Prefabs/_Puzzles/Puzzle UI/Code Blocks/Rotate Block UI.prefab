@@ -282,8 +282,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 541c886dd61fb96408afa19c1287c18d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  codeBlockName: Rotate Block
+  codeBlockDescription: "Rotates the Helper Bot 90\xB0 clockwise or counterclockwise.\n\nClick
+    on the Rotate Block to cycle between Clockwise (CW) and Counterclockwise (CC)"
+  onCodeBlockClick: {fileID: 11400000, guid: f8d254c9d25edc546889d2feea2c7364, type: 2}
+  canDrag: 1
   parentAfterDrag: {fileID: 0}
-  countText: {fileID: 0}
+  parameters: 
   onRotate: {fileID: 11400000, guid: 75cc73aeee1337542b841420da7d6d8b, type: 2}
   rotateDirectionText: {fileID: 98469368638333580}
   rotateDirection: 0

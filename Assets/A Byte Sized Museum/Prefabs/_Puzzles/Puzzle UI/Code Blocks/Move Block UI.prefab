@@ -110,7 +110,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5993886930896345989, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
       propertyPath: m_Name
-      value: Move Block UI 1
+      value: Move Block UI
       objectReference: {fileID: 0}
     - target: {fileID: 7291833404981967488, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
       propertyPath: m_Color.g
@@ -145,6 +145,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 307646bdb333809488cbbcef691bbbd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  codeBlockName: Move Block
+  codeBlockDescription: Moves the Helper Bot 1 unit forward
+  onCodeBlockClick: {fileID: 11400000, guid: f8d254c9d25edc546889d2feea2c7364, type: 2}
+  canDrag: 1
   parentAfterDrag: {fileID: 0}
-  countText: {fileID: 0}
   onMove: {fileID: 11400000, guid: 62e235ed14f65104ca8c09519bfa74e7, type: 2}
