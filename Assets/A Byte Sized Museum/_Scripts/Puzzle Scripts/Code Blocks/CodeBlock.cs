@@ -28,7 +28,7 @@ namespace KaChow.AByteSizedMuseum
         [TextArea] public string codeBlockDescription;
         [SerializeField] protected GameEvent onCodeBlockClick;
 
-        protected float delay = 0.5f;
+        protected float delay = 0.75f;
         [HideInInspector] public bool canDrag = true;
         public abstract IEnumerator ExecuteBlock();
 

@@ -1,4 +1,5 @@
 using UnityEngine;
+using DG.Tweening;
 
 /*
     Spiderman PS4 circuit voltage puzzles 
@@ -14,7 +15,7 @@ namespace KaChow.AByteSizedMuseum
     {
         [Header("Helper Bot Variables")]
         [SerializeField] private float speed = 10.0f;
-        [SerializeField] private float moveDistance = 1f;
+        [SerializeField] private float moveDistance = 0.5f;
         
         [Header("Helper Bot Raycast Variables")]
         [SerializeField] private GameObject raycastSource;
@@ -46,23 +47,33 @@ namespace KaChow.AByteSizedMuseum
         {
             if (!FireRaycast(out GameObject hitObject))
             {
-                transform.Translate(Vector3.forward * moveDistance);
-            }
+                Vector3 targetPosition = transform.position + transform.forward;
+                transform.DOMove(targetPosition, moveDistance)
+                        .SetEase(Ease.InOutQuint);
 
-            // TODO: look DOTween
-            // Vector3 targetPosition = transform.position + transform.forward;
-            // transform.position = Vector3.Lerp(transform.position, targetPosition, speed * Time.deltaTime);
-            // transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+            }
         }
 
         public void Rotate(Component sender, object data)
         {
             if (data is RotateDirection rotateDirection)
             {
+                float targetRotation;
+
                 if (rotateDirection == RotateDirection.Clockwise)
-                    transform.Rotate(0f, -90f, 0f);
+                {
+                    targetRotation = transform.eulerAngles.y - 90.0f;
+                }
                 else if (rotateDirection == RotateDirection.CounterClockwise)
-                    transform.Rotate(0f, 90f, 0f);
+                {
+                    targetRotation = transform.eulerAngles.y + 90.0f;
+                }
+                else 
+                {
+                    targetRotation = transform.eulerAngles.y;
+                }
+
+                transform.DORotate(new Vector3(0f, targetRotation, 0f), moveDistance, RotateMode.Fast).SetEase(Ease.InOutQuint);
             }
         }
 
@@ -74,7 +85,7 @@ namespace KaChow.AByteSizedMuseum
             // reset object's position and rotation
             if (!isHoldingAnObject) 
             {
-                heldObject.transform.SetPositionAndRotation(heldObjectInitialPosition, heldObjectInitialRotation);
+                // heldObject.transform.SetPositionAndRotation(heldObjectInitialPosition, heldObjectInitialRotation);
 
                 return;
             }
