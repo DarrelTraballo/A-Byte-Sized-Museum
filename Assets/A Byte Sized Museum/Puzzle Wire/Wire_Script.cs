@@ -1,9 +1,5 @@
-using System.Transactions;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Unity.VisualScripting;
-using System;
+using UnityEngine.UI;
 
 namespace KaChow.AByteSizedMuseum
 {
@@ -13,8 +9,6 @@ namespace KaChow.AByteSizedMuseum
         Vector3 startPoint;
         Vector3 startPosition;
         public GameObject lightOn;
-
-        public Main main;
 
         // Start is called before the first frame update
         void Start()
@@ -50,7 +44,7 @@ namespace KaChow.AByteSizedMuseum
                         collider.GetComponent<Wire_Script>()?.light_on();
                         Main.Instance.updateCount();
                         light_on();
-                        
+                        return;
 
                     }
                     return;

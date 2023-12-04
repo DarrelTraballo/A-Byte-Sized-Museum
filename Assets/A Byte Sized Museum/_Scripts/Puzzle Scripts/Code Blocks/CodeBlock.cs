@@ -30,6 +30,7 @@ namespace KaChow.AByteSizedMuseum
 
         protected float delay = 0.75f;
         [HideInInspector] public bool canDrag = true;
+
         public abstract IEnumerator ExecuteBlock();
 
         [HideInInspector] public Transform parentAfterDrag;
@@ -39,11 +40,6 @@ namespace KaChow.AByteSizedMuseum
         private void Start()
         {
             image = GetComponentInChildren<Image>();
-        }
-
-        public void InitializeCodeBlock()
-        {
-            
         }
 
         public void OnBeginDrag(PointerEventData eventData)
@@ -68,6 +64,7 @@ namespace KaChow.AByteSizedMuseum
         public virtual void OnPointerClick(PointerEventData eventData)
         {
             onCodeBlockClick.Raise(this, this);
+
         }
     }
 }
