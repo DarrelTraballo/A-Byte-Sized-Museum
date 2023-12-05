@@ -15,12 +15,14 @@ namespace KaChow.AByteSizedMuseum
         public GameObject lightOn;
 
         public Main main;
+        public GameManager gameManager;
 
         // Start is called before the first frame update
         void Start()
         {
             startPoint = transform.parent.position;
             startPosition = transform.position;
+            gameManager = GameManager.Instance;
         }
 
         // Update is called once per frame
@@ -30,6 +32,8 @@ namespace KaChow.AByteSizedMuseum
         }
         private void OnMouseDrag() 
         {
+            //gameManager.Player.canMove = false;
+            //gameManager.SetCursorState(CursorLockMode.Confined);
             //Mouse position to world point
             Vector3 newPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             newPosition.z = 0;

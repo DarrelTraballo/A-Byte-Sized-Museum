@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 600247898901011780}
-  - component: {fileID: 6018123261046308882}
   - component: {fileID: 8090783795046030541}
+  - component: {fileID: 7971491103372508690}
   m_Layer: 0
   m_Name: Moving
   m_TagString: Untagged
@@ -33,9 +33,26 @@ Transform:
   m_Children:
   - {fileID: 1243169391959867893}
   - {fileID: 9108115308968160492}
+  - {fileID: 511005810612679131}
   m_Father: {fileID: 52818419901850613}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &6018123261046308882
+--- !u!114 &8090783795046030541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1551181123122750355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b219bfc6ecf4cf4d919ea97b667d6e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wireEnd: {fileID: 1834581497050062975}
+  lightOn: {fileID: 7879351238791581568}
+  main: {fileID: 0}
+  gameManager: {fileID: 0}
+--- !u!61 &7971491103372508690
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -67,7 +84,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.007087618}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -78,24 +95,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9086018, y: 0.41550785}
+  m_Size: {x: 1, y: 0.36779106}
   m_EdgeRadius: 0
---- !u!114 &8090783795046030541
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1551181123122750355}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b219bfc6ecf4cf4d919ea97b667d6e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wireEnd: {fileID: 1834581497050062975}
-  lightOn: {fileID: 7879351238791581568}
-  completed: {fileID: 6240224763141161268}
-  counter: 0
 --- !u!1 &2217633729495322289
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,7 +218,6 @@ Transform:
   - {fileID: 3852528897877454053}
   - {fileID: 2582884053994145712}
   - {fileID: 600247898901011780}
-  - {fileID: 511005810612679131}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6523911544900986561
@@ -562,7 +562,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 52818419901850613}
+    m_TransformParent: {fileID: 600247898901011780}
     m_Modifications:
     - target: {fileID: 961382003654642408, guid: 4cda6db928096be40bc54686b19854ae, type: 3}
       propertyPath: m_Pivot.x
@@ -614,15 +614,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 961382003654642408, guid: 4cda6db928096be40bc54686b19854ae, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 961382003654642408, guid: 4cda6db928096be40bc54686b19854ae, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 961382003654642408, guid: 4cda6db928096be40bc54686b19854ae, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 961382003654642408, guid: 4cda6db928096be40bc54686b19854ae, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -656,10 +656,5 @@ PrefabInstance:
 --- !u!224 &511005810612679131 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 961382003654642408, guid: 4cda6db928096be40bc54686b19854ae, type: 3}
-  m_PrefabInstance: {fileID: 738861666987637555}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &6240224763141161268 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6690464042493114887, guid: 4cda6db928096be40bc54686b19854ae, type: 3}
   m_PrefabInstance: {fileID: 738861666987637555}
   m_PrefabAsset: {fileID: 0}
