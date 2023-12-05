@@ -1,9 +1,5 @@
-using System.Transactions;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Unity.VisualScripting;
-using System;
+using UnityEngine.UI;
 
 namespace KaChow.AByteSizedMuseum
 {
@@ -54,7 +50,7 @@ namespace KaChow.AByteSizedMuseum
                         collider.GetComponent<Wire_Script>()?.light_on();
                         Main.Instance.updateCount();
                         light_on();
-                        
+                        return;
 
                     }
                     return;

@@ -41,6 +41,9 @@ namespace KaChow.AByteSizedMuseum
                 return;
             }
 
+            gameManager.Player.canMove = false;
+            gameManager.SetCursorState(CursorLockMode.Confined);
+
             if (wirePuzzleUIInstance == null)
             {
                 wirePuzzleUIInstance = Instantiate(wirePuzzleUI);
@@ -56,6 +59,8 @@ namespace KaChow.AByteSizedMuseum
 
         public void CloseInterpreter()
         {
+            gameManager.Player.canMove = true;
+            gameManager.SetCursorState(CursorLockMode.Locked);
 
             wirePuzzleUIInstance.SetActive(false);
             isWirePuzzleOpen = false;
