@@ -18,16 +18,5 @@ namespace KaChow.WFC {
 
         // [Header("Exhibit Data")]
         // public ExhibitData exhibitData;
-
-
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.CompareTag("Player"))
-            {
-                Debug.Log("working");
-                var tileContents = transform.Find("Contents");
-                tileContents.gameObject.SetActive(true);
-            }
-        }
     }
 }

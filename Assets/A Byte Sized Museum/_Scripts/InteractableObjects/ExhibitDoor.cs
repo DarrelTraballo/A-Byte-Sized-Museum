@@ -1,18 +1,18 @@
+using System.IO.IsolatedStorage;
 using UnityEngine;
 
 namespace KaChow.AByteSizedMuseum
 {
     public class ExhibitDoor : InteractableBase
     {
-        [Header("Events")]
+        // [Header("Events")]
         // public GameEvent onDoorInteract;
 
-        [SerializeField]
-        private Transform[] doors;
+        [Header("Doors")]
+        public Transform[] doors;
 
         private bool isOpen = false;
-
-        // Should have an idea what exhibit it is in??
+        public bool isLocked = false;
 
         protected override void OnTriggerExit(Collider actor)
         {
@@ -21,7 +21,7 @@ namespace KaChow.AByteSizedMuseum
             if (isOpen)
             {
                 foreach (var door in doors)
-                {
+                {                    
                     door.gameObject.SetActive(true);
                 }
                 isOpen = false;
@@ -37,7 +37,14 @@ namespace KaChow.AByteSizedMuseum
             {
                 foreach (var door in doors)
                 {
-                    door.gameObject.SetActive(false);
+                    if (!isLocked)
+                    {
+                        door.gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        Debug.Log("Door is Locked");
+                    }
                 }
                 isOpen = true;
             }
