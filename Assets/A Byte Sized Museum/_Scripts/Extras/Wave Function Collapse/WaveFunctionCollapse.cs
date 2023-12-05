@@ -124,6 +124,7 @@ namespace KaChow.WFC {
                 secondCall = true;
             }
             // TODO: if can, do secondCall and thirdCall on firstCall
+            // collapses right tile, right tile should be in index 4
             else if (secondCall)
             {
                 int finalExhibitCellIndex = (int)(0.5f * dimensions * dimensions - 1.5f * dimensions + dimensions) + dimensions - 1;
@@ -149,7 +150,7 @@ namespace KaChow.WFC {
                 // picks which cell to collapse from tempGrid
                 int randIndex = Random.Range(0, tempGrid.Count);
                 cellToCollapse = tempGrid[randIndex];
-                selectedTile = cellToCollapse.tileOptions[Random.Range(0, cellToCollapse.tileOptions.Length-1)];
+                selectedTile = cellToCollapse.tileOptions[Random.Range(0, cellToCollapse.tileOptions.Length)];
             }
 
             // sets selected cell's isCollapsed to true

@@ -8,35 +8,34 @@ namespace KaChow.AByteSizedMuseum
         [SerializeField] private ExhibitDoor[] doors;
         [SerializeField] private bool isExhibitLocked;
 
-        private void Start()
-        {
-
-        }
-
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 isExhibitLocked = !isExhibitLocked;
                 ToggleDoors(isExhibitLocked);
-                Debug.Log($"Doors {(isExhibitLocked ? "Locked" : "Unlocked")}!");
             }
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log("Player Inside *FLUSH*");
-
-            isExhibitLocked = true;
+            // isExhibitLocked = true;
             ToggleDoors(isExhibitLocked);
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            // isExhibitLocked = false;
+            ToggleDoors(isExhibitLocked);
+            
         }
 
         private void ToggleDoors(bool isOpen)
         {
+            Debug.Log($"Doors {(isOpen ? "Locked" : "Unlocked")}!");
             foreach (var door in doors)
             {
                 door.isLocked = isOpen;
-                // door.doors.ToList().ForEach(openDoor => openDoor.gameObject.SetActive(isOpen));
             }
         }
     }

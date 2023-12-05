@@ -4,15 +4,14 @@ using UnityEngine;
 
 namespace KaChow.AByteSizedMuseum
 {
-    public class MoveBlock : CodeBlock
+    public class PickUpBlock : CodeBlock
     {
         [Header("Game Event")]
-        public GameEvent onMove;
+        public GameEvent onPickUp;
 
         public override IEnumerator ExecuteBlock()
         {
-            Debug.Log("Move Block");
-            onMove.Raise(this, name);
+            onPickUp.Raise(this, name);
             yield return new WaitForSeconds(delay);
         }
     }
