@@ -14,7 +14,7 @@ namespace KaChow.AByteSizedMuseum
         {
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                isPuzzleSolved = !isPuzzleSolved;
+                isExhibitLocked = !isExhibitLocked;
 
                 
 
@@ -24,20 +24,19 @@ namespace KaChow.AByteSizedMuseum
 
         private void OnTriggerEnter(Collider other)
         {
-            isExhibitLocked = true;
+            // isExhibitLocked = true;
             ToggleDoors(isExhibitLocked);
         }
 
         private void OnTriggerExit(Collider other)
         {
-            isExhibitLocked = false;
+            // isExhibitLocked = false;
             ToggleDoors(isExhibitLocked);
             
         }
 
         private void ToggleDoors(bool isOpen)
         {
-            Debug.Log($"Doors {(isOpen ? "Locked" : "Unlocked")}!");
             foreach (var door in doors)
             {
                 door.isLocked = isOpen;
