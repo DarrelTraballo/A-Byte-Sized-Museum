@@ -8,24 +8,29 @@ namespace KaChow.AByteSizedMuseum
         [SerializeField] private ExhibitDoor[] doors;
         [SerializeField] private bool isExhibitLocked;
 
+        private bool isPuzzleSolved;
+
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                isExhibitLocked = !isExhibitLocked;
+                isPuzzleSolved = !isPuzzleSolved;
+
+                
+
                 ToggleDoors(isExhibitLocked);
             }
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            // isExhibitLocked = true;
+            isExhibitLocked = true;
             ToggleDoors(isExhibitLocked);
         }
 
         private void OnTriggerExit(Collider other)
         {
-            // isExhibitLocked = false;
+            isExhibitLocked = false;
             ToggleDoors(isExhibitLocked);
             
         }
@@ -37,6 +42,11 @@ namespace KaChow.AByteSizedMuseum
             {
                 door.isLocked = isOpen;
             }
+        }
+
+        public void SetPuzzleSolved(bool isPuzzleSolved)
+        {
+            this.isPuzzleSolved = isPuzzleSolved;
         }
     }
 }
