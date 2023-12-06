@@ -21,7 +21,6 @@ namespace KaChow.AByteSizedMuseum
 
         public override IEnumerator ExecuteBlock()
         {
-            Debug.Log("Rotate Block");
             onRotate.Raise(this, rotateDirection);
             yield return new WaitForSeconds(delay);
         }
