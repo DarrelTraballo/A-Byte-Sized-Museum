@@ -18,24 +18,25 @@ namespace KaChow.AByteSizedMuseum {
 
         private void Update() 
         {
-            Ray r = new Ray(interactorSource.position, interactorSource.forward);
-            if (Physics.Raycast(r, out RaycastHit hitInfo, interactRange))
+            if (inputManager.PlayerInteractedThisFrame())
             {
-                var hit = hitInfo.collider.gameObject.TryGetComponent(out InteractableBase interactObj);
-                if (hit)
+                Ray r = new Ray(interactorSource.position, interactorSource.forward);
+                if (Physics.Raycast(r, out RaycastHit hitInfo, interactRange))
                 {
-                    interactObj.OnLookEnter();
-
-                    if (inputManager.PlayerInteractedThisFrame())
+                    var hit = hitInfo.collider.gameObject.TryGetComponent(out InteractableBase interactObj);
+                    if (hit)
                     {
+                        interactObj.OnLookEnter();
+
                         interactObj.OnInteract();
+                        
                     }
-                }
-            } 
-            else 
-            {
-                // GameManager.Instance.crossHairText.text = "";
+                } 
             }
+            // else 
+            // {
+            //     // GameManager.Instance.crossHairText.text = "";
+            // }
         }
     }
 }

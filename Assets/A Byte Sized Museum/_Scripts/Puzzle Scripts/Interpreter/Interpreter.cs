@@ -78,12 +78,9 @@ namespace KaChow.AByteSizedMuseum
     /* TODO: pickup-able items
                 > allow players to pick up certain items and store them in their inventory
                 > 
-
+       TODO: 
+             reset button for interpreter
     */
-
-    // gagawing texture ang camera?
-    //   > material
-    // 
 
     public class Interpreter : MonoBehaviour
     {
@@ -96,6 +93,8 @@ namespace KaChow.AByteSizedMuseum
         [Header("Bottom Right Panel")]
         [SerializeField] private GameObject codeBlockDetailsPanel;
         [SerializeField] private GameObject puzzleCameraFeed;
+
+        [SerializeField] private GameObject closeIcon;
 
         [Header("Buttons")]
         [SerializeField] private Button executeButton;
@@ -112,11 +111,8 @@ namespace KaChow.AByteSizedMuseum
 
         public void ExecuteLines()
         {
-            puzzleCameraFeed.SetActive(true);
+            codeBlockDetailsPanel.SetActive(false);
             StartCoroutine(ExecuteAllLines());
-
-            // TODO: make it keep running while exited from interpreter
-            //       or have camera thingy appear bootom right panel, "cctv footage" of the puzzle
         }
 
         private IEnumerator ExecuteAllLines()
@@ -130,7 +126,7 @@ namespace KaChow.AByteSizedMuseum
 
                 if (codeBlock == null)
                 {
-                    yield return new WaitForSeconds(0.25f);
+                    yield return new WaitForSeconds(0.20f);
                     interpreterLine.DisableHighlight();
                     continue;
                 }
@@ -163,7 +159,7 @@ namespace KaChow.AByteSizedMuseum
         {
             if (data is CodeBlock codeBlock)
             {
-                puzzleCameraFeed.SetActive(false);
+                codeBlockDetailsPanel.SetActive(true);
                 var codeBlockName = codeBlockDetailsPanel.transform.Find("Code Block Name").GetComponent<TextMeshProUGUI>();
                 var codeBlockDescription = codeBlockDetailsPanel.transform.Find("Code Block Description").GetComponent<TextMeshProUGUI>();
 
@@ -171,6 +167,11 @@ namespace KaChow.AByteSizedMuseum
                 codeBlockDescription.text = codeBlock.codeBlockDescription;
 
             }
+        }
+
+        public void HideCodeBlockDetails()
+        {
+            codeBlockDetailsPanel.SetActive(false);
         }
 
         // method to destroy interpreter ui when player exits an exhibit

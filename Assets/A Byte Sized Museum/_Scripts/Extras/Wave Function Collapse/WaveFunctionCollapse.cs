@@ -150,7 +150,16 @@ namespace KaChow.WFC {
                 // picks which cell to collapse from tempGrid
                 int randIndex = Random.Range(0, tempGrid.Count);
                 cellToCollapse = tempGrid[randIndex];
-                selectedTile = cellToCollapse.tileOptions[Random.Range(0, cellToCollapse.tileOptions.Length)];
+
+                try 
+                {
+                    selectedTile = cellToCollapse.tileOptions[Random.Range(0, cellToCollapse.tileOptions.Length)];
+                }
+                catch
+                {
+                    // forces to generate base tile if things go wrong?
+                    selectedTile = cellToCollapse.tileOptions[2];
+                }
             }
 
             // sets selected cell's isCollapsed to true
