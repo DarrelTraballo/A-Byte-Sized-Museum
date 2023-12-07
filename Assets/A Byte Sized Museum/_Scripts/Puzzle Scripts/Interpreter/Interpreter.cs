@@ -93,8 +93,9 @@ namespace KaChow.AByteSizedMuseum
         [Header("Game Events")]
         public GameEvent onInterpreterClose;
 
-        [Header("Code Block Details Panel")]
+        [Header("Bottom Right Panel")]
         [SerializeField] private GameObject codeBlockDetailsPanel;
+        [SerializeField] private GameObject puzzleCameraFeed;
 
         [Header("Buttons")]
         [SerializeField] private Button executeButton;
@@ -111,7 +112,11 @@ namespace KaChow.AByteSizedMuseum
 
         public void ExecuteLines()
         {
+            puzzleCameraFeed.SetActive(true);
             StartCoroutine(ExecuteAllLines());
+
+            // TODO: make it keep running while exited from interpreter
+            //       or have camera thingy appear bootom right panel, "cctv footage" of the puzzle
         }
 
         private IEnumerator ExecuteAllLines()
@@ -141,6 +146,12 @@ namespace KaChow.AByteSizedMuseum
         {
             // currently does not reset code block execution
             onInterpreterClose.Raise(this, name);
+
+            foreach (var interpreterLine in interpreterLines)
+            {
+                interpreterLine.DisableHighlight();
+            }
+
             EnableButton(executeButton);
         }
 
@@ -152,6 +163,7 @@ namespace KaChow.AByteSizedMuseum
         {
             if (data is CodeBlock codeBlock)
             {
+                puzzleCameraFeed.SetActive(false);
                 var codeBlockName = codeBlockDetailsPanel.transform.Find("Code Block Name").GetComponent<TextMeshProUGUI>();
                 var codeBlockDescription = codeBlockDetailsPanel.transform.Find("Code Block Description").GetComponent<TextMeshProUGUI>();
 
@@ -161,5 +173,6 @@ namespace KaChow.AByteSizedMuseum
             }
         }
 
+        // method to destroy interpreter ui when player exits an exhibit
     }
 }
