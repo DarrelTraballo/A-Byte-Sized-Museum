@@ -8,7 +8,7 @@ using KaChow.AByteSizedMuseum;
 using System.Collections;
 
 namespace KaChow.WFC {
-    public class WaveFunctionCollapse : MonoBehaviour
+    public class WaveFunctionCollapse
     {
 
 
@@ -137,8 +137,9 @@ namespace KaChow.WFC {
                 int finalExhibitCellIndex = (int)(0.5f * dimensions * dimensions - 1.5f * dimensions + dimensions) + dimensions - 1;
                 cellToCollapse = gridComponents[finalExhibitCellIndex];
                 // select randomly between indices 3, 4, 5
-                int randIndex = Random.Range(3, 6);
-                // selectedTile = cellToCollapse.tileOptions[randIndex];
+                // int randIndex = Random.Range(3, 6);
+                // selectedTile = cellToCollapse.tileOptions[randIndex];\
+                // Force collapse right path on exhibit before final exhibit
                 selectedTile = cellToCollapse.tileOptions[4];
                 secondCall = false;
                 thirdCall = false;
@@ -147,7 +148,7 @@ namespace KaChow.WFC {
             {
                 int selectedExhibitCellIndex = dimensions - 2;
                 cellToCollapse = gridComponents[selectedExhibitCellIndex];
-                int randIndex = Random.Range(3, 6);
+                // int randIndex = Random.Range(3, 6);
                 selectedTile = cellToCollapse.tileOptions[3];
                 thirdCall = false;
             }
@@ -158,15 +159,16 @@ namespace KaChow.WFC {
                 int randIndex = Random.Range(0, tempGrid.Count);
                 cellToCollapse = tempGrid[randIndex];
 
-                try 
-                {
                     selectedTile = cellToCollapse.tileOptions[Random.Range(0, cellToCollapse.tileOptions.Length)];
-                }
-                catch
-                {
-                    // forces to generate base tile if things go wrong?
-                    selectedTile = cellToCollapse.tileOptions[2];
-                }
+                // try 
+                // {
+                //     selectedTile = cellToCollapse.tileOptions[Random.Range(0, cellToCollapse.tileOptions.Length)];
+                // }
+                // catch
+                // {
+                //     // forces to generate base tile if things go wrong?
+                //     selectedTile = cellToCollapse.tileOptions[2];
+                // }
             }
 
             // sets selected cell's isCollapsed to true
@@ -204,8 +206,6 @@ namespace KaChow.WFC {
                         foreach (Tile t in tileObjects)
                         {
                             options.Add(t);
-                             Debug.Log("sa options to ");
-                              Debug.Log(t.ToString());
                         }
 
                         //update above
@@ -222,21 +222,12 @@ namespace KaChow.WFC {
                                 validOptions = validOptions.Concat(valid).ToList();
                                
                             }
-                             // Debug.Log for each element in the list
-                            foreach (var option in validOptions)
-                            {
-                                Debug.Log(option.ToString());
-                            }
-
-                            // Or use string.Join to concatenate elements into a single string
-                           
-                            Debug.Log("Valid Options: " + string.Join(", ", validOptions.Select(option => option.ToString())));
 
                             CheckValidity(options, validOptions);
                         }
 
                         //update right
-                        else if (x < dimensions - 1)
+                        if (x < dimensions - 1)
                         {
                             Cell right = gridComponents[x + 1 + z * dimensions];
                             List<Tile> validOptions = new List<Tile>();
@@ -253,7 +244,7 @@ namespace KaChow.WFC {
                         }
 
                         //look down
-                        else if (z < dimensions - 1)
+                        if (z < dimensions - 1)
                         {
                             Cell down = gridComponents[x + (z + 1) * dimensions];
                             List<Tile> validOptions = new List<Tile>();
@@ -270,7 +261,7 @@ namespace KaChow.WFC {
                         }
 
                         //look left
-                        else if (x > 0)
+                        if (x > 0)
                         {
                             Cell left = gridComponents[x - 1 + z * dimensions];
                             List<Tile> validOptions = new List<Tile>();
@@ -309,9 +300,6 @@ namespace KaChow.WFC {
             else 
             {
                 isDoneGenerating = true;
-                // Trigger the event when initialization is complete
-            TriggerInitializationCompleteEvent();
-            ///////////////////////////////////////////////////////////
             }
         }
 
@@ -363,75 +351,15 @@ namespace KaChow.WFC {
 
         public void DisableExhibits()
         {
-              
-              foreach (Cell cell in gridComponents)
-            {
-            // Assuming Cell has a meaningful ToString() method or a property you want to 
-               Debug.Log("ROOMS IN THIS CELL: " + cell.ToString());
-            }   
-            int count = 0;
-
             foreach (var exhibit in gridComponents)
             {
                 Tile tile = exhibit.GetComponentInChildren<Tile>();
                 
-                if (tile != null)
-                {
-                    var tileContents = tile.transform.Find("Contents");
-
-                    if (tileContents != null)
-                    {
-                        var output = JsonUtility.ToJson(exhibit, true);
-                        Debug.Log(count + ": " + output);
-                        count++;
-                        tileContents.gameObject.SetActive(false);
-                        // StartCoroutine(DelayedExecution());
-                    }
-                    else
-                    {
-                        Debug.LogError("Contents not found in tile for exhibit: " + exhibit.name);
-                    }
-                }
-                else
-                {
-                    Debug.LogError("Tile component not found in exhibit: " + exhibit.name);
-                }
+                var tileContents = tile.transform.Find("Contents");
+                tileContents.gameObject.SetActive(false);
             }
 
-            // second try to eliminate all
-            foreach (var exhibit in gridComponents)
-            {
-                Tile tile = exhibit.GetComponentInChildren<Tile>();
-                
-                if (tile != null)
-                {
-                    var tileContents = tile.transform.Find("Contents");
-
-                    if (tileContents != null)
-                    {
-                        var output = JsonUtility.ToJson(exhibit, true);
-                        Debug.Log(count + ": " + output);
-                        count++;
-                        tileContents.gameObject.SetActive(false);
-                        // StartCoroutine(DelayedExecution());
-                    }
-                    else
-                    {
-                        Debug.LogError("Contents not found in tile for exhibit: " + exhibit.name);
-                    }
-                }
-                else
-                {
-                    Debug.LogError("Tile component not found in exhibit: " + exhibit.name);
-                }
-            }
-            
         }
-            IEnumerator DelayedExecution()
-        {
-            yield return new WaitForSeconds(1);
-        }
-
         
         public void EnableExhibits()
         {
@@ -440,22 +368,8 @@ namespace KaChow.WFC {
                 Tile tile = exhibit.GetComponentInChildren<Tile>();
                 var tileContents = tile.transform.Find("Contents");
 
-                var output = JsonUtility.ToJson(exhibit, true);
-                Debug.Log(output);
-
                 tileContents.gameObject.SetActive(true);
             }
         }
-        // UnityEvent for initialization complete///////////////////////////////////////////////////////
-        
-
-        // Trigger the event when initialization is complete
-        private void TriggerInitializationCompleteEvent()
-        {
-            InitializationCompleteEvent.Invoke();
-        }
-        ////////////////////////////////////////////////////////////////////////////////////
-        
-        
     }
 }

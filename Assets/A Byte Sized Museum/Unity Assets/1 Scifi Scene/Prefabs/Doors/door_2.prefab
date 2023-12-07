@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 415124}
   - component: {fileID: 3392990}
   - component: {fileID: 2347196}
-  - component: {fileID: 3728190463059419549}
   - component: {fileID: 9546954}
   - component: {fileID: 6461558}
   - component: {fileID: 1790052410536505134}
+  - component: {fileID: 4090539611813043419}
   m_Layer: 0
   m_Name: door_2
   m_TagString: Untagged
@@ -89,22 +89,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &3728190463059419549
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 115324}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d8e3ed76addfec48ae8a2aa5323d044, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doors:
-  - {fileID: 485782}
-  - {fileID: 476950}
-  isLocked: 0
 --- !u!95 &9546954
 Animator:
   serializedVersion: 5
@@ -169,6 +153,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4, y: 4.0475597, z: 2.8564188}
   m_Center: {x: 0, y: 2.0237799, z: 0}
+--- !u!114 &4090539611813043419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 115324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d8e3ed76addfec48ae8a2aa5323d044, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doors:
+  - {fileID: 485782}
+  - {fileID: 476950}
+  isLocked: 0
 --- !u!1 &141230
 GameObject:
   m_ObjectHideFlags: 0
