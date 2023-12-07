@@ -212,7 +212,8 @@ Transform:
   m_LocalPosition: {x: -0.04185295, y: 4.7679687, z: 0}
   m_LocalScale: {x: 32, y: 0.5, z: 32}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2090484499787954137}
   m_Father: {fileID: 818570655124810942}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7835343129779191892
@@ -243,7 +244,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e1acff2de4590ac48b0fdeb4b162db91, type: 2}
+  - {fileID: 2100000, guid: ecbd584c3efc3304bb17b93c9783307f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1223,7 +1224,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e1acff2de4590ac48b0fdeb4b162db91, type: 2}
+  - {fileID: 2100000, guid: ecbd584c3efc3304bb17b93c9783307f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1822,7 +1823,6 @@ Transform:
   m_Children:
   - {fileID: 5416815042548058238}
   - {fileID: 9074959014217225082}
-  - {fileID: 2090484499787954137}
   - {fileID: 3580856938854784244}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1858,8 +1858,6 @@ MonoBehaviour:
   - {fileID: 112269932417135242, guid: bf46d729b3b383548bd6fb2f480bee85, type: 3}
   - {fileID: 8572151404337286140}
   - {fileID: 9115549660130418069, guid: 64f42e342409a2047b9b4cec050355ec, type: 3}
-  - {fileID: 8572151404337286140}
-  - {fileID: 9115549660130418069, guid: 64f42e342409a2047b9b4cec050355ec, type: 3}
   rightNeighbors:
   - {fileID: -5528231922914340875, guid: 9d666134c91ce204da0539857add20ad, type: 3}
   - {fileID: 8572151404337286140}
@@ -1867,17 +1865,15 @@ MonoBehaviour:
   - {fileID: 9115549660130418069, guid: 64f42e342409a2047b9b4cec050355ec, type: 3}
   - {fileID: 760429974862850253, guid: c04a376612151f843aa621e639261cef, type: 3}
   downNeighbors:
+  - {fileID: 8572151404337286140}
   - {fileID: 112269932417135242, guid: bf46d729b3b383548bd6fb2f480bee85, type: 3}
-  - {fileID: 8572151404337286140}
-  - {fileID: 1225158810576762053, guid: 971b62a9c2e44cd459e128f103c94669, type: 3}
-  - {fileID: 8572151404337286140}
   - {fileID: 1225158810576762053, guid: 971b62a9c2e44cd459e128f103c94669, type: 3}
   leftNeighbors:
-  - {fileID: -5528231922914340875, guid: 9d666134c91ce204da0539857add20ad, type: 3}
   - {fileID: 8572151404337286140}
   - {fileID: 1225158810576762053, guid: 971b62a9c2e44cd459e128f103c94669, type: 3}
   - {fileID: 9115549660130418069, guid: 64f42e342409a2047b9b4cec050355ec, type: 3}
   - {fileID: -8179233783697589823, guid: c04e66d3cb61e3040a4af5cf163f2766, type: 3}
+  - {fileID: -5528231922914340875, guid: 9d666134c91ce204da0539857add20ad, type: 3}
 --- !u!65 &7895290554853382265
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2229,12 +2225,12 @@ Transform:
   m_GameObject: {fileID: 6727355972137288395}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.0013079047, y: -9.535937, z: 0}
+  m_LocalScale: {x: 0.03125, y: 2, z: 0.03125}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4337438281625367659}
-  m_Father: {fileID: 6476168336606724661}
+  m_Father: {fileID: 6976551982687005468}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6938358973089209666
 GameObject:
