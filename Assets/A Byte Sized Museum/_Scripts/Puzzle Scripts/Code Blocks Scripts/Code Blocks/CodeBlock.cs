@@ -44,6 +44,7 @@ namespace KaChow.AByteSizedMuseum
 
         public void OnBeginDrag(PointerEventData eventData)
         {
+            onCodeBlockClick.Raise(this, this);
             parentAfterDrag = transform.parent;
             transform.SetParent(transform.root);
             transform.SetAsLastSibling();
@@ -64,7 +65,6 @@ namespace KaChow.AByteSizedMuseum
         public virtual void OnPointerClick(PointerEventData eventData)
         {
             onCodeBlockClick.Raise(this, this);
-
         }
     }
 }
