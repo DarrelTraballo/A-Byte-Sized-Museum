@@ -10,11 +10,15 @@ namespace KaChow.AByteSizedMuseum
         Vector3 startPosition;
         public GameObject lightOn;
 
+        public Main main;
+        public GameManager gameManager;
+
         // Start is called before the first frame update
         void Start()
         {
             startPoint = transform.parent.position;
             startPosition = transform.position;
+            gameManager = GameManager.Instance;
         }
 
         // Update is called once per frame
@@ -24,9 +28,11 @@ namespace KaChow.AByteSizedMuseum
         }
         private void OnMouseDrag() 
         {
+            //gameManager.Player.canMove = false;
+            //gameManager.SetCursorState(CursorLockMode.Confined);
             //Mouse position to world point
             Vector3 newPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            newPosition.z = 0;
+            newPosition.z = -1318;
 
             // check for nearby connection points
             Collider2D[]colliders = Physics2D.OverlapCircleAll(newPosition, .2f);
@@ -83,7 +89,7 @@ namespace KaChow.AByteSizedMuseum
             transform.position = newPosition;
 
             // update direction
-           Vector3 direction = newPosition - startPoint;
+           Vector2 direction = newPosition - startPoint;
             transform.right = direction * transform.lossyScale.x;
        
             // update scale

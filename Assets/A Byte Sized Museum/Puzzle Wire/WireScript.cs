@@ -9,11 +9,14 @@ namespace KaChow.AByteSizedMuseum
         [SerializeField]
         private GameObject wirePuzzleUI;
         private GameObject wirePuzzleUIInstance;
+
+        private Camera maincamera;
         private bool isWirePuzzleOpen;
 
         public override void Start()
         {
             base.Start();
+            
         }
 
         private void Update()
@@ -34,6 +37,8 @@ namespace KaChow.AByteSizedMuseum
 
         private void OpenInterpreter()
         {
+            gameManager.Player.playerCamera.enabled = false;
+            gameManager.Player.gameObject.SetActive(false);
 
             if (wirePuzzleUI == null)
             {
@@ -44,25 +49,27 @@ namespace KaChow.AByteSizedMuseum
             gameManager.Player.canMove = false;
             gameManager.SetCursorState(CursorLockMode.Confined);
 
-            if (wirePuzzleUIInstance == null)
+            if (wirePuzzleUI == null)
             {
-                wirePuzzleUIInstance = Instantiate(wirePuzzleUI);
-                wirePuzzleUIInstance.transform.SetParent(GameObject.Find("PlayerUICanvas").transform, false);
+                wirePuzzleUI.SetActive(true);
+                
                 isWirePuzzleOpen = true;
             }
             else
             {
                 isWirePuzzleOpen = !isWirePuzzleOpen;
-               wirePuzzleUIInstance.SetActive(isWirePuzzleOpen);
+                wirePuzzleUI.SetActive(isWirePuzzleOpen);
             }
         }
 
         public void CloseInterpreter()
         {
+            gameManager.Player.playerCamera.enabled = true;
+            gameManager.Player.gameObject.SetActive(true);
             gameManager.Player.canMove = true;
             gameManager.SetCursorState(CursorLockMode.Locked);
 
-            wirePuzzleUIInstance.SetActive(false);
+            wirePuzzleUI.SetActive(false);
             isWirePuzzleOpen = false;
         }
     }
