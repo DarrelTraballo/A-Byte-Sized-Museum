@@ -1,15 +1,20 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 using KaChow.AByteSizedMuseum;
+using System.Collections;
 
 namespace KaChow.WFC {
-    public class WaveFunctionCollapse
+    public class WaveFunctionCollapse : MonoBehaviour
     {
+
+
+        public UnityEvent InitializationCompleteEvent = new UnityEvent();
         private readonly int dimensions;
+        // Add an event in WaveFunctionCollapse
         private readonly Tile[] tileObjects;
         private readonly Museum museum;
         private readonly Cell cellObj;
@@ -28,6 +33,7 @@ namespace KaChow.WFC {
         private bool secondCall = false;
         private bool thirdCall = false;
 
+        
         public WaveFunctionCollapse(Museum museum, Cell cellObj, GameObject parentGO, Tile[] tileObjects)
         {
             gridComponents = new List<Cell>();
@@ -69,7 +75,9 @@ namespace KaChow.WFC {
             }
 
             // MonoBehaviour.StartCoroutine(CheckEntropy());
+            
             CheckEntropy();
+            
         }
 
         private void CheckEntropy()
@@ -124,7 +132,6 @@ namespace KaChow.WFC {
                 secondCall = true;
             }
             // TODO: if can, do secondCall and thirdCall on firstCall
-            // collapses right tile, right tile should be in index 4
             else if (secondCall)
             {
                 int finalExhibitCellIndex = (int)(0.5f * dimensions * dimensions - 1.5f * dimensions + dimensions) + dimensions - 1;
@@ -188,6 +195,8 @@ namespace KaChow.WFC {
                         foreach (Tile t in tileObjects)
                         {
                             options.Add(t);
+                             Debug.Log("sa options to ");
+                              Debug.Log(t.ToString());
                         }
 
                         //update above
@@ -202,13 +211,23 @@ namespace KaChow.WFC {
                                 var valid = tileObjects[valOption].upNeighbors;
 
                                 validOptions = validOptions.Concat(valid).ToList();
+                               
                             }
+                             // Debug.Log for each element in the list
+                            foreach (var option in validOptions)
+                            {
+                                Debug.Log(option.ToString());
+                            }
+
+                            // Or use string.Join to concatenate elements into a single string
+                           
+                            Debug.Log("Valid Options: " + string.Join(", ", validOptions.Select(option => option.ToString())));
 
                             CheckValidity(options, validOptions);
                         }
 
                         //update right
-                        if (x < dimensions - 1)
+                        else if (x < dimensions - 1)
                         {
                             Cell right = gridComponents[x + 1 + z * dimensions];
                             List<Tile> validOptions = new List<Tile>();
@@ -225,7 +244,7 @@ namespace KaChow.WFC {
                         }
 
                         //look down
-                        if (z < dimensions - 1)
+                        else if (z < dimensions - 1)
                         {
                             Cell down = gridComponents[x + (z + 1) * dimensions];
                             List<Tile> validOptions = new List<Tile>();
@@ -242,7 +261,7 @@ namespace KaChow.WFC {
                         }
 
                         //look left
-                        if (x > 0)
+                        else if (x > 0)
                         {
                             Cell left = gridComponents[x - 1 + z * dimensions];
                             List<Tile> validOptions = new List<Tile>();
@@ -281,11 +300,16 @@ namespace KaChow.WFC {
             else 
             {
                 isDoneGenerating = true;
+                // Trigger the event when initialization is complete
+            TriggerInitializationCompleteEvent();
+            ///////////////////////////////////////////////////////////
             }
         }
 
         private void CheckValidity(List<Tile> optionList, List<Tile> validOption)
         {
+            //testing
+            
             for (int x = optionList.Count - 1; x >= 0; x--)
             {
                 var element = optionList[x];
@@ -330,22 +354,99 @@ namespace KaChow.WFC {
 
         public void DisableExhibits()
         {
+              
+              foreach (Cell cell in gridComponents)
+            {
+            // Assuming Cell has a meaningful ToString() method or a property you want to 
+               Debug.Log("ROOMS IN THIS CELL: " + cell.ToString());
+            }   
+            int count = 0;
+
             foreach (var exhibit in gridComponents)
             {
                 Tile tile = exhibit.GetComponentInChildren<Tile>();
-                var tileContents = tile.transform.Find("Contents");
-                tileContents.gameObject.SetActive(false);
+                
+                if (tile != null)
+                {
+                    var tileContents = tile.transform.Find("Contents");
+
+                    if (tileContents != null)
+                    {
+                        var output = JsonUtility.ToJson(exhibit, true);
+                        Debug.Log(count + ": " + output);
+                        count++;
+                        tileContents.gameObject.SetActive(false);
+                        // StartCoroutine(DelayedExecution());
+                    }
+                    else
+                    {
+                        Debug.LogError("Contents not found in tile for exhibit: " + exhibit.name);
+                    }
+                }
+                else
+                {
+                    Debug.LogError("Tile component not found in exhibit: " + exhibit.name);
+                }
             }
+
+            // second try to eliminate all
+            foreach (var exhibit in gridComponents)
+            {
+                Tile tile = exhibit.GetComponentInChildren<Tile>();
+                
+                if (tile != null)
+                {
+                    var tileContents = tile.transform.Find("Contents");
+
+                    if (tileContents != null)
+                    {
+                        var output = JsonUtility.ToJson(exhibit, true);
+                        Debug.Log(count + ": " + output);
+                        count++;
+                        tileContents.gameObject.SetActive(false);
+                        // StartCoroutine(DelayedExecution());
+                    }
+                    else
+                    {
+                        Debug.LogError("Contents not found in tile for exhibit: " + exhibit.name);
+                    }
+                }
+                else
+                {
+                    Debug.LogError("Tile component not found in exhibit: " + exhibit.name);
+                }
+            }
+            
+        }
+            IEnumerator DelayedExecution()
+        {
+            yield return new WaitForSeconds(1);
         }
 
+        
         public void EnableExhibits()
         {
             foreach (var exhibit in gridComponents)
             {
                 Tile tile = exhibit.GetComponentInChildren<Tile>();
                 var tileContents = tile.transform.Find("Contents");
+
+                var output = JsonUtility.ToJson(exhibit, true);
+                Debug.Log(output);
+
                 tileContents.gameObject.SetActive(true);
             }
         }
+        // UnityEvent for initialization complete///////////////////////////////////////////////////////
+        
+
+        // Trigger the event when initialization is complete
+        private void TriggerInitializationCompleteEvent()
+        {
+            InitializationCompleteEvent.Invoke();
+        }
+        ////////////////////////////////////////////////////////////////////////////////////
+        
+        
     }
 }

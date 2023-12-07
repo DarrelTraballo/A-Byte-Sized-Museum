@@ -32,7 +32,7 @@ namespace KaChow.AByteSizedMuseum
             //gameManager.SetCursorState(CursorLockMode.Confined);
             //Mouse position to world point
             Vector3 newPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            newPosition.z = 0;
+            newPosition.z = -1318;
 
             // check for nearby connection points
             Collider2D[]colliders = Physics2D.OverlapCircleAll(newPosition, .2f);
@@ -89,7 +89,7 @@ namespace KaChow.AByteSizedMuseum
             transform.position = newPosition;
 
             // update direction
-           Vector3 direction = newPosition - startPoint;
+           Vector2 direction = newPosition - startPoint;
             transform.right = direction * transform.lossyScale.x;
        
             // update scale

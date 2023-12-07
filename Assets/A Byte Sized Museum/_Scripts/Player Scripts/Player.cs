@@ -5,6 +5,23 @@ namespace KaChow.AByteSizedMuseum {
     [RequireComponent(typeof(CharacterController))]
     public class Player : MonoBehaviour
     {
+        public static Player Instance { get; private set; }
+        #region Singleton
+        private Player() {}
+        private void Awake() 
+        {
+            if (Instance != null && Instance != this)
+                Destroy(this);
+            else 
+                Instance = this;
+
+            characterController = GetComponent<CharacterController>();
+            runningSpeed = walkingSpeed * 1.3f;
+            crouchSpeed = walkingSpeed * 0.322f;
+        }
+        #endregion
+
+
         public float walkingSpeed = 7.5f;
         public float runningSpeed;
         public float crouchSpeed;
@@ -20,15 +37,7 @@ namespace KaChow.AByteSizedMuseum {
         private InputManager inputManager;
 
         [HideInInspector]
-        public bool canMove = true;
-
-        private void Awake() 
-        {
-            characterController = GetComponent<CharacterController>();
-            runningSpeed = walkingSpeed * 1.3f;
-            crouchSpeed = walkingSpeed * 0.322f;
-        }
-        
+        public bool canMove = true;        
 
         private void Start()
         {
