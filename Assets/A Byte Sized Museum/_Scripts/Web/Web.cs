@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -10,6 +11,7 @@ namespace KaChow.AByteSizedMuseum
         private readonly string webURL = "https://www.example.com";
         private readonly string errorWebURL = "https://error.html";
         private readonly string loginURL = "https://www.example.com";
+        private readonly string sendTimeURL = "https://www.example.com";
 
         private void Start()
         {
@@ -55,6 +57,26 @@ namespace KaChow.AByteSizedMuseum
             form.AddField("db field name", section);
 
             UnityWebRequest www = UnityWebRequest.Post(loginURL, form);
+            yield return www.SendWebRequest();
+
+            if (www.result != UnityWebRequest.Result.Success)
+            {
+                Debug.Log(www.error);
+            }
+            else
+            {
+                Debug.Log("Form upload complete!");
+            }
+        }
+
+        public IEnumerator SendTime(TimeSpan stopTime)
+        {
+            string stopTimeString = stopTime.ToString(@"mm\:ss");
+
+            WWWForm form = new WWWForm();
+            form.AddField("name ng time field sa db", stopTimeString);
+
+            UnityWebRequest www = UnityWebRequest.Post(sendTimeURL, form);
             yield return www.SendWebRequest();
 
             if (www.result != UnityWebRequest.Result.Success)

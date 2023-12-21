@@ -10,7 +10,7 @@ namespace KaChow.AByteSizedMuseum
         public static WebManager Instance { get; private set; }
         private WebManager() {}
 
-        private Web Web;
+        [HideInInspector] public Web Web;
         
         private void Awake()
         {
