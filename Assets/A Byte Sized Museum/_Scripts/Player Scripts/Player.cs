@@ -17,19 +17,19 @@ namespace KaChow.AByteSizedMuseum {
 
             characterController = GetComponent<CharacterController>();
             runningSpeed = walkingSpeed * 1.3f;
-            crouchSpeed = walkingSpeed * 0.322f;
+            sneakSpeed = walkingSpeed * 0.322f;
         }
         #endregion
 
 
         public float walkingSpeed = 7.5f;
         public float runningSpeed;
-        public float crouchSpeed;
+        public float sneakSpeed;
         public float jumpSpeed = 10.0f;
         public float gravity = 25.0f;
         public Camera playerCamera;
         public float lookSpeed;
-        public float lookXLimit = 45.0f;
+        public float lookXLimit = 90.0f;
 
         private CharacterController characterController;
         private Vector3 moveDirection = Vector3.zero;
@@ -63,15 +63,18 @@ namespace KaChow.AByteSizedMuseum {
 
             Vector2 moveInput = inputManager.GetPlayerMovement();
 
-            // Press Left Shift to run
+            // Press Left Ctrl to run
             bool isRunning = inputManager.IsPlayerRunning();
+
+            // Press Left Shift to sneak
+            bool isSneaking = inputManager.IsPlayerSneaking();
             
             float currentSpeedX = (isRunning ? runningSpeed : walkingSpeed) * moveInput.y;
             float currentSpeedY = (isRunning ? runningSpeed : walkingSpeed) * moveInput.x;
 
             float movementDirectionY = moveDirection.y;
             Vector3 desiredMove = (forward * currentSpeedX) + (right * currentSpeedY);
-            moveDirection = desiredMove.normalized * (isRunning ? runningSpeed : walkingSpeed);
+            moveDirection = desiredMove.normalized * (isRunning ? runningSpeed : isSneaking ? sneakSpeed : walkingSpeed);
 
             if (inputManager.PlayerJumpedThisFrame() && characterController.isGrounded)
             {

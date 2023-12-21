@@ -54,5 +54,10 @@ namespace KaChow.AByteSizedMuseum
         {
             return playerControls.Player.Run.IsPressed();
         }
+
+        public bool IsPlayerSneaking()
+        {
+            return playerControls.Player.Sneak.IsPressed();
+        }
     }
 }

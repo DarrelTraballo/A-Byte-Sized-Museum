@@ -71,6 +71,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Sneak"",
+                    ""type"": ""Button"",
+                    ""id"": ""2f0da9bc-5d5d-4c4f-af2c-967e963cb1e1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -187,11 +196,22 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""fa78d010-f6e2-48b2-acdc-75a0ef4fb85c"",
-                    ""path"": ""<Keyboard>/leftShift"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Run"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3b4ed98a-3382-4229-b8a7-2847245cdbf3"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sneak"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -207,6 +227,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
+        m_Player_Sneak = m_Player.FindAction("Sneak", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -273,6 +294,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Run;
+    private readonly InputAction m_Player_Sneak;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -282,6 +304,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @Run => m_Wrapper.m_Player_Run;
+        public InputAction @Sneak => m_Wrapper.m_Player_Sneak;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -306,6 +329,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Run.started += instance.OnRun;
             @Run.performed += instance.OnRun;
             @Run.canceled += instance.OnRun;
+            @Sneak.started += instance.OnSneak;
+            @Sneak.performed += instance.OnSneak;
+            @Sneak.canceled += instance.OnSneak;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -325,6 +351,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Run.started -= instance.OnRun;
             @Run.performed -= instance.OnRun;
             @Run.canceled -= instance.OnRun;
+            @Sneak.started -= instance.OnSneak;
+            @Sneak.performed -= instance.OnSneak;
+            @Sneak.canceled -= instance.OnSneak;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -349,5 +378,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
+        void OnSneak(InputAction.CallbackContext context);
     }
 }

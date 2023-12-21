@@ -60,15 +60,6 @@ namespace KaChow.AByteSizedMuseum
                 
             }
             UpdateWire(newPosition);    
-
-        void DONE()
-        {
-            // turn on the light
-            lightOn.SetActive(true);
-            
-            // destroy the script/ connects the wire to the same color
-            //Destroy(this);
-        }
         }
         void light_on()
         {

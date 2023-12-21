@@ -14,8 +14,7 @@ namespace KaChow.AByteSizedMuseum
     public class HelperBot : MonoBehaviour
     {
         [Header("Helper Bot Variables")]
-        [SerializeField] private float speed = 10.0f;
-        [SerializeField] private float moveDistance = 0.25f;
+        [SerializeField] private float moveSpeed = 0.25f;
         
         [Header("Helper Bot Raycast Variables")]
         [SerializeField] private GameObject raycastSource;
@@ -48,7 +47,7 @@ namespace KaChow.AByteSizedMuseum
             if (!FireRaycast(out GameObject hitObject))
             {
                 Vector3 targetPosition = transform.position + transform.forward;
-                transform.DOMove(targetPosition, moveDistance)
+                transform.DOMove(targetPosition, moveSpeed)
                          .SetEase(Ease.OutExpo);
 
             }
@@ -73,7 +72,7 @@ namespace KaChow.AByteSizedMuseum
                     targetRotation = transform.eulerAngles.y;
                 }
 
-                transform.DORotate(new Vector3(0f, targetRotation, 0f), moveDistance, RotateMode.Fast)
+                transform.DORotate(new Vector3(0f, targetRotation, 0f), moveSpeed, RotateMode.Fast)
                          .SetEase(Ease.InOutCirc);
             }
         }
@@ -122,7 +121,7 @@ namespace KaChow.AByteSizedMuseum
 
                     Vector3 targetPosition = aboveHead.position;
 
-                    puzzleObject.transform.DOMove(targetPosition, moveDistance)
+                    puzzleObject.transform.DOMove(targetPosition, moveSpeed)
                                     .SetEase(Ease.OutExpo);
 
                     
@@ -148,7 +147,7 @@ namespace KaChow.AByteSizedMuseum
 
                 Vector3 targetPosition = transform.position + transform.forward;
 
-                heldObject.transform.DOMove(targetPosition, moveDistance)
+                heldObject.transform.DOMove(targetPosition, moveSpeed)
                                     .SetEase(Ease.OutExpo);
                                     
                 heldObject.transform.parent = heldObjectParent;

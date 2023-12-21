@@ -43,7 +43,7 @@ namespace KaChow.AByteSizedMuseum
                     }
                     else
                     {
-                        Debug.Log("Door is Locked");
+                        // Debug.Log("Door is Locked");
                     }
                 }
                 isOpen = true;
