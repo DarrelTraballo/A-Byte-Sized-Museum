@@ -7,11 +7,17 @@ namespace KaChow.AByteSizedMuseum
 {
     public class Web : MonoBehaviour
     {
-        // web urls
+        // idk if need pa 'to, nasa tutorial lang so ginaya ko lang
         private readonly string webURL = "https://www.example.com";
         private readonly string errorWebURL = "https://error.html";
+
+        // eto mga need yung URLs
         private readonly string loginURL = "https://www.example.com";
         private readonly string sendTimeURL = "https://www.example.com";
+
+        // AND also change yung mga string values sa mga form.AddValue().
+        // first argument is yung name niya ng column sa db
+        // second argument is yung galing dito na ipapasa mo sa db
 
         private void Start()
         {
@@ -19,7 +25,7 @@ namespace KaChow.AByteSizedMuseum
             StartCoroutine(GetRequest(webURL));
 
             // A non-existing page.
-            StartCoroutine(GetRequest(errorWebURL));
+            // StartCoroutine(GetRequest(errorWebURL));
         }
 
         public IEnumerator GetRequest(string uri)
@@ -51,7 +57,7 @@ namespace KaChow.AByteSizedMuseum
         public IEnumerator Login(string firstName, string lastName, string section)
         {
             WWWForm form = new WWWForm();
-            //             db field name
+            //             db field name , data galing dito na ipapasa sa db
             form.AddField("db field name", firstName);
             form.AddField("db field name", lastName);
             form.AddField("db field name", section);
@@ -74,6 +80,7 @@ namespace KaChow.AByteSizedMuseum
             string stopTimeString = stopTime.ToString(@"mm\:ss");
 
             WWWForm form = new WWWForm();
+            // make sure yung time column sa db is naka set sa string or anything similar
             form.AddField("name ng time field sa db", stopTimeString);
 
             UnityWebRequest www = UnityWebRequest.Post(sendTimeURL, form);
