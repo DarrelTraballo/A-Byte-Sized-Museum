@@ -18,20 +18,20 @@ namespace KaChow.AByteSizedMuseum
 
                 
 
-                ToggleDoors(isExhibitLocked);
+                // ToggleDoors(isExhibitLocked);
             }
         }
 
         private void OnTriggerEnter(Collider other)
         {
             // isExhibitLocked = true;
-            ToggleDoors(isExhibitLocked);
+            // ToggleDoors(isExhibitLocked);
         }
 
         private void OnTriggerExit(Collider other)
         {
             // isExhibitLocked = false;
-            ToggleDoors(isExhibitLocked);
+            // ToggleDoors(isExhibitLocked);
             
         }
 

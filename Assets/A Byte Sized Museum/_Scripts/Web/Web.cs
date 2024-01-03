@@ -22,7 +22,7 @@ namespace KaChow.AByteSizedMuseum
         private void Start()
         {
             // A correct website page.
-            StartCoroutine(GetRequest(webURL));
+            // StartCoroutine(GetRequest(webURL));
 
             // A non-existing page.
             // StartCoroutine(GetRequest(errorWebURL));
