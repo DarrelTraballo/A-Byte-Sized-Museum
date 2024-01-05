@@ -12,12 +12,14 @@ namespace KaChow.AByteSizedMuseum
         [SerializeField] public TMP_InputField sectionInputField;
 
         [SerializeField] public Button loginButton;
+        public WebManager webinst;
 
         private void Start()
         {
             
 
             loginButton.onClick.AddListener(() => {
+            
             string firstNameText = firstNameInputField.text;
             string lastNameText = lastNameInputField.text;
             string sectionText = sectionInputField.text;
