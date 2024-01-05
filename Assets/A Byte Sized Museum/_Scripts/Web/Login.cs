@@ -14,15 +14,13 @@ namespace KaChow.AByteSizedMuseum
 
         private void Start()
         {
-            string firstNameText = firstNameInputField.text;
-            string lastNameText = lastNameInputField.text;
-            string sectionText = sectionInputField.text;
-
             loginButton.onClick.AddListener(() => {
+                string firstNameText = firstNameInputField.text;
+                string lastNameText = lastNameInputField.text;
+                string sectionText = sectionInputField.text;
 
                 // UNCOMMENT IF NAKA SET-UP NA MGA URLS
                 // StartCoroutine(WebManager.Instance.Web.Login(firstNameText, lastNameText, sectionText));
-
                 gameObject.SetActive(false);
             });
         }
