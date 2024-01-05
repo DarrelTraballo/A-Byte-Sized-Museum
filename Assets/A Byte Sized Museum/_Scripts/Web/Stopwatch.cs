@@ -73,7 +73,7 @@ namespace KaChow.AByteSizedMuseum
                 StopTimer();
                 DisplayCompleteMessage();
                 
-                StartCoroutine(WebManager.Instance.Web.SendTime(stoppedTimeSpan));
+                WebManager.Instance.Web.storeTime(stoppedTimeSpan);
             }
         }
     }

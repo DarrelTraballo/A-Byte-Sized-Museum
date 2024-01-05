@@ -6,22 +6,27 @@ namespace KaChow.AByteSizedMuseum
 {
     public class Login : MonoBehaviour
     {
-        [SerializeField] private TMP_InputField firstNameInputField;
-        [SerializeField] private TMP_InputField lastNameInputField;
-        [SerializeField] private TMP_InputField sectionInputField;
 
-        [SerializeField] private Button loginButton;
+        [SerializeField] public TMP_InputField firstNameInputField;
+        [SerializeField] public TMP_InputField lastNameInputField;
+        [SerializeField] public TMP_InputField sectionInputField;
+
+        [SerializeField] public Button loginButton;
 
         private void Start()
         {
+            
+
+            loginButton.onClick.AddListener(() => {
             string firstNameText = firstNameInputField.text;
             string lastNameText = lastNameInputField.text;
             string sectionText = sectionInputField.text;
 
-            loginButton.onClick.AddListener(() => {
 
                 // UNCOMMENT IF NAKA SET-UP NA MGA URLS
-                // StartCoroutine(WebManager.Instance.Web.Login(firstNameText, lastNameText, sectionText));
+                WebManager.Instance.Web.storedata(firstNameText, lastNameText, sectionText);
+
+                
 
                 gameObject.SetActive(false);
             });
