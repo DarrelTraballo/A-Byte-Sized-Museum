@@ -8,15 +8,11 @@ namespace KaChow.WFC {
         // try turning them into GameObjects instead
 
         // haha maybe just revert everything back for now
-        public Tile[] upNeighbors;
-        public Tile[] rightNeighbors;
-        public Tile[] downNeighbors;
-        public Tile[] leftNeighbors;
+        public ExhibitData exhibitData;
 
-        // [Header("Exhibit Prefab")]
-        // public GameObject tilePrefab;
-
-        // [Header("Exhibit Data")]
-        // public ExhibitData exhibitData;
+        public Tile[] UpNeighbors => exhibitData.upNeighbors;
+        public Tile[] RightNeighbors => exhibitData.rightNeighbors;
+        public Tile[] DownNeighbors => exhibitData.downNeighbors;
+        public Tile[] LeftNeighbors => exhibitData.leftNeighbors;        
     }
 }

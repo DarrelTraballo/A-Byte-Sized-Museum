@@ -195,7 +195,7 @@ namespace KaChow.AByteSizedMuseum
                 Debug.Log("Form upload complete!");
             }
         }
-        
+
                 // public IEnumerator GetRequest(string uri)
         // {
         //     using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))

@@ -217,7 +217,7 @@ namespace KaChow.WFC {
                             foreach (Tile possibleOptions in up.tileOptions)
                             {
                                 var valOption = Array.FindIndex(tileObjects, obj => obj == possibleOptions);
-                                var valid = tileObjects[valOption].upNeighbors;
+                                var valid = tileObjects[valOption].UpNeighbors;
 
                                 validOptions = validOptions.Concat(valid).ToList();
                                
@@ -235,7 +235,7 @@ namespace KaChow.WFC {
                             foreach (Tile possibleOptions in right.tileOptions)
                             {
                                 var valOption = Array.FindIndex(tileObjects, obj => obj == possibleOptions);
-                                var valid = tileObjects[valOption].leftNeighbors;
+                                var valid = tileObjects[valOption].LeftNeighbors;
 
                                 validOptions = validOptions.Concat(valid).ToList();
                             }
@@ -252,7 +252,7 @@ namespace KaChow.WFC {
                             foreach (Tile possibleOptions in down.tileOptions)
                             {
                                 var valOption = Array.FindIndex(tileObjects, obj => obj == possibleOptions);
-                                var valid = tileObjects[valOption].downNeighbors;
+                                var valid = tileObjects[valOption].DownNeighbors;
 
                                 validOptions = validOptions.Concat(valid).ToList();
                             }
@@ -269,7 +269,7 @@ namespace KaChow.WFC {
                             foreach (Tile possibleOptions in left.tileOptions)
                             {
                                 var valOption = Array.FindIndex(tileObjects, obj => obj == possibleOptions);
-                                var valid = tileObjects[valOption].rightNeighbors;
+                                var valid = tileObjects[valOption].RightNeighbors;
 
                                 validOptions = validOptions.Concat(valid).ToList();
                             }
