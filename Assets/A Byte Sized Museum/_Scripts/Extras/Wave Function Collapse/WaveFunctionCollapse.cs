@@ -10,11 +10,7 @@ using System.Collections;
 namespace KaChow.WFC {
     public class WaveFunctionCollapse
     {
-
-
-        public UnityEvent InitializationCompleteEvent = new UnityEvent();
         private readonly int dimensions;
-        // Add an event in WaveFunctionCollapse
         private readonly Tile[] tileObjects;
         private readonly Museum museum;
         private readonly Cell cellObj;
@@ -75,9 +71,7 @@ namespace KaChow.WFC {
             }
 
             // MonoBehaviour.StartCoroutine(CheckEntropy());
-            
             CheckEntropy();
-            
         }
 
         private void CheckEntropy()
@@ -136,10 +130,6 @@ namespace KaChow.WFC {
             {
                 int finalExhibitCellIndex = (int)(0.5f * dimensions * dimensions - 1.5f * dimensions + dimensions) + dimensions - 1;
                 cellToCollapse = gridComponents[finalExhibitCellIndex];
-                // select randomly between indices 3, 4, 5
-                // int randIndex = Random.Range(3, 6);
-                // selectedTile = cellToCollapse.tileOptions[randIndex];\
-                // Force collapse right path on exhibit before final exhibit
                 selectedTile = cellToCollapse.tileOptions[4];
                 secondCall = false;
                 thirdCall = false;
@@ -159,16 +149,7 @@ namespace KaChow.WFC {
                 int randIndex = Random.Range(0, tempGrid.Count);
                 cellToCollapse = tempGrid[randIndex];
 
-                    selectedTile = cellToCollapse.tileOptions[Random.Range(0, cellToCollapse.tileOptions.Length)];
-                // try 
-                // {
-                //     selectedTile = cellToCollapse.tileOptions[Random.Range(0, cellToCollapse.tileOptions.Length)];
-                // }
-                // catch
-                // {
-                //     // forces to generate base tile if things go wrong?
-                //     selectedTile = cellToCollapse.tileOptions[2];
-                // }
+                selectedTile = cellToCollapse.tileOptions[Random.Range(0, cellToCollapse.tileOptions.Length)];
             }
 
             // sets selected cell's isCollapsed to true
@@ -305,8 +286,6 @@ namespace KaChow.WFC {
 
         private void CheckValidity(List<Tile> optionList, List<Tile> validOption)
         {
-            //testing
-            
             for (int x = optionList.Count - 1; x >= 0; x--)
             {
                 var element = optionList[x];
@@ -369,6 +348,52 @@ namespace KaChow.WFC {
                 var tileContents = tile.transform.Find("Contents");
 
                 tileContents.gameObject.SetActive(true);
+            }
+        }
+
+        public void CheckEdges()
+        {
+            for (int i = 0; i < gridComponents.Count; i++)
+            {
+                int row = i / (int) museum.museumSize;
+                int col = i % (int) museum.museumSize;
+
+
+                bool isBottomEdge = row == 0;
+                bool isTopEdge = row == museum.museumSize - 1;
+                bool isLeftEdge = col == 0;
+                bool isRightEdge = col == museum.museumSize - 1;
+
+                if (isTopEdge || isBottomEdge || isLeftEdge || isRightEdge)
+                {
+                    Tile tile = gridComponents[i].GetComponentInChildren<Tile>();
+
+                    // TODO: replace position with wall changing thingy based on edge position
+                    string position = "";
+
+                    if (isTopEdge)
+                    {
+                        position += "top ";
+                    }
+                    if (isBottomEdge)
+                    {
+                        position += "bottom ";
+                    }
+                    if (isLeftEdge)
+                    {
+                        position += "left ";
+                    }
+                    if (isRightEdge)
+                    {
+                        position += "right ";
+                    }
+
+                    // for debugging purposes
+                    position = position.Trim();
+                    position += position.Contains(" ") ? "corner" : "edge"; // Add "corner" if two edges are true, otherwise "edge"
+
+                    // Debug.Log($"GameObject at index {i} is on the {position} of the grid.", tile);
+                }
             }
         }
     }
