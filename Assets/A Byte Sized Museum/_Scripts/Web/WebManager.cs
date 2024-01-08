@@ -1,17 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace KaChow.AByteSizedMuseum
 {
-    // Attach to Web Manager GameObject
     public class WebManager : MonoBehaviour
     {
         public static WebManager Instance { get; private set; }
-        private WebManager() {}
+        private WebManager() { }
 
         [HideInInspector] public Web Web;
-        
+
         private void Awake()
         {
             if (Instance != null && Instance != this)
@@ -21,7 +18,5 @@ namespace KaChow.AByteSizedMuseum
 
             Web = GetComponent<Web>();
         }
-
-
     }
 }

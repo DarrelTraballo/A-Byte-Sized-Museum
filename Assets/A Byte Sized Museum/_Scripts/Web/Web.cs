@@ -1,40 +1,34 @@
 using System;
 using System.Collections;
-using System.Data.Common;
 using UnityEngine;
 using UnityEngine.Networking;
 
 namespace KaChow.AByteSizedMuseum
 {
-   public class BypassCertificateHandler : CertificateHandler
-{
-    protected override bool ValidateCertificate(byte[] certificateData)
+    public class BypassCertificateHandler : CertificateHandler
     {
-        // Always return true to bypass certificate validation
-        return true;
+        protected override bool ValidateCertificate(byte[] certificateData)
+        {
+            // Always return true to bypass certificate validation
+            return true;
+        }
     }
-}
 
     public class Web : MonoBehaviour
     {
-        // idk if need pa 'to, nasa tutorial lang so ginaya ko lang
         private readonly string webURL = "http://www.example.com";
         private readonly string errorWebURL = "http://error.html";
 
-        // eto mga need yung URLs
         private readonly string registerUserURL = "https://net-otaku.com/api/Kachow/registerUser.php";
         private readonly string sendTimeURL = "https://net-otaku.com/api/Kachow/sendTime.php";
 
         private readonly string getDateURL = "https://net-otaku.com/api/Kachow/GetDate.php";
         private readonly string getuserURL = "https://net-otaku.com/api/Kachow/db_connect.php";
-        public string firstName;
-        public string lastName;
-        public string section;
-        public string game_time;
 
-        // AND also change yung mga string values sa mga form.AddValue().
-        // first argument is yung name niya ng column sa db
-        // second argument is yung galing dito na ipapasa mo sa db
+        private string firstName;
+        private string lastName;
+        private string section;
+        private string game_time;
 
         public string StoredUsernameKey;
 
@@ -52,36 +46,20 @@ namespace KaChow.AByteSizedMuseum
         }
 
 
-        public void storedata(string firstName, string lastName, string section)
+        public void Storedata(string firstName, string lastName, string section)
         {
             this.firstName = firstName;
             this.lastName = lastName;
             this.section = section;
 
-            StartCoroutine(Login(firstName,lastName,section));
+            StartCoroutine(Login(firstName, lastName, section));
         }
-        public void storeTime(TimeSpan stopTime)
+        public void StoreTime(TimeSpan stopTime)
         {
             this.game_time = stopTime.ToString(@"mm\:ss");
 
-            StartCoroutine(SendTime(firstName,section,game_time));
+            StartCoroutine(SendTime(firstName, section, game_time));
         }
-
-
-        private void Start()
-        {
-            // A correct website page.
-            // StartCoroutine(GetRequest(testingDate));
-            //StartCoroutine(GetDate());
-            //StartCoroutine(GetUser());
-            //StartCoroutine(Login("Darrel","Traballo","IV-ACSAD"));
-            //StartCoroutine(Login);
-
-            // A non-existing page.
-            // StartCoroutine(GetRequest(errorWebURL));
-        }
-
-        
 
         private IEnumerator GetDate()
         {
@@ -122,7 +100,6 @@ namespace KaChow.AByteSizedMuseum
             }
         }
 
-
         public IEnumerator Login(string firstName, string lastName, string section)
         {
             WWWForm form = new WWWForm();
@@ -155,21 +132,15 @@ namespace KaChow.AByteSizedMuseum
                 string responseText = www.downloadHandler.text;
                 Debug.Log("Response: " + responseText);
                 Debug.Log("Stored Username: " + GetStoredUsername());
-
-                // Handle the response text as needed
             }
-            
-
         }
-
-
 
         public IEnumerator SendTime(String firstName, String section, String game_time)
         {
 
             Debug.Log("Stored Username in Send Time: " + GetStoredUsername());
             WWWForm form = new WWWForm();
-            // make sure yung time column sa db is naka set sa string or anything similar
+
             form.AddField("game_time", game_time);
             form.AddField("firstName", firstName);
             form.AddField("student_section", section);
@@ -178,8 +149,6 @@ namespace KaChow.AByteSizedMuseum
             Debug.Log("First Name: " + firstName);
             Debug.Log("Section: " + section);
             Debug.Log("Game Time: " + game_time);
-
-
 
             UnityWebRequest www = UnityWebRequest.Post(sendTimeURL, form);
             www.certificateHandler = new BypassCertificateHandler();
@@ -195,31 +164,5 @@ namespace KaChow.AByteSizedMuseum
                 Debug.Log("Form upload complete!");
             }
         }
-
-                // public IEnumerator GetRequest(string uri)
-        // {
-        //     using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
-        //     {
-        // Request and wait for the desired page.
-        //yield return webRequest.SendWebRequest();
-
-                // string[] pages = uri.Split('/');
-                // int page = pages.Length - 1;
-
-                // switch (webRequest.result)
-                // {
-                //     case UnityWebRequest.Result.ConnectionError:
-                //     case UnityWebRequest.Result.DataProcessingError:
-                //         Debug.LogError(pages[page] + ": Error: " + webRequest.error);
-                //         break;
-                //     case UnityWebRequest.Result.ProtocolError:
-                //         Debug.LogError(pages[page] + ": HTTP Error: " + webRequest.error);
-                //         break;
-                //     case UnityWebRequest.Result.Success:
-                //         Debug.Log(pages[page] + ":\nReceived: " + webRequest.downloadHandler.text);
-                //         break;
-                // }
-        //     }
-        // }
     }
 }
