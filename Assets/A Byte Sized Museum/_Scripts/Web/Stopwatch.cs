@@ -52,8 +52,8 @@ namespace KaChow.AByteSizedMuseum
             stoppedTimeSpan = TimeSpan.FromSeconds(currentTime);
             string stoppedTime = stoppedTimeSpan.ToString(@"mm\:ss");
 
-            onCompleteText.text = 
-                "Congratulations!\n" + 
+            onCompleteText.text =
+                "Congratulations!\n" +
                 "You completed the game in\n" +
                 $"{stoppedTime}";
         }
@@ -72,8 +72,8 @@ namespace KaChow.AByteSizedMuseum
             {
                 StopTimer();
                 DisplayCompleteMessage();
-                
-                WebManager.Instance.Web.storeTime(stoppedTimeSpan);
+
+                WebManager.Instance.Web.StoreTime(stoppedTimeSpan);
             }
         }
     }
