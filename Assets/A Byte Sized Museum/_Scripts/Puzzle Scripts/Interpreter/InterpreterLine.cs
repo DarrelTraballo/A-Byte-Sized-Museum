@@ -27,7 +27,7 @@ namespace KaChow.AByteSizedMuseum
 
         public void OnDrop(PointerEventData eventData)
         {
-            if (transform.childCount == 0) 
+            if (transform.childCount == 0)
             {
                 var dropped = eventData.pointerDrag;
                 var codeBlock = dropped.GetComponent<CodeBlock>();
