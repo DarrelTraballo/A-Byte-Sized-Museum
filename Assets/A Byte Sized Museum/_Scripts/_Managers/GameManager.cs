@@ -2,7 +2,7 @@ using KaChow.WFC;
 using KaChow.Demo;
 using UnityEngine;
 
-namespace KaChow.AByteSizedMuseum 
+namespace KaChow.AByteSizedMuseum
 {
     public class GameManager : MonoBehaviour
     {
@@ -10,12 +10,12 @@ namespace KaChow.AByteSizedMuseum
         // can only access GameManager by using GameManager.Instance
         public static GameManager Instance { get; private set; }
         #region Singleton
-        private GameManager() {}
-        private void Awake() 
+        private GameManager() { }
+        private void Awake()
         {
             if (Instance != null && Instance != this)
                 Destroy(this);
-            else 
+            else
                 Instance = this;
 
         }
@@ -25,7 +25,7 @@ namespace KaChow.AByteSizedMuseum
 
         [Header("Player variables")]
         [SerializeField] private Vector3 playerStartPosition;
-        public Player Player { get ; private set; }
+        public Player Player { get; private set; }
 
         private CharacterController characterController;
 

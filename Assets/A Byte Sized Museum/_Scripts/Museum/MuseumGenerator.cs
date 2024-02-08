@@ -68,6 +68,7 @@ namespace KaChow.AByteSizedMuseum
             {
                 WFC.InitializeGrid();
                 WFC.DisableExhibits();
+                WFC.CheckEdges();
             }
         }
 
