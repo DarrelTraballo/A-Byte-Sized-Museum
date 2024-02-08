@@ -7,7 +7,8 @@ using Random = UnityEngine.Random;
 using KaChow.AByteSizedMuseum;
 using System.Collections;
 
-namespace KaChow.WFC {
+namespace KaChow.WFC
+{
     public class WaveFunctionCollapse
     {
         private readonly int dimensions;
@@ -29,11 +30,11 @@ namespace KaChow.WFC {
         private bool secondCall = false;
         private bool thirdCall = false;
 
-        
+
         public WaveFunctionCollapse(Museum museum, Cell cellObj, GameObject parentGO, Tile[] tileObjects)
         {
             gridComponents = new List<Cell>();
-            dimensions = (int) museum.museumSize;
+            dimensions = (int)museum.museumSize;
             this.museum = museum;
             this.cellObj = cellObj;
             this.parentGO = parentGO;
@@ -108,7 +109,7 @@ namespace KaChow.WFC {
 
             // yield return new WaitForSeconds(0.01f);
 
-            CollapseCell(tempGrid);        
+            CollapseCell(tempGrid);
         }
 
         private void CollapseCell(List<Cell> tempGrid)
@@ -119,7 +120,7 @@ namespace KaChow.WFC {
             // if first collapse, collapse tile in front of start exhibit to 4-way tile
             if (firstCall)
             {
-                int startExhibitCellIndex = (int)(0.5f * dimensions * dimensions - 1.5f * dimensions + dimensions); 
+                int startExhibitCellIndex = (int)(0.5f * dimensions * dimensions - 1.5f * dimensions + dimensions);
                 cellToCollapse = gridComponents[startExhibitCellIndex];
                 selectedTile = cellToCollapse.tileOptions[0];
                 firstCall = false;
@@ -161,7 +162,7 @@ namespace KaChow.WFC {
 
             // sets cell to the selected tile
             Tile foundTile = cellToCollapse.tileOptions[0];
-            // TODO: 
+            // TODO:
             GameObject.Instantiate(foundTile, cellToCollapse.transform.position, Quaternion.identity, cellToCollapse.transform);
 
             UpdateGeneration();
@@ -176,7 +177,7 @@ namespace KaChow.WFC {
                 for (int x = 0; x < dimensions; x++)
                 {
                     var index = x + z * dimensions;
-                    
+
                     if (gridComponents[index].isCollapsed)
                     {
                         newGenerationCell[index] = gridComponents[index];
@@ -201,7 +202,7 @@ namespace KaChow.WFC {
                                 var valid = tileObjects[valOption].UpNeighbors;
 
                                 validOptions = validOptions.Concat(valid).ToList();
-                               
+
                             }
 
                             CheckValidity(options, validOptions);
@@ -273,12 +274,12 @@ namespace KaChow.WFC {
             gridComponents = newGenerationCell;
             iterations++;
 
-            if(!isDoneGenerating && iterations < dimensions * dimensions)
+            if (!isDoneGenerating && iterations < dimensions * dimensions)
             {
                 // StartCoroutine(CheckEntropy());
                 CheckEntropy();
             }
-            else 
+            else
             {
                 isDoneGenerating = true;
             }
@@ -333,13 +334,13 @@ namespace KaChow.WFC {
             foreach (var exhibit in gridComponents)
             {
                 Tile tile = exhibit.GetComponentInChildren<Tile>();
-                
+
                 var tileContents = tile.transform.Find("Contents");
                 tileContents.gameObject.SetActive(false);
             }
 
         }
-        
+
         public void EnableExhibits()
         {
             foreach (var exhibit in gridComponents)
@@ -355,8 +356,8 @@ namespace KaChow.WFC {
         {
             for (int i = 0; i < gridComponents.Count; i++)
             {
-                int row = i / (int) museum.museumSize;
-                int col = i % (int) museum.museumSize;
+                int row = i / (int)museum.museumSize;
+                int col = i % (int)museum.museumSize;
 
 
                 bool isBottomEdge = row == 0;
