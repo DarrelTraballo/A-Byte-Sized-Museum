@@ -18,9 +18,9 @@ namespace KaChow.AByteSizedMuseum
                     - adds complexity to level generation since we need to randomly place random code blocks around the level
                 - need to implement a pickup system
                 - need to implement some kind of counter for these code blocks.
-                > 
+                >
     */
-    
+
     public abstract class CodeBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
     {
         [Header("Code Block Details")]
@@ -29,13 +29,13 @@ namespace KaChow.AByteSizedMuseum
         [SerializeField] protected GameEvent onCodeBlockClick;
 
         protected float delay = 1.0f;
-        [HideInInspector] public bool canDrag = true;
+        public bool canDrag = true;
 
         public abstract IEnumerator ExecuteBlock();
 
         [HideInInspector] public Transform parentAfterDrag;
 
-        private Image image;
+        [HideInInspector] public Image image;
 
         private void Start()
         {
@@ -44,6 +44,8 @@ namespace KaChow.AByteSizedMuseum
 
         public void OnBeginDrag(PointerEventData eventData)
         {
+            if (!canDrag) return;
+
             onCodeBlockClick.Raise(this, this);
             parentAfterDrag = transform.parent;
             transform.SetParent(transform.root);
@@ -53,11 +55,15 @@ namespace KaChow.AByteSizedMuseum
 
         public void OnDrag(PointerEventData eventData)
         {
+            if (!canDrag) return;
+
             transform.position = Input.mousePosition;
         }
 
         public void OnEndDrag(PointerEventData eventData)
         {
+            if (!canDrag) return;
+
             transform.SetParent(parentAfterDrag);
             image.raycastTarget = true;
         }
