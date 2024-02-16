@@ -12,7 +12,7 @@ namespace KaChow.AByteSizedMuseum
         private void Start()
         {
             if (codeBlock == null) return;
-            codeBlock.image.raycastTarget = false;
+            // codeBlock.image.raycastTarget = false;
         }
 
         private CodeBlock Clone()
