@@ -16,7 +16,7 @@ namespace KaChow.AByteSizedMuseum
         {
             if (actor.CompareTag("Player"))
             {
-                // Debug.Log("Press E to interact");
+                Debug.Log("Press E to interact");
             }
         }
 

@@ -37,7 +37,7 @@ public class DebuggingMiniGame : MonoBehaviour
         }
         else
         {
-            feedbackText.text = "Incorrect. Check for errors.";
+            feedbackText.text = "Incorrect. Try Again";
             // Deduct points or provide hints
         }
     }
