@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace KaChow.AByteSizedMuseum
 {
-    public class MethodBlock : CodeBlock
+    public class ProcedureBlock : CodeBlock
     {
-        /* 
+        /*
             initially, wala yung holder ng method block sa bottom right panel
                 > only appears when method block is in "edit mode"
                     - basically whenever the method block is clicked.
@@ -16,13 +17,19 @@ namespace KaChow.AByteSizedMuseum
             then continues executing the other lines of interpreter
         */
 
-        [SerializeField] private GameObject methodBlockHolder;
-        // TODO: figure out how to spawn the holder to the bottom right panel of interpreter UI
-        [SerializeField] private GameObject bottomRightPanel;
+        [SerializeField] private GameObject procedureBlockHolder;
+        [SerializeField] private GameEvent onProcedureBlockClick;
+
+        [SerializeField] private List<InterpreterLine> procedureInterpreterLines;
 
         public override IEnumerator ExecuteBlock()
         {
             throw new System.NotImplementedException();
+        }
+
+        public override void OnPointerClick(PointerEventData eventData)
+        {
+            onProcedureBlockClick.Raise(this, this);
         }
     }
 }
