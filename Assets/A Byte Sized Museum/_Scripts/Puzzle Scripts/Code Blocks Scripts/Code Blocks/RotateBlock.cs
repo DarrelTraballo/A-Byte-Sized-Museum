@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using TMPro;
@@ -7,7 +8,7 @@ namespace KaChow.AByteSizedMuseum
 {
     public class RotateBlock : CodeBlock
     {
-        [TextArea] public string parameters; 
+        [TextArea] public string parameters;
 
         [Header("Game Event")]
         public GameEvent onRotate;
@@ -19,9 +20,9 @@ namespace KaChow.AByteSizedMuseum
         [SerializeField]
         private RotateDirection rotateDirection = RotateDirection.Clockwise;
 
-        public override IEnumerator ExecuteBlock()
+        public override IEnumerator ExecuteBlock(int botID)
         {
-            onRotate.Raise(this, rotateDirection);
+            onRotate.Raise(this, new Tuple<RotateDirection, int>(rotateDirection, botID));
             yield return new WaitForSeconds(delay);
         }
 
@@ -36,7 +37,7 @@ namespace KaChow.AByteSizedMuseum
 
         private void SetDirection()
         {
-            rotateDirection = (RotateDirection) (((int) rotateDirection + 1) % System.Enum.GetValues(typeof(RotateDirection)).Length);
+            rotateDirection = (RotateDirection)(((int)rotateDirection + 1) % System.Enum.GetValues(typeof(RotateDirection)).Length);
             rotateDirectionText.text = GetTextRotation(rotateDirection);
         }
 

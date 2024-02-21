@@ -12,7 +12,7 @@ namespace KaChow.AByteSizedMuseum
        TODO: make for loop block expandable or something
              like if you try to put another code block inside the for loop, it expands (take up the bottom 1-2 InterpreterLines)
              OR
-             
+
 
        TODO: also start working on the easy code blocks or something
              both UI and functionality
@@ -23,16 +23,16 @@ namespace KaChow.AByteSizedMuseum
                 - Pickup Block
                     > picks up object directly in front of it
                         ```
-                        if bot is not holding an object: 
+                        if bot is not holding an object:
                             use raycast to check if object in front of it is pickup-able
                             if raycast.hit == pickup-able object:
                                 pickup object
-                            else: 
+                            else:
                                 do nothing
-                        else: 
+                        else:
                             do nothing
                         ```
-                    
+
                 - Drop Block
                     > drops held object directly in front of it
                         ```
@@ -47,7 +47,7 @@ namespace KaChow.AByteSizedMuseum
                         ```
 
                 - Function block
-                    > Lets players define a series of commands as a function. 
+                    > Lets players define a series of commands as a function.
                     > should have another UI for telling what's inside the function block
                     > when clicked, a part of inventory side gets covered by the function block UI
                     > functionality should be very similar to how interpreter reads lines.
@@ -77,8 +77,8 @@ namespace KaChow.AByteSizedMuseum
 
     /* TODO: pickup-able items
                 > allow players to pick up certain items and store them in their inventory
-                > 
-       TODO: 
+                >
+       TODO:
              reset button for interpreter
     */
 
@@ -98,6 +98,8 @@ namespace KaChow.AByteSizedMuseum
 
         [Header("Buttons")]
         [SerializeField] private Button executeButton;
+
+        [SerializeField] private int interpreterID;
 
         // [Space]
         // [Header("Debugging")]
@@ -131,7 +133,7 @@ namespace KaChow.AByteSizedMuseum
                     continue;
                 }
 
-                yield return StartCoroutine(codeBlock.ExecuteBlock());
+                yield return StartCoroutine(codeBlock.ExecuteBlock(interpreterID));
 
                 interpreterLine.DisableHighlight();
             }
@@ -175,5 +177,12 @@ namespace KaChow.AByteSizedMuseum
         }
 
         // method to destroy interpreter ui when player exits an exhibit
+
+
+
+        public void SetInterpreterID(int interpreterID)
+        {
+            this.interpreterID = interpreterID;
+        }
     }
 }

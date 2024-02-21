@@ -4,6 +4,7 @@ namespace KaChow.AByteSizedMuseum
 {
     public class InterpreterPanel : InteractableBase
     {
+        [SerializeField] private int interpreterID;
         [Header("UI")]
         [SerializeField]
         private GameObject interpreterUI;
@@ -46,6 +47,8 @@ namespace KaChow.AByteSizedMuseum
             if (interpreterUIInstance == null)
             {
                 interpreterUIInstance = Instantiate(interpreterUI);
+                var interpreter = interpreterUIInstance.GetComponent<Interpreter>();
+                interpreter.SetInterpreterID(interpreterID);
                 interpreterUIInstance.transform.SetParent(GameObject.Find("PlayerUICanvas").transform, false);
                 isInterpreterOpen = true;
             }

@@ -6,7 +6,7 @@ namespace KaChow.AByteSizedMuseum
 {
     public class GiveBlock : CodeBlock
     {
-        public override IEnumerator ExecuteBlock()
+        public override IEnumerator ExecuteBlock(int botID)
         {
             Debug.Log("Give Block");
             yield return new WaitForSeconds(delay);
