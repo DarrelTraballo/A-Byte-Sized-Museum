@@ -133,7 +133,7 @@ namespace KaChow.WFC
                 cellToCollapse = gridComponents[finalExhibitCellIndex];
                 selectedTile = cellToCollapse.tileOptions[4];
                 secondCall = false;
-                thirdCall = false;
+                thirdCall = true;
             }
             else if (thirdCall)
             {

@@ -4,13 +4,13 @@ using UnityEngine;
 
 namespace KaChow.AByteSizedMuseum
 {
-    // programatically place final exhibit at the opposite side of museum    
+    // programatically place final exhibit at the opposite side of museum
     public class MuseumGenerator : MonoBehaviour
     {
         // MuseumGenerator.Instance to access MuseumGenerator variables
         public static MuseumGenerator Instance { get; private set; }
         #region Singleton
-        private MuseumGenerator() {}
+        private MuseumGenerator() { }
         private void Awake()
         {
             if (Instance != null && Instance != this)
@@ -32,6 +32,8 @@ namespace KaChow.AByteSizedMuseum
         [Space]
         [SerializeField]
         private List<GameObject> exhibitList;
+        [SerializeField] private int puzzleExhibitAmount = 7;
+        private List<Cell> puzzleExhibitCells;
 
         [Space]
         [Header("For Debugging")]
@@ -50,16 +52,16 @@ namespace KaChow.AByteSizedMuseum
                 else if (Input.GetKeyDown(KeyCode.X))
                 {
                     WFC.EnableExhibits();
-                } 
+                }
             }
         }
 
-        public void Initialize() 
+        public void Initialize()
         {
             exhibitSize = museum.exhibitPrefabs[0].gameObject.transform.GetChild(0).localScale.x;
             WFC = new WaveFunctionCollapse(museum, cellObj, exhibitParent.gameObject, museum.exhibitPrefabs);
         }
- 
+
         // TODO: set up code structure for Exhibits
         public void GenerateExhibits()
         {
@@ -69,6 +71,40 @@ namespace KaChow.AByteSizedMuseum
                 WFC.InitializeGrid();
                 WFC.DisableExhibits();
                 WFC.CheckEdges();
+                GeneratePuzzleExhibits(WFC.gridComponents);
+            }
+        }
+
+        public void GeneratePuzzleExhibits(List<Cell> gridComponents)
+        {
+            puzzleExhibitCells = new List<Cell>();
+            List<Cell> gridComponentsCopy = new List<Cell>(gridComponents);
+
+            int excludedIndex = 10;
+            gridComponentsCopy.RemoveAt(excludedIndex);
+
+            for (int i = 0; i < puzzleExhibitAmount; i++)
+            {
+                int randomIndex = Random.Range(0, gridComponentsCopy.Count);
+                var potentialExhibitCell = gridComponentsCopy[randomIndex];
+
+                // Check if the cell has an Exhibit component
+                if (potentialExhibitCell.GetComponentInChildren<Exhibit>() != null)
+                {
+                    puzzleExhibitCells.Add(potentialExhibitCell);
+                }
+
+                gridComponentsCopy.RemoveAt(randomIndex);
+            }
+
+            foreach (var puzzleExhibitCell in puzzleExhibitCells)
+            {
+                Debug.Log($"Puzzle Exhibits : {puzzleExhibitCell.name}", puzzleExhibitCell);
+
+                var puzzleExhibit = puzzleExhibitCell.GetComponentInChildren<Exhibit>();
+                puzzleExhibit.isPuzzleExhibit = true;
+
+                puzzleExhibit.TogglePuzzleExhibit();
             }
         }
 
@@ -99,12 +135,12 @@ namespace KaChow.AByteSizedMuseum
         }
 
         #region OnDrawGizmos()
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         private void OnDrawGizmos()
         {
             DrawGrid();
         }
-      
+
         private void DrawGrid()
         {
             Gizmos.color = Color.black;
@@ -123,7 +159,7 @@ namespace KaChow.AByteSizedMuseum
                 Vector3 end = start + new Vector3(0, 0, cellHeight);
                 Gizmos.DrawLine(start, end);
             }
-            
+
             // vertical grid lines
             for (int i = 0; i <= museum.museumSize; i++)
             {
@@ -132,7 +168,7 @@ namespace KaChow.AByteSizedMuseum
                 Gizmos.DrawLine(start, end);
             }
         }
-        #endif
+#endif
         #endregion
     }
 }
