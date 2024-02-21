@@ -26,7 +26,7 @@ namespace KaChow.AByteSizedMuseum {
                     var hit = hitInfo.collider.gameObject.TryGetComponent(out InteractableBase interactObj);
                     if (hit)
                     {
-                        interactObj.OnLookEnter();
+                        //interactObj.OnLookEnter();
 
                         interactObj.OnInteract();
                         

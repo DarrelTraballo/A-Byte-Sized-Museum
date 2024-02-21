@@ -13,6 +13,7 @@ namespace KaChow.AByteSizedMuseum
         public TMP_Text nameText;
         public TMP_Text dialogueText;
         public GameObject Input_manager;
+        public GameObject DialogueContainer;
         private int count = 0;
         public int counter;
         public Animator animator;
@@ -23,7 +24,7 @@ namespace KaChow.AByteSizedMuseum
         // Start is called before the first frame update
         public void Start()
         {
-            
+            DialogueContainer.SetActive(true);
         }
 
         public void StartDialogue (Dialogue dialogue)
@@ -78,9 +79,36 @@ namespace KaChow.AByteSizedMuseum
         }
         void EndDialogue()
         {
+            count = 0;
             animator.SetBool("IsOpen", false);
+            //DialogueContainer.SetActive(false);
+            ResetData();
             Debug.Log("End of conversation");
+
         }
+        public void ResetData()
+        {
+            // Reset relevant variables to their initial values
+            count = 0;
+            sentences.Clear();
+
+            // You may want to reset other variables as needed
+
+            // Additional reset logic...
+
+            // Call the method to reset the UI elements
+            ResetUIElements();
+        }
+
+        // Method to reset UI elements
+        private void ResetUIElements()
+        {
+            // Reset UI elements to their initial state
+            nameText.text = "";
+            dialogueText.text = "";
+            //Input_manager.SetActive(false);
+        }
+
 
 
 
