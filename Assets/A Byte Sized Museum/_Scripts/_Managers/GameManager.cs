@@ -29,6 +29,9 @@ namespace KaChow.AByteSizedMuseum
 
         private CharacterController characterController;
 
+        [Header("Museum")]
+        [SerializeField] private bool initMuseum = true;
+
         private void Start()
         {
             Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
@@ -36,6 +39,13 @@ namespace KaChow.AByteSizedMuseum
 
             // SetCursorState(CursorLockMode.Locked);
 
+            if (!initMuseum) return;
+
+            InitMuseum();
+        }
+
+        private void InitMuseum()
+        {
             museumGenerator = MuseumGenerator.Instance;
             museumGenerator.Initialize();
             museumGenerator.GenerateExhibits();

@@ -31,7 +31,7 @@ namespace KaChow.AByteSizedMuseum
         protected float delay = 1.0f;
         public bool canDrag = true;
 
-        public abstract IEnumerator ExecuteBlock();
+        public abstract IEnumerator ExecuteBlock(int botID);
 
         [HideInInspector] public Transform parentAfterDrag;
 

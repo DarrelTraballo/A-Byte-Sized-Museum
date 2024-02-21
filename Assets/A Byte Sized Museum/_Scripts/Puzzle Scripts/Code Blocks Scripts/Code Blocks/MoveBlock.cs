@@ -9,9 +9,9 @@ namespace KaChow.AByteSizedMuseum
         [Header("Game Event")]
         public GameEvent onMove;
 
-        public override IEnumerator ExecuteBlock()
+        public override IEnumerator ExecuteBlock(int botID)
         {
-            onMove.Raise(this, name);
+            onMove.Raise(this, botID);
             yield return new WaitForSeconds(delay);
         }
     }

@@ -1842,6 +1842,8 @@ MonoBehaviour:
   - {fileID: 5022941337501437922}
   - {fileID: 9211641224682011272}
   isExhibitLocked: 0
+  isPuzzleExhibit: 0
+  pathwayGuide: {fileID: 9102426170574020120}
 --- !u!114 &8572151404337286140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1855,30 +1857,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   exhibitData: {fileID: 11400000, guid: 849937b7e15b94d4399cccb47e22868f, type: 2}
-  upNeighbors:
-  - {fileID: 112269932417135242, guid: bf46d729b3b383548bd6fb2f480bee85, type: 3}
-  - {fileID: 8572151404337286140}
-  - {fileID: 9115549660130418069, guid: 64f42e342409a2047b9b4cec050355ec, type: 3}
-  - {fileID: 8572151404337286140}
-  - {fileID: 9115549660130418069, guid: 64f42e342409a2047b9b4cec050355ec, type: 3}
-  rightNeighbors:
-  - {fileID: -5528231922914340875, guid: 9d666134c91ce204da0539857add20ad, type: 3}
-  - {fileID: 8572151404337286140}
-  - {fileID: 1225158810576762053, guid: 971b62a9c2e44cd459e128f103c94669, type: 3}
-  - {fileID: 9115549660130418069, guid: 64f42e342409a2047b9b4cec050355ec, type: 3}
-  - {fileID: 760429974862850253, guid: c04a376612151f843aa621e639261cef, type: 3}
-  downNeighbors:
-  - {fileID: 112269932417135242, guid: bf46d729b3b383548bd6fb2f480bee85, type: 3}
-  - {fileID: 8572151404337286140}
-  - {fileID: 1225158810576762053, guid: 971b62a9c2e44cd459e128f103c94669, type: 3}
-  - {fileID: 8572151404337286140}
-  - {fileID: 1225158810576762053, guid: 971b62a9c2e44cd459e128f103c94669, type: 3}
-  leftNeighbors:
-  - {fileID: -5528231922914340875, guid: 9d666134c91ce204da0539857add20ad, type: 3}
-  - {fileID: 8572151404337286140}
-  - {fileID: 1225158810576762053, guid: 971b62a9c2e44cd459e128f103c94669, type: 3}
-  - {fileID: 9115549660130418069, guid: 64f42e342409a2047b9b4cec050355ec, type: 3}
-  - {fileID: -8179233783697589823, guid: c04e66d3cb61e3040a4af5cf163f2766, type: 3}
 --- !u!65 &7895290554853382265
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3091,7 +3069,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4337438281625367659}
   m_Layer: 8
-  m_Name: Path
+  m_Name: Pathway Guide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

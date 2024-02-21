@@ -798,7 +798,7 @@ Transform:
   m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3986914195995734803}
+  - {fileID: 5006967589114403184}
   m_Father: {fileID: 6476168336606724661}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1802978117001324234
@@ -1434,6 +1434,38 @@ Transform:
   - {fileID: 3138104825589297957}
   - {fileID: 883738156764791326}
   m_Father: {fileID: 4602712941054515097}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3144304132349011330
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5006967589114403184}
+  m_Layer: 8
+  m_Name: Pathway Guide
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5006967589114403184
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3144304132349011330}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3986914195995734803}
+  m_Father: {fileID: 2431758514197556415}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3151216665809438880
 GameObject:
@@ -3364,6 +3396,8 @@ MonoBehaviour:
   - {fileID: 4557568704638764749}
   - {fileID: 871082830909040179}
   isExhibitLocked: 0
+  isPuzzleExhibit: 0
+  pathwayGuide: {fileID: 3144304132349011330}
 --- !u!114 &-7416507269541812059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3377,30 +3411,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   exhibitData: {fileID: 11400000, guid: a5d218adb37e68547b8d1e30ef0a885c, type: 2}
-  upNeighbors:
-  - {fileID: -8179233783697589823, guid: c04e66d3cb61e3040a4af5cf163f2766, type: 3}
-  - {fileID: -7416507269541812059}
-  - {fileID: 760429974862850253, guid: c04a376612151f843aa621e639261cef, type: 3}
-  - {fileID: 1225158810576762053, guid: 971b62a9c2e44cd459e128f103c94669, type: 3}
-  - {fileID: -5528231922914340875, guid: 9d666134c91ce204da0539857add20ad, type: 3}
-  rightNeighbors:
-  - {fileID: 112269932417135242, guid: bf46d729b3b383548bd6fb2f480bee85, type: 3}
-  - {fileID: -7416507269541812059}
-  - {fileID: -8179233783697589823, guid: c04e66d3cb61e3040a4af5cf163f2766, type: 3}
-  - {fileID: -7416507269541812059}
-  - {fileID: -8179233783697589823, guid: c04e66d3cb61e3040a4af5cf163f2766, type: 3}
-  downNeighbors:
-  - {fileID: -7416507269541812059}
-  - {fileID: -8179233783697589823, guid: c04e66d3cb61e3040a4af5cf163f2766, type: 3}
-  - {fileID: -5528231922914340875, guid: 9d666134c91ce204da0539857add20ad, type: 3}
-  - {fileID: 760429974862850253, guid: c04a376612151f843aa621e639261cef, type: 3}
-  - {fileID: 9115549660130418069, guid: 64f42e342409a2047b9b4cec050355ec, type: 3}
-  leftNeighbors:
-  - {fileID: 112269932417135242, guid: bf46d729b3b383548bd6fb2f480bee85, type: 3}
-  - {fileID: -7416507269541812059}
-  - {fileID: 760429974862850253, guid: c04a376612151f843aa621e639261cef, type: 3}
-  - {fileID: -7416507269541812059}
-  - {fileID: 760429974862850253, guid: c04a376612151f843aa621e639261cef, type: 3}
 --- !u!65 &142095104154691023
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3607,7 +3617,7 @@ Transform:
   m_LocalScale: {x: 5, y: 0.5, z: 30}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2431758514197556415}
+  m_Father: {fileID: 5006967589114403184}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6447128429888087993
 MeshFilter:

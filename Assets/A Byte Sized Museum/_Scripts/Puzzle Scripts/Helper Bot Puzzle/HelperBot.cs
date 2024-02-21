@@ -1,8 +1,9 @@
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 /*
-    Spiderman PS4 circuit voltage puzzles 
+    Spiderman PS4 circuit voltage puzzles
 
     logic gates
 
@@ -14,8 +15,9 @@ namespace KaChow.AByteSizedMuseum
     public class HelperBot : MonoBehaviour
     {
         [Header("Helper Bot Variables")]
+        [SerializeField] private int botID;
         [SerializeField] private float moveSpeed = 0.25f;
-        
+
         [Header("Helper Bot Raycast Variables")]
         [SerializeField] private GameObject raycastSource;
         [SerializeField] private float raycastRange;
@@ -41,9 +43,11 @@ namespace KaChow.AByteSizedMuseum
             initialPosition = transform.position;
             initialRotation = transform.rotation;
         }
-        
-        public void Move()
+
+        public void Move(Component sender, object data)
         {
+            if (data is not int interpreterID || interpreterID != botID) return;
+
             if (!FireRaycast(out GameObject hitObject))
             {
                 Vector3 targetPosition = transform.position + transform.forward;
@@ -55,26 +59,26 @@ namespace KaChow.AByteSizedMuseum
 
         public void Rotate(Component sender, object data)
         {
-            if (data is RotateDirection rotateDirection)
+            if (data is not Tuple<RotateDirection, int> tupleData || tupleData.Item2 != botID) return;
+
+            RotateDirection rotateDirection = tupleData.Item1;
+            float targetRotation;
+
+            switch (rotateDirection)
             {
-                float targetRotation;
-
-                if (rotateDirection == RotateDirection.Clockwise)
-                {
+                case RotateDirection.Clockwise:
                     targetRotation = transform.eulerAngles.y - 90.0f;
-                }
-                else if (rotateDirection == RotateDirection.CounterClockwise)
-                {
+                    break;
+                case RotateDirection.CounterClockwise:
                     targetRotation = transform.eulerAngles.y + 90.0f;
-                }
-                else 
-                {
+                    break;
+                default:
                     targetRotation = transform.eulerAngles.y;
-                }
-
-                transform.DORotate(new Vector3(0f, targetRotation, 0f), moveSpeed, RotateMode.Fast)
-                         .SetEase(Ease.InOutCirc);
+                    break;
             }
+
+            transform.DORotate(new Vector3(0f, targetRotation, 0f), moveSpeed, RotateMode.Fast)
+                     .SetEase(Ease.InOutCirc);
         }
 
         // TODO: fix
@@ -84,7 +88,7 @@ namespace KaChow.AByteSizedMuseum
             transform.SetPositionAndRotation(initialPosition, initialRotation);
 
             // reset object's position and rotation
-            if (!isHoldingAnObject) 
+            if (!isHoldingAnObject)
             {
                 // heldObject.transform.SetPositionAndRotation(heldObjectInitialPosition, heldObjectInitialRotation);
 
@@ -100,60 +104,55 @@ namespace KaChow.AByteSizedMuseum
             isHoldingAnObject = false;
         }
 
-        public void PickUp()
+        public void PickUp(Component sender, object data)
         {
+            if (data is not int interpreterID || interpreterID != botID) return;
+
             // if bot is already holding an object, do nothing
             if (isHoldingAnObject) return;
 
-            // if there is an object in front of bot, pick it up
-            if (FireRaycast(out GameObject hitObject))
+            // if there is no object in front of bot, do nothing
+            if (!FireRaycast(out GameObject hitObject)) return;
+
+            if (hitObject.TryGetComponent(out HelperBotPuzzleObject puzzleObject))
             {
-                if (hitObject.TryGetComponent(out HelperBotPuzzleObject puzzleObject))
-                {                    
-                    RotateArms();
+                RotateArms();
+                // cache object's parent, position and rotation
+                heldObjectParent = puzzleObject.transform.parent;
+                heldObjectInitialPosition = puzzleObject.transform.position;
+                heldObjectInitialRotation = puzzleObject.transform.rotation;
 
-                    // cache object's parent, position and rotation
-                    heldObjectParent = puzzleObject.transform.parent;
-                    heldObjectInitialPosition = puzzleObject.transform.position;
-                    heldObjectInitialRotation = puzzleObject.transform.rotation;
+                puzzleObject.transform.parent = aboveHead;
+                Vector3 targetPosition = aboveHead.position;
 
-                    puzzleObject.transform.parent = aboveHead;
+                puzzleObject.transform.DOMove(targetPosition, moveSpeed)
+                                     .SetEase(Ease.OutExpo);
 
-                    Vector3 targetPosition = aboveHead.position;
-
-                    puzzleObject.transform.DOMove(targetPosition, moveSpeed)
-                                    .SetEase(Ease.OutExpo);
-
-                    
-                    isHoldingAnObject = true;
-                }
-
-                else return;
+                isHoldingAnObject = true;
             }
         }
 
-        public void Drop()
-        {   
-            // if bot is NOT holding an object
+        public void Drop(Component sender, object data)
+        {
+            if (data is not int interpreterID || interpreterID != botID) return;
+
+            // if bot is NOT holding an object, do nothing
             if (!isHoldingAnObject) return;
 
-            // check if there is an object in front.
-            if (!FireRaycast(out GameObject hitObject))
-            {
-                // Reset hand position
-                RotateArms();
+            // if there is no object in front of bot, do nothing
+            if (FireRaycast(out GameObject hitObject)) return;
 
-                heldObject = aboveHead.GetChild(0).gameObject;
+            // Reset hand position
+            RotateArms();
 
-                Vector3 targetPosition = transform.position + transform.forward;
+            heldObject = aboveHead.GetChild(0).gameObject;
+            Vector3 targetPosition = transform.position + transform.forward;
 
-                heldObject.transform.DOMove(targetPosition, moveSpeed)
-                                    .SetEase(Ease.OutExpo);
-                                    
-                heldObject.transform.parent = heldObjectParent;
+            heldObject.transform.DOMove(targetPosition, moveSpeed)
+                               .SetEase(Ease.OutExpo);
 
-                isHoldingAnObject = false;
-            }
+            heldObject.transform.parent = heldObjectParent;
+            isHoldingAnObject = false;
         }
 
         public bool FireRaycast(out GameObject hitObject)

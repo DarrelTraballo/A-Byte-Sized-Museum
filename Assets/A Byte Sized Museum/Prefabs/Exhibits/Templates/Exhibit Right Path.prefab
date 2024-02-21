@@ -1908,6 +1908,8 @@ MonoBehaviour:
   - {fileID: 6821378649375328636}
   - {fileID: 5119520591757936436}
   isExhibitLocked: 0
+  isPuzzleExhibit: 0
+  pathwayGuide: {fileID: 7415708772405589095}
 --- !u!114 &-8179233783697589823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1921,30 +1923,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   exhibitData: {fileID: 11400000, guid: d101ab7ecf41a6d4d84d3f2f764ffd0d, type: 2}
-  upNeighbors:
-  - {fileID: -7416507269541812059, guid: 7fa077aff48aab449987c54b2f74304d, type: 3}
-  - {fileID: -5528231922914340875, guid: 9d666134c91ce204da0539857add20ad, type: 3}
-  - {fileID: -8179233783697589823}
-  - {fileID: 760429974862850253, guid: c04a376612151f843aa621e639261cef, type: 3}
-  - {fileID: 1225158810576762053, guid: 971b62a9c2e44cd459e128f103c94669, type: 3}
-  rightNeighbors:
-  - {fileID: -5528231922914340875, guid: 9d666134c91ce204da0539857add20ad, type: 3}
-  - {fileID: 8572151404337286140, guid: 9f0ca718bb9a41b4eb8c32ed846ced1a, type: 3}
-  - {fileID: 1225158810576762053, guid: 971b62a9c2e44cd459e128f103c94669, type: 3}
-  - {fileID: 9115549660130418069, guid: 64f42e342409a2047b9b4cec050355ec, type: 3}
-  - {fileID: 760429974862850253, guid: c04a376612151f843aa621e639261cef, type: 3}
-  downNeighbors:
-  - {fileID: -7416507269541812059, guid: 7fa077aff48aab449987c54b2f74304d, type: 3}
-  - {fileID: -8179233783697589823}
-  - {fileID: -5528231922914340875, guid: 9d666134c91ce204da0539857add20ad, type: 3}
-  - {fileID: 760429974862850253, guid: c04a376612151f843aa621e639261cef, type: 3}
-  - {fileID: 9115549660130418069, guid: 64f42e342409a2047b9b4cec050355ec, type: 3}
-  leftNeighbors:
-  - {fileID: 112269932417135242, guid: bf46d729b3b383548bd6fb2f480bee85, type: 3}
-  - {fileID: -7416507269541812059, guid: 7fa077aff48aab449987c54b2f74304d, type: 3}
-  - {fileID: 760429974862850253, guid: c04a376612151f843aa621e639261cef, type: 3}
-  - {fileID: -7416507269541812059, guid: 7fa077aff48aab449987c54b2f74304d, type: 3}
-  - {fileID: 760429974862850253, guid: c04a376612151f843aa621e639261cef, type: 3}
 --- !u!65 &2024094761874716215
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2744,7 +2722,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5251068588114086822}
   m_Layer: 8
-  m_Name: Path
+  m_Name: Pathway Guide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

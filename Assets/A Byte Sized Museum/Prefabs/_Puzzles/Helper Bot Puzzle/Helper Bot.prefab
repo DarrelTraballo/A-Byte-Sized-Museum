@@ -708,8 +708,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35322ed78534cd742a405c1376e5d86c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  moveDistance: 1
+  botID: 0
+  moveSpeed: 0.25
   raycastSource: {fileID: 3451100607316859331}
   raycastRange: 1
   leftHand: {fileID: 5022427515277870447}
@@ -734,7 +734,7 @@ MonoBehaviour:
       - m_Target: {fileID: 8500254362408176804}
         m_TargetAssemblyTypeName: KaChow.AByteSizedMuseum.HelperBot, Assembly-CSharp
         m_MethodName: Drop
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -760,9 +760,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8500254362408176804}
-        m_TargetAssemblyTypeName: KaChow.AByteSizedMuseum.MoveObject, Assembly-CSharp
+        m_TargetAssemblyTypeName: KaChow.AByteSizedMuseum.HelperBot, Assembly-CSharp
         m_MethodName: Move
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -788,7 +788,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8500254362408176804}
-        m_TargetAssemblyTypeName: KaChow.AByteSizedMuseum.MoveObject, Assembly-CSharp
+        m_TargetAssemblyTypeName: KaChow.AByteSizedMuseum.HelperBot, Assembly-CSharp
         m_MethodName: Rotate
         m_Mode: 0
         m_Arguments:
@@ -846,7 +846,7 @@ MonoBehaviour:
       - m_Target: {fileID: 8500254362408176804}
         m_TargetAssemblyTypeName: KaChow.AByteSizedMuseum.HelperBot, Assembly-CSharp
         m_MethodName: PickUp
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
