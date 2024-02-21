@@ -42,7 +42,7 @@ namespace KaChow.AByteSizedMuseum
             }
 
             gameManager.Player.canMove = false;
-            gameManager.SetCursorState(CursorLockMode.Confined);
+            // gameManager.SetCursorState(CursorLockMode.Confined);
 
             if (interpreterUIInstance == null)
             {

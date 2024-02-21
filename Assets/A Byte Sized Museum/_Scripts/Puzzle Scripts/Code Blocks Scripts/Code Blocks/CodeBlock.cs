@@ -29,13 +29,15 @@ namespace KaChow.AByteSizedMuseum
         [SerializeField] protected GameEvent onCodeBlockClick;
 
         protected float delay = 1.0f;
-        public bool canDrag = true;
+        public bool isInfinite = false;
 
         public abstract IEnumerator ExecuteBlock(int botID);
 
         [HideInInspector] public Transform parentAfterDrag;
 
         [HideInInspector] public Image image;
+
+        private CodeBlock movedBlock;
 
         private void Start()
         {
@@ -44,28 +46,35 @@ namespace KaChow.AByteSizedMuseum
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            if (!canDrag) return;
+            if (isInfinite)
+            {
+                CodeBlock clone = Instantiate(this, transform.position, transform.rotation);
+                clone.name = gameObject.name;
+                movedBlock = clone.GetComponent<CodeBlock>();
+                movedBlock.isInfinite = false;
+            }
+            else
+            {
+                movedBlock = this;
+            }
 
-            onCodeBlockClick.Raise(this, this);
-            parentAfterDrag = transform.parent;
-            transform.SetParent(transform.root);
-            transform.SetAsLastSibling();
-            image.raycastTarget = false;
+            movedBlock.onCodeBlockClick.Raise(this, this);
+            movedBlock.parentAfterDrag = transform.parent;
+            movedBlock.transform.SetParent(transform.root);
+            movedBlock.transform.SetAsLastSibling();
+            movedBlock.image.raycastTarget = false;
         }
 
         public void OnDrag(PointerEventData eventData)
         {
-            if (!canDrag) return;
-
-            transform.position = Input.mousePosition;
+            movedBlock.transform.position = Input.mousePosition;
         }
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            if (!canDrag) return;
-
-            transform.SetParent(parentAfterDrag);
-            image.raycastTarget = true;
+            movedBlock.transform.SetParent(parentAfterDrag);
+            movedBlock.image.raycastTarget = true;
+            movedBlock = null;
         }
 
         public virtual void OnPointerClick(PointerEventData eventData)

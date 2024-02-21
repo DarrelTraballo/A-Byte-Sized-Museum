@@ -168,6 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStartPosition: {x: 0, y: 0, z: 0}
+  initMuseum: 1
 --- !u!1 &18591298
 GameObject:
   m_ObjectHideFlags: 0
@@ -5986,6 +5987,10 @@ PrefabInstance:
     - target: {fileID: 7408020725860253556, guid: 78475407b289b5c4aaf6566cc1a8c9d0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8100985583261559181, guid: 78475407b289b5c4aaf6566cc1a8c9d0, type: 3}
+      propertyPath: response.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8176128962065841971, guid: 78475407b289b5c4aaf6566cc1a8c9d0, type: 3}
       propertyPath: m_LocalPosition.x

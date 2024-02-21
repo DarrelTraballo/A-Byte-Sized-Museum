@@ -9,6 +9,8 @@ namespace KaChow.AByteSizedMuseum
         private Image highlight;
         private Color defaultColor;
 
+        [SerializeField] private bool isOccupied = false;
+
         private void Start()
         {
             highlight = GetComponent<Image>();
@@ -27,11 +29,27 @@ namespace KaChow.AByteSizedMuseum
 
         public void OnDrop(PointerEventData eventData)
         {
-            if (transform.childCount == 0)
+            var dropped = eventData.pointerDrag;
+            var codeBlock = dropped.GetComponent<CodeBlock>();
+            var dropTarget = eventData.pointerCurrentRaycast.gameObject;
+
+            if (dropTarget.GetComponent<InterpreterLine>() != null)
             {
-                var dropped = eventData.pointerDrag;
-                var codeBlock = dropped.GetComponent<CodeBlock>();
-                codeBlock.parentAfterDrag = transform;
+                if (transform.childCount == 0)
+                {
+                    codeBlock.parentAfterDrag = transform;
+                }
+                else
+                {
+                    if (!codeBlock.isInfinite)
+                    {
+                        Destroy(dropped);
+                    }
+                }
+            }
+            else
+            {
+                Destroy(dropped);
             }
         }
     }

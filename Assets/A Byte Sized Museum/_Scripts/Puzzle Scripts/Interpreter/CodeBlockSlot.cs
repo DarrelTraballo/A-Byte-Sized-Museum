@@ -23,7 +23,7 @@ namespace KaChow.AByteSizedMuseum
             clone.gameObject.transform.position = Input.mousePosition;
             clone.gameObject.transform.SetParent(transform.root);
 
-            clone.canDrag = true;
+            clone.isInfinite = true;
 
             return clone;
         }
