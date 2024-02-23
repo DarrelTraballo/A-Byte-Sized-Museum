@@ -98,6 +98,7 @@ namespace KaChow.AByteSizedMuseum
 
         [Header("Buttons")]
         [SerializeField] private Button executeButton;
+        [SerializeField] private Button clearAllButton;
 
         [SerializeField] private int interpreterID;
 
@@ -120,6 +121,7 @@ namespace KaChow.AByteSizedMuseum
         private IEnumerator ExecuteAllLines()
         {
             DisableButton(executeButton);
+            DisableButton(clearAllButton);
             foreach (var interpreterLine in interpreterLines)
             {
                 interpreterLine.EnableHighlight();
@@ -138,6 +140,31 @@ namespace KaChow.AByteSizedMuseum
                 interpreterLine.DisableHighlight();
             }
             EnableButton(executeButton);
+            EnableButton(clearAllButton);
+        }
+
+        public IEnumerator ClearInterpreterLines()
+        {
+            DisableButton(executeButton);
+            DisableButton(clearAllButton);
+
+            foreach (var interpreterLine in interpreterLines)
+            {
+                interpreterLine.EnableHighlight();
+
+                foreach (Transform child in interpreterLine.transform)
+                {
+                    Destroy(child.gameObject);
+                    // yield return new WaitForSeconds(0.20f);
+                }
+
+                yield return new WaitForSeconds(0.20f);
+
+                interpreterLine.DisableHighlight();
+            }
+
+            EnableButton(executeButton);
+            EnableButton(clearAllButton);
         }
 
         public void CloseInterpreter()
@@ -176,7 +203,11 @@ namespace KaChow.AByteSizedMuseum
             codeBlockDetailsPanel.SetActive(false);
         }
 
-        // method to destroy interpreter ui when player exits an exhibit
+        public void ClearInterpreter()
+        {
+            StartCoroutine(ClearInterpreterLines());
+        }
+
 
 
 

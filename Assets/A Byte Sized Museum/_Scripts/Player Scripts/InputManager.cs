@@ -8,14 +8,14 @@ namespace KaChow.AByteSizedMuseum
 
         #region Singleton
         public static InputManager Instance { get; private set; }
-        private InputManager() {}
-        private void Awake() 
+        private InputManager() { }
+        private void Awake()
         {
             playerControls = new PlayerControls();
 
             if (Instance != null && Instance != this)
                 Destroy(this.gameObject);
-            else 
+            else
                 Instance = this;
         }
         #endregion
@@ -58,6 +58,11 @@ namespace KaChow.AByteSizedMuseum
         public bool IsPlayerSneaking()
         {
             return playerControls.Player.Sneak.IsPressed();
+        }
+
+        public bool IsEscapeButtonPressed()
+        {
+            return playerControls.Player.Escape.triggered;
         }
     }
 }

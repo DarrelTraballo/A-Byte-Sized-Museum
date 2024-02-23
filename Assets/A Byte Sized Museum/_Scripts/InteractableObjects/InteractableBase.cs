@@ -5,14 +5,16 @@ namespace KaChow.AByteSizedMuseum
     public abstract class InteractableBase : MonoBehaviour
     {
         protected GameManager gameManager;
+        protected InputManager inputManager;
 
         public virtual void Start()
         {
             gameManager = GameManager.Instance;
+            inputManager = InputManager.Instance;
         }
 
         // what happens if player enters interactable object collider
-        protected virtual void OnTriggerEnter(Collider actor) 
+        protected virtual void OnTriggerEnter(Collider actor)
         {
             if (actor.CompareTag("Player"))
             {
@@ -21,7 +23,7 @@ namespace KaChow.AByteSizedMuseum
         }
 
         // what happens if player exits interactable object collider
-        protected virtual void OnTriggerExit(Collider actor) 
+        protected virtual void OnTriggerExit(Collider actor)
         {
             if (actor.CompareTag("Player"))
             {
@@ -35,14 +37,14 @@ namespace KaChow.AByteSizedMuseum
         }
 
         // base method for interactable object specific interactions
-        // just leave empty 
+        // just leave empty
         public virtual void OnInteract()
         {
             // Debug.Log("Interacted");
         }
 
         /*  Puzzles
-            
+
 
         */
     }

@@ -167,8 +167,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deca3fe71d6c51247a07ae54c0f62ff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentState: 0
   playerStartPosition: {x: 0, y: 0, z: 0}
   initMuseum: 1
+  crosshair: {fileID: 1149831241}
 --- !u!1 &18591298
 GameObject:
   m_ObjectHideFlags: 0
@@ -5988,6 +5990,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -3
       objectReference: {fileID: 0}
+    - target: {fileID: 8100985583261559181, guid: 78475407b289b5c4aaf6566cc1a8c9d0, type: 3}
+      propertyPath: response.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8176128962065841971, guid: 78475407b289b5c4aaf6566cc1a8c9d0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -9.65
@@ -7802,7 +7808,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PausePanel: {fileID: 1127605387}
-  InputManager: {fileID: 1113272428}
 --- !u!4 &921065263
 Transform:
   m_ObjectHideFlags: 0
@@ -16863,6 +16868,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 164513236158529101, guid: 83cd40e7489944243b6979acb491be4b, type: 3}
+      propertyPath: lookSpeed
+      value: 0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 1051793748895791787, guid: 83cd40e7489944243b6979acb491be4b, type: 3}
       propertyPath: m_Name
       value: Player

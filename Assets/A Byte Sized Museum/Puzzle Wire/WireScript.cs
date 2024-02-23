@@ -16,7 +16,7 @@ namespace KaChow.AByteSizedMuseum
         public override void Start()
         {
             base.Start();
-            
+
         }
 
         private void Update()
@@ -46,13 +46,12 @@ namespace KaChow.AByteSizedMuseum
                 return;
             }
 
-            gameManager.Player.canMove = false;
-            gameManager.SetCursorState(CursorLockMode.Confined);
+            gameManager.SetGameState(GameState.SolvePuzzle);
 
             if (wirePuzzleUI == null)
             {
                 wirePuzzleUI.SetActive(true);
-                
+
                 isWirePuzzleOpen = true;
             }
             else
@@ -66,8 +65,7 @@ namespace KaChow.AByteSizedMuseum
         {
             gameManager.Player.playerCamera.enabled = true;
             gameManager.Player.gameObject.SetActive(true);
-            gameManager.Player.canMove = true;
-            gameManager.SetCursorState(CursorLockMode.Locked);
+            gameManager.SetGameState(GameState.Playing);
 
             wirePuzzleUI.SetActive(false);
             isWirePuzzleOpen = false;
