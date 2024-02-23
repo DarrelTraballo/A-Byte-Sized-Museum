@@ -1,69 +1,73 @@
 using System.Collections;
 using System.Collections.Generic;
+using KaChow.AByteSizedMuseum;
 using UnityEngine;
 
 public class PauseManager : MonoBehaviour
 {
     public GameObject PausePanel;
-    public GameObject InputManager;
     private bool isPaused = false;
     private bool isCursorVisible = true;
+    private GameManager gameManager;
+    private InputManager inputManager;
+
+    private void Start()
+    {
+        gameManager = GameManager.Instance;
+        inputManager = InputManager.Instance;
+    }
 
     // Update is called once per frame
     void Update()
     {
         // Check for the Escape key press
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (inputManager.IsEscapeButtonPressed() && (gameManager.currentState == GameState.Playing || gameManager.currentState == GameState.Paused))
         {
+            Debug.Log("Esc sa pause manager");
             // Toggle the pause state
-            ShowCursor();
             TogglePause();
         }
     }
 
-   public void TogglePause()
+    public void TogglePause()
     {
         if (PausePanel.activeSelf)
         {
             Continue();
             return;
         }
-       PausePanel.SetActive(true);
-       InputManager.SetActive(false);
-       Time.timeScale = 0;
+        PausePanel.SetActive(true);
+        gameManager.SetGameState(GameState.Paused);
+        Time.timeScale = 0;
     }
 
     public void Continue()
     {
         PausePanel.SetActive(false);
-        InputManager.SetActive(true);
-        HideCursor();
+        gameManager.SetGameState(GameState.Playing);
         Time.timeScale = 1;
     }
-    private void ToggleCursorVisibility()
-    {
-        // Toggle the cursor visibility
-        if (isCursorVisible)
-        {
-            HideCursor();
-        }
-        else
-        {
-            ShowCursor();
-        }
-    }
 
-    private void ShowCursor()
-    {
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None; // Optional: Set lock state according to your needs
-        isCursorVisible = true;
-    }
+    // private void ToggleCursorVisibility()
+    // {
+    //     // Toggle the cursor visibility
+    //     if (isCursorVisible)
+    //     {
+    //         HideCursor();
+    //     }
+    //     else
+    //     {
+    //         ShowCursor();
+    //     }
+    // }
 
-    private void HideCursor()
-    {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked; // Optional: Set lock state according to your needs
-        isCursorVisible = false;
-    }
+    // private void ShowCursor()
+    // {
+    //     isCursorVisible = true;
+    // }
+
+    // private void HideCursor()
+    // {
+    //     isCursorVisible = false;
+    // }
 }

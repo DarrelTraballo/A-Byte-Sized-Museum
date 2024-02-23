@@ -19,9 +19,10 @@ namespace KaChow.AByteSizedMuseum
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Escape) && isInterpreterOpen)
+            if (inputManager.IsEscapeButtonPressed() && isInterpreterOpen && gameManager.currentState == GameState.SolvePuzzle)
             {
                 CloseInterpreter();
+                gameManager.SetGameState(GameState.Playing);
             }
         }
 
@@ -29,6 +30,7 @@ namespace KaChow.AByteSizedMuseum
         {
             if (!isInterpreterOpen)
             {
+                gameManager.SetGameState(GameState.SolvePuzzle);
                 OpenInterpreter();
             }
         }
@@ -40,9 +42,6 @@ namespace KaChow.AByteSizedMuseum
                 Debug.Log("Interpreter UI not set");
                 return;
             }
-
-            gameManager.Player.canMove = false;
-            // gameManager.SetCursorState(CursorLockMode.Confined);
 
             if (interpreterUIInstance == null)
             {
@@ -61,9 +60,6 @@ namespace KaChow.AByteSizedMuseum
 
         public void CloseInterpreter()
         {
-            gameManager.Player.canMove = true;
-            gameManager.SetCursorState(CursorLockMode.Locked);
-
             interpreterUIInstance.SetActive(false);
             isInterpreterOpen = false;
         }

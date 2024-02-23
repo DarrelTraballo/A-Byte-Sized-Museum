@@ -1,25 +1,21 @@
-using KaChow.WFC;
-using KaChow.Demo;
 using UnityEngine;
 
 namespace KaChow.AByteSizedMuseum
 {
+    public enum GameState
+    {
+        GenerateMuseum,
+        Paused,
+        Playing,
+        SolvePuzzle,
+
+    }
     public class GameManager : MonoBehaviour
     {
-        // Singleton reference, para isang instance lang ang kinukuha pag need i-reference from another script
-        // can only access GameManager by using GameManager.Instance
         public static GameManager Instance { get; private set; }
-        #region Singleton
         private GameManager() { }
-        private void Awake()
-        {
-            if (Instance != null && Instance != this)
-                Destroy(this);
-            else
-                Instance = this;
 
-        }
-        #endregion
+        public GameState currentState;
 
         private MuseumGenerator museumGenerator;
 
@@ -32,16 +28,26 @@ namespace KaChow.AByteSizedMuseum
         [Header("Museum")]
         [SerializeField] private bool initMuseum = true;
 
+        [Header("Misc")]
+        [SerializeField] private GameObject crosshair;
+
+        private void Awake()
+        {
+            if (Instance != null && Instance != this)
+                Destroy(this);
+            else
+                Instance = this;
+        }
+
         private void Start()
         {
-            Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-            characterController = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>();
-
-            // SetCursorState(CursorLockMode.Locked);
+            GameObject playerGO = GameObject.FindGameObjectWithTag("Player");
+            Player = playerGO.GetComponent<Player>();
+            characterController = playerGO.GetComponent<CharacterController>();
 
             if (!initMuseum) return;
 
-            InitMuseum();
+            SetGameState(GameState.GenerateMuseum);
         }
 
         private void InitMuseum()
@@ -49,6 +55,44 @@ namespace KaChow.AByteSizedMuseum
             museumGenerator = MuseumGenerator.Instance;
             museumGenerator.Initialize();
             museumGenerator.GenerateExhibits();
+            SetGameState(GameState.Playing);
+        }
+
+        public void SetGameState(GameState state)
+        {
+            currentState = state;
+
+            switch (state)
+            {
+                case GameState.GenerateMuseum:
+                    crosshair.SetActive(false);
+                    SetCursorState(CursorLockMode.Confined);
+                    InitMuseum();
+                    break;
+
+                case GameState.Playing:
+                    crosshair.SetActive(true);
+                    Player.SetCanMove(true);
+                    SetCursorState(CursorLockMode.Locked);
+                    break;
+
+                case GameState.Paused:
+                    crosshair.SetActive(false);
+                    Player.SetCanMove(false);
+                    SetCursorState(CursorLockMode.Confined);
+                    break;
+
+                case GameState.SolvePuzzle:
+                    crosshair.SetActive(false);
+                    Player.SetCanMove(false);
+                    SetCursorState(CursorLockMode.Confined);
+                    break;
+
+                default:
+                    break;
+
+            }
+
         }
 
         public void SetCursorState(CursorLockMode cursorLockMode)

@@ -99,8 +99,6 @@ namespace KaChow.AByteSizedMuseum
 
             foreach (var puzzleExhibitCell in puzzleExhibitCells)
             {
-                Debug.Log($"Puzzle Exhibits : {puzzleExhibitCell.name}", puzzleExhibitCell);
-
                 var puzzleExhibit = puzzleExhibitCell.GetComponentInChildren<Exhibit>();
                 puzzleExhibit.isPuzzleExhibit = true;
 

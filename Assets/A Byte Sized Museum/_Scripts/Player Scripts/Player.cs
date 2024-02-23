@@ -1,26 +1,13 @@
 using UnityEngine;
 
-namespace KaChow.AByteSizedMuseum {
+namespace KaChow.AByteSizedMuseum
+{
     // If can, completely refactor playerControllers
     [RequireComponent(typeof(CharacterController))]
     public class Player : MonoBehaviour
     {
         public static Player Instance { get; private set; }
-        #region Singleton
-        private Player() {}
-        private void Awake() 
-        {
-            if (Instance != null && Instance != this)
-                Destroy(this);
-            else 
-                Instance = this;
-
-            characterController = GetComponent<CharacterController>();
-            runningSpeed = walkingSpeed * 1.3f;
-            sneakSpeed = walkingSpeed * 0.322f;
-        }
-        #endregion
-
+        private Player() { }
 
         public float walkingSpeed = 7.5f;
         public float runningSpeed;
@@ -36,15 +23,26 @@ namespace KaChow.AByteSizedMuseum {
         private float rotationX = 0f;
         private InputManager inputManager;
 
-        [HideInInspector]
-        public bool canMove = true;        
+        private bool canMove = true;
+
+        private void Awake()
+        {
+            if (Instance != null && Instance != this)
+                Destroy(this);
+            else
+                Instance = this;
+
+            characterController = GetComponent<CharacterController>();
+            runningSpeed = walkingSpeed * 1.3f;
+            sneakSpeed = walkingSpeed * 0.322f;
+        }
 
         private void Start()
         {
             inputManager = InputManager.Instance;
         }
 
-        private void Update() 
+        private void Update()
         {
             HandleMovementInput();
             HandleJumpInput();
@@ -56,7 +54,7 @@ namespace KaChow.AByteSizedMuseum {
         private void HandleMovementInput()
         {
             if (!canMove) return;
-        
+
             // We are grounded, so recalculate move direction based on axes
             Vector3 forward = transform.TransformDirection(Vector3.forward);
             Vector3 right = transform.TransformDirection(Vector3.right);
@@ -68,7 +66,7 @@ namespace KaChow.AByteSizedMuseum {
 
             // Press Left Shift to sneak
             bool isSneaking = inputManager.IsPlayerSneaking();
-            
+
             float currentSpeedX = (isRunning ? runningSpeed : walkingSpeed) * moveInput.y;
             float currentSpeedY = (isRunning ? runningSpeed : walkingSpeed) * moveInput.x;
 
@@ -123,6 +121,11 @@ namespace KaChow.AByteSizedMuseum {
 
             playerCamera.transform.localRotation = Quaternion.Euler(-rotationX, 0, 0);
             transform.rotation *= Quaternion.Euler(0, lookInput.x * lookSpeed, 0);
+        }
+
+        public void SetCanMove(bool newCanMove)
+        {
+            canMove = newCanMove;
         }
     }
 }
