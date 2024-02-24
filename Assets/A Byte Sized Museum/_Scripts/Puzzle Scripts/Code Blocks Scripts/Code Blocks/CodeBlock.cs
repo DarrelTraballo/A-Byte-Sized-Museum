@@ -39,7 +39,7 @@ namespace KaChow.AByteSizedMuseum
 
         private CodeBlock movedBlock;
 
-        private void Start()
+        public virtual void Start()
         {
             image = GetComponentInChildren<Image>();
         }
@@ -67,7 +67,7 @@ namespace KaChow.AByteSizedMuseum
 
         public void OnDrag(PointerEventData eventData)
         {
-            movedBlock.transform.position = Input.mousePosition;
+            movedBlock.gameObject.transform.position = Input.mousePosition;
         }
 
         public void OnEndDrag(PointerEventData eventData)

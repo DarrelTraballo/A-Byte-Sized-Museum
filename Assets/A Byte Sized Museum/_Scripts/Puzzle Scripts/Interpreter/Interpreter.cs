@@ -84,8 +84,14 @@ namespace KaChow.AByteSizedMuseum
 
     public class Interpreter : MonoBehaviour
     {
+        public static Interpreter Instance { get; private set; }
+        private Interpreter() { }
+
+        private GameManager gameManager;
+
         [Header("Interpreter Lines")]
         public List<InterpreterLine> interpreterLines;
+        public float executeTime = 0.20f;
 
         [Header("Game Events")]
         public GameEvent onInterpreterClose;
@@ -102,19 +108,23 @@ namespace KaChow.AByteSizedMuseum
 
         [SerializeField] private int interpreterID;
 
-        // [Space]
-        // [Header("Debugging")]
+        private void Awake()
+        {
+            if (Instance != null && Instance != this)
+                Destroy(this);
+            else
+                Instance = this;
+        }
 
-        /*
-            if execute is pressed:
-                close interpreter
-                execute blocks after a delay?
-                    (use Coroutines?)
-        */
+        private void Start()
+        {
+            gameManager = GameManager.Instance;
+        }
 
         public void ExecuteLines()
         {
             codeBlockDetailsPanel.SetActive(false);
+            puzzleCameraFeed.SetActive(true);
             StartCoroutine(ExecuteAllLines());
         }
 
@@ -127,14 +137,14 @@ namespace KaChow.AByteSizedMuseum
                 interpreterLine.EnableHighlight();
 
                 CodeBlock codeBlock = interpreterLine.GetComponentInChildren<CodeBlock>();
-
                 if (codeBlock == null)
                 {
-                    yield return new WaitForSeconds(0.20f);
+                    yield return new WaitForSeconds(executeTime);
                     interpreterLine.DisableHighlight();
                     continue;
                 }
 
+                Debug.LogWarning($"Executing {codeBlock.name}");
                 yield return StartCoroutine(codeBlock.ExecuteBlock(interpreterID));
 
                 interpreterLine.DisableHighlight();
@@ -155,10 +165,9 @@ namespace KaChow.AByteSizedMuseum
                 foreach (Transform child in interpreterLine.transform)
                 {
                     Destroy(child.gameObject);
-                    // yield return new WaitForSeconds(0.20f);
                 }
 
-                yield return new WaitForSeconds(0.20f);
+                yield return new WaitForSeconds(executeTime);
 
                 interpreterLine.DisableHighlight();
             }
@@ -169,7 +178,8 @@ namespace KaChow.AByteSizedMuseum
 
         public void CloseInterpreter()
         {
-            // currently does not reset code block execution
+            StopExecuting();
+            gameManager.SetGameState(GameState.Playing);
             onInterpreterClose.Raise(this, name);
 
             foreach (var interpreterLine in interpreterLines)
@@ -189,18 +199,22 @@ namespace KaChow.AByteSizedMuseum
             if (data is CodeBlock codeBlock)
             {
                 codeBlockDetailsPanel.SetActive(true);
-                var codeBlockName = codeBlockDetailsPanel.transform.Find("Code Block Name").GetComponent<TextMeshProUGUI>();
-                var codeBlockDescription = codeBlockDetailsPanel.transform.Find("Code Block Description").GetComponent<TextMeshProUGUI>();
+                puzzleCameraFeed.SetActive(false);
+
+                Transform codeBlockDetailsPanelTransform = codeBlockDetailsPanel.transform;
+
+                TextMeshProUGUI codeBlockName = codeBlockDetailsPanelTransform.Find("Code Block Name").GetComponent<TextMeshProUGUI>();
+                TextMeshProUGUI codeBlockDescription = codeBlockDetailsPanelTransform.Find("Code Block Description").GetComponent<TextMeshProUGUI>();
 
                 codeBlockName.text = codeBlock.codeBlockName;
                 codeBlockDescription.text = codeBlock.codeBlockDescription;
-
             }
         }
 
         public void HideCodeBlockDetails()
         {
             codeBlockDetailsPanel.SetActive(false);
+            puzzleCameraFeed.SetActive(true);
         }
 
         public void ClearInterpreter()
@@ -208,8 +222,10 @@ namespace KaChow.AByteSizedMuseum
             StartCoroutine(ClearInterpreterLines());
         }
 
-
-
+        public void StopExecuting()
+        {
+            StopCoroutine(ExecuteAllLines());
+        }
 
         public void SetInterpreterID(int interpreterID)
         {
