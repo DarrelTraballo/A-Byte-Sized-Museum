@@ -80,7 +80,7 @@ namespace KaChow.AByteSizedMuseum
             puzzleExhibitCells = new List<Cell>();
             List<Cell> gridComponentsCopy = new List<Cell>(gridComponents);
 
-            int excludedIndex = 10;
+            int excludedIndex = 12;
             gridComponentsCopy.RemoveAt(excludedIndex);
 
             for (int i = 0; i < puzzleExhibitAmount; i++)
@@ -89,12 +89,12 @@ namespace KaChow.AByteSizedMuseum
                 var potentialExhibitCell = gridComponentsCopy[randomIndex];
 
                 // Check if the cell has an Exhibit component
-                if (potentialExhibitCell.GetComponentInChildren<Exhibit>() != null)
-                {
-                    puzzleExhibitCells.Add(potentialExhibitCell);
-                }
 
+                if (potentialExhibitCell.GetComponentInChildren<Exhibit>() == null) continue;
+
+                puzzleExhibitCells.Add(potentialExhibitCell);
                 gridComponentsCopy.RemoveAt(randomIndex);
+
             }
 
             foreach (var puzzleExhibitCell in puzzleExhibitCells)
