@@ -10,6 +10,7 @@ namespace KaChow.AByteSizedMuseum
     {
         public GameObject LoadingScreen;
         public Image LoadingBarfill;
+        public int LoadingSceneNumber;
         public void LoadScene(int sceneId)
         {
             StartCoroutine(LoadSceneAsync(sceneId));

@@ -11,11 +11,15 @@ namespace KaChow.AByteSizedMuseum
         public GameObject Input_Manager;
         // Start is called before the first frame update
 
-        void Start()
-        {
-                TriggerDialogue();
+        void OnEnable() {
+            TriggerDialogue();
                 Input_Manager.SetActive(false);
        
+            
+        }
+        void Start()
+        {
+                
 
         }
 
