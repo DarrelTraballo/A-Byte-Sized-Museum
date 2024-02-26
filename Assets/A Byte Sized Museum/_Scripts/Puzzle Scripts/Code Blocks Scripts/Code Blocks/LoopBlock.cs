@@ -1,23 +1,21 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 namespace KaChow.AByteSizedMuseum
 {
     public class LoopBlock : CodeBlock
     {
         /*
-            initially, wala yung holder ng method block sa bottom right panel
-                > only appears when method block is in "edit mode"
-                    - basically whenever the method block is clicked.
-
-            white execution indicator stops on this block's line
-            execution indicator appears on Method Block Lines UI, executes all lines inside method block
-            then continues executing the other lines of interpreter
+            TODO: ENABLE PLAYER TO SET COUNTER AND SHIT
         */
 
         [SerializeField] private TMP_Text counterText;
         [SerializeField] private int counter;
+
+        [SerializeField] private Button plusIcon;
+        [SerializeField] private Button minusIcon;
 
         public override void Start()
         {
@@ -27,6 +25,9 @@ namespace KaChow.AByteSizedMuseum
 
         public override IEnumerator ExecuteBlock(int botID)
         {
+            plusIcon.enabled = false;
+            minusIcon.enabled = false;
+
             while (counter > 0)
             {
                 counter--;
@@ -51,6 +52,26 @@ namespace KaChow.AByteSizedMuseum
                     interpreterLine.DisableHighlight();
                     Debug.Log("End of foreach");
                 }
+            }
+
+            plusIcon.enabled = true;
+            minusIcon.enabled = true;
+        }
+
+        public void IncrementCounter()
+        {
+            Debug.Log("Inceremebt CLickec");
+            counter++;
+            UpdateCounterText();
+        }
+
+        public void DecrementCounter()
+        {
+            Debug.Log("Decrement CLickec");
+            if (counter > 0)
+            {
+                counter--;
+                UpdateCounterText();
             }
         }
 
