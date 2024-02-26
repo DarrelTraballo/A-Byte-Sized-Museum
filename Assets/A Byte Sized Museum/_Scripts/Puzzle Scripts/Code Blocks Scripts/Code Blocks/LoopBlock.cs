@@ -50,7 +50,6 @@ namespace KaChow.AByteSizedMuseum
 
                     yield return StartCoroutine(codeBlock.ExecuteBlock(botID));
                     interpreterLine.DisableHighlight();
-                    Debug.Log("End of foreach");
                 }
             }
 

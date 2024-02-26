@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 namespace KaChow.AByteSizedMuseum
 {
+    #region comments
     /* TODO: Interpreter UI: may line numbers sa left side, similar sa mga code editors (like vscode)
 <- these things
 
@@ -81,6 +82,7 @@ namespace KaChow.AByteSizedMuseum
        TODO:
              reset button for interpreter
     */
+    #endregion
 
     public class Interpreter : MonoBehaviour
     {
@@ -88,6 +90,7 @@ namespace KaChow.AByteSizedMuseum
         private Interpreter() { }
 
         private GameManager gameManager;
+        private InputManager inputManager;
 
         [Header("Interpreter Lines")]
         public List<InterpreterLine> interpreterLines;
@@ -103,8 +106,7 @@ namespace KaChow.AByteSizedMuseum
         [SerializeField] private GameObject closeIcon;
 
         [Header("Buttons")]
-        [SerializeField] private Button executeButton;
-        [SerializeField] private Button clearAllButton;
+        [SerializeField] private Button[] interpreterButtons;
 
         [SerializeField] private int interpreterID;
 
@@ -119,10 +121,12 @@ namespace KaChow.AByteSizedMuseum
         private void Start()
         {
             gameManager = GameManager.Instance;
+            inputManager = InputManager.Instance;
         }
 
         public void ExecuteLines()
         {
+            inputManager.enabled = false;
             codeBlockDetailsPanel.SetActive(false);
             puzzleCameraFeed.SetActive(true);
             StartCoroutine(ExecuteAllLines());
@@ -130,8 +134,7 @@ namespace KaChow.AByteSizedMuseum
 
         private IEnumerator ExecuteAllLines()
         {
-            DisableButton(executeButton);
-            DisableButton(clearAllButton);
+            ToggleButtons(false);
             foreach (var interpreterLine in interpreterLines)
             {
                 interpreterLine.EnableHighlight();
@@ -144,19 +147,20 @@ namespace KaChow.AByteSizedMuseum
                     continue;
                 }
 
-                Debug.LogWarning($"Executing {codeBlock.name}");
                 yield return StartCoroutine(codeBlock.ExecuteBlock(interpreterID));
 
                 interpreterLine.DisableHighlight();
             }
-            EnableButton(executeButton);
-            EnableButton(clearAllButton);
+            yield return new WaitForSeconds(0.2f);
+
+            ToggleButtons(true);
+
+            inputManager.enabled = true;
         }
 
         public IEnumerator ClearInterpreterLines()
         {
-            DisableButton(executeButton);
-            DisableButton(clearAllButton);
+            ToggleButtons(false);
 
             foreach (var interpreterLine in interpreterLines)
             {
@@ -171,9 +175,11 @@ namespace KaChow.AByteSizedMuseum
 
                 interpreterLine.DisableHighlight();
             }
+            yield return new WaitForSeconds(0.2f);
 
-            EnableButton(executeButton);
-            EnableButton(clearAllButton);
+            ToggleButtons(true);
+
+            inputManager.enabled = true;
         }
 
         public void CloseInterpreter()
@@ -187,12 +193,16 @@ namespace KaChow.AByteSizedMuseum
                 interpreterLine.DisableHighlight();
             }
 
-            EnableButton(executeButton);
+            ToggleButtons(true);
         }
 
-        public void DisableButton(Button button) => button.interactable = false;
-
-        public void EnableButton(Button button) => button.interactable = true;
+        public void ToggleButtons(bool isInteractable)
+        {
+            foreach (var button in interpreterButtons)
+            {
+                button.interactable = isInteractable;
+            }
+        }
 
         public void ShowCodeBlockDetails(Component sender, object data)
         {
@@ -219,12 +229,14 @@ namespace KaChow.AByteSizedMuseum
 
         public void ClearInterpreter()
         {
+            inputManager.enabled = false;
             StartCoroutine(ClearInterpreterLines());
         }
 
         public void StopExecuting()
         {
-            StopCoroutine(ExecuteAllLines());
+            // StopCoroutine(ExecuteAllLines());
+            StopAllCoroutines();
         }
 
         public void SetInterpreterID(int interpreterID)

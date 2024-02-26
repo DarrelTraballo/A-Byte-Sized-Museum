@@ -23,7 +23,6 @@ public class PauseManager : MonoBehaviour
         // Check for the Escape key press
         if (inputManager.IsEscapeButtonPressed() && (gameManager.currentState == GameState.Playing || gameManager.currentState == GameState.Paused))
         {
-            Debug.Log("Esc sa pause manager");
             // Toggle the pause state
             TogglePause();
         }
