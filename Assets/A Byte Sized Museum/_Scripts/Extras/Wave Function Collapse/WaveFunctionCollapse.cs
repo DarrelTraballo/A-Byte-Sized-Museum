@@ -117,15 +117,17 @@ namespace KaChow.WFC
             Cell cellToCollapse;
             Tile selectedTile;
 
+            // forces cell in front of start exhibit
             // if first collapse, collapse tile in front of start exhibit to 4-way tile
             if (firstCall)
             {
                 int startExhibitCellIndex = (int)(0.5f * dimensions * dimensions - 1.5f * dimensions + dimensions);
-                cellToCollapse = gridComponents[startExhibitCellIndex];
+                cellToCollapse = gridComponents[startExhibitCellIndex + 2];
                 selectedTile = cellToCollapse.tileOptions[0];
                 firstCall = false;
-                secondCall = true;
+                // secondCall = true;
             }
+            // forces cell in front of final exhibit
             // TODO: if can, do secondCall and thirdCall on firstCall
             else if (secondCall)
             {
@@ -133,14 +135,16 @@ namespace KaChow.WFC
                 cellToCollapse = gridComponents[finalExhibitCellIndex];
                 selectedTile = cellToCollapse.tileOptions[4];
                 secondCall = false;
-                thirdCall = true;
+                // thirdCall = true;
             }
+            // forces a cell at the bottom of the map to be a horizontal exhibit
+            // to ensure entire map
             else if (thirdCall)
             {
-                int selectedExhibitCellIndex = dimensions - 2;
+                int selectedExhibitCellIndex = dimensions - 3;
                 cellToCollapse = gridComponents[selectedExhibitCellIndex];
                 // int randIndex = Random.Range(3, 6);
-                selectedTile = cellToCollapse.tileOptions[3];
+                selectedTile = cellToCollapse.tileOptions[6];
                 thirdCall = false;
             }
             // else, collapses cells randomly based on entropy

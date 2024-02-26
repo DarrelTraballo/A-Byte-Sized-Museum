@@ -87,7 +87,7 @@ namespace KaChow.AByteSizedMuseum
                 case GameState.SolvePuzzle:
                     crosshair.SetActive(false);
                     Player.SetCanMove(false);
-                    SetCursorState(CursorLockMode.Confined);
+                    SetCursorState(CursorLockMode.None);
                     break;
 
                 case GameState.RunDialog:
@@ -113,6 +113,10 @@ namespace KaChow.AByteSizedMuseum
                     break;
 
                 case CursorLockMode.Confined:
+                    Cursor.visible = true;
+                    break;
+
+                case CursorLockMode.None:
                     Cursor.visible = true;
                     break;
 

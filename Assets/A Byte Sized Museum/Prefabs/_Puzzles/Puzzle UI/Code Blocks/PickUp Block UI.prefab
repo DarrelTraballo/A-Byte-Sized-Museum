@@ -150,8 +150,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   codeBlockName: Pick Up Block
-  codeBlockDescription: Helper Bot picks up objects directly in front of it.
+  codeBlockDescription: 'Helper Bot picks up an object that is directly in front
+    of it
+
+
+    Helper Bot does nothing if there is no pick up-able object in front'
   onCodeBlockClick: {fileID: 11400000, guid: f8d254c9d25edc546889d2feea2c7364, type: 2}
-  canDrag: 1
+  isInfinite: 0
   parentAfterDrag: {fileID: 0}
+  image: {fileID: 0}
   onPickUp: {fileID: 11400000, guid: a5d1c849962ee624788a37bcfeaaf40f, type: 2}
