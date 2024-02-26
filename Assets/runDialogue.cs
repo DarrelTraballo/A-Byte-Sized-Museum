@@ -9,22 +9,24 @@ namespace KaChow.AByteSizedMuseum
     {
         public Dialogue dialogue;
         public GameObject Input_Manager;
+        private GameManager gameManager;
         // Start is called before the first frame update
 
         void OnEnable() {
             TriggerDialogue();
-                Input_Manager.SetActive(false);
+            
        
             
         }
         void Start()
         {
-                
+            gameManager = GameManager.Instance;
 
         }
 
         public void TriggerDialogue()
         {
+            
             FindObjectOfType<dialogmanager>().Start();
             FindObjectOfType<dialogmanager>().StartDialogue(dialogue);
 

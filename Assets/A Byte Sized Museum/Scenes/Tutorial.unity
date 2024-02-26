@@ -253,8 +253,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deca3fe71d6c51247a07ae54c0f62ff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentState: 0
   playerStartPosition: {x: 0, y: 0, z: 0}
   initMuseum: 0
+  crosshair: {fileID: 1149831241}
 --- !u!1 &13573817
 GameObject:
   m_ObjectHideFlags: 0
@@ -15637,7 +15639,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PausePanel: {fileID: 1127605387}
-  InputManager: {fileID: 1113272428}
 --- !u!4 &921065263
 Transform:
   m_ObjectHideFlags: 0
