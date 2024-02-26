@@ -25,12 +25,16 @@ namespace KaChow.AByteSizedMuseum
         public int sentences_count;
         public GameObject[] images;
 
+        private GameManager gameManager;
+
         int index;
 
 
         // Start is called before the first frame update
         public void Start()
         {
+
+            gameManager = GameManager.Instance;
             DialogueContainer.SetActive(true);
             sentences_count = sentences.Count +1 ;
 
@@ -75,7 +79,7 @@ namespace KaChow.AByteSizedMuseum
 
         public void StartDialogue (Dialogue dialogue)
         {
-
+            gameManager.SetGameState(GameState.RunDialog);
             animator.SetBool("IsOpen", true);
             
             nameText.text = dialogue.name;
@@ -140,20 +144,15 @@ namespace KaChow.AByteSizedMuseum
             animator.SetBool("IsOpen", false);
             //DialogueContainer.SetActive(false);
             
+            gameManager.SetGameState(GameState.Playing);
             Debug.Log("End of conversation");
+
 
         }
         public void ResetData()
         {
-            // Reset relevant variables to their initial values
-            //count = 0;
+
             sentences.Clear();
-
-            // You may want to reset other variables as needed
-
-            // Additional reset logic...
-
-            // Call the method to reset the UI elements
             ResetUIElements();
         }
 

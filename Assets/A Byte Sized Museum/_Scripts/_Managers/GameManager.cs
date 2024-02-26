@@ -8,6 +8,7 @@ namespace KaChow.AByteSizedMuseum
         Paused,
         Playing,
         SolvePuzzle,
+        RunDialog,
 
     }
     public class GameManager : MonoBehaviour
@@ -45,6 +46,7 @@ namespace KaChow.AByteSizedMuseum
             Player = playerGO.GetComponent<Player>();
             characterController = playerGO.GetComponent<CharacterController>();
 
+            SetGameState(GameState.Playing);
             if (!initMuseum) return;
 
             SetGameState(GameState.GenerateMuseum);
@@ -86,6 +88,12 @@ namespace KaChow.AByteSizedMuseum
                     crosshair.SetActive(false);
                     Player.SetCanMove(false);
                     SetCursorState(CursorLockMode.None);
+                    break;
+
+                case GameState.RunDialog:
+                    crosshair.SetActive(false);
+                    Player.SetCanMove(false);
+                    SetCursorState(CursorLockMode.Confined);
                     break;
 
                 default:
