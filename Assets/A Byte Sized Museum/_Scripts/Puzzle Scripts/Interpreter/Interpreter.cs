@@ -98,6 +98,7 @@ namespace KaChow.AByteSizedMuseum
 
         [Header("Game Events")]
         public GameEvent onInterpreterClose;
+        public GameEvent onResetPuzzle;
 
         [Header("Bottom Right Panel")]
         [SerializeField] private GameObject codeBlockDetailsPanel;
@@ -231,6 +232,11 @@ namespace KaChow.AByteSizedMuseum
         {
             inputManager.enabled = false;
             StartCoroutine(ClearInterpreterLines());
+        }
+
+        public void ResetPuzzle()
+        {
+            onResetPuzzle.Raise(this, interpreterID);
         }
 
         public void StopExecuting()

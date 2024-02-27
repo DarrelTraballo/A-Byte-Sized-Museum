@@ -28,7 +28,7 @@ namespace KaChow.AByteSizedMuseum
         [TextArea] public string codeBlockDescription;
         [SerializeField] protected GameEvent onCodeBlockClick;
 
-        protected float delay = 1.0f;
+        protected float delay = 0.5f;
         public bool isInfinite = false;
 
         public abstract IEnumerator ExecuteBlock(int botID);
@@ -39,13 +39,17 @@ namespace KaChow.AByteSizedMuseum
 
         private CodeBlock movedBlock;
 
+        private InputManager inputManager;
+
         public virtual void Start()
         {
+            inputManager = InputManager.Instance;
             image = GetComponentInChildren<Image>();
         }
 
         public void OnBeginDrag(PointerEventData eventData)
         {
+            inputManager.enabled = false;
             if (isInfinite)
             {
                 CodeBlock clone = Instantiate(this, transform.position, transform.rotation);
@@ -60,8 +64,8 @@ namespace KaChow.AByteSizedMuseum
 
             movedBlock.onCodeBlockClick.Raise(this, this);
             movedBlock.parentAfterDrag = transform.parent;
-            movedBlock.transform.SetParent(transform.root);
-            movedBlock.transform.SetAsLastSibling();
+            movedBlock.transform.SetParent(GameObject.Find("ContainerCenter").transform);
+            // movedBlock.transform.SetAsLastSibling();
             movedBlock.image.raycastTarget = false;
         }
 
@@ -75,6 +79,9 @@ namespace KaChow.AByteSizedMuseum
             movedBlock.transform.SetParent(parentAfterDrag);
             movedBlock.image.raycastTarget = true;
             movedBlock = null;
+            inputManager.enabled = true;
+
+            Debug.Log($"{name}'s Parent after drag is {parentAfterDrag}");
         }
 
         public virtual void OnPointerClick(PointerEventData eventData)

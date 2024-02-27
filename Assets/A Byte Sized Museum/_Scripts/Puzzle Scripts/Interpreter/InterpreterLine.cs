@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace KaChow.AByteSizedMuseum
 {
-    public class InterpreterLine : MonoBehaviour, IDropHandler
+    public class InterpreterLine : MonoBehaviour, IDropHandler, IPointerClickHandler
     {
         private Image highlight;
         private Color defaultColor;
@@ -29,28 +29,44 @@ namespace KaChow.AByteSizedMuseum
 
         public void OnDrop(PointerEventData eventData)
         {
-            var dropped = eventData.pointerDrag;
-            var codeBlock = dropped.GetComponent<CodeBlock>();
-            var dropTarget = eventData.pointerCurrentRaycast.gameObject;
+            GameObject dropped = eventData.pointerDrag;
+            CodeBlock heldCodeBlock = dropped.GetComponent<CodeBlock>();
+            GameObject dropTarget = eventData.pointerCurrentRaycast.gameObject;
 
-            if (dropTarget.GetComponent<InterpreterLine>() != null)
+            if (dropTarget.TryGetComponent<InterpreterLine>(out var targetInterpreterLine))
             {
-                if (transform.childCount == 0)
+                if (targetInterpreterLine.transform.childCount > 0)
                 {
-                    codeBlock.parentAfterDrag = transform;
+                    return;
                 }
-                else
+                // if (targetInterpreterLine.transform.childCount == 0)
+                // {
+                heldCodeBlock.parentAfterDrag = transform;
+                // return;
+                // }
+
+                var targetCodeBlock = targetInterpreterLine.GetComponentInChildren<CodeBlock>();
+                if (targetCodeBlock == null)
                 {
-                    if (!codeBlock.isInfinite)
-                    {
-                        Destroy(dropped);
-                    }
+                    Debug.LogError("no target codeblock found in this interpreter line");
+                    return;
+                }
+
+                if (targetCodeBlock.isInfinite)
+                {
+                    Debug.Log("Destroyed in targetCodeBlock.isInfinite check");
+                    Destroy(heldCodeBlock);
                 }
             }
             else
             {
-                Destroy(dropped);
+                Destroy(heldCodeBlock);
             }
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            Debug.Log($"child count : {transform.childCount}");
         }
     }
 }
