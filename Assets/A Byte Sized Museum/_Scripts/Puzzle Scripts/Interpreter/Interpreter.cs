@@ -195,6 +195,7 @@ namespace KaChow.AByteSizedMuseum
             }
 
             ToggleButtons(true);
+            inputManager.enabled = true;
         }
 
         public void ToggleButtons(bool isInteractable)

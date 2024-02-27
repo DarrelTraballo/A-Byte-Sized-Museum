@@ -4,15 +4,14 @@ using UnityEngine.EventSystems;
 
 namespace KaChow.AByteSizedMuseum
 {
-    public class CodeBlockSlot : MonoBehaviour, IDropHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
+    public class CodeBlockSlot : MonoBehaviour, IPointerClickHandler
     {
-        [SerializeField] private CodeBlock codeBlock;
+        private CodeBlock codeBlock;
         [SerializeField] private CodeBlock clonedBlock;
 
         private void Start()
         {
-            if (codeBlock == null) return;
-            // codeBlock.image.raycastTarget = false;
+            codeBlock = GetComponentInChildren<CodeBlock>();
         }
 
         private CodeBlock Clone()
@@ -26,36 +25,6 @@ namespace KaChow.AByteSizedMuseum
             clone.isInfinite = true;
 
             return clone;
-        }
-
-        public void OnDrop(PointerEventData eventData)
-        {
-
-        }
-
-        public void OnBeginDrag(PointerEventData eventData)
-        {
-            Debug.Log("erm");
-            clonedBlock = Clone();
-
-            if (clonedBlock != null)
-            {
-                Debug.Log("clonedBlock == null D:");
-                clonedBlock.OnBeginDrag(eventData);
-            }
-        }
-
-        public void OnDrag(PointerEventData eventData)
-        {
-            if (clonedBlock == null) return;
-            clonedBlock.OnDrag(eventData);
-        }
-
-        public void OnEndDrag(PointerEventData eventData)
-        {
-            if (clonedBlock == null) return;
-            clonedBlock.OnEndDrag(eventData);
-            clonedBlock = null;
         }
 
         public void OnPointerClick(PointerEventData eventData)
