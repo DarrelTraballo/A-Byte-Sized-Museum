@@ -96,13 +96,16 @@ namespace KaChow.AByteSizedMuseum
             {
                 images[0].gameObject.SetActive(true);
             }
-            
+        
             DisplayNextSentence();
 
         }
 
         public void DisplayNextSentence()
         {
+            AudioManager.Instance.sfxSource.Stop();
+            AudioManager.Instance.PlaySFX("HelperBot");
+
             if (count == counter)
             {
                 Input_manager.SetActive(true);

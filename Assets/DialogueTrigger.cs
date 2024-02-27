@@ -11,6 +11,7 @@ public class DialogueTrigger : MonoBehaviour {
     public void TriggerDialogue()
     {
         FindObjectOfType<dialogmanager>().StartDialogue(dialogue);
+        AudioManager.Instance.PlaySFX("HelperBot");
     }
 
 }
