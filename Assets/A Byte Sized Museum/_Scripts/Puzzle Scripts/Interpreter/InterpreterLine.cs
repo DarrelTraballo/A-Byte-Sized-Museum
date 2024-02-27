@@ -39,11 +39,8 @@ namespace KaChow.AByteSizedMuseum
                 {
                     return;
                 }
-                // if (targetInterpreterLine.transform.childCount == 0)
-                // {
+
                 heldCodeBlock.parentAfterDrag = transform;
-                // return;
-                // }
 
                 var targetCodeBlock = targetInterpreterLine.GetComponentInChildren<CodeBlock>();
                 if (targetCodeBlock == null)
@@ -55,12 +52,14 @@ namespace KaChow.AByteSizedMuseum
                 if (targetCodeBlock.isInfinite)
                 {
                     Debug.Log("Destroyed in targetCodeBlock.isInfinite check");
-                    Destroy(heldCodeBlock);
+                    Destroy(dropped);
                 }
             }
             else
             {
-                Destroy(heldCodeBlock);
+                Debug.LogError("no interpreter line?");
+                heldCodeBlock.parentAfterDrag = transform;
+                // Destroy(dropped);
             }
         }
 
