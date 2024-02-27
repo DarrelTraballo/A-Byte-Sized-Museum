@@ -46,6 +46,10 @@ namespace KaChow.AByteSizedMuseum
 
         public void Move(Component sender, object data)
         {
+
+            AudioManager.Instance.sfxSource.Stop();
+            AudioManager.Instance.PlaySFX("BotMove");
+
             if (data is not int interpreterID || interpreterID != botID) return;
 
             if (!FireRaycast(out GameObject hitObject))
@@ -59,6 +63,9 @@ namespace KaChow.AByteSizedMuseum
 
         public void Rotate(Component sender, object data)
         {
+            AudioManager.Instance.sfxSource.Stop();
+            AudioManager.Instance.PlaySFX("BotMove");
+
             if (data is not Tuple<RotateDirection, int> tupleData || tupleData.Item2 != botID) return;
 
             RotateDirection rotateDirection = tupleData.Item1;
@@ -106,6 +113,7 @@ namespace KaChow.AByteSizedMuseum
 
         public void PickUp(Component sender, object data)
         {
+
             if (data is not int interpreterID || interpreterID != botID) return;
 
             // if bot is already holding an object, do nothing
@@ -130,10 +138,14 @@ namespace KaChow.AByteSizedMuseum
 
                 isHoldingAnObject = true;
             }
+
+            AudioManager.Instance.sfxSource.Stop();
+            AudioManager.Instance.PlaySFX("BotPick");
         }
 
         public void Drop(Component sender, object data)
         {
+
             if (data is not int interpreterID || interpreterID != botID) return;
 
             // if bot is NOT holding an object, do nothing
@@ -153,6 +165,9 @@ namespace KaChow.AByteSizedMuseum
 
             heldObject.transform.parent = heldObjectParent;
             isHoldingAnObject = false;
+
+            AudioManager.Instance.sfxSource.Stop();
+            AudioManager.Instance.PlaySFX("BotDrop");
         }
 
         public bool FireRaycast(out GameObject hitObject)

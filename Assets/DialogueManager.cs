@@ -118,7 +118,7 @@ namespace KaChow.AByteSizedMuseum
 
             Debug.Log(count);
             count++;
-            
+
             if (sentences.Count == 0)
             {
                 EndDialogue();
@@ -142,6 +142,8 @@ namespace KaChow.AByteSizedMuseum
         }
         void EndDialogue()
         {
+            AudioManager.Instance.sfxSource.Stop();
+            
             ResetData();
             Canvas_images.SetActive(false);
             animator.SetBool("IsOpen", false);
