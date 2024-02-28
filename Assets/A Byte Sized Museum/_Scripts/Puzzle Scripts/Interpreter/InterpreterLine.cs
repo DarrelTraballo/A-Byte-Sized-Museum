@@ -33,7 +33,7 @@ namespace KaChow.AByteSizedMuseum
             CodeBlock heldCodeBlock = dropped.GetComponent<CodeBlock>();
             GameObject dropTarget = eventData.pointerCurrentRaycast.gameObject;
 
-            // Debug.Log($"Tried to drop on {dropTarget.name}", dropTarget.gameObject);
+            // Debug.Log($"<color=green>Tried to drop on {dropTarget.name}</color>", dropTarget.gameObject);
 
             if (dropTarget.TryGetComponent<InterpreterLine>(out var targetInterpreterLine))
             {
@@ -45,7 +45,6 @@ namespace KaChow.AByteSizedMuseum
                     if (heldCodeBlock.parentBeforeDrag.GetComponent<CodeBlockSlot>() != null) return;
 
                     CodeBlock existingCodeBlock = targetInterpreterLine.GetComponentInChildren<CodeBlock>();
-
 
                     // Swap the parent of the held and existing code blocks
                     existingCodeBlock.transform.SetParent(heldCodeBlock.parentAfterDrag);

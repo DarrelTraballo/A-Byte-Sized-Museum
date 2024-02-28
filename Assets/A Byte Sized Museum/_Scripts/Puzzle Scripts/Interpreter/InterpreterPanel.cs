@@ -28,6 +28,7 @@ namespace KaChow.AByteSizedMuseum
 
         public override void OnInteract()
         {
+            base.OnInteract();
             if (!isInterpreterOpen)
             {
                 gameManager.SetGameState(GameState.SolvePuzzle);

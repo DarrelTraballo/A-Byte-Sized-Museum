@@ -76,8 +76,8 @@ namespace KaChow.AByteSizedMuseum
         {
             movedBlock.gameObject.transform.position = Input.mousePosition;
 
-            Debug.Log($"{name} parent BEFORE drag : {movedBlock.parentBeforeDrag.name}");
-            Debug.Log($"{name} parent AFTER drag : {movedBlock.parentAfterDrag.name}");
+            // Debug.Log($"{name} parent BEFORE drag : {movedBlock.parentBeforeDrag.name}");
+            // Debug.Log($"{name} parent AFTER drag : {movedBlock.parentAfterDrag.name}");
         }
 
         public void OnEndDrag(PointerEventData eventData)

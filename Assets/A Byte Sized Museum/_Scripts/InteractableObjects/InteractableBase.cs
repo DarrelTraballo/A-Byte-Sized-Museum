@@ -40,12 +40,7 @@ namespace KaChow.AByteSizedMuseum
         // just leave empty
         public virtual void OnInteract()
         {
-            // Debug.Log("Interacted");
+
         }
-
-        /*  Puzzles
-
-
-        */
     }
 }
