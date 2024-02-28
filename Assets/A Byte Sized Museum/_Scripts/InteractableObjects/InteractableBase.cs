@@ -40,7 +40,7 @@ namespace KaChow.AByteSizedMuseum
         // just leave empty
         public virtual void OnInteract()
         {
-
+            AudioManager.Instance.PlaySFX("Click");
         }
     }
 }
