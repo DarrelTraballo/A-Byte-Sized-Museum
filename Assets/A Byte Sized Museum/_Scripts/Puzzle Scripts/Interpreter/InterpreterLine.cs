@@ -29,27 +29,34 @@ namespace KaChow.AByteSizedMuseum
 
         public void OnDrop(PointerEventData eventData)
         {
-            var dropped = eventData.pointerDrag;
-            var codeBlock = dropped.GetComponent<CodeBlock>();
-            var dropTarget = eventData.pointerCurrentRaycast.gameObject;
+            GameObject dropped = eventData.pointerDrag;
+            CodeBlock heldCodeBlock = dropped.GetComponent<CodeBlock>();
+            GameObject dropTarget = eventData.pointerCurrentRaycast.gameObject;
 
-            if (dropTarget.GetComponent<InterpreterLine>() != null)
+            // Debug.Log($"<color=green>Tried to drop on {dropTarget.name}</color>", dropTarget.gameObject);
+
+            if (dropTarget.TryGetComponent<InterpreterLine>(out var targetInterpreterLine))
             {
-                if (transform.childCount == 0)
+                if (targetInterpreterLine.transform.childCount >= 1)
                 {
-                    codeBlock.parentAfterDrag = transform;
+                    // Debug.Log($"{heldCodeBlock.name}", heldCodeBlock.gameObject);
+                    Debug.Log($"{heldCodeBlock.parentBeforeDrag.name}");
+
+                    if (heldCodeBlock.parentBeforeDrag.GetComponent<CodeBlockSlot>() != null) return;
+
+                    CodeBlock existingCodeBlock = targetInterpreterLine.GetComponentInChildren<CodeBlock>();
+
+                    // Swap the parent of the held and existing code blocks
+                    existingCodeBlock.transform.SetParent(heldCodeBlock.parentAfterDrag);
+                    heldCodeBlock.transform.SetParent(targetInterpreterLine.transform);
                 }
-                else
-                {
-                    if (!codeBlock.isInfinite)
-                    {
-                        Destroy(dropped);
-                    }
-                }
+
+                heldCodeBlock.parentAfterDrag = transform;
             }
             else
             {
-                Destroy(dropped);
+                // Debug.Log("no interpreter line found");
+                heldCodeBlock.parentAfterDrag = null;
             }
         }
     }

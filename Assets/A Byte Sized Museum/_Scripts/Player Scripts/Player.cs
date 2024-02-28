@@ -64,6 +64,7 @@ namespace KaChow.AByteSizedMuseum
             // Press Left Ctrl to run
             bool isRunning = inputManager.IsPlayerRunning();
 
+
             // Press Left Shift to sneak
             bool isSneaking = inputManager.IsPlayerSneaking();
 
@@ -91,6 +92,7 @@ namespace KaChow.AByteSizedMuseum
             if (inputManager.PlayerJumpedThisFrame())
             {
                 moveDirection.y = jumpSpeed;
+                AudioManager.Instance.PlaySFX("Jump");
             }
         }
 

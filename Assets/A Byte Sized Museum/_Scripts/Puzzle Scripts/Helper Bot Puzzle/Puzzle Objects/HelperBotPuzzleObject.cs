@@ -6,16 +6,18 @@ namespace KaChow.AByteSizedMuseum
 {
     public class HelperBotPuzzleObject : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
+        private Vector3 initialPosition;
+        private Quaternion initialRotation;
+
+        private void Start()
         {
-        
+            initialPosition = transform.position;
+            initialRotation = transform.rotation;
         }
 
-        // Update is called once per frame
-        void Update()
+        public void Reset()
         {
-        
+            transform.SetPositionAndRotation(initialPosition, initialRotation);
         }
     }
 }

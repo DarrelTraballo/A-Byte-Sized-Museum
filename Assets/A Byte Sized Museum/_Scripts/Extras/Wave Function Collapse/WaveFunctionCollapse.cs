@@ -2,10 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Events;
 using Random = UnityEngine.Random;
 using KaChow.AByteSizedMuseum;
-using System.Collections;
 
 namespace KaChow.WFC
 {
@@ -331,6 +329,17 @@ namespace KaChow.WFC
             {
                 GameObject.Destroy(child.gameObject);
             }
+        }
+
+        public void ToggleExhibit(Cell gridComponent, bool isActive)
+        {
+            Tile tile = gridComponent.GetComponentInChildren<Tile>();
+
+            var tileContents = tile.transform.Find("Contents");
+
+            var exhibitCollider = tile.transform.Find("ExhibitCollider");
+            exhibitCollider.gameObject.SetActive(isActive);
+            tileContents.gameObject.SetActive(isActive);
         }
 
         public void DisableExhibits()

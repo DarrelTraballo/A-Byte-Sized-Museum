@@ -27,6 +27,7 @@ namespace KaChow.AByteSizedMuseum
         [SerializeField] private GameObject rightHand;
         [SerializeField] private Transform aboveHead;
         private bool isHoldingAnObject;
+        private bool isRotated;
 
         // bot's initial position and rotation
         private Vector3 initialPosition;
@@ -46,6 +47,10 @@ namespace KaChow.AByteSizedMuseum
 
         public void Move(Component sender, object data)
         {
+
+            AudioManager.Instance.sfxSource.Stop();
+            AudioManager.Instance.PlaySFX("BotMove");
+
             if (data is not int interpreterID || interpreterID != botID) return;
 
             if (!FireRaycast(out GameObject hitObject))
@@ -59,24 +64,18 @@ namespace KaChow.AByteSizedMuseum
 
         public void Rotate(Component sender, object data)
         {
+            AudioManager.Instance.sfxSource.Stop();
+            AudioManager.Instance.PlaySFX("BotMove");
+
             if (data is not Tuple<RotateDirection, int> tupleData || tupleData.Item2 != botID) return;
 
             RotateDirection rotateDirection = tupleData.Item1;
-            float targetRotation;
-
-            switch (rotateDirection)
+            var targetRotation = rotateDirection switch
             {
-                case RotateDirection.Clockwise:
-                    targetRotation = transform.eulerAngles.y - 90.0f;
-                    break;
-                case RotateDirection.CounterClockwise:
-                    targetRotation = transform.eulerAngles.y + 90.0f;
-                    break;
-                default:
-                    targetRotation = transform.eulerAngles.y;
-                    break;
-            }
-
+                RotateDirection.Clockwise => transform.eulerAngles.y - 90.0f,
+                RotateDirection.CounterClockwise => transform.eulerAngles.y + 90.0f,
+                _ => transform.eulerAngles.y,
+            };
             transform.DORotate(new Vector3(0f, targetRotation, 0f), moveSpeed, RotateMode.Fast)
                      .SetEase(Ease.InOutCirc);
         }
@@ -88,12 +87,7 @@ namespace KaChow.AByteSizedMuseum
             transform.SetPositionAndRotation(initialPosition, initialRotation);
 
             // reset object's position and rotation
-            if (!isHoldingAnObject)
-            {
-                // heldObject.transform.SetPositionAndRotation(heldObjectInitialPosition, heldObjectInitialRotation);
-
-                return;
-            }
+            if (!isHoldingAnObject) return;
 
             RotateArms();
 
@@ -106,6 +100,7 @@ namespace KaChow.AByteSizedMuseum
 
         public void PickUp(Component sender, object data)
         {
+
             if (data is not int interpreterID || interpreterID != botID) return;
 
             // if bot is already holding an object, do nothing
@@ -130,10 +125,14 @@ namespace KaChow.AByteSizedMuseum
 
                 isHoldingAnObject = true;
             }
+
+            AudioManager.Instance.sfxSource.Stop();
+            AudioManager.Instance.PlaySFX("BotPick");
         }
 
         public void Drop(Component sender, object data)
         {
+
             if (data is not int interpreterID || interpreterID != botID) return;
 
             // if bot is NOT holding an object, do nothing
@@ -153,6 +152,9 @@ namespace KaChow.AByteSizedMuseum
 
             heldObject.transform.parent = heldObjectParent;
             isHoldingAnObject = false;
+
+            AudioManager.Instance.sfxSource.Stop();
+            AudioManager.Instance.PlaySFX("BotDrop");
         }
 
         public bool FireRaycast(out GameObject hitObject)
@@ -174,10 +176,20 @@ namespace KaChow.AByteSizedMuseum
 
         private void RotateArms()
         {
-            // leftHand.transform.DORotate()
+            isRotated = !isRotated;
 
-            leftHand.transform.Rotate(180.0f, 0f, 0f);
-            rightHand.transform.Rotate(180.0f, 0f, 0f);
+            Vector3 targetRotation = isRotated ? new Vector3(-180f, 0f, 0f) : new Vector3(180f, 0f, 0f);
+
+            Debug.Log($"target Rotation : {targetRotation}");
+            Debug.Log($"isRotated : {isRotated}");
+
+            leftHand.transform.DORotate(targetRotation, moveSpeed, RotateMode.LocalAxisAdd)
+                              .SetLoops(1)
+                              .SetEase(Ease.OutExpo);
+
+            rightHand.transform.DORotate(targetRotation, moveSpeed, RotateMode.LocalAxisAdd)
+                              .SetLoops(1)
+                              .SetEase(Ease.OutExpo);
         }
     }
 }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4942852725176792968}
   - component: {fileID: 5019766469784494068}
   - component: {fileID: 2747603788214061037}
+  - component: {fileID: 5485504936106536287}
   - component: {fileID: 1116467971679721424}
   - component: {fileID: 6523010958310997109}
   m_Layer: 5
@@ -55,6 +56,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c2fea71a395845458ce4b64574c1a1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5485504936106536287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2730229434611064302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86e171c6f8676ee42a4585aa2f52c4e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 16fb61c4a5590a442a07d2e52d868321, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2747603788214061037}
+        m_TargetAssemblyTypeName: KaChow.AByteSizedMuseum.HelperBotPuzzleObject,
+          Assembly-CSharp
+        m_MethodName: Reset
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!23 &1116467971679721424
 MeshRenderer:
   m_ObjectHideFlags: 0

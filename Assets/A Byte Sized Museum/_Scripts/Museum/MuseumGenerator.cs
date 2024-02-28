@@ -71,6 +71,7 @@ namespace KaChow.AByteSizedMuseum
                 WFC.InitializeGrid();
                 WFC.DisableExhibits();
                 WFC.CheckEdges();
+                WFC.ToggleExhibit(WFC.gridComponents[12], false);
                 GeneratePuzzleExhibits(WFC.gridComponents);
             }
         }

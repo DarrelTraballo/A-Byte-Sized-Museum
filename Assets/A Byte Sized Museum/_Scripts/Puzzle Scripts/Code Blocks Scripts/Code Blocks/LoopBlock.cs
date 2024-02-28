@@ -28,6 +28,8 @@ namespace KaChow.AByteSizedMuseum
             plusIcon.enabled = false;
             minusIcon.enabled = false;
 
+            yield return new WaitForSeconds(delay);
+
             while (counter > 0)
             {
                 counter--;
@@ -52,7 +54,6 @@ namespace KaChow.AByteSizedMuseum
                     interpreterLine.DisableHighlight();
                 }
             }
-
             plusIcon.enabled = true;
             minusIcon.enabled = true;
         }
