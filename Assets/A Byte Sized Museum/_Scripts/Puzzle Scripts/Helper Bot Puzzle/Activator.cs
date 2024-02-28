@@ -31,6 +31,7 @@ namespace KaChow.AByteSizedMuseum
             {
                 if (hitObject.TryGetComponent(out HelperBotPuzzleObject puzzleObject))
                 {
+                    AudioManager.Instance.PlaySFX("Completed");
                     rend.material.color = activatedColor;
 
                     // TODO: GameEvent for signaling something na na-activate na yung activator
