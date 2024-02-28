@@ -16,6 +16,7 @@ namespace KaChow.AByteSizedMuseum
 
         protected override void OnTriggerExit(Collider actor)
         {
+            AudioManager.Instance.PlaySFX("DoorOpen");
             base.OnTriggerExit(actor);
 
             if (isOpen)
@@ -31,6 +32,7 @@ namespace KaChow.AByteSizedMuseum
         public override void OnInteract()
         {
             base.OnInteract();
+            AudioManager.Instance.PlaySFX("DoorOpen");
             // onDoorInteract.Raise(this, name);
 
             if (!isOpen)
