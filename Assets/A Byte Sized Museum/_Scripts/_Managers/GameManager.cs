@@ -29,8 +29,10 @@ namespace KaChow.AByteSizedMuseum
         [Header("Museum")]
         [SerializeField] private bool initMuseum = true;
 
-        [Header("Misc")]
+        [Header("UI")]
         [SerializeField] private GameObject crosshair;
+        [SerializeField] private GameObject interpreterUI;
+        private Canvas interpreterUICanvas;
 
         private void Awake()
         {
@@ -45,6 +47,8 @@ namespace KaChow.AByteSizedMuseum
             GameObject playerGO = GameObject.FindGameObjectWithTag("Player");
             Player = playerGO.GetComponent<Player>();
             characterController = playerGO.GetComponent<CharacterController>();
+
+            interpreterUICanvas = interpreterUI.GetComponentInChildren<Canvas>();
 
             SetGameState(GameState.Playing);
             if (!initMuseum) return;
@@ -67,30 +71,36 @@ namespace KaChow.AByteSizedMuseum
             switch (state)
             {
                 case GameState.GenerateMuseum:
+                    interpreterUICanvas.enabled = false;
                     crosshair.SetActive(false);
                     SetCursorState(CursorLockMode.Confined);
                     InitMuseum();
                     break;
 
                 case GameState.Playing:
+                    interpreterUICanvas.enabled = false;
                     crosshair.SetActive(true);
                     Player.SetCanMove(true);
                     SetCursorState(CursorLockMode.Locked);
                     break;
 
                 case GameState.Paused:
+                    interpreterUICanvas.enabled = false;
                     crosshair.SetActive(false);
                     Player.SetCanMove(false);
                     SetCursorState(CursorLockMode.Confined);
                     break;
 
                 case GameState.SolvePuzzle:
+                    interpreterUICanvas.enabled = true;
                     crosshair.SetActive(false);
                     Player.SetCanMove(false);
+                    // SetCursorState(CursorLockMode.Locked);
                     SetCursorState(CursorLockMode.None);
                     break;
 
                 case GameState.RunDialog:
+                    interpreterUICanvas.enabled = false;
                     crosshair.SetActive(false);
                     Player.SetCanMove(false);
                     SetCursorState(CursorLockMode.Confined);

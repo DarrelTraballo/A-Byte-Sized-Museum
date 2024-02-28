@@ -6,9 +6,8 @@ namespace KaChow.AByteSizedMuseum
     {
         [SerializeField] private int interpreterID;
         [Header("UI")]
-        [SerializeField]
-        private GameObject interpreterUI;
-        private GameObject interpreterUIInstance;
+        [SerializeField] private GameObject interpreterUI;
+        [SerializeField] private GameObject interpreterUIInstance;
 
         private bool isInterpreterOpen;
 
@@ -19,10 +18,9 @@ namespace KaChow.AByteSizedMuseum
 
         private void Update()
         {
-            if (inputManager.IsEscapeButtonPressed() && isInterpreterOpen && gameManager.currentState == GameState.SolvePuzzle)
+            if (inputManager.IsEscapeButtonPressed() && gameManager.currentState == GameState.SolvePuzzle)
             {
                 CloseInterpreter();
-                gameManager.SetGameState(GameState.Playing);
             }
         }
 
@@ -31,37 +29,19 @@ namespace KaChow.AByteSizedMuseum
             base.OnInteract();
             if (!isInterpreterOpen)
             {
-                gameManager.SetGameState(GameState.SolvePuzzle);
                 OpenInterpreter();
             }
         }
 
         private void OpenInterpreter()
         {
-            if (interpreterUI == null)
-            {
-                Debug.Log("Interpreter UI not set");
-                return;
-            }
-
-            if (interpreterUIInstance == null)
-            {
-                interpreterUIInstance = Instantiate(interpreterUI);
-                var interpreter = interpreterUIInstance.GetComponent<Interpreter>();
-                interpreter.SetInterpreterID(interpreterID);
-                interpreterUIInstance.transform.SetParent(GameObject.Find("PlayerUICanvas").transform, false);
-                isInterpreterOpen = true;
-            }
-            else
-            {
-                isInterpreterOpen = !isInterpreterOpen;
-                interpreterUIInstance.SetActive(isInterpreterOpen);
-            }
+            gameManager.SetGameState(GameState.SolvePuzzle);
+            isInterpreterOpen = true;
         }
 
         public void CloseInterpreter()
         {
-            interpreterUIInstance.SetActive(false);
+            gameManager.SetGameState(GameState.Playing);
             isInterpreterOpen = false;
         }
     }

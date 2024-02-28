@@ -159,6 +159,23 @@ namespace KaChow.AByteSizedMuseum
             inputManager.enabled = true;
         }
 
+        public void ClearInterpreter()
+        {
+            foreach (var interpreterLine in interpreterLines)
+            {
+                foreach (Transform child in interpreterLine.transform)
+                {
+                    Destroy(child.gameObject);
+                }
+            }
+        }
+
+        public void ClearInterpreterCoroutine()
+        {
+            inputManager.enabled = false;
+            StartCoroutine(ClearInterpreterLines());
+        }
+
         public IEnumerator ClearInterpreterLines()
         {
             ToggleButtons(false);
@@ -192,6 +209,11 @@ namespace KaChow.AByteSizedMuseum
             foreach (var interpreterLine in interpreterLines)
             {
                 interpreterLine.DisableHighlight();
+
+                foreach (Transform child in interpreterLine.transform)
+                {
+                    Destroy(child.gameObject);
+                }
             }
 
             ToggleButtons(true);
@@ -229,12 +251,6 @@ namespace KaChow.AByteSizedMuseum
             puzzleCameraFeed.SetActive(true);
         }
 
-        public void ClearInterpreter()
-        {
-            inputManager.enabled = false;
-            StartCoroutine(ClearInterpreterLines());
-        }
-
         public void ResetPuzzle()
         {
             onResetPuzzle.Raise(this, interpreterID);
@@ -242,7 +258,6 @@ namespace KaChow.AByteSizedMuseum
 
         public void StopExecuting()
         {
-            // StopCoroutine(ExecuteAllLines());
             StopAllCoroutines();
         }
 

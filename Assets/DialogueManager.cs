@@ -17,7 +17,7 @@ namespace KaChow.AByteSizedMuseum
         public GameObject Input_manager;
         public GameObject DialogueContainer;
         public GameObject Canvas_images;
-        public  Button button;
+        public Button button;
         private int count = 0;
         public int counter;
         public Animator animator;
@@ -36,7 +36,7 @@ namespace KaChow.AByteSizedMuseum
 
             gameManager = GameManager.Instance;
             DialogueContainer.SetActive(true);
-            sentences_count = sentences.Count +1 ;
+            sentences_count = sentences.Count + 1;
 
             if (helperbot_tutorial == true)
             {
@@ -46,30 +46,30 @@ namespace KaChow.AByteSizedMuseum
 
         void Update()
         {
-        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
-        {
-
-            if (sentences.Count != 0 )
+            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
             {
-                if (button != null)
+
+                if (sentences.Count != 0)
+                {
+                    if (button != null)
                     {
                         button.onClick.Invoke();
                     }
+                }
+                else
+                {
+                    EndDialogue();
+                }
+                // Invoke the button click
+
             }
-            else 
-            {
-                EndDialogue();
-            }
-            // Invoke the button click
-           
-        }
-       
+
         }
 
         public void Next()
         {
-            index +=1; 
-            for(int i = 0; i < images.Length; i++)
+            index += 1;
+            for (int i = 0; i < images.Length; i++)
             {
                 images[i].gameObject.SetActive(false);
                 images[index].gameObject.SetActive(true);
@@ -77,14 +77,14 @@ namespace KaChow.AByteSizedMuseum
             }
         }
 
-        public void StartDialogue (Dialogue dialogue)
+        public void StartDialogue(Dialogue dialogue)
         {
             gameManager.SetGameState(GameState.RunDialog);
             animator.SetBool("IsOpen", true);
-            
+
             nameText.text = dialogue.name;
             //Debug.Log("Starting conversation with " + dialogue.name);
-        
+
             sentences.Clear();
 
             foreach (string sentence in dialogue.sentences)
@@ -96,7 +96,7 @@ namespace KaChow.AByteSizedMuseum
             {
                 images[0].gameObject.SetActive(true);
             }
-        
+
             DisplayNextSentence();
 
         }
@@ -110,7 +110,7 @@ namespace KaChow.AByteSizedMuseum
             {
                 Input_manager.SetActive(true);
             }
-            
+
             if (helperbot_tutorial == true)
             {
                 Next();
@@ -125,12 +125,12 @@ namespace KaChow.AByteSizedMuseum
                 return;
             }
             string sentence = sentences.Dequeue();
-           // Debug.Log(sentence);
+            // Debug.Log(sentence);
             StopAllCoroutines();
             StartCoroutine(TypeSentence(sentence));
         }
 
-        IEnumerator TypeSentence (String sentence)
+        IEnumerator TypeSentence(String sentence)
         {
             dialogueText.text = "";
             foreach (char letter in sentence.ToCharArray())
@@ -143,12 +143,12 @@ namespace KaChow.AByteSizedMuseum
         void EndDialogue()
         {
             AudioManager.Instance.sfxSource.Stop();
-            
+
             ResetData();
             Canvas_images.SetActive(false);
             animator.SetBool("IsOpen", false);
             //DialogueContainer.SetActive(false);
-            
+
             gameManager.SetGameState(GameState.Playing);
             Debug.Log("End of conversation");
 
