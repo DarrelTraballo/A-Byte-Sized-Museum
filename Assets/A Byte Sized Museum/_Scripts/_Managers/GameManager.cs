@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace KaChow.AByteSizedMuseum
 {
@@ -31,6 +32,7 @@ namespace KaChow.AByteSizedMuseum
 
         [Header("UI")]
         [SerializeField] private GameObject crosshair;
+        [SerializeField] private GameObject miniMapUI;
         [SerializeField] private GameObject interpreterUI;
         private Canvas interpreterUICanvas;
 
@@ -44,6 +46,9 @@ namespace KaChow.AByteSizedMuseum
 
         private void Start()
         {
+            Scene currentScene = SceneManager.GetActiveScene();
+            string sceneName = currentScene.name;
+
             GameObject playerGO = GameObject.FindGameObjectWithTag("Player");
             Player = playerGO.GetComponent<Player>();
             characterController = playerGO.GetComponent<CharacterController>();
@@ -51,7 +56,7 @@ namespace KaChow.AByteSizedMuseum
             interpreterUICanvas = interpreterUI.GetComponentInChildren<Canvas>();
 
             SetGameState(GameState.Playing);
-            if (!initMuseum) return;
+            if (sceneName.Equals("Tutorial") || sceneName.Equals("MainMenu")) return;
 
             SetGameState(GameState.GenerateMuseum);
         }
@@ -73,6 +78,7 @@ namespace KaChow.AByteSizedMuseum
                 case GameState.GenerateMuseum:
                     interpreterUICanvas.enabled = false;
                     crosshair.SetActive(false);
+                    miniMapUI.SetActive(false);
                     SetCursorState(CursorLockMode.Confined);
                     InitMuseum();
                     break;
@@ -80,6 +86,7 @@ namespace KaChow.AByteSizedMuseum
                 case GameState.Playing:
                     interpreterUICanvas.enabled = false;
                     crosshair.SetActive(true);
+                    miniMapUI.SetActive(true);
                     Player.SetCanMove(true);
                     SetCursorState(CursorLockMode.Locked);
                     break;
@@ -87,6 +94,7 @@ namespace KaChow.AByteSizedMuseum
                 case GameState.Paused:
                     interpreterUICanvas.enabled = false;
                     crosshair.SetActive(false);
+                    miniMapUI.SetActive(false);
                     Player.SetCanMove(false);
                     SetCursorState(CursorLockMode.Confined);
                     break;
@@ -94,6 +102,7 @@ namespace KaChow.AByteSizedMuseum
                 case GameState.SolvePuzzle:
                     interpreterUICanvas.enabled = true;
                     crosshair.SetActive(false);
+                    miniMapUI.SetActive(false);
                     Player.SetCanMove(false);
                     // SetCursorState(CursorLockMode.Locked);
                     SetCursorState(CursorLockMode.None);
@@ -102,6 +111,7 @@ namespace KaChow.AByteSizedMuseum
                 case GameState.RunDialog:
                     interpreterUICanvas.enabled = false;
                     crosshair.SetActive(false);
+                    miniMapUI.SetActive(false);
                     Player.SetCanMove(false);
                     SetCursorState(CursorLockMode.Confined);
                     break;

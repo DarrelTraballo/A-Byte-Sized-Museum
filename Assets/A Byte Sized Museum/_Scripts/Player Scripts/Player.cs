@@ -23,6 +23,8 @@ namespace KaChow.AByteSizedMuseum
         private float rotationX = 0f;
         private InputManager inputManager;
 
+        [SerializeField] private GameObject playerIcon;
+
         private bool canMove = true;
 
         private void Awake()
@@ -35,6 +37,17 @@ namespace KaChow.AByteSizedMuseum
             characterController = GetComponent<CharacterController>();
             runningSpeed = walkingSpeed * 1.3f;
             sneakSpeed = walkingSpeed * 0.322f;
+        }
+
+        private void OnEnable()
+        {
+            playerIcon.transform.position += Vector3.up * 25f;
+            playerIcon.transform.GetChild(0).gameObject.SetActive(true);
+        }
+
+        private void OnDisable()
+        {
+            playerIcon.transform.GetChild(0).gameObject.SetActive(false);
         }
 
         private void Start()
