@@ -176,12 +176,9 @@ namespace KaChow.AByteSizedMuseum
 
         private void RotateArms()
         {
-            isRotated = !isRotated;
+            int direction = 1;
 
-            Vector3 targetRotation = isRotated ? new Vector3(-180f, 0f, 0f) : new Vector3(180f, 0f, 0f);
-
-            Debug.Log($"target Rotation : {targetRotation}");
-            Debug.Log($"isRotated : {isRotated}");
+            Vector3 targetRotation = new Vector3(-180f * direction, 0f, 0f);
 
             leftHand.transform.DORotate(targetRotation, moveSpeed, RotateMode.LocalAxisAdd)
                               .SetLoops(1)
@@ -190,6 +187,8 @@ namespace KaChow.AByteSizedMuseum
             rightHand.transform.DORotate(targetRotation, moveSpeed, RotateMode.LocalAxisAdd)
                               .SetLoops(1)
                               .SetEase(Ease.OutExpo);
+
+            direction *= -1;
         }
     }
 }
