@@ -8,21 +8,19 @@ namespace KaChow.AByteSizedMuseum
         [SerializeField] private ExhibitDoor[] doors;
         [SerializeField] private bool isExhibitLocked;
 
+        [SerializeField] private PuzzleSetData puzzles;
+        [SerializeField] private Transform puzzleHolder;
+        private GameObject puzzleInterpreterAndCam;
+
         [HideInInspector] public bool isPuzzleExhibit = false;
         public GameObject pathwayGuide;
 
         private bool isPuzzleSolved;
 
-        private void Update()
+        public void InitiizeExhibit()
         {
-            // if (Input.GetKeyDown(KeyCode.Q))
-            // {
-            //     isExhibitLocked = !isExhibitLocked;
-
-
-
-            //     // ToggleDoors(isExhibitLocked);
-            // }
+            puzzleInterpreterAndCam = puzzleHolder.GetChild(0).gameObject;
+            puzzleInterpreterAndCam.SetActive(false);
         }
 
         public void TogglePuzzleExhibit()
@@ -38,6 +36,11 @@ namespace KaChow.AByteSizedMuseum
                         renderer.material.color = Color.blue;
                     }
                 }
+
+                puzzleInterpreterAndCam.SetActive(true);
+
+                // TODO: Make random selection once more puzzle sets have been created
+                Instantiate(puzzles.puzzleSets[0], puzzleHolder);
             }
             else
             {

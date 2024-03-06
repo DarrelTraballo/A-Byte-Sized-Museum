@@ -53,13 +53,17 @@ namespace KaChow.AByteSizedMuseum
 
             if (data is not int interpreterID || interpreterID != botID) return;
 
-            if (!FireRaycast(out GameObject hitObject))
+            // if there is an object in front
+            if (FireRaycast(out GameObject hitObject))
             {
-                Vector3 targetPosition = transform.position + transform.forward;
-                transform.DOMove(targetPosition, moveSpeed)
-                         .SetEase(Ease.OutExpo);
-
+                if (hitObject.TryGetComponent(out PuzzleFloorTile puzzleFloorTile))
+                {
+                    Vector3 targetPosition = transform.position + transform.forward;
+                    transform.DOMove(targetPosition, moveSpeed)
+                             .SetEase(Ease.OutExpo);
+                }
             }
+
         }
 
         public void Rotate(Component sender, object data)
@@ -132,14 +136,13 @@ namespace KaChow.AByteSizedMuseum
 
         public void Drop(Component sender, object data)
         {
-
             if (data is not int interpreterID || interpreterID != botID) return;
 
             // if bot is NOT holding an object, do nothing
             if (!isHoldingAnObject) return;
 
             // if there is no object in front of bot, do nothing
-            if (FireRaycast(out GameObject hitObject)) return;
+            if (!FireRaycast(out GameObject hitObject)) return;
 
             // Reset hand position
             RotateArms();
@@ -176,9 +179,8 @@ namespace KaChow.AByteSizedMuseum
 
         private void RotateArms()
         {
-            int direction = 1;
-
-            Vector3 targetRotation = new Vector3(-180f * direction, 0f, 0f);
+            isRotated = !isRotated;
+            Vector3 targetRotation = isRotated ? new Vector3(-180f, 0f, 0f) : new Vector3(180f, 0f, 0f);
 
             leftHand.transform.DORotate(targetRotation, moveSpeed, RotateMode.LocalAxisAdd)
                               .SetLoops(1)
@@ -188,7 +190,6 @@ namespace KaChow.AByteSizedMuseum
                               .SetLoops(1)
                               .SetEase(Ease.OutExpo);
 
-            direction *= -1;
         }
     }
 }
