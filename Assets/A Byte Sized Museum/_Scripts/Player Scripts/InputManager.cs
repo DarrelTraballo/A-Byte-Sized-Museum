@@ -64,5 +64,10 @@ namespace KaChow.AByteSizedMuseum
         {
             return playerControls.Player.Escape.triggered;
         }
+
+        public bool IsDebugModeToggled()
+        {
+            return playerControls.Player.DebugToggle.triggered;
+        }
     }
 }

@@ -20,6 +20,7 @@ namespace KaChow.AByteSizedMuseum
         public GameState currentState;
 
         private MuseumGenerator museumGenerator;
+        private InputManager inputManager;
 
         [Header("Player variables")]
         [SerializeField] private Vector3 playerStartPosition;
@@ -27,14 +28,24 @@ namespace KaChow.AByteSizedMuseum
 
         private CharacterController characterController;
 
-        [Header("Museum")]
-        [SerializeField] private bool initMuseum = true;
-
         [Header("UI")]
         [SerializeField] private GameObject crosshair;
         [SerializeField] private GameObject miniMapUI;
         [SerializeField] private GameObject interpreterUI;
         private Canvas interpreterUICanvas;
+
+        [Header("Debug")]
+        [SerializeField] private bool debugModeEnabled = false;
+
+        public bool DebugModeEnabled
+        {
+            get { return debugModeEnabled; }
+            private set
+            {
+                debugModeEnabled = value;
+                Debug.Log($"Debug Mode {(debugModeEnabled ? "Enabled" : "Disabled")}");
+            }
+        }
 
         private void Awake()
         {
@@ -46,6 +57,7 @@ namespace KaChow.AByteSizedMuseum
 
         private void Start()
         {
+            inputManager = InputManager.Instance;
             Scene currentScene = SceneManager.GetActiveScene();
             string sceneName = currentScene.name;
 
@@ -59,6 +71,19 @@ namespace KaChow.AByteSizedMuseum
             if (sceneName.Equals("Tutorial") || sceneName.Equals("MainMenu")) return;
 
             SetGameState(GameState.GenerateMuseum);
+        }
+
+        private void Update()
+        {
+            if (inputManager.IsDebugModeToggled())
+            {
+                ToggleDebugMode();
+            }
+        }
+
+        private void ToggleDebugMode()
+        {
+            DebugModeEnabled = !DebugModeEnabled;
         }
 
         private void InitMuseum()

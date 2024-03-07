@@ -9,25 +9,36 @@ namespace KaChow.AByteSizedMuseum
     {
         public GameObject DialogueContainer2;
         public GameObject LoadingScreenCanvas;
-        void OnTriggerEnter(Collider other)  
+
+        private GameManager gameManager;
+
+        private void Start()
+        {
+            gameManager = GameManager.Instance;
+        }
+
+        void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.tag == "Tutorialbox")
             {
                 DialogueContainer2.SetActive(true);
+                gameManager.SetGameState(GameState.RunDialog);
                 print("Enter");
             }
-            
+
         }
 
-        void OnTriggerStay(Collider other) {
-            
-             if (other.gameObject.tag == "Tutorialbox")
+        void OnTriggerStay(Collider other)
+        {
+
+            if (other.gameObject.tag == "Tutorialbox")
             {
                 print("Stay");
             }
         }
 
-        void OnTriggerExit(Collider other) {
+        void OnTriggerExit(Collider other)
+        {
             if (other.gameObject.tag == "Tutorialbox")
             {
                 DialogueContainer2.SetActive(false);
@@ -35,7 +46,7 @@ namespace KaChow.AByteSizedMuseum
 
                 FindObjectOfType<LoadingSceneScript>().LoadScene(3);
                 LoadingScreenCanvas.SetActive(true);
-            
+
             }
         }
 
