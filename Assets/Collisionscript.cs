@@ -33,7 +33,7 @@ namespace KaChow.AByteSizedMuseum
                 DialogueContainer2.SetActive(false);
                 print("Exit");
 
-                FindObjectOfType<LoadingSceneScript>().LoadScene(2);
+                FindObjectOfType<LoadingSceneScript>().LoadScene(3);
                 LoadingScreenCanvas.SetActive(true);
             
             }

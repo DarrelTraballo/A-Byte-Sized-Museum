@@ -11,6 +11,11 @@ namespace KaChow.AByteSizedMuseum
         public GameObject LoadingScreen;
         public Image LoadingBarfill;
         public int LoadingSceneNumber;
+
+        public void callscene()
+        {
+            LoadScene(LoadingSceneNumber);
+        }
         public void LoadScene(int sceneId)
         {
             StartCoroutine(LoadSceneAsync(sceneId));
@@ -27,6 +32,7 @@ namespace KaChow.AByteSizedMuseum
 
                 yield return null;
             }
+            SceneManager.LoadScene("MainMenu");
         }
     }
 }
