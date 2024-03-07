@@ -253,6 +253,7 @@ namespace KaChow.AByteSizedMuseum
 
         public void ResetPuzzle()
         {
+            Debug.Log($"Reset Called from {name}");
             onResetPuzzle.Raise(this, interpreterID);
         }
 
