@@ -17,7 +17,7 @@ namespace KaChow.AByteSizedMuseum
 
         private bool isPuzzleSolved;
 
-        public void InitiizeExhibit()
+        public void InitializeExhibit()
         {
             puzzleInterpreterAndCam = puzzleHolder.GetChild(0).gameObject;
             puzzleInterpreterAndCam.SetActive(false);
@@ -40,7 +40,7 @@ namespace KaChow.AByteSizedMuseum
                 puzzleInterpreterAndCam.SetActive(true);
 
                 // TODO: Make random selection once more puzzle sets have been created
-                Instantiate(puzzles.puzzleSets[0], puzzleHolder);
+                Instantiate(puzzles.puzzleSets[1], puzzleHolder);
             }
             else
             {
