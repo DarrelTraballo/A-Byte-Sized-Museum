@@ -24,6 +24,18 @@ namespace KaChow.AByteSizedMuseum
             }
         }
 
+        public override void OnLookEnter()
+        {
+            base.OnLookEnter();
+            gameManager.UpdateToolTipText("Interpreter", "Press E to OPEN");
+        }
+
+        public override void OnLookExit()
+        {
+            base.OnLookExit();
+            gameManager.DisableToolTipText();
+        }
+
         public override void OnInteract()
         {
             base.OnInteract();
