@@ -75,6 +75,7 @@ namespace KaChow.AByteSizedMuseum
 
         private void Update()
         {
+            // ctrl + shit + t
             if (inputManager.IsDebugModeToggled())
             {
                 ToggleDebugMode();

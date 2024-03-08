@@ -33,7 +33,7 @@ namespace KaChow.AByteSizedMuseum
 
         public virtual void OnLookEnter()
         {
-            // Debug.Log("Looking at Interactor");
+            Debug.Log($"Looking at {name}");
         }
 
         // base method for interactable object specific interactions

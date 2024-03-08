@@ -101,7 +101,7 @@ namespace KaChow.AByteSizedMuseum
             foreach (var puzzleExhibitCell in puzzleExhibitCells)
             {
                 var puzzleExhibit = puzzleExhibitCell.GetComponentInChildren<Exhibit>();
-                puzzleExhibit.InitiizeExhibit();
+                puzzleExhibit.InitializeExhibit();
                 puzzleExhibit.isPuzzleExhibit = true;
 
                 puzzleExhibit.TogglePuzzleExhibit();
