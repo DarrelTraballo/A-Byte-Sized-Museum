@@ -1,3 +1,5 @@
+using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -32,7 +34,11 @@ namespace KaChow.AByteSizedMuseum
         [SerializeField] private GameObject crosshair;
         [SerializeField] private GameObject miniMapUI;
         [SerializeField] private GameObject interpreterUI;
+        [SerializeField] private GameObject toolTipUI;
+
         private Canvas interpreterUICanvas;
+        private TMP_Text toolTipTitle;
+        private TMP_Text toolTipSubtitle;
 
         [Header("Debug")]
         [SerializeField] private bool debugModeEnabled = false;
@@ -67,6 +73,11 @@ namespace KaChow.AByteSizedMuseum
 
             interpreterUICanvas = interpreterUI.GetComponentInChildren<Canvas>();
 
+            toolTipTitle = toolTipUI.transform.Find("ToolTip Text Title").GetComponent<TMP_Text>();
+            toolTipSubtitle = toolTipUI.transform.Find("ToolTip Text Subtitle").GetComponent<TMP_Text>();
+
+            toolTipUI.SetActive(false);
+
             SetGameState(GameState.Playing);
             if (sceneName.Equals("Tutorial") || sceneName.Equals("MainMenu")) return;
 
@@ -85,6 +96,7 @@ namespace KaChow.AByteSizedMuseum
         private void ToggleDebugMode()
         {
             DebugModeEnabled = !DebugModeEnabled;
+            StartCoroutine(UpdateToolTipText("Debug Mode", $"{(debugModeEnabled ? "Enabled" : "Disabled")}", 3f));
         }
 
         private void InitMuseum()
@@ -169,6 +181,31 @@ namespace KaChow.AByteSizedMuseum
                 default:
                     break;
             }
+        }
+
+        public IEnumerator UpdateToolTipText(string title, string subtitle, float delay)
+        {
+            UpdateToolTipText(title, subtitle);
+
+            yield return new WaitForSeconds(delay);
+
+            DisableToolTipText();
+        }
+
+        // TODO: make disappear after a while
+        public void UpdateToolTipText(string title, string subtitle)
+        {
+            toolTipUI.SetActive(true);
+            toolTipTitle.text = title;
+            toolTipSubtitle.text = subtitle;
+
+            // yield return new WaitForSeconds(delay);
+
+        }
+
+        public void DisableToolTipText()
+        {
+            toolTipUI.SetActive(false);
         }
     }
 }

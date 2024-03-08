@@ -13,6 +13,8 @@ namespace KaChow.AByteSizedMuseum
         private InputManager inputManager;
         private GameManager gameManager;
 
+        private InteractableBase lastInteractedObject = null;
+
         private void Start()
         {
             inputManager = InputManager.Instance;
@@ -21,20 +23,26 @@ namespace KaChow.AByteSizedMuseum
 
         private void Update()
         {
-            if (inputManager.PlayerInteractedThisFrame() && gameManager.currentState == GameState.Playing)
+            if (gameManager.currentState == GameState.Playing)
             {
                 Ray r = new Ray(interactorSource.position, interactorSource.forward);
-                if (Physics.Raycast(r, out RaycastHit hitInfo, interactRange))
+                bool hitSomething = Physics.Raycast(r, out RaycastHit hitInfo, interactRange);
+                InteractableBase currentInteractObject = null;
+
+                if (hitSomething && hitInfo.collider.gameObject.TryGetComponent(out InteractableBase interactObj))
                 {
-                    var hit = hitInfo.collider.gameObject.TryGetComponent(out InteractableBase interactObj);
-                    if (hit)
-                    {
-                        //interactObj.OnLookEnter();
+                    currentInteractObject = interactObj;
+                    interactObj.OnLookEnter();
 
+                    if (inputManager.PlayerInteractedThisFrame())
                         interactObj.OnInteract();
-
-                    }
                 }
+                if (lastInteractedObject != null && lastInteractedObject != currentInteractObject)
+                {
+                    lastInteractedObject.OnLookExit();
+                }
+
+                lastInteractedObject = currentInteractObject;
             }
             // else
             // {
