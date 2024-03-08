@@ -27,13 +27,13 @@ namespace KaChow.AByteSizedMuseum
         {
             if (actor.CompareTag("Player"))
             {
-                // Debug.Log("player exited");
+                Debug.Log("player exited");
             }
         }
 
         public virtual void OnLookEnter()
         {
-            // Debug.Log("Looking at Interactor");
+            Debug.Log("Looking at Interactor");
         }
 
         // base method for interactable object specific interactions

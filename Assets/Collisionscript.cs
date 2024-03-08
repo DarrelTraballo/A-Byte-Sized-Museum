@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 namespace KaChow.AByteSizedMuseum
@@ -8,9 +9,10 @@ namespace KaChow.AByteSizedMuseum
     public class Collisionscript : MonoBehaviour
     {
         public GameObject DialogueContainer2;
-        public GameObject LoadingScreenCanvas;
+       // public GameObject Block;
 
         private GameManager gameManager;
+         private bool hasEntered = false;
 
         private void Start()
         {
@@ -21,9 +23,16 @@ namespace KaChow.AByteSizedMuseum
         {
             if (other.gameObject.tag == "Tutorialbox")
             {
-                DialogueContainer2.SetActive(true);
-                gameManager.SetGameState(GameState.RunDialog);
-                print("Enter");
+             //   Block.SetActive(true);
+                if(hasEntered == false)
+                {
+                    
+                    DialogueContainer2.SetActive(true);
+                    gameManager.SetGameState(GameState.RunDialog);
+                    print("Enter");
+                    hasEntered = true;
+                }
+              
             }
 
         }
@@ -41,12 +50,7 @@ namespace KaChow.AByteSizedMuseum
         {
             if (other.gameObject.tag == "Tutorialbox")
             {
-                DialogueContainer2.SetActive(false);
-                print("Exit");
-
-                FindObjectOfType<LoadingSceneScript>().LoadScene(3);
-                LoadingScreenCanvas.SetActive(true);
-
+                //Block.SetActive(false);
             }
         }
 

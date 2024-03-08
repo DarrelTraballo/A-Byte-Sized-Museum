@@ -9,7 +9,9 @@ namespace KaChow.AByteSizedMuseum
         [SerializeField] private Color activatedColor;
         [SerializeField] private Color deactivatedColor;
 
-        private Renderer rend;
+        public bool tutorial = true;
+
+        public Renderer rend;
         
         private Vector3 raycastOrigin;
         private Vector3 raycastDirection;
@@ -33,8 +35,7 @@ namespace KaChow.AByteSizedMuseum
                 {
                     AudioManager.Instance.PlaySFX("Completed");
                     rend.material.color = activatedColor;
-
-                    // TODO: GameEvent for signaling something na na-activate na yung activator
+                    tutorial = false;
                 }
 
                 else 

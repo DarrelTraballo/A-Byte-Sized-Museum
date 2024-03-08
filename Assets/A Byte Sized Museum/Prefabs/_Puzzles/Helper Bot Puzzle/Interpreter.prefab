@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4605209269976665582}
   - component: {fileID: 6092137699217910839}
   - component: {fileID: 5035259153470960656}
+  - component: {fileID: 1167149324745057552}
   m_Layer: 0
   m_Name: Interpreter
   m_TagString: Untagged
@@ -49,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interpreterID: 0
   interpreterUI: {fileID: 1264106325956390583, guid: 3179bdd4eae0471459e1c867eb2b1ec9, type: 3}
+  interpreterUIInstance: {fileID: 0}
 --- !u!114 &5035259153470960656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,6 +79,27 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!65 &1167149324745057552
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 757534651170363485}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 2.85, z: 6.34}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2844448894945202190
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,6 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interpreterID: 0
   interpreterUI: {fileID: 1264106325956390583, guid: 3179bdd4eae0471459e1c867eb2b1ec9, type: 3}
+  interpreterUIInstance: {fileID: 0}
 --- !u!114 &7850657179336797067
 MonoBehaviour:
   m_ObjectHideFlags: 0
