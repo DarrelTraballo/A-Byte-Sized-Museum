@@ -39,6 +39,7 @@ namespace KaChow.AByteSizedMuseum
         public virtual void OnLookExit()
         {
             Debug.Log($"Looked away from {name}");
+            gameManager.DisableToolTipText();
         }
 
         // base method for interactable object specific interactions

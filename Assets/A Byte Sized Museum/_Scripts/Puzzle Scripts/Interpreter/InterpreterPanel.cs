@@ -33,7 +33,6 @@ namespace KaChow.AByteSizedMuseum
         public override void OnLookExit()
         {
             base.OnLookExit();
-            gameManager.DisableToolTipText();
         }
 
         public override void OnInteract()
