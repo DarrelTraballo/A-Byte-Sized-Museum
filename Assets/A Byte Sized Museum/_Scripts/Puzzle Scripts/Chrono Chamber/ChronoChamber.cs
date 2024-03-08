@@ -20,6 +20,7 @@ namespace KaChow.AByteSizedMuseum
         public override void OnLookEnter()
         {
             base.OnLookEnter();
+            // TODO: ayaw mapatungan
             gameManager.UpdateToolTipText("Chrono Chamber", "Press E to repair");
         }
 
@@ -30,25 +31,26 @@ namespace KaChow.AByteSizedMuseum
                 if (Input.GetKeyDown(KeyCode.F))
                     Debug.Log($"Time left : {timer.RemainingTimeInSeconds}");
 
-                if (Input.GetKeyDown(KeyCode.R))
-                {
-                    if (UseFragment())
-                    {
-                        gameManager.UpdateToolTipText($"Added {timer.SecondsToAdd}s", "to timer");
-                        timer.AddSecondsToTimer(timer.SecondsToAdd);
-                        UpdateFragmentsText();
-                    }
-                    else
-                    {
-                        gameManager.UpdateToolTipText("Not enough Fragments", "");
-                    }
-                }
-
                 if (Input.GetKeyDown(KeyCode.G))
                 {
                     AddFragment();
                     UpdateFragmentsText();
                 }
+            }
+        }
+
+        public override void OnInteract()
+        {
+            base.OnInteract();
+            if (UseFragment())
+            {
+                gameManager.UpdateToolTipText($"Added {timer.SecondsToAdd}s", "to timer");
+                timer.AddSecondsToTimer(timer.SecondsToAdd);
+                UpdateFragmentsText();
+            }
+            else
+            {
+                gameManager.UpdateToolTipText("Not enough Fragments", "");
             }
         }
 
