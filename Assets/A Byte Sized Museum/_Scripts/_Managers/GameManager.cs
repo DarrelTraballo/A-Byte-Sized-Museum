@@ -96,7 +96,7 @@ namespace KaChow.AByteSizedMuseum
         private void ToggleDebugMode()
         {
             DebugModeEnabled = !DebugModeEnabled;
-            StartCoroutine(UpdateToolTipText("Debug Mode", $"{(debugModeEnabled ? "Enabled" : "Disabled")}", 3f));
+            StartCoroutine(UpdateToolTipText("Cheats", $"{(debugModeEnabled ? "Enabled" : "Disabled")}", 3f));
         }
 
         private void InitMuseum()
@@ -135,6 +135,7 @@ namespace KaChow.AByteSizedMuseum
                     miniMapUI.SetActive(false);
                     Player.SetCanMove(false);
                     SetCursorState(CursorLockMode.Confined);
+                    DisableToolTipText();
                     break;
 
                 case GameState.SolvePuzzle:
@@ -142,8 +143,8 @@ namespace KaChow.AByteSizedMuseum
                     crosshair.SetActive(false);
                     miniMapUI.SetActive(false);
                     Player.SetCanMove(false);
-                    // SetCursorState(CursorLockMode.Locked);
-                    SetCursorState(CursorLockMode.None);
+                    SetCursorState(DebugModeEnabled ? CursorLockMode.None : CursorLockMode.Confined);
+                    DisableToolTipText();
                     break;
 
                 case GameState.RunDialog:

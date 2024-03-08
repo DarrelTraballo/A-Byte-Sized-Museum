@@ -3849,6 +3849,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 794688071}
   m_CullTransparentMesh: 1
+--- !u!114 &799352485 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4833659746255696268, guid: 641e1c4b59bf8e3488ea7ec50fe69591, type: 3}
+  m_PrefabInstance: {fileID: 1106787863908069077}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e244dc93b625dd24ea7b86ad72cd0f68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &824656580
 GameObject:
   m_ObjectHideFlags: 0
@@ -4112,11 +4123,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 695711140431275171, guid: 3179bdd4eae0471459e1c867eb2b1ec9, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 695711140431275171, guid: 3179bdd4eae0471459e1c867eb2b1ec9, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 695711140431275171, guid: 3179bdd4eae0471459e1c867eb2b1ec9, type: 3}
       propertyPath: m_SizeDelta.x
@@ -4580,11 +4591,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4958400231439858338, guid: 3179bdd4eae0471459e1c867eb2b1ec9, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4958400231439858338, guid: 3179bdd4eae0471459e1c867eb2b1ec9, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4958400231439858338, guid: 3179bdd4eae0471459e1c867eb2b1ec9, type: 3}
       propertyPath: m_SizeDelta.x
@@ -8478,6 +8489,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Final Exhibt
       objectReference: {fileID: 0}
+    - target: {fileID: 7485673838354507332, guid: 19ebec9dd7f91a3408a70564f3aae6c0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7668361125985460192, guid: 19ebec9dd7f91a3408a70564f3aae6c0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1
@@ -9980,6 +9995,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1934620376}
+  - component: {fileID: 1934620378}
   - component: {fileID: 1934620377}
   m_Layer: 0
   m_Name: Chrono Chamber
@@ -10022,8 +10038,34 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 15, y: 15, z: 15}
+  m_Size: {x: 12, y: 14.5, z: 12}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1934620378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934620375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bb6da85410bd0844b817d69b13c81c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: {fileID: 799352485}
+  fragmentsAmount: 0
+  fragmentsAmountText: {fileID: 1936823026}
+--- !u!114 &1936823026 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 713944446283749814, guid: 641e1c4b59bf8e3488ea7ec50fe69591, type: 3}
+  m_PrefabInstance: {fileID: 1106787863908069077}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1939288126
 GameObject:
   m_ObjectHideFlags: 0
