@@ -27,7 +27,7 @@ namespace KaChow.AByteSizedMuseum
         {
             if (actor.CompareTag("Player"))
             {
-                // Debug.Log("player exited");
+                Debug.Log("player exited");
             }
         }
 
