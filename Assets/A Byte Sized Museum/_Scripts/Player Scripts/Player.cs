@@ -68,7 +68,7 @@ namespace KaChow.AByteSizedMuseum
         {
             if (!canMove)
             {
-                moveDirection = Vector3.zero;
+                moveDirection = new Vector3(0, moveDirection.y, 0);
                 return;
             }
 
