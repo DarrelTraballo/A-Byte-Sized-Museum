@@ -25,7 +25,6 @@ namespace KaChow.AByteSizedMuseum
         public int sentences_count;
         public GameObject[] images;
 
-        public GameObject Block;
 
         private GameManager gameManager;
 
@@ -38,10 +37,6 @@ namespace KaChow.AByteSizedMuseum
         // Start is called before the first frame update
         public void Start()
         {
-            if(firstrun == false)
-            {
-                Block.SetActive(true);
-            }
             gameManager = GameManager.Instance;
             DialogueContainer.SetActive(true);
             sentences_count = sentences.Count + 1;
@@ -50,7 +45,7 @@ namespace KaChow.AByteSizedMuseum
             {
                 index = 0;
             }
-            
+
         }
 
         void Update()
@@ -153,7 +148,6 @@ namespace KaChow.AByteSizedMuseum
         {
             AudioManager.Instance.sfxSource.Stop();
             firstrun = false;
-            Block.SetActive(false);
             ResetData();
             Canvas_images.SetActive(false);
             animator.SetBool("IsOpen", false);
