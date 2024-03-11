@@ -69,7 +69,7 @@ namespace KaChow.DebugUtils
 
         private void ToggleDebugConsole()
         {
-            if (Input.GetKeyDown(KeyCode.F3))
+            if (Input.GetKeyDown(KeyCode.Z))
             {
                 debugConsoleCanvas.enabled = !debugConsoleCanvas.enabled;
             }

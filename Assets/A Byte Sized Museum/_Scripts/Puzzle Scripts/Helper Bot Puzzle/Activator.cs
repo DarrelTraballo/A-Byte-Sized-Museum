@@ -8,14 +8,17 @@ namespace KaChow.AByteSizedMuseum
     {
         [SerializeField] private Color activatedColor;
         [SerializeField] private Color deactivatedColor;
+        private bool isSolved = false;
 
         public bool tutorial = true;
 
-        public Renderer rend;
-        
+        private Renderer rend;
+
         private Vector3 raycastOrigin;
         private Vector3 raycastDirection;
         private float raycastDistance;
+
+        [SerializeField] private GameEvent onActivatorActivated;
 
         private void Start()
         {
@@ -29,27 +32,24 @@ namespace KaChow.AByteSizedMuseum
 
         private void Update()
         {
-            if (FireRayCast(out GameObject hitObject))
-            {
-                if (hitObject.TryGetComponent(out HelperBotPuzzleObject puzzleObject))
-                {
-                    AudioManager.Instance.PlaySFX("Completed");
-                    rend.material.color = activatedColor;
-                    tutorial = false;
-                }
+            bool hitSuccess = FireRayCast(out GameObject hitObject);
+            bool isPuzzleObject = hitSuccess && hitObject.TryGetComponent(out HelperBotPuzzleObject puzzleObject);
 
-                else 
+            if (isPuzzleObject)
+            {
+                AudioManager.Instance.PlaySFX("Completed");
+                tutorial = false;
+
+                if (!isSolved)
                 {
-                    rend.material.color = deactivatedColor;
+                    onActivatorActivated.Raise(this, this);
+                    isSolved = true;
                 }
             }
-            else
-            {
-                rend.material.color = deactivatedColor;
-            }
 
+            rend.material.color = isPuzzleObject ? activatedColor : deactivatedColor;
         }
-        
+
         private bool FireRayCast(out GameObject hitObject)
         {
             if (Physics.Raycast(raycastOrigin, raycastDirection, out RaycastHit hit, raycastDistance))

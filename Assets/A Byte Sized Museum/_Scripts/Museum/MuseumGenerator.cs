@@ -4,10 +4,8 @@ using UnityEngine;
 
 namespace KaChow.AByteSizedMuseum
 {
-    // programatically place final exhibit at the opposite side of museum
     public class MuseumGenerator : MonoBehaviour
     {
-        // MuseumGenerator.Instance to access MuseumGenerator variables
         public static MuseumGenerator Instance { get; private set; }
         #region Singleton
         private MuseumGenerator() { }
@@ -20,6 +18,8 @@ namespace KaChow.AByteSizedMuseum
         }
         #endregion
 
+        private GameManager gameManager;
+
         [Header("Museum Layout Generation")]
         [SerializeField] private Transform exhibitParent;
         [SerializeField] private Museum museum;
@@ -30,15 +30,19 @@ namespace KaChow.AByteSizedMuseum
         private float exhibitSize;
 
         [Space]
-        [SerializeField]
-        private List<GameObject> exhibitList;
-        [SerializeField] private int puzzleExhibitAmount = 7;
-        private List<Cell> puzzleExhibitCells;
+        [SerializeField] private List<GameObject> exhibitList;
+        private int puzzleExhibitAmount;
+        [HideInInspector] public List<Cell> puzzleExhibitCells;
 
         [Space]
         [Header("For Debugging")]
         [SerializeField] private bool enableWFC;
         [SerializeField] private bool enableDebugging;
+
+        private void Start()
+        {
+
+        }
 
         // for Debugging
         private void Update()
@@ -60,6 +64,9 @@ namespace KaChow.AByteSizedMuseum
         {
             exhibitSize = museum.exhibitPrefabs[0].gameObject.transform.GetChild(0).localScale.x;
             WFC = new WaveFunctionCollapse(museum, cellObj, exhibitParent.gameObject, museum.exhibitPrefabs);
+
+            gameManager = GameManager.Instance;
+            puzzleExhibitAmount = gameManager.PuzzleExhibitAmount;
         }
 
         // TODO: set up code structure for Exhibits
@@ -91,7 +98,13 @@ namespace KaChow.AByteSizedMuseum
 
                 // Check if the cell has an Exhibit component
 
-                if (potentialExhibitCell.GetComponentInChildren<Exhibit>() == null) continue;
+                var potentialExhibit = potentialExhibitCell.GetComponentInChildren<Exhibit>();
+
+                if (potentialExhibit == null || potentialExhibit.isPuzzleExhibit)
+                {
+                    --i;
+                    continue;
+                }
 
                 puzzleExhibitCells.Add(potentialExhibitCell);
                 gridComponentsCopy.RemoveAt(randomIndex);

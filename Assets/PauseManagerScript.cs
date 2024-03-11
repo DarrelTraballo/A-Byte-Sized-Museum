@@ -35,38 +35,13 @@ public class PauseManager : MonoBehaviour
             Continue();
             return;
         }
-        PausePanel.SetActive(true);
         gameManager.SetGameState(GameState.Paused);
         Time.timeScale = 0;
     }
 
     public void Continue()
     {
-        PausePanel.SetActive(false);
         gameManager.SetGameState(GameState.Playing);
         Time.timeScale = 1;
     }
-
-    // private void ToggleCursorVisibility()
-    // {
-    //     // Toggle the cursor visibility
-    //     if (isCursorVisible)
-    //     {
-    //         HideCursor();
-    //     }
-    //     else
-    //     {
-    //         ShowCursor();
-    //     }
-    // }
-
-    // private void ShowCursor()
-    // {
-    //     isCursorVisible = true;
-    // }
-
-    // private void HideCursor()
-    // {
-    //     isCursorVisible = false;
-    // }
 }

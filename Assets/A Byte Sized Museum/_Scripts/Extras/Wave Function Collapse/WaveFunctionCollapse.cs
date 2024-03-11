@@ -64,7 +64,8 @@ namespace KaChow.WFC
                     Vector3 position = new Vector3(x * museum.museumExhibitSize + cellCenterX - offsetX, -1, z * museum.museumExhibitSize + cellCenterZ - offsetZ) + gridOffset;
                     Cell newCell = GameObject.Instantiate(cellObj, position, Quaternion.identity, parentGO.transform);
                     newCell.CreateCell(false, tileObjects);
-                    newCell.name = $"Exhibit {z * museum.museumSize + x}";
+                    // newCell.name = $"Exhibit {z * museum.museumSize + x}";
+                    newCell.name = $"Exhibit ({z}, {x})";
                     gridComponents.Add(newCell);
                 }
             }

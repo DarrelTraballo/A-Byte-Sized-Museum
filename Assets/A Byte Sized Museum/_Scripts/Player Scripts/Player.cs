@@ -66,7 +66,11 @@ namespace KaChow.AByteSizedMuseum
 
         private void HandleMovementInput()
         {
-            if (!canMove) return;
+            if (!canMove)
+            {
+                moveDirection = Vector3.zero;
+                return;
+            }
 
             // We are grounded, so recalculate move direction based on axes
             Vector3 forward = transform.TransformDirection(Vector3.forward);

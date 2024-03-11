@@ -12,8 +12,10 @@ namespace KaChow.AByteSizedMuseum
         Playing,
         SolvePuzzle,
         RunDialog,
-
+        PlayerWin, // TODO: Rename
+        GameOver
     }
+
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance { get; private set; }
@@ -31,17 +33,47 @@ namespace KaChow.AByteSizedMuseum
         private CharacterController characterController;
 
         [Header("UI")]
-        [SerializeField] private GameObject crosshair;
+        [SerializeField] private GameObject crosshairUI;
         [SerializeField] private GameObject miniMapUI;
         [SerializeField] private GameObject interpreterUI;
+        [SerializeField] private GameObject pauseUI;
         [SerializeField] private GameObject toolTipUI;
+        [SerializeField] private GameObject gameOverUI;
+        [SerializeField] private GameObject playerWinUI; // TODO: Rename
 
         private Canvas interpreterUICanvas;
         private TMP_Text toolTipTitle;
         private TMP_Text toolTipSubtitle;
 
+        [Header("Gameplay")]
+        [SerializeField, Range(5f, 20f)] private int remainingTimeInMinutes = 15;
+        [SerializeField, Range(10f, 30f)] private int secondsToAdd = 30;
+        [SerializeField, Range(7, 12)] private int puzzleExhibitAmount = 10;
+
+        public bool isGameOver;
+
         [Header("Debug")]
         [SerializeField] private bool debugModeEnabled = false;
+
+        public int RemainingTimeInMinutes
+        {
+            get { return remainingTimeInMinutes; }
+            private set { remainingTimeInMinutes = Mathf.Clamp(value, 10, 30); }
+        }
+
+        public int SecondsToAdd
+        {
+            get { return secondsToAdd; }
+            private set { secondsToAdd = Mathf.Clamp(value, 10, 30); }
+        }
+
+        public int PuzzleExhibitAmount
+        {
+            get { return puzzleExhibitAmount; }
+            private set { puzzleExhibitAmount = Mathf.Clamp(value, 7, 12); }
+        }
+
+        public bool IsGameOver { get; private set; }
 
         public bool DebugModeEnabled
         {
@@ -107,61 +139,6 @@ namespace KaChow.AByteSizedMuseum
             SetGameState(GameState.Playing);
         }
 
-        public void SetGameState(GameState state)
-        {
-            currentState = state;
-
-            switch (state)
-            {
-                case GameState.GenerateMuseum:
-                    interpreterUICanvas.enabled = false;
-                    crosshair.SetActive(false);
-                    miniMapUI.SetActive(false);
-                    SetCursorState(CursorLockMode.Confined);
-                    InitMuseum();
-                    break;
-
-                case GameState.Playing:
-                    interpreterUICanvas.enabled = false;
-                    crosshair.SetActive(true);
-                    miniMapUI.SetActive(true);
-                    Player.SetCanMove(true);
-                    SetCursorState(CursorLockMode.Locked);
-                    break;
-
-                case GameState.Paused:
-                    interpreterUICanvas.enabled = false;
-                    crosshair.SetActive(false);
-                    miniMapUI.SetActive(false);
-                    Player.SetCanMove(false);
-                    SetCursorState(CursorLockMode.Confined);
-                    DisableToolTipText();
-                    break;
-
-                case GameState.SolvePuzzle:
-                    interpreterUICanvas.enabled = true;
-                    crosshair.SetActive(false);
-                    miniMapUI.SetActive(false);
-                    Player.SetCanMove(false);
-                    SetCursorState(DebugModeEnabled ? CursorLockMode.None : CursorLockMode.Confined);
-                    DisableToolTipText();
-                    break;
-
-                case GameState.RunDialog:
-                    interpreterUICanvas.enabled = false;
-                    crosshair.SetActive(false);
-                    miniMapUI.SetActive(false);
-                    Player.SetCanMove(false);
-                    SetCursorState(CursorLockMode.Confined);
-                    break;
-
-                default:
-                    break;
-
-            }
-
-        }
-
         public void SetCursorState(CursorLockMode cursorLockMode)
         {
             Cursor.lockState = cursorLockMode;
@@ -193,20 +170,84 @@ namespace KaChow.AByteSizedMuseum
             DisableToolTipText();
         }
 
-        // TODO: make disappear after a while
         public void UpdateToolTipText(string title, string subtitle)
         {
             toolTipUI.SetActive(true);
             toolTipTitle.text = title;
             toolTipSubtitle.text = subtitle;
-
-            // yield return new WaitForSeconds(delay);
-
         }
 
         public void DisableToolTipText()
         {
             toolTipUI.SetActive(false);
+        }
+
+
+        public void SetGameState(GameState state)
+        {
+            currentState = state;
+
+            // Reset UI and player states before applying specific state settings
+            ResetUI();
+            ResetPlayerState();
+
+            switch (state)
+            {
+                case GameState.GenerateMuseum:
+                    SetCursorState(CursorLockMode.Confined);
+                    InitMuseum();
+                    break;
+
+                case GameState.Playing:
+                    crosshairUI.SetActive(true);
+                    miniMapUI.SetActive(true);
+                    Player.SetCanMove(true);
+                    SetCursorState(CursorLockMode.Locked);
+                    break;
+
+                case GameState.Paused:
+                    pauseUI.SetActive(true);
+                    SetCursorState(CursorLockMode.Confined);
+                    break;
+
+                case GameState.SolvePuzzle:
+                    interpreterUICanvas.enabled = true;
+                    SetCursorState(DebugModeEnabled ? CursorLockMode.None : CursorLockMode.Confined);
+                    break;
+
+                case GameState.RunDialog:
+                    SetCursorState(CursorLockMode.Confined);
+                    break;
+
+                case GameState.PlayerWin:
+                    playerWinUI.SetActive(true);
+                    SetCursorState(CursorLockMode.Confined);
+                    break;
+
+                case GameState.GameOver:
+                    gameOverUI.SetActive(true);
+                    SetCursorState(CursorLockMode.Confined);
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        private void ResetUI()
+        {
+            crosshairUI.SetActive(false);
+            miniMapUI.SetActive(false);
+            gameOverUI.SetActive(false);
+            playerWinUI.SetActive(false);
+            interpreterUICanvas.enabled = false;
+            pauseUI.SetActive(false);
+            DisableToolTipText();
+        }
+
+        private void ResetPlayerState()
+        {
+            Player.SetCanMove(false);
         }
     }
 }

@@ -6,15 +6,12 @@ namespace KaChow.AByteSizedMuseum
     public class Timer : MonoBehaviour
     {
         [SerializeField] private TMP_Text timerText;
-        [SerializeField, Range(5f, 20f)] private int remainingTimeInMinutes = 15;
-        [SerializeField, Range(10f, 30f)] private int secondsToAdd = 30;
+        [SerializeField] private TMP_Text fragmentsAmountText;
         private float remainingTimeInSeconds;
+        private int secondsToAdd;
 
-        public int SecondsToAdd
-        {
-            get { return secondsToAdd; }
-            set { secondsToAdd = Mathf.Clamp(value, 10, 30); } // Ensures secondsToAdd is within the range 10 to 30.
-        }
+        private int fragmentsAmount = 0;
+        private int totalFragments;
 
         public float RemainingTimeInSeconds
         {
@@ -27,7 +24,11 @@ namespace KaChow.AByteSizedMuseum
         private void Start()
         {
             gameManager = GameManager.Instance;
-            RemainingTimeInSeconds = (remainingTimeInMinutes * 60) + 5f;
+            RemainingTimeInSeconds = (gameManager.RemainingTimeInMinutes * 60) + 5f;
+            totalFragments = gameManager.PuzzleExhibitAmount;
+            secondsToAdd = gameManager.SecondsToAdd;
+
+            UpdateFragmentsText();
         }
 
         private void Update()
@@ -36,17 +37,89 @@ namespace KaChow.AByteSizedMuseum
             {
                 RemainingTimeInSeconds -= Time.deltaTime;
             }
+            else
+            {
+                if (gameManager.currentState != GameState.GameOver)
+                    gameManager.SetGameState(GameState.GameOver);
+            }
 
             int minutes = Mathf.FloorToInt(RemainingTimeInSeconds / 60);
             int seconds = Mathf.FloorToInt(RemainingTimeInSeconds % 60);
 
             timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
 
+            DebugCommands();
         }
 
-        public void AddSecondsToTimer(int secondsToAdd)
+        public void AddSecondsToTimer()
         {
+            AddSecondsToTimer(secondsToAdd);
+        }
+
+        private void AddSecondsToTimer(int secondsToAdd)
+        {
+            gameManager.UpdateToolTipText($"Added {secondsToAdd}s", "to timer");
             RemainingTimeInSeconds += secondsToAdd;
+            UpdateFragmentsText();
+        }
+
+        public void RemoveSecondsToTimer(int secondsToRemove)
+        {
+            RemainingTimeInSeconds -= secondsToRemove;
+        }
+
+        public bool UseFragment()
+        {
+            if (fragmentsAmount > 0 && totalFragments > 0)
+            {
+                fragmentsAmount--;
+                totalFragments--;
+                CheckWinCondition();
+                return true;
+            }
+            UpdateFragmentsText();
+            return false;
+        }
+
+        private void CheckWinCondition()
+        {
+            if (totalFragments <= 0)
+            {
+                gameManager.SetGameState(GameState.PlayerWin);
+            }
+        }
+
+        public void AddFragment()
+        {
+            if (fragmentsAmount < totalFragments)
+            {
+                StartCoroutine(gameManager.UpdateToolTipText("Puzzle Solved!", "Received FRAGMENT", 5f));
+                fragmentsAmount++;
+                UpdateFragmentsText();
+            }
+            else
+            {
+                Debug.Log("Cannot add more fragments. Maximum reached.");
+            }
+        }
+
+        private void UpdateFragmentsText()
+        {
+            fragmentsAmountText.text = $"Fragments: {fragmentsAmount}/{totalFragments}";
+        }
+
+        private void DebugCommands()
+        {
+            if (!gameManager.DebugModeEnabled) return;
+
+            if (Input.GetKeyDown(KeyCode.F))
+                Debug.Log($"Time left : {RemainingTimeInSeconds}");
+
+            if (Input.GetKeyDown(KeyCode.G))
+                AddFragment();
+
+            if (Input.GetKeyDown(KeyCode.H))
+                RemoveSecondsToTimer(60);
         }
     }
 }

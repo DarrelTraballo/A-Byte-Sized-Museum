@@ -1,5 +1,4 @@
 using KaChow.WFC;
-using KaChow.Demo;
 using UnityEngine;
 
 namespace KaChow.AByteSizedMuseum

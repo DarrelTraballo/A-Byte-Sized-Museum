@@ -40,7 +40,7 @@ namespace KaChow.AByteSizedMuseum
                 puzzleInterpreterAndCam.SetActive(true);
 
                 // TODO: Make random selection once more puzzle sets have been created
-                Instantiate(puzzles.puzzleSets[1], puzzleHolder);
+                Instantiate(puzzles.puzzleSets[2], puzzleHolder);
             }
             else
             {

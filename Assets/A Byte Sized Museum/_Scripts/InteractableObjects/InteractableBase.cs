@@ -13,7 +13,6 @@ namespace KaChow.AByteSizedMuseum
             inputManager = InputManager.Instance;
         }
 
-        // what happens if player enters interactable object collider
         protected virtual void OnTriggerEnter(Collider actor)
         {
             if (actor.CompareTag("Player"))
@@ -22,7 +21,6 @@ namespace KaChow.AByteSizedMuseum
             }
         }
 
-        // what happens if player exits interactable object collider
         protected virtual void OnTriggerExit(Collider actor)
         {
             if (actor.CompareTag("Player"))
@@ -33,12 +31,10 @@ namespace KaChow.AByteSizedMuseum
 
         public virtual void OnLookEnter()
         {
-            Debug.Log($"Looking at {name}");
         }
 
         public virtual void OnLookExit()
         {
-            Debug.Log($"Looked away from {name}");
             gameManager.DisableToolTipText();
         }
 
