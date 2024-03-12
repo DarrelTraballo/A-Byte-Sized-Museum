@@ -14,6 +14,7 @@ namespace KaChow.AByteSizedMuseum
         public override void Start()
         {
             base.Start();
+            subtitleText = "Press E to OPEN";
         }
 
         private void Update()
@@ -27,7 +28,7 @@ namespace KaChow.AByteSizedMuseum
         public override void OnLookEnter()
         {
             base.OnLookEnter();
-            gameManager.UpdateToolTipText("Interpreter", "Press E to OPEN");
+            // gameManager.SetToolTipText("Interpreter", "Press E to OPEN");
 
         }
 
