@@ -22,7 +22,7 @@ namespace KaChow.AByteSizedMuseum
             if (isOpen)
             {
                 foreach (var door in doors)
-                {                    
+                {
                     door.gameObject.SetActive(true);
                 }
                 isOpen = false;

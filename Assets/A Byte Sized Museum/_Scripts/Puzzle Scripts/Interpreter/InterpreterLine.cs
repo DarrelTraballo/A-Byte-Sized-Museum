@@ -9,8 +9,6 @@ namespace KaChow.AByteSizedMuseum
         private Image highlight;
         private Color defaultColor;
 
-        [SerializeField] private bool isOccupied = false;
-
         private void Start()
         {
             highlight = GetComponent<Image>();

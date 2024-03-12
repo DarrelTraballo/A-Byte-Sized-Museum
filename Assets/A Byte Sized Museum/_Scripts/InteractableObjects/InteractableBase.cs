@@ -19,21 +19,9 @@ namespace KaChow.AByteSizedMuseum
             subtitleDelay = 1.5f;
         }
 
-        protected virtual void OnTriggerEnter(Collider actor)
-        {
-            if (actor.CompareTag("Player"))
-            {
-                Debug.Log("Press E to interact");
-            }
-        }
+        protected virtual void OnTriggerEnter(Collider actor) { }
 
-        protected virtual void OnTriggerExit(Collider actor)
-        {
-            if (actor.CompareTag("Player"))
-            {
-                Debug.Log("player exited");
-            }
-        }
+        protected virtual void OnTriggerExit(Collider actor) { }
 
         public virtual void OnLookEnter()
         {
