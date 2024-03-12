@@ -182,7 +182,6 @@ namespace KaChow.AByteSizedMuseum
             toolTipUI.SetActive(false);
         }
 
-
         public void SetGameState(GameState state)
         {
             currentState = state;

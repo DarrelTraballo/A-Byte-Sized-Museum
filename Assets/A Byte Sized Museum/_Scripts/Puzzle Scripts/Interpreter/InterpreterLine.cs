@@ -33,13 +33,10 @@ namespace KaChow.AByteSizedMuseum
             CodeBlock heldCodeBlock = dropped.GetComponent<CodeBlock>();
             GameObject dropTarget = eventData.pointerCurrentRaycast.gameObject;
 
-            // Debug.Log($"<color=green>Tried to drop on {dropTarget.name}</color>", dropTarget.gameObject);
-
             if (dropTarget.TryGetComponent<InterpreterLine>(out var targetInterpreterLine))
             {
                 if (targetInterpreterLine.transform.childCount >= 1)
                 {
-                    // Debug.Log($"{heldCodeBlock.name}", heldCodeBlock.gameObject);
                     Debug.Log($"{heldCodeBlock.parentBeforeDrag.name}");
 
                     if (heldCodeBlock.parentBeforeDrag.GetComponent<CodeBlockSlot>() != null) return;
@@ -55,7 +52,6 @@ namespace KaChow.AByteSizedMuseum
             }
             else
             {
-                // Debug.Log("no interpreter line found");
                 heldCodeBlock.parentAfterDrag = null;
             }
         }

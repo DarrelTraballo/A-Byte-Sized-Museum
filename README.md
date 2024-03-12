@@ -4,7 +4,7 @@
 
 GAMEPLAY
 - [HIGH] Make more puzzle sets
-- [HIGH] Loop Block increment/decrement
+- ~~ [HIGH] Loop Block increment/decrement ~~
 - [HIGH] Indicator to what the player needs to do in the game
 - [MEDIUM] Drag and Drop somewhere to discard code blocks in Interpreter
 - [MEDIUM] Hold the Interact Key on the Chrono Chamber to use the collected Fragments

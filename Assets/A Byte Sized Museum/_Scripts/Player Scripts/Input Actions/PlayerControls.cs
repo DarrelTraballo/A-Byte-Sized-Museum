@@ -204,7 +204,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""1673d067-e758-4a9f-ab79-886c361db190"",
                     ""path"": ""<Keyboard>/e"",
-                    ""interactions"": ""Hold,Press"",
+                    ""interactions"": ""Hold,Tap"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Interact"",

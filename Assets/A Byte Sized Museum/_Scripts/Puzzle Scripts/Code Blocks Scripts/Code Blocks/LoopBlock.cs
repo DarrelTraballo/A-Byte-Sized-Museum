@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 namespace KaChow.AByteSizedMuseum
 {
@@ -14,9 +15,6 @@ namespace KaChow.AByteSizedMuseum
         [SerializeField] private TMP_Text counterText;
         [SerializeField] private int counter;
 
-        [SerializeField] private Button plusIcon;
-        [SerializeField] private Button minusIcon;
-
         public override void Start()
         {
             base.Start();
@@ -25,8 +23,6 @@ namespace KaChow.AByteSizedMuseum
 
         public override IEnumerator ExecuteBlock(int botID)
         {
-            plusIcon.enabled = false;
-            minusIcon.enabled = false;
 
             yield return new WaitForSeconds(delay);
 
@@ -54,25 +50,17 @@ namespace KaChow.AByteSizedMuseum
                     interpreterLine.DisableHighlight();
                 }
             }
-            plusIcon.enabled = true;
-            minusIcon.enabled = true;
         }
 
         public void IncrementCounter()
         {
             Debug.Log("Inceremebt CLickec");
             counter++;
-            UpdateCounterText();
-        }
-
-        public void DecrementCounter()
-        {
-            Debug.Log("Decrement CLickec");
-            if (counter > 0)
+            if (counter > 10)
             {
-                counter--;
-                UpdateCounterText();
+                counter = 1;
             }
+            UpdateCounterText();
         }
 
         private void UpdateCounterText()
@@ -83,6 +71,13 @@ namespace KaChow.AByteSizedMuseum
             }
 
             counterText.text = counter.ToString();
+        }
+
+        public override void OnPointerClick(PointerEventData eventData)
+        {
+            base.OnPointerClick(eventData);
+
+            IncrementCounter();
         }
     }
 }
