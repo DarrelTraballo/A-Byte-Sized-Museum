@@ -16,6 +16,9 @@ GAMEPLAY
       - Change color of Exhibit Paths in minimap upon completion of puzzle(s)
    - [MEDIUM] have tried to use a fragment
    - [MEDIUM] are about to run out of time
+- [LOW] Multiple Camera views for Puzzle camera
+   - CCTV type camera
+   - Top-down Orthographic camera   
 
 UI
 - [HIGH] Game Over screen
