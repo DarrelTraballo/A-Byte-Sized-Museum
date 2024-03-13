@@ -44,6 +44,7 @@ namespace KaChow.AByteSizedMuseum
             }
             gameManager = GameManager.Instance;
             DialogueContainer.SetActive(true);
+            //Invoke("DelayedCode",1f);
             sentences_count = sentences.Count + 1;
 
             if (helperbot_tutorial == true)
@@ -75,6 +76,11 @@ namespace KaChow.AByteSizedMuseum
 
         }
 
+        void DelayedCode()
+        {
+            DialogueContainer.SetActive(true);
+        }
+
         public void Next()
         {
             index += 1;
@@ -88,8 +94,9 @@ namespace KaChow.AByteSizedMuseum
 
         public void StartDialogue(Dialogue dialogue)
         {
-            gameManager.SetGameState(GameState.RunDialog);
+            animator.SetBool("IsOpen", false);
             animator.SetBool("IsOpen", true);
+            gameManager.SetGameState(GameState.RunDialog);
 
             nameText.text = dialogue.name;
             //Debug.Log("Starting conversation with " + dialogue.name);
@@ -169,6 +176,7 @@ namespace KaChow.AByteSizedMuseum
 
             sentences.Clear();
             ResetUIElements();
+            DialogueContainer.SetActive(false);
         }
 
         // Method to reset UI elements
@@ -177,7 +185,7 @@ namespace KaChow.AByteSizedMuseum
             // Reset UI elements to their initial state
             nameText.text = "";
             dialogueText.text = "";
-            Input_manager.SetActive(true);
+            //Input_manager.SetActive(true);
         }
 
 
