@@ -41,19 +41,20 @@ OTHERS
    - Timer ticking down
    - When player uses a Fragment to repair Chrono Chamber
    - Chrono Chamber breaking sounds
-- [HIGH] Update Interpreter tutorial images and text
-   - Cube => Power Orb
-   - HelperBots => Quantum Bots
-   - Mini game => Quantum Maze
-   - Maze Room => Exhibit
-   - Code Reader => Interpreter Panel
-      - Image is too stretched
-      - Make use of one image of the entire Interpreter and simply highlight the specific part(s) being explained
+- ~~[HIGH] Update Interpreter tutorial images and text~~
+   - ~~Cube => Power Orb~~
+   - ~~HelperBots => Quantum Bots~~
+   - ~~Mini game => Quantum Maze~~
+   - ~~Maze Room => Exhibit~~
+   - ~~Code Reader => Interpreter Panel~~
+- [HIGH] Interpreter tutorial
+   - Make use of one image of the entire Interpreter and simply highlight the specific part(s) being explained
 - [HIGH] Prompt player to try out the Puzzle
 - [MEDIUM] More dialogues for the main game's gameplay
    - i.e. Iris explaining what had happened to the player (nung nasira yung chrono chamber) (in A Byte Sized Museum scene)
 - [MEDIUM] Skip button for cutscene/dialogues
    - Button to backtrack or go back sa previous dialogues
-- [MEDIUM] Fix & clean dialogue/cutscene text content
+- ~~[MEDIUM] Fix & clean dialogue text content~~
+- [MEDIUM] Fix & clean cutscene text content
 - [LOW] Credits
    - Need list of assets used and where they're taken from
