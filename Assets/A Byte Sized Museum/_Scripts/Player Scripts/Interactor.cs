@@ -32,7 +32,14 @@ namespace KaChow.AByteSizedMuseum
                 if (hitSomething && hitInfo.collider.gameObject.TryGetComponent(out InteractableBase interactObj))
                 {
                     currentInteractObject = interactObj;
-                    interactObj.OnLookEnter();
+
+                    if (lastInteractedObject != currentInteractObject)
+                    {
+                        interactObj.OnLookEnter();
+                    }
+
+                    if (inputManager.PlayerInteractedThisFrame())
+                        interactObj.OnInteract();
 
                     if (inputManager.PlayerInteractedThisFrame())
                         interactObj.OnInteract();
@@ -44,10 +51,6 @@ namespace KaChow.AByteSizedMuseum
 
                 lastInteractedObject = currentInteractObject;
             }
-            // else
-            // {
-            //     // GameManager.Instance.crossHairText.text = "";
-            // }
         }
     }
 }

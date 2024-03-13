@@ -27,15 +27,7 @@ namespace KaChow.AByteSizedMuseum
         {
             if (isPuzzleExhibit)
             {
-                for (int i = 0; i < pathwayGuide.transform.childCount; i++)
-                {
-                    GameObject pathwayObject = pathwayGuide.transform.GetChild(i).gameObject;
-                    Renderer renderer = pathwayObject.GetComponent<Renderer>();
-                    if (renderer != null)
-                    {
-                        renderer.material.color = Color.blue;
-                    }
-                }
+                SetPathColor(Color.blue);
 
                 puzzleInterpreterAndCam.SetActive(true);
 
@@ -49,30 +41,26 @@ namespace KaChow.AByteSizedMuseum
             }
         }
 
-        private void OnTriggerEnter(Collider other)
+        public void SetPathColor(Color color)
         {
-            // isExhibitLocked = true;
-            // ToggleDoors(isExhibitLocked);
-        }
-
-        private void OnTriggerExit(Collider other)
-        {
-            // isExhibitLocked = false;
-            // ToggleDoors(isExhibitLocked);
-
-        }
-
-        private void ToggleDoors(bool isOpen)
-        {
-            foreach (var door in doors)
+            for (int i = 0; i < pathwayGuide.transform.childCount; i++)
             {
-                door.isLocked = isOpen;
+                GameObject pathwayObject = pathwayGuide.transform.GetChild(i).gameObject;
+                Renderer renderer = pathwayObject.GetComponent<Renderer>();
+                if (renderer != null)
+                {
+                    renderer.material.color = color;
+                }
             }
         }
 
-        public void SetPuzzleSolved(bool isPuzzleSolved)
+        public void SetIsPuzzleExhibit(bool isPuzzleExhibit) => this.isPuzzleExhibit = isPuzzleExhibit;
+
+        public void SetPathColorSolved()
         {
-            this.isPuzzleSolved = isPuzzleSolved;
+            if (!isPuzzleExhibit) return;
+
+            SetPathColor(Color.green);
         }
     }
 }

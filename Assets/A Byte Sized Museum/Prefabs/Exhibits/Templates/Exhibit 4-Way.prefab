@@ -1818,6 +1818,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6476168336606724661}
   - component: {fileID: 5707440005127990562}
+  - component: {fileID: 2589662539135596521}
   - component: {fileID: -5528231922914340875}
   - component: {fileID: 4190191339156420321}
   m_Layer: 0
@@ -1868,6 +1869,34 @@ MonoBehaviour:
   puzzleHolder: {fileID: 4041504578908571620}
   isPuzzleExhibit: 0
   pathwayGuide: {fileID: 5054993530634553200}
+--- !u!114 &2589662539135596521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5995404055193659014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86e171c6f8676ee42a4585aa2f52c4e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 000d7d5fcdbe4994cae67caba482a52d, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5707440005127990562}
+        m_TargetAssemblyTypeName: KaChow.AByteSizedMuseum.Exhibit, Assembly-CSharp
+        m_MethodName: SetPathColorSolved
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &-5528231922914340875
 MonoBehaviour:
   m_ObjectHideFlags: 0

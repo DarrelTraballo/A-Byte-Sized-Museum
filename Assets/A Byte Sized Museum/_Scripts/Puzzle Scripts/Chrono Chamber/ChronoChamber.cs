@@ -9,11 +9,17 @@ namespace KaChow.AByteSizedMuseum
     {
         [SerializeField] private Timer timer;
 
+        public override void Start()
+        {
+            base.Start();
+            subtitleText = "Press E to REPAIR";
+        }
+
         public override void OnLookEnter()
         {
             base.OnLookEnter();
             // TODO: ayaw mapatungan
-            gameManager.UpdateToolTipText("Chrono Chamber", "Press E to repair");
+
         }
 
         public override void OnInteract()
@@ -25,7 +31,7 @@ namespace KaChow.AByteSizedMuseum
             }
             else
             {
-                gameManager.UpdateToolTipText("Not enough Fragments", "");
+                StartCoroutine(gameManager.SetToolTipText("Not enough Fragments", "", subtitleDelay));
             }
         }
     }

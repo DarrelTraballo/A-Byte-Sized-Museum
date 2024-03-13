@@ -12,11 +12,12 @@ namespace KaChow.AByteSizedMuseum
         private GameManager gameManager;
         // Start is called before the first frame update
 
-        void OnEnable() {
+        void OnEnable()
+        {
             TriggerDialogue();
-            
-       
-            
+
+
+
         }
         void Start()
         {
@@ -26,7 +27,7 @@ namespace KaChow.AByteSizedMuseum
 
         public void TriggerDialogue()
         {
-            
+
             FindObjectOfType<dialogmanager>().Start();
             FindObjectOfType<dialogmanager>().StartDialogue(dialogue);
 
@@ -36,7 +37,7 @@ namespace KaChow.AByteSizedMuseum
         // Update is called once per frame
         void Update()
         {
-        
+
         }
     }
 }

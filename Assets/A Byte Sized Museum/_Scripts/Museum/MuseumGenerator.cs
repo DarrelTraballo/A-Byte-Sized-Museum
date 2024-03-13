@@ -106,6 +106,10 @@ namespace KaChow.AByteSizedMuseum
                     continue;
                 }
 
+                potentialExhibit.InitializeExhibit();
+                potentialExhibit.SetIsPuzzleExhibit(true);
+
+
                 puzzleExhibitCells.Add(potentialExhibitCell);
                 gridComponentsCopy.RemoveAt(randomIndex);
 
@@ -114,8 +118,8 @@ namespace KaChow.AByteSizedMuseum
             foreach (var puzzleExhibitCell in puzzleExhibitCells)
             {
                 var puzzleExhibit = puzzleExhibitCell.GetComponentInChildren<Exhibit>();
-                puzzleExhibit.InitializeExhibit();
-                puzzleExhibit.isPuzzleExhibit = true;
+                // puzzleExhibit.InitializeExhibit();
+                // puzzleExhibit.SetIsPuzzleExhibit(true);
 
                 puzzleExhibit.TogglePuzzleExhibit();
             }

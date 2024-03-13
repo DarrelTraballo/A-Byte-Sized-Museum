@@ -4,7 +4,7 @@ using System.Collections;
 
 public class TextTypingEffect : MonoBehaviour
 {
-    public float typingSpeed = 0.05f; // Adjust the typing speed as needed
+    public float typingSpeed = 0.01f; // Adjust the typing speed as needed
     public TMPro.TextMeshProUGUI tmproTextField; // Corrected line for TextMeshPro
     public string fullText;
 
@@ -16,7 +16,7 @@ public class TextTypingEffect : MonoBehaviour
     }
     void OnEnable()
     {
-        
+
         if (currentText != fullText) // Check if typing is not already completed
         {
             currentText = "";
@@ -27,7 +27,7 @@ public class TextTypingEffect : MonoBehaviour
 
     IEnumerator TypeText()
     {
-        
+
         foreach (char letter in fullText.ToCharArray())
         {
             currentText += letter;
