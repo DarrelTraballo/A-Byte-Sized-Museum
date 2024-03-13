@@ -37,11 +37,12 @@ namespace KaChow.AByteSizedMuseum
 
             if (isPuzzleObject)
             {
-                AudioManager.Instance.PlaySFX("Completed");
                 tutorial = false;
 
                 if (!isSolved)
                 {
+                    AudioManager.Instance.sfxSource.Stop();
+                    AudioManager.Instance.PlaySFX("Completed");
                     onActivatorActivated.Raise(this, this);
                     isSolved = true;
                 }
