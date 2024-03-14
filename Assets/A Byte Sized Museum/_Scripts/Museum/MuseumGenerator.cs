@@ -108,20 +108,12 @@ namespace KaChow.AByteSizedMuseum
 
                 potentialExhibit.InitializeExhibit();
                 potentialExhibit.SetIsPuzzleExhibit(true);
+                potentialExhibit.TogglePuzzleExhibit();
 
 
                 puzzleExhibitCells.Add(potentialExhibitCell);
                 gridComponentsCopy.RemoveAt(randomIndex);
 
-            }
-
-            foreach (var puzzleExhibitCell in puzzleExhibitCells)
-            {
-                var puzzleExhibit = puzzleExhibitCell.GetComponentInChildren<Exhibit>();
-                // puzzleExhibit.InitializeExhibit();
-                // puzzleExhibit.SetIsPuzzleExhibit(true);
-
-                puzzleExhibit.TogglePuzzleExhibit();
             }
         }
 
