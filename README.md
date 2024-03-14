@@ -21,12 +21,6 @@ GAMEPLAY
    - Top-down Orthographic camera
 
 UI
-- ~~[HIGH] Game Over screen~~
-   - ~~Play again button~~
-   - ~~Back to Main Menu button~~
-- [HIGH] Win screen
-   - Play again button
-   - Back to Main Menu button
 - [HIGH/MEDIUM] Cutscene and Dialogue Fonts
    - Find a font similar to what real comics use
    - Highlight important bits in dialogue texts
@@ -35,29 +29,37 @@ UI
    - Play Tutorial => goes to Tutorial scene first before A Byte-Sized Museum scene
 - [MEDIUM] Improvements on Interpreter UI
 - [MEDIUM] Make Dialog text start from the top instead of the center of UI
+- ~~[HIGH] Game Over screen~~
+   - ~~Play again button~~
+   - ~~Back to Main Menu button~~
+- ~~[HIGH] Win screen~~
+   - ~~Play again button~~
+   - ~~Back to Main Menu button~~
 
 OTHERS
 - [HIGH] Toggleable walls for edge of map edge cases in map generation
-- [HIGH] Reorder Scene order
-   - MainMenu -> Cutscene -> Tutorial -> A Byte-Sized Museum
+- [HIGH] Skip button for cutscene/dialogues
+   - Button to backtrack or go back sa previous dialogues
 - [HIGH] New sound effects:
    - Timer ticking down
-   - When player uses a Fragment to repair Chrono Chamber
+   - ~~When player uses a Fragment to repair Chrono Chamber~~
    - Chrono Chamber breaking sounds
+- [HIGH] Prompt player to try out the Puzzle
+- [MEDIUM] More dialogues for the main game's gameplay
+   - i.e. Iris explaining what had happened to the player (nung nasira yung chrono chamber) (in A Byte Sized Museum scene)
+- [MEDIUM] Fix & clean cutscene text content
+- [LOW] Credits
+   - Need list of assets used and where they're taken from
+- [LOW]
+   - Make mini map paths reflect exhibit's actual paths
+- ~~[HIGH] Reorder Scene order~~
+   - ~~MainMenu -> Cutscene -> Tutorial -> A Byte-Sized Museum~~
 - ~~[HIGH] Update Interpreter tutorial images and text~~
    - ~~Cube => Power Orb~~
    - ~~HelperBots => Quantum Bots~~
    - ~~Mini game => Quantum Maze~~
    - ~~Maze Room => Exhibit~~
    - ~~Code Reader => Interpreter Panel~~
-- [HIGH] Interpreter tutorial
-   - Make use of one image of the entire Interpreter and simply highlight the specific part(s) being explained
-- [HIGH] Prompt player to try out the Puzzle
-- [MEDIUM] More dialogues for the main game's gameplay
-   - i.e. Iris explaining what had happened to the player (nung nasira yung chrono chamber) (in A Byte Sized Museum scene)
-- [MEDIUM] Skip button for cutscene/dialogues
-   - Button to backtrack or go back sa previous dialogues
+- ~~[HIGH] Interpreter tutorial~~
+   - ~~Make use of one image of the entire Interpreter and simply highlight the specific part(s) being explained~~
 - ~~[MEDIUM] Fix & clean dialogue text content~~
-- [MEDIUM] Fix & clean cutscene text content
-- [LOW] Credits
-   - Need list of assets used and where they're taken from

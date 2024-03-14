@@ -740,6 +740,7 @@ GameObject:
   - component: {fileID: 6218434352261835092}
   - component: {fileID: 6227132769786454606}
   - component: {fileID: 6258554902582687848}
+  - component: {fileID: 319569872967157225}
   - component: {fileID: 3607169361449399187}
   - component: {fileID: 1253452984103307586}
   m_Layer: 0
@@ -839,6 +840,27 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300020, guid: 65c4e0d1191656a43a436373673c91f7, type: 3}
+--- !u!65 &319569872967157225
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214939011774631786}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5, y: 4, z: 1}
+  m_Center: {x: -1.25, y: 2, z: 1.1495768}
 --- !u!65 &3607169361449399187
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -875,6 +897,7 @@ MonoBehaviour:
   doors:
   - {fileID: 1558241889313293387}
   - {fileID: 524848093299941791}
+  doorCollider: {fileID: 319569872967157225}
   doorOpenSpeed: 0.5
   isLocked: 0
 --- !u!1 &8319744233149915147

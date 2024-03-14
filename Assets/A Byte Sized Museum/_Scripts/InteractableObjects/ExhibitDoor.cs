@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+using System.Collections;
 
 namespace KaChow.AByteSizedMuseum
 {
@@ -8,14 +9,20 @@ namespace KaChow.AByteSizedMuseum
         [Header("Doors")]
         [Tooltip("Doors[0] => left door, Doors[1] => right door")]
         public Transform[] doors; // doors[0] => left door, doors[1] => right door
+        [SerializeField] private BoxCollider doorCollider;
 
-        [SerializeField] private bool isOpen = false;
+        private bool isOpen = false;
         [SerializeField] private float doorOpenSpeed = 0.5f;
-        public bool isLocked = false;
+        [HideInInspector] public bool isLocked = false;
+
+        public override void Start()
+        {
+            base.Start();
+            className = "Door";
+        }
 
         protected override void OnTriggerExit(Collider actor)
         {
-            AudioManager.Instance.PlaySFX("DoorOpen");
             base.OnTriggerExit(actor);
 
             if (isOpen)
@@ -25,7 +32,6 @@ namespace KaChow.AByteSizedMuseum
         public override void OnInteract()
         {
             base.OnInteract();
-            AudioManager.Instance.PlaySFX("DoorOpen");
 
             if (!isOpen)
                 OpenCloseDoor();
@@ -34,6 +40,9 @@ namespace KaChow.AByteSizedMuseum
         private void OpenCloseDoor()
         {
             if (isLocked) return; // Check if the door is locked and return if true
+            AudioManager.Instance.PlaySFX("DoorOpen");
+
+            doorCollider.enabled = isOpen;
 
             Vector3 openRotation = new Vector3(0f, 90f, 0f); // Rotation for opening the door
             Vector3 closeRotation = new Vector3(0f, -90f, 0f); // Rotation for closing the door
@@ -44,12 +53,11 @@ namespace KaChow.AByteSizedMuseum
                 // Determine the target rotation based on the door's current state (open or closed)
                 // and whether the door is the left or right door in the pair
                 Vector3 targetRotation = isOpen ? closeRotation : openRotation;
-                Ease ease = isOpen ? Ease.InExpo : Ease.OutExpo;
                 targetRotation = (i % 2 == 0) ? -targetRotation : targetRotation;
 
                 door.DORotate(targetRotation, doorOpenSpeed, RotateMode.LocalAxisAdd)
                     .SetLoops(1)
-                    .SetEase(ease);
+                    .SetEase(Ease.OutExpo);
             }
 
             isOpen = !isOpen; // Toggle the isOpen state
