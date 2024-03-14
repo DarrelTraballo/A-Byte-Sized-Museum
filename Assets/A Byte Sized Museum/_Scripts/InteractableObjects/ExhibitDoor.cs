@@ -48,11 +48,12 @@ namespace KaChow.AByteSizedMuseum
                 // Determine the target rotation based on the door's current state (open or closed)
                 // and whether the door is the left or right door in the pair
                 Vector3 targetRotation = isOpen ? closeRotation : openRotation;
+                Ease ease = isOpen ? Ease.InExpo : Ease.OutExpo;
                 targetRotation = (i % 2 == 0) ? -targetRotation : targetRotation;
 
                 door.DORotate(targetRotation, doorOpenSpeed, RotateMode.LocalAxisAdd)
                     .SetLoops(1)
-                    .SetEase(Ease.OutExpo);
+                    .SetEase(ease);
             }
 
             isOpen = !isOpen; // Toggle the isOpen state
