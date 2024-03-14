@@ -23,34 +23,31 @@ namespace KaChow.AByteSizedMuseum
 
         private void Update()
         {
-            if (gameManager.currentState == GameState.Playing)
+            if (gameManager.currentState != GameState.Playing) return;
+
+            Ray r = new Ray(interactorSource.position, interactorSource.forward);
+            bool hitSomething = Physics.Raycast(r, out RaycastHit hitInfo, interactRange);
+            InteractableBase currentInteractObject = null;
+
+            if (hitSomething && hitInfo.collider.gameObject.TryGetComponent(out InteractableBase interactObj))
             {
-                Ray r = new Ray(interactorSource.position, interactorSource.forward);
-                bool hitSomething = Physics.Raycast(r, out RaycastHit hitInfo, interactRange);
-                InteractableBase currentInteractObject = null;
+                currentInteractObject = interactObj;
 
-                if (hitSomething && hitInfo.collider.gameObject.TryGetComponent(out InteractableBase interactObj))
+                if (lastInteractedObject != currentInteractObject)
                 {
-                    currentInteractObject = interactObj;
-
-                    if (lastInteractedObject != currentInteractObject)
-                    {
-                        interactObj.OnLookEnter();
-                    }
-
-                    if (inputManager.PlayerInteractedThisFrame())
-                        interactObj.OnInteract();
-
-                    if (inputManager.PlayerInteractedThisFrame())
-                        interactObj.OnInteract();
-                }
-                if (lastInteractedObject != null && lastInteractedObject != currentInteractObject)
-                {
-                    lastInteractedObject.OnLookExit();
+                    interactObj.OnLookEnter();
                 }
 
-                lastInteractedObject = currentInteractObject;
+                if (inputManager.PlayerInteractedThisFrame())
+                    interactObj.OnInteract();
             }
+
+            if (lastInteractedObject != null && lastInteractedObject != currentInteractObject)
+            {
+                lastInteractedObject.OnLookExit();
+            }
+
+            lastInteractedObject = currentInteractObject;
         }
     }
 }

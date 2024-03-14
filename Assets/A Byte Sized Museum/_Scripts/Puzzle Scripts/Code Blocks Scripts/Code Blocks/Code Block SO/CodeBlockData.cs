@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 
 namespace KaChow.AByteSizedMuseum
@@ -9,7 +6,7 @@ namespace KaChow.AByteSizedMuseum
     public class CodeBlockData : ScriptableObject
     {
         public string codeBlockName;
-        
+
         [TextArea] public string codeBlockDescription;
 
         public GameObject interpreterImage;
@@ -17,8 +14,8 @@ namespace KaChow.AByteSizedMuseum
 
         // public Image inventoryImage;
 
-        // TODO: 
+        // TODO:
         // data to be displayed sa bottom right panel ng interpreter
-        
+
     }
 }

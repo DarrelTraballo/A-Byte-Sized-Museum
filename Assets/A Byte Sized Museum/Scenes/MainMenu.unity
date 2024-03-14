@@ -2815,7 +2815,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LoadingScreen: {fileID: 400826067}
   LoadingBarfill: {fileID: 1379361921}
-  LoadingSceneNumber: 2
+  LoadingSceneNumber: 1
+  delayAfterLoad: 1
 --- !u!4 &727165731
 Transform:
   m_ObjectHideFlags: 0
@@ -3059,7 +3060,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -7652,7 +7653,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2042086323}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 727165730}
+        m_TargetAssemblyTypeName: KaChow.AByteSizedMuseum.LoadingSceneScript, Assembly-CSharp
+        m_MethodName: Quit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2042086323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8105,3 +8118,4 @@ SceneRoots:
   - {fileID: 727165731}
   - {fileID: 495973830}
   - {fileID: 1365655086}
+  - {fileID: 805719132}
