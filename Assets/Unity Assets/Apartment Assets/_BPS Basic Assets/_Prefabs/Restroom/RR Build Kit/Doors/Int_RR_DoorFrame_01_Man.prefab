@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 4216421510756335136}
   - component: {fileID: 2098397324547774765}
   - component: {fileID: 5269415267944294191}
+  - component: {fileID: 2473830002202211684}
   m_Layer: 0
   m_Name: Int_RR_DoorFrame_01_Man
   m_TagString: Untagged
@@ -183,6 +184,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doors:
   - {fileID: 6700578642741047608}
+  doorCollider: {fileID: 2473830002202211684}
+  doorOpenSpeed: 0.5
+  isLocked: 0
 --- !u!65 &5269415267944294191
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -204,6 +208,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.1191438, y: 3.0493088, z: 1.8079051}
   m_Center: {x: -1.2259758, y: 1.624656, z: -0.0000009536743}
+--- !u!65 &2473830002202211684
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2530248384463198189}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.29863143, y: 3.0493088, z: 1.8079051}
+  m_Center: {x: -1.2499999, y: 1.624656, z: -0.0000009536743}
 --- !u!1 &4225370588171917849
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,8 +241,6 @@ GameObject:
   - component: {fileID: 2939240808337946003}
   - component: {fileID: 1485641211378322918}
   - component: {fileID: 5024598522548661699}
-  - component: {fileID: 835323280870341542}
-  - component: {fileID: 1295105221917445327}
   m_Layer: 0
   m_Name: BP_BR_Door
   m_TagString: Untagged
@@ -313,42 +336,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.08325128, y: 2.889, z: 1.4780005}
   m_Center: {x: -0.041623905, y: 1.4444997, z: -0.7390004}
---- !u!95 &835323280870341542
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4225370588171917849}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a78403c5152a9024b9029ea9f39b3592, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1295105221917445327
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4225370588171917849}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b5e0617227fa4743be84f23d9e5cb42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  openandclose1: {fileID: 835323280870341542}
-  open: 0
-  Player: {fileID: 0}
 --- !u!1 &8693036758117733237
 GameObject:
   m_ObjectHideFlags: 0
