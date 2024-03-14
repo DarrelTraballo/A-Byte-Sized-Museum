@@ -12,13 +12,13 @@ GAMEPLAY
 - [MEDIUM] Compass
    - make it point towards center room
 - Give feedback to players when they:
-   - [HIGH] have completed a puzzle
-      - Change color of Exhibit Paths in minimap upon completion of puzzle(s)
+   - [HIGH] have completed the puzzle
+      - ~~Change color of Exhibit Paths in minimap upon completion of puzzle(s)~~
    - [MEDIUM] have tried to use a fragment
    - [MEDIUM] are about to run out of time
 - [LOW] Multiple Camera views for Puzzle camera
    - CCTV type camera
-   - Top-down Orthographic camera   
+   - Top-down Orthographic camera
 
 UI
 - [HIGH] Game Over screen

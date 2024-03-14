@@ -8,10 +8,6 @@ namespace KaChow.AByteSizedMuseum
 {
     public class LoopBlock : CodeBlock
     {
-        /*
-            TODO: ENABLE PLAYER TO SET COUNTER AND SHIT
-        */
-
         [SerializeField] private TMP_Text counterText;
         [SerializeField] private int counter;
 
@@ -54,7 +50,6 @@ namespace KaChow.AByteSizedMuseum
 
         public void IncrementCounter()
         {
-            Debug.Log("Inceremebt CLickec");
             counter++;
             if (counter > 10)
             {

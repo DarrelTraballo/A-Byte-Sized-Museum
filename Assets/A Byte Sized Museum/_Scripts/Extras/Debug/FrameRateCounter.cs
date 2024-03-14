@@ -1,3 +1,4 @@
+using KaChow.AByteSizedMuseum;
 using TMPro;
 using UnityEngine;
 
@@ -69,6 +70,8 @@ namespace KaChow.DebugUtils
 
         private void ToggleDebugConsole()
         {
+            if (!GameManager.Instance.DebugModeEnabled) return;
+
             if (Input.GetKeyDown(KeyCode.Z))
             {
                 debugConsoleCanvas.enabled = !debugConsoleCanvas.enabled;

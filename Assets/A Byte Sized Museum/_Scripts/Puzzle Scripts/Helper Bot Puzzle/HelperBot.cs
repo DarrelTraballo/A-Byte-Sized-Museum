@@ -47,7 +47,6 @@ namespace KaChow.AByteSizedMuseum
 
         public void Move(Component sender, object data)
         {
-
             AudioManager.Instance.sfxSource.Stop();
             AudioManager.Instance.PlaySFX("BotMove");
 
@@ -63,7 +62,6 @@ namespace KaChow.AByteSizedMuseum
                              .SetEase(Ease.OutExpo);
                 }
             }
-
         }
 
         public void Rotate(Component sender, object data)
@@ -76,15 +74,14 @@ namespace KaChow.AByteSizedMuseum
             RotateDirection rotateDirection = tupleData.Item1;
             var targetRotation = rotateDirection switch
             {
-                RotateDirection.Clockwise => transform.eulerAngles.y - 90.0f,
-                RotateDirection.CounterClockwise => transform.eulerAngles.y + 90.0f,
+                RotateDirection.Clockwise => transform.eulerAngles.y + 90.0f,
+                RotateDirection.CounterClockwise => transform.eulerAngles.y - 90.0f,
                 _ => transform.eulerAngles.y,
             };
             transform.DORotate(new Vector3(0f, targetRotation, 0f), moveSpeed, RotateMode.Fast)
                      .SetEase(Ease.InOutCirc);
         }
 
-        // TODO: fix
         public void Reset()
         {
             // reset bot's positions
@@ -104,7 +101,6 @@ namespace KaChow.AByteSizedMuseum
 
         public void PickUp(Component sender, object data)
         {
-
             if (data is not int interpreterID || interpreterID != botID) return;
 
             // if bot is already holding an object, do nothing

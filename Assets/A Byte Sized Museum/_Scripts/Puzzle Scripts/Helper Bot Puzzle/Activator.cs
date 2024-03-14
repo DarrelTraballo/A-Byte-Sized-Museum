@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using KaChow.WFC;
 using UnityEngine;
 
 namespace KaChow.AByteSizedMuseum
@@ -37,12 +38,16 @@ namespace KaChow.AByteSizedMuseum
 
             if (isPuzzleObject)
             {
-                AudioManager.Instance.PlaySFX("Completed");
                 tutorial = false;
 
                 if (!isSolved)
                 {
-                    onActivatorActivated.Raise(this, this);
+                    AudioManager.Instance.sfxSource.Stop();
+                    AudioManager.Instance.PlaySFX("Completed");
+
+                    var cell = GetComponentInParent<Cell>();
+
+                    onActivatorActivated.Raise(this, cell);
                     isSolved = true;
                 }
             }

@@ -1,4 +1,5 @@
 using System.Linq;
+using KaChow.WFC;
 using UnityEngine;
 
 namespace KaChow.AByteSizedMuseum
@@ -31,7 +32,6 @@ namespace KaChow.AByteSizedMuseum
 
                 puzzleInterpreterAndCam.SetActive(true);
 
-                // TODO: Make random selection once more puzzle sets have been created
                 int selectedPuzzleSet = Random.Range(0, puzzles.puzzleSets.Count);
                 Instantiate(puzzles.puzzleSets[selectedPuzzleSet], puzzleHolder);
             }
@@ -56,11 +56,15 @@ namespace KaChow.AByteSizedMuseum
 
         public void SetIsPuzzleExhibit(bool isPuzzleExhibit) => this.isPuzzleExhibit = isPuzzleExhibit;
 
-        public void SetPathColorSolved()
+        public void SetPathColorSolved(Component sender, object data)
         {
-            if (!isPuzzleExhibit) return;
+            if (!isPuzzleExhibit || data is not Cell exhibitCell) return;
 
-            SetPathColor(Color.green);
+            var exhibit = exhibitCell.GetComponentInChildren<Exhibit>();
+
+            Debug.Log($"Set this exhibit's color to solved : {name}", gameObject);
+
+            exhibit.SetPathColor(Color.green);
         }
     }
 }

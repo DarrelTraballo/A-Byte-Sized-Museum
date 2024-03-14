@@ -37,7 +37,7 @@ namespace KaChow.AByteSizedMuseum
 
         private void SetDirection()
         {
-            rotateDirection = (RotateDirection)(((int)rotateDirection + 1) % System.Enum.GetValues(typeof(RotateDirection)).Length);
+            rotateDirection = (RotateDirection)(((int)rotateDirection + 1) % Enum.GetValues(typeof(RotateDirection)).Length);
             rotateDirectionText.text = GetTextRotation(rotateDirection);
         }
 
@@ -45,8 +45,8 @@ namespace KaChow.AByteSizedMuseum
         {
             return rotateDirection switch
             {
-                RotateDirection.Clockwise => "CC",
-                RotateDirection.CounterClockwise => "CW",
+                RotateDirection.Clockwise => "CW",
+                RotateDirection.CounterClockwise => "CC",
                 _ => rotateDirection.ToString(),
             };
         }
