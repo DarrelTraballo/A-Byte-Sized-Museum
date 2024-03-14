@@ -70,6 +70,7 @@ namespace KaChow.AByteSizedMuseum
 
         public bool UseFragment()
         {
+            Debug.Log("Called");
             if (fragmentsAmount > 0 && totalFragments > 0)
             {
                 fragmentsAmount--;

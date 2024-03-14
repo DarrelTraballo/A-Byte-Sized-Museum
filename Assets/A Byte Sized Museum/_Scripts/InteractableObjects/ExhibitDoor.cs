@@ -5,13 +5,9 @@ namespace KaChow.AByteSizedMuseum
 {
     public class ExhibitDoor : InteractableBase
     {
-        // [Header("Events")]
-        // public GameEvent onDoorInteract;
-
         [Header("Doors")]
+        [Tooltip("Doors[0] => left door, Doors[1] => right door")]
         public Transform[] doors; // doors[0] => left door, doors[1] => right door
-        // public Transform leftDoor;
-        // public Transform rightDoor;
 
         [SerializeField] private bool isOpen = false;
         [SerializeField] private float doorOpenSpeed = 0.5f;

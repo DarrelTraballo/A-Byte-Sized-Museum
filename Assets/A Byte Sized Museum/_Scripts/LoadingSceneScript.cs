@@ -16,7 +16,7 @@ namespace KaChow.AByteSizedMuseum
         {
             StartCoroutine(LoadSceneWithDelay(LoadingSceneNumber));
         }
-         public void LoadScene(int sceneId)
+        public void LoadScene(int sceneId)
         {
             StartCoroutine(LoadSceneWithDelay(sceneId));
         }
@@ -49,6 +49,11 @@ namespace KaChow.AByteSizedMuseum
 
                 yield return null;
             }
+        }
+
+        public void Quit()
+        {
+            Application.Quit();
         }
     }
 }

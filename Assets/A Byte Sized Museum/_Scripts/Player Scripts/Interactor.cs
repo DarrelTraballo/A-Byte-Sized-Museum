@@ -40,9 +40,6 @@ namespace KaChow.AByteSizedMuseum
 
                     if (inputManager.PlayerInteractedThisFrame())
                         interactObj.OnInteract();
-
-                    if (inputManager.PlayerInteractedThisFrame())
-                        interactObj.OnInteract();
                 }
                 if (lastInteractedObject != null && lastInteractedObject != currentInteractObject)
                 {

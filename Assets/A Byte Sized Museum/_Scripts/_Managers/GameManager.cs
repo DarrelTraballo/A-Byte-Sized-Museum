@@ -90,7 +90,10 @@ namespace KaChow.AByteSizedMuseum
             if (Instance != null && Instance != this)
                 Destroy(this);
             else
+            {
                 Instance = this;
+                // DontDestroyOnLoad(this);
+            }
         }
 
         private void Start()
@@ -247,6 +250,11 @@ namespace KaChow.AByteSizedMuseum
         private void ResetPlayerState()
         {
             Player.SetCanMove(false);
+        }
+
+        public void Quit()
+        {
+            Application.Quit();
         }
     }
 }
