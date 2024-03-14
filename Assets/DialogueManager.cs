@@ -12,10 +12,12 @@ namespace KaChow.AByteSizedMuseum
     {
 
         [SerializeField] public bool helperbot_tutorial = false;
+        [SerializeField] public bool unlock = false;
         public TMP_Text nameText;
         public TMP_Text dialogueText;
         public GameObject Input_manager;
         public GameObject DialogueContainer;
+        public GameObject DialogueContainer2;
         public GameObject Canvas_images;
         public Button button;
         private int count = 0;
@@ -43,6 +45,10 @@ namespace KaChow.AByteSizedMuseum
             sentences_count = sentences.Count + 1;
 
             if (helperbot_tutorial == true)
+            {
+                index = 0;
+            }
+            if (unlock == true)
             {
                 index = 0;
             }
@@ -171,12 +177,14 @@ namespace KaChow.AByteSizedMuseum
             sentences.Clear();
             ResetUIElements();
             DialogueContainer.SetActive(false);
+            DialogueContainer2.SetActive(false);
         }
 
         // Method to reset UI elements
         private void ResetUIElements()
         {
             // Reset UI elements to their initial state
+            index = 0;
             nameText.text = "";
             dialogueText.text = "";
             //Input_manager.SetActive(true);

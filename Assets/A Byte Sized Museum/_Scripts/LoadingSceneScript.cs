@@ -31,11 +31,11 @@ namespace KaChow.AByteSizedMuseum
             Debug.Log("Scene loaded and delay completed!");
 
             // Example: Accessing an Animator component and triggering a parameter
-            Animator animator = GetComponent<Animator>();
-            if (animator != null)
-            {
-                animator.SetTrigger("YourTrigger");
-            }
+            // Animator animator = GetComponent<Animator>();
+            // if (animator != null)
+            // {
+            //     animator.SetTrigger("YourTrigger");
+            // }
         }
 
         IEnumerator LoadSceneAsync(int sceneId)

@@ -7,6 +7,7 @@ namespace KaChow.AByteSizedMuseum
     public class loadmanager : MonoBehaviour
     {
         public GameObject loadingscenecanvas;
+        
         void OnEnable()
         {
         loadingscenecanvas.SetActive(true);
