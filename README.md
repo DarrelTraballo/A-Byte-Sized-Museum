@@ -3,7 +3,7 @@
 ## CURRENT TASKS FOR THE GAME
 
 GAMEPLAY
-- [HIGH] Make more puzzle sets
+- ~~[HIGH] Make more puzzle sets~~
 - ~~[HIGH] Loop Block increment/decrement~~
 - [HIGH] Indicator to what the player needs to do in the game
 - [MEDIUM] Drag and Drop somewhere to discard code blocks in Interpreter
@@ -21,15 +21,18 @@ GAMEPLAY
    - Top-down Orthographic camera
 
 UI
-- [HIGH] Game Over screen
-   - Play again button
-   - Back to Main Menu button
+- ~~[HIGH] Game Over screen~~
+   - ~~Play again button~~
+   - ~~Back to Main Menu button~~
 - [HIGH] Win screen
    - Play again button
    - Back to Main Menu button
 - [HIGH/MEDIUM] Cutscene and Dialogue Fonts
    - Find a font similar to what real comics use
    - Highlight important bits in dialogue texts
+- [MEDIUM] Separate play buttons in Main Menu
+   - Play => goes directly to A Byte-Sized Museum scene
+   - Play Tutorial => goes to Tutorial scene first before A Byte-Sized Museum scene
 - [MEDIUM] Improvements on Interpreter UI
 - [MEDIUM] Make Dialog text start from the top instead of the center of UI
 
