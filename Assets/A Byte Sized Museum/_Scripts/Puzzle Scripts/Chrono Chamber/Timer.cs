@@ -58,7 +58,7 @@ namespace KaChow.AByteSizedMuseum
 
         private void AddSecondsToTimer(int secondsToAdd)
         {
-            StartCoroutine(gameManager.SetToolTipText($"Added {secondsToAdd}s", "to timer", 1.5f));
+            StartCoroutine(gameManager.SetToolTipTextCoroutine($"Added {secondsToAdd}s", "to timer"));
             RemainingTimeInSeconds += secondsToAdd;
             UpdateFragmentsText();
         }
@@ -94,7 +94,7 @@ namespace KaChow.AByteSizedMuseum
         {
             if (fragmentsAmount < totalFragments)
             {
-                StartCoroutine(gameManager.SetToolTipText("Puzzle Solved!", "Received FRAGMENT", 5f));
+                StartCoroutine(gameManager.SetToolTipTextCoroutine("Puzzle Solved!", "Received FRAGMENT"));
                 fragmentsAmount++;
                 UpdateFragmentsText();
             }

@@ -131,7 +131,7 @@ namespace KaChow.AByteSizedMuseum
         private void ToggleDebugMode()
         {
             DebugModeEnabled = !DebugModeEnabled;
-            StartCoroutine(SetToolTipText("Cheats", $"{(debugModeEnabled ? "Enabled" : "Disabled")}", 3f));
+            StartCoroutine(SetToolTipTextCoroutine("Cheats", $"{(debugModeEnabled ? "Enabled" : "Disabled")}"));
         }
 
         private void InitMuseum()
@@ -164,7 +164,7 @@ namespace KaChow.AByteSizedMuseum
             }
         }
 
-        public IEnumerator SetToolTipText(string title, string subtitle, float delay)
+        public IEnumerator SetToolTipTextCoroutine(string title, string subtitle, float delay = 2.5f)
         {
             SetToolTipText(title, subtitle);
 

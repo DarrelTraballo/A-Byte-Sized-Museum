@@ -31,7 +31,7 @@ namespace KaChow.AByteSizedMuseum
             }
             else
             {
-                StartCoroutine(gameManager.SetToolTipText("Not enough Fragments", "", subtitleDelay));
+                StartCoroutine(gameManager.SetToolTipTextCoroutine("Not enough Fragments", "", subtitleDelay));
             }
         }
     }
