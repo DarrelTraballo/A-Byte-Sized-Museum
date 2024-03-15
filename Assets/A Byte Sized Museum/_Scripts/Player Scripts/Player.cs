@@ -9,7 +9,7 @@ namespace KaChow.AByteSizedMuseum
         public static Player Instance { get; private set; }
         private Player() { }
 
-        public float walkingSpeed = 7.5f;
+        public float walkingSpeed = 8.5f;
         public float runningSpeed;
         public float sneakSpeed;
         public float jumpSpeed = 10.0f;
@@ -17,6 +17,7 @@ namespace KaChow.AByteSizedMuseum
         public Camera playerCamera;
         public float lookSpeed;
         public float lookXLimit = 90.0f;
+        public float angleFactor = 1.5f;
 
         private CharacterController characterController;
         private Vector3 moveDirection = Vector3.zero;
@@ -43,11 +44,13 @@ namespace KaChow.AByteSizedMuseum
         {
             playerIcon.transform.position += Vector3.up * 25f;
             playerIcon.transform.GetChild(0).gameObject.SetActive(true);
+            playerIcon.transform.GetChild(1).gameObject.SetActive(true);
         }
 
         private void OnDisable()
         {
             playerIcon.transform.GetChild(0).gameObject.SetActive(false);
+            playerIcon.transform.GetChild(1).gameObject.SetActive(false);
         }
 
         private void Start()
@@ -85,7 +88,7 @@ namespace KaChow.AByteSizedMuseum
             // Press Left Shift to sneak
             bool isSneaking = inputManager.IsPlayerSneaking();
 
-            float currentSpeedX = (isRunning ? runningSpeed : walkingSpeed) * moveInput.y;
+            float currentSpeedX = (isRunning ? runningSpeed : walkingSpeed) * moveInput.y * angleFactor;
             float currentSpeedY = (isRunning ? runningSpeed : walkingSpeed) * moveInput.x;
 
             float movementDirectionY = moveDirection.y;

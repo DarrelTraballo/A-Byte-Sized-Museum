@@ -19,6 +19,7 @@ namespace KaChow.WFC
 
         // list of rooms generated. starts bottom left, goes upwards until top right
         public List<Cell> gridComponents;
+        private List<Cell> gridComponentsEdges;
 
         private int iterations = 0;
         private readonly float exhibitSize;
@@ -32,6 +33,7 @@ namespace KaChow.WFC
         public WaveFunctionCollapse(Museum museum, Cell cellObj, GameObject parentGO, Tile[] tileObjects)
         {
             gridComponents = new List<Cell>();
+            gridComponentsEdges = new List<Cell>();
             dimensions = (int)museum.museumSize;
             this.museum = museum;
             this.cellObj = cellObj;
@@ -368,6 +370,8 @@ namespace KaChow.WFC
 
         public void CheckEdges()
         {
+
+
             for (int i = 0; i < gridComponents.Count; i++)
             {
                 int row = i / (int)museum.museumSize;
@@ -381,34 +385,48 @@ namespace KaChow.WFC
 
                 if (isTopEdge || isBottomEdge || isLeftEdge || isRightEdge)
                 {
+                    gridComponentsEdges.Add(gridComponents[i]);
                     Tile tile = gridComponents[i].GetComponentInChildren<Tile>();
 
-                    // TODO: replace position with wall changing thingy based on edge position
-                    string position = "";
+                    if (tile.TryGetComponent(out Exhibit exhibit))
+                    {
+                        // TODO: replace position with wall changing thingy based on edge position
+                        string position = "";
 
-                    if (isTopEdge)
-                    {
-                        position += "top ";
-                    }
-                    if (isBottomEdge)
-                    {
-                        position += "bottom ";
-                    }
-                    if (isLeftEdge)
-                    {
-                        position += "left ";
-                    }
-                    if (isRightEdge)
-                    {
-                        position += "right ";
-                    }
+                        if (isTopEdge)
+                        {
+                            exhibit.topBlock.SetActive(true);
+                            position += "top ";
+                        }
+                        if (isBottomEdge)
+                        {
+                            exhibit.bottomBlock.SetActive(true);
+                            position += "bottom ";
+                        }
+                        if (isLeftEdge)
+                        {
+                            exhibit.leftBlock.SetActive(true);
+                            position += "left ";
+                        }
+                        if (isRightEdge)
+                        {
+                            exhibit.rightBlock.SetActive(true);
+                            position += "right ";
+                        }
 
-                    // for debugging purposes
-                    position = position.Trim();
-                    position += position.Contains(" ") ? "corner" : "edge"; // Add "corner" if two edges are true, otherwise "edge"
+                        // for debugging purposes
+                        position = position.Trim();
+                        position += position.Contains(" ") ? " corner" : " edge"; // Add "corner" if two edges are true, otherwise "edge"
 
-                    // Debug.Log($"GameObject at index {i} is on the {position} of the grid.", tile);
+                        tile.gameObject.name = $"{position} " + tile.gameObject.name;
+                        // Debug.Log($"Exhibit found in {tile.gameObject.name}! \n {exhibit}", exhibit.gameObject);
+                    }
                 }
+
+                // for (int j = 0; j < gridComponentsEdges.Count; j++)
+                // {
+
+                // }
             }
         }
     }

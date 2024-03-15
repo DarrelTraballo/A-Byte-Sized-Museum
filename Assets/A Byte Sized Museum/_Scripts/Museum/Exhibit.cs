@@ -16,9 +16,15 @@ namespace KaChow.AByteSizedMuseum
         [HideInInspector] public bool isPuzzleExhibit = false;
         public GameObject pathwayGuide;
 
+        [Space]
+        public GameObject topBlock;
+        public GameObject rightBlock;
+        public GameObject bottomBlock;
+        public GameObject leftBlock;
+
         private bool isPuzzleSolved;
 
-        public void InitializeExhibit()
+        public void InitializePuzzleExhibit()
         {
             puzzleInterpreterAndCam = puzzleHolder.GetChild(0).gameObject;
             puzzleInterpreterAndCam.SetActive(false);

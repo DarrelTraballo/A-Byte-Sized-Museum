@@ -34,32 +34,6 @@ namespace KaChow.AByteSizedMuseum
         private int puzzleExhibitAmount;
         [HideInInspector] public List<Cell> puzzleExhibitCells;
 
-        [Space]
-        [Header("For Debugging")]
-        [SerializeField] private bool enableWFC;
-        [SerializeField] private bool enableDebugging;
-
-        private void Start()
-        {
-
-        }
-
-        // for Debugging
-        private void Update()
-        {
-            if (enableDebugging)
-            {
-                if (Input.GetKeyDown(KeyCode.Z))
-                {
-                    WFC.DisableExhibits();
-                }
-                else if (Input.GetKeyDown(KeyCode.X))
-                {
-                    WFC.EnableExhibits();
-                }
-            }
-        }
-
         public void Initialize()
         {
             exhibitSize = museum.exhibitPrefabs[0].gameObject.transform.GetChild(0).localScale.x;
@@ -72,15 +46,13 @@ namespace KaChow.AByteSizedMuseum
         // TODO: set up code structure for Exhibits
         public void GenerateExhibits()
         {
-            // Generate Museum Layout using WFC
-            if (enableWFC)
-            {
-                WFC.InitializeGrid();
-                WFC.DisableExhibits();
-                WFC.CheckEdges();
-                WFC.ToggleExhibit(WFC.gridComponents[12], false);
-                GeneratePuzzleExhibits(WFC.gridComponents);
-            }
+            WFC.InitializeGrid();
+            WFC.DisableExhibits();
+            WFC.CheckEdges();
+            WFC.ToggleExhibit(WFC.gridComponents[12], false);
+            GeneratePuzzleExhibits(WFC.gridComponents);
+
+
         }
 
         public void GeneratePuzzleExhibits(List<Cell> gridComponents)
@@ -106,7 +78,7 @@ namespace KaChow.AByteSizedMuseum
                     continue;
                 }
 
-                potentialExhibit.InitializeExhibit();
+                potentialExhibit.InitializePuzzleExhibit();
                 potentialExhibit.SetIsPuzzleExhibit(true);
                 potentialExhibit.TogglePuzzleExhibit();
 

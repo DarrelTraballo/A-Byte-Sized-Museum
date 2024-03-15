@@ -527,6 +527,7 @@ Transform:
   - {fileID: 6617698087237849777}
   - {fileID: 5442590024490367476}
   - {fileID: 8246430831364126725}
+  - {fileID: 5124727418218577956}
   m_Father: {fileID: 3794231630418888191}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3066075509249144147
@@ -544,7 +545,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5442590024490367476
 Transform:
   m_ObjectHideFlags: 0
@@ -778,6 +779,7 @@ Transform:
   - {fileID: 818570655124810942}
   - {fileID: 7671140616547715397}
   - {fileID: 8758228448055631291}
+  - {fileID: 1442370636844766591}
   - {fileID: 6424977719345672204}
   - {fileID: 367241089711374673}
   - {fileID: 4814822219949816605}
@@ -791,7 +793,6 @@ Transform:
   - {fileID: 967948128909758660}
   - {fileID: 5584183952325791506}
   - {fileID: 2600892129566868783}
-  - {fileID: 1442370636844766591}
   m_Father: {fileID: 6476168336606724661}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4039535398616987765
@@ -933,6 +934,37 @@ Transform:
   - {fileID: 4713157469371791616}
   m_Father: {fileID: 818570655124810942}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4404793858113931526
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5124727418218577956}
+  m_Layer: 0
+  m_Name: Right
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &5124727418218577956
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4404793858113931526}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 1.81, y: 0, z: -46.53}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1442370636844766591}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &4418371628721986626
 GameObject:
   m_ObjectHideFlags: 0
@@ -1090,7 +1122,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8246430831364126725
 Transform:
   m_ObjectHideFlags: 0
@@ -1535,6 +1567,10 @@ MonoBehaviour:
   puzzleHolder: {fileID: 4547967099393036828}
   isPuzzleExhibit: 0
   pathwayGuide: {fileID: 1003400590202408570}
+  topBlock: {fileID: 3066075509249144147}
+  rightBlock: {fileID: 4404793858113931526}
+  bottomBlock: {fileID: 5084331379017429660}
+  leftBlock: {fileID: 7277170905594707806}
 --- !u!114 &7205223635586630572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2078,7 +2114,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6617698087237849777
 Transform:
   m_ObjectHideFlags: 0
