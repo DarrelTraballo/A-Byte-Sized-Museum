@@ -45,7 +45,7 @@ namespace KaChow.AByteSizedMuseum
         private TMP_Text toolTipSubtitle;
 
         [Header("Gameplay")]
-        [SerializeField, Range(5f, 20f)] private int remainingTimeInMinutes = 15;
+        [SerializeField, Range(5f, 20f)] public int remainingTimeInMinutes = 15;
         [SerializeField, Range(10f, 30f)] private int secondsToAdd = 30;
         [SerializeField, Range(7, 12)] private int puzzleExhibitAmount = 10;
         [SerializeField] private bool isPaused = false;
