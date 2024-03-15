@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using KaChow.AByteSizedMuseum;
 using UnityEngine;
 
+// TODO: Transfer sa GameManager
 public class PauseManager : MonoBehaviour
 {
     public GameObject PausePanel;
@@ -22,7 +23,7 @@ public class PauseManager : MonoBehaviour
         if (inputManager.IsEscapeButtonPressed() && (gameManager.currentState == GameState.Playing || gameManager.currentState == GameState.Paused))
         {
             // Toggle the pause state
-            TogglePause();
+            // TogglePause();
         }
     }
 

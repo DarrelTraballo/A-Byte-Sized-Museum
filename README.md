@@ -24,6 +24,7 @@ UI
 - [HIGH/MEDIUM] Cutscene and Dialogue Fonts
    - Find a font similar to what real comics use
    - Highlight important bits in dialogue texts
+- [HIGH/MEDIUM] Make Code Block tooltips appear OnMouseOver instead of OnPointerClick
 - [MEDIUM] Separate play buttons in Main Menu
    - Play => goes directly to A Byte-Sized Museum scene
    - Play Tutorial => goes to Tutorial scene first before A Byte-Sized Museum scene
@@ -37,8 +38,8 @@ UI
    - ~~Back to Main Menu button~~
 
 OTHERS
-- [HIGH] Toggleable walls for edge of map edge cases in map generation
-- [HIGH] Skip button for cutscene/dialogues
+- [VERY HIGH] Toggleable walls for edge of map edge cases in map generation
+- [VERY HIGH] Skip button for cutscene/dialogues
    - Button to backtrack or go back sa previous dialogues
 - [HIGH] New sound effects:
    - Timer ticking down

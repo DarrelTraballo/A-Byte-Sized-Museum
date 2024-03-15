@@ -6,6 +6,7 @@ public class TextTypingEffect : MonoBehaviour
 {
     public float typingSpeed = 0.01f; // Adjust the typing speed as needed
     public TMPro.TextMeshProUGUI tmproTextField; // Corrected line for TextMeshPro
+    [TextArea]
     public string fullText;
 
     private string currentText = "";

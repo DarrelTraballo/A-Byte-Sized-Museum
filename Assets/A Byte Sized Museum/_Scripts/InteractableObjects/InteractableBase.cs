@@ -18,7 +18,7 @@ namespace KaChow.AByteSizedMuseum
             gameManager = GameManager.Instance;
             inputManager = InputManager.Instance;
             subtitleText = "Press E to INTERACT";
-            subtitleDelay = 1.5f;
+            subtitleDelay = 2.5f;
 
             className = GetType().Name;
         }
@@ -42,7 +42,7 @@ namespace KaChow.AByteSizedMuseum
         {
             string className = this.className;
             string formattedClassName = Regex.Replace(className, "(\\B[A-Z])", " $1");
-            StartCoroutine(gameManager.SetToolTipText(formattedClassName, subtitleText, subtitleDelay));
+            StartCoroutine(gameManager.SetToolTipTextCoroutine(formattedClassName, subtitleText, subtitleDelay));
         }
 
         /// <summary>

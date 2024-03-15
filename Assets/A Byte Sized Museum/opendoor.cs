@@ -8,7 +8,6 @@ namespace KaChow.AByteSizedMuseum
         private bool OPENDOOR = true;
         public GameObject opendoor1;
         public GameObject closedoor;
-        public GameObject DialogueContainerUnlock;
         private Activator activator;
 
         // Start is called before the first frame update
@@ -39,23 +38,13 @@ namespace KaChow.AByteSizedMuseum
                 OPENDOOR = activator.tutorial;
                 if (OPENDOOR == false)
                 {
-                    DialogueContainerUnlock.SetActive(true);
+                    // DialogueContainerUnlock.SetActive(true);
                     closedoor.SetActive(false);
                     opendoor1.SetActive(true);
 
-                    // Start a coroutine to wait for 5 seconds and then set DialogueContainerUnlock to false
-                    StartCoroutine(DisableDialogueContainer());
+                    StartCoroutine(GameManager.Instance.SetToolTipTextCoroutine("Puzzle Solved!", "Exit Unlocked!", 5f));
                 }
             }
-        }
-
-        IEnumerator DisableDialogueContainer()
-        {
-            // Wait for 5 seconds
-            yield return new WaitForSeconds(5f);
-
-            // Set DialogueContainerUnlock to false
-            DialogueContainerUnlock.SetActive(false);
         }
     }
 }

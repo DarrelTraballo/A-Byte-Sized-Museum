@@ -13,7 +13,8 @@ namespace KaChow.AByteSizedMuseum
         SolvePuzzle,
         RunDialog,
         PlayerWin, // TODO: Rename
-        GameOver
+        GameOver,
+        MainMenu
     }
 
     public class GameManager : MonoBehaviour
@@ -26,8 +27,6 @@ namespace KaChow.AByteSizedMuseum
         private MuseumGenerator museumGenerator;
         private InputManager inputManager;
 
-        [Header("Player variables")]
-        [SerializeField] private Vector3 playerStartPosition;
         public Player Player { get; private set; }
 
         private CharacterController characterController;
@@ -49,11 +48,11 @@ namespace KaChow.AByteSizedMuseum
         [SerializeField, Range(5f, 20f)] private int remainingTimeInMinutes = 15;
         [SerializeField, Range(10f, 30f)] private int secondsToAdd = 30;
         [SerializeField, Range(7, 12)] private int puzzleExhibitAmount = 10;
-
-        public bool isGameOver;
+        [SerializeField] private bool isPaused = false;
 
         [Header("Debug")]
         [SerializeField] private bool debugModeEnabled = false;
+
 
         public int RemainingTimeInMinutes
         {
@@ -92,7 +91,6 @@ namespace KaChow.AByteSizedMuseum
             else
             {
                 Instance = this;
-                // DontDestroyOnLoad(this);
             }
         }
 
@@ -121,6 +119,11 @@ namespace KaChow.AByteSizedMuseum
 
         private void Update()
         {
+            if (inputManager.IsEscapeButtonPressed() &&
+               (currentState == GameState.Playing ||
+                currentState == GameState.Paused))
+                HandlePause();
+
             // ctrl + shit + t
             if (inputManager.IsDebugModeToggled())
             {
@@ -131,7 +134,7 @@ namespace KaChow.AByteSizedMuseum
         private void ToggleDebugMode()
         {
             DebugModeEnabled = !DebugModeEnabled;
-            StartCoroutine(SetToolTipText("Cheats", $"{(debugModeEnabled ? "Enabled" : "Disabled")}", 3f));
+            StartCoroutine(SetToolTipTextCoroutine("Cheats", $"{(debugModeEnabled ? "Enabled" : "Disabled")}"));
         }
 
         private void InitMuseum()
@@ -164,7 +167,7 @@ namespace KaChow.AByteSizedMuseum
             }
         }
 
-        public IEnumerator SetToolTipText(string title, string subtitle, float delay)
+        public IEnumerator SetToolTipTextCoroutine(string title, string subtitle, float delay = 2.5f)
         {
             SetToolTipText(title, subtitle);
 
@@ -183,6 +186,14 @@ namespace KaChow.AByteSizedMuseum
         public void DisableToolTipText()
         {
             toolTipUI.SetActive(false);
+        }
+
+        public void HandlePause()
+        {
+            GameState state = isPaused ? GameState.Playing : GameState.Paused;
+            SetGameState(state);
+
+            isPaused = !isPaused;
         }
 
         public void SetGameState(GameState state)
@@ -205,11 +216,13 @@ namespace KaChow.AByteSizedMuseum
                     miniMapUI.SetActive(true);
                     Player.SetCanMove(true);
                     SetCursorState(CursorLockMode.Locked);
+                    Time.timeScale = 1;
                     break;
 
                 case GameState.Paused:
                     pauseUI.SetActive(true);
                     SetCursorState(CursorLockMode.Confined);
+                    Time.timeScale = 0;
                     break;
 
                 case GameState.SolvePuzzle:
@@ -229,6 +242,11 @@ namespace KaChow.AByteSizedMuseum
                 case GameState.GameOver:
                     gameOverUI.SetActive(true);
                     SetCursorState(CursorLockMode.Confined);
+                    break;
+
+                case GameState.MainMenu:
+                    ResetUI();
+                    Time.timeScale = 1;
                     break;
 
                 default:
@@ -255,6 +273,16 @@ namespace KaChow.AByteSizedMuseum
         public void Quit()
         {
             Application.Quit();
+        }
+
+        public void ResumeGame()
+        {
+            HandlePause();
+        }
+
+        public void MainMenuState()
+        {
+            SetGameState(GameState.MainMenu);
         }
     }
 }
