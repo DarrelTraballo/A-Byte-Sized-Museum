@@ -1,29 +1,39 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace KaChow.AByteSizedMuseum
 {
-    public class Unlock : MonoBehaviour
+    public class unlock : MonoBehaviour
     {
-        public dialogmanager dialog_manager;
-        // Start is called before the first frame update
 
+        public GameObject DialogueContainerUnlock;
+
+
+        // Start is called before the first frame update
+      
+        // Update is called once per frame
         void OnEnable()
         {
-            Start();
-        }
-        void Start()
-        {
-            dialog_manager.helperbot_tutorial = false;
-            dialog_manager.unlock = true;
-
+           activate();
         }
 
-        // Update is called once per frame
-        void Update()
+        private void activate()
         {
         
+            DialogueContainerUnlock.SetActive(true);
+                // Start a coroutine to wait for 5 seconds and then set DialogueContainerUnlock to false
+            StartCoroutine(DisableDialogueContainer());
+                
+            
+        }
+
+        IEnumerator DisableDialogueContainer()
+        {
+            // Wait for 5 seconds
+            yield return new WaitForSeconds(5f);
+
+            // Set DialogueContainerUnlock to false
+            DialogueContainerUnlock.SetActive(false);
         }
     }
 }

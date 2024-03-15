@@ -22,10 +22,16 @@ namespace KaChow.AByteSizedMuseum
             {
                 Debug.LogError("Activator component not found on the same GameObject as opendoor script.");
             }
+            
         }
 
         // Update is called once per frame
         void Update()
+        {
+           activate();
+        }
+
+        private void activate()
         {
             if (activator != null)
             {
