@@ -68,8 +68,6 @@ namespace KaChow.AByteSizedMuseum
 
             var exhibit = exhibitCell.GetComponentInChildren<Exhibit>();
 
-            Debug.Log($"Set this exhibit's color to solved : {name}", gameObject);
-
             exhibit.SetPathColor(Color.green);
         }
     }

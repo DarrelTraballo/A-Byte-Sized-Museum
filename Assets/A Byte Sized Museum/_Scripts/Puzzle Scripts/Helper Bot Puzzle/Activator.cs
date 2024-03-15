@@ -9,15 +9,19 @@ namespace KaChow.AByteSizedMuseum
     {
         [SerializeField] private Color activatedColor;
         [SerializeField] private Color deactivatedColor;
-        private bool isSolved = false;
-
-        public bool tutorial = true;
+        private bool isSolved;
 
         private Renderer rend;
 
         private Vector3 raycastOrigin;
         private Vector3 raycastDirection;
         private float raycastDistance;
+
+        public bool IsSolved
+        {
+            get { return isSolved; }
+            private set { isSolved = value; }
+        }
 
         [SerializeField] private GameEvent onActivatorActivated;
 
@@ -38,9 +42,7 @@ namespace KaChow.AByteSizedMuseum
 
             if (isPuzzleObject)
             {
-                tutorial = false;
-
-                if (!isSolved)
+                if (!IsSolved)
                 {
                     AudioManager.Instance.sfxSource.Stop();
                     AudioManager.Instance.PlaySFX("Completed");
@@ -48,7 +50,7 @@ namespace KaChow.AByteSizedMuseum
                     var cell = GetComponentInParent<Cell>();
 
                     onActivatorActivated.Raise(this, cell);
-                    isSolved = true;
+                    IsSolved = true;
                 }
             }
 

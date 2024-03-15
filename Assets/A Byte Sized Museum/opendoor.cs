@@ -5,46 +5,22 @@ namespace KaChow.AByteSizedMuseum
 {
     public class opendoor : MonoBehaviour
     {
-        private bool OPENDOOR = true;
-        public GameObject opendoor1;
-        public GameObject closedoor;
-        private Activator activator;
+        public GameObject[] doors;
+        private GameManager gameManager;
 
-        // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
-            closedoor.SetActive(true);
-            opendoor1.SetActive(false);
-
-            // Assuming the Activator component is on the same GameObject, you can use GetComponent
-            activator = GetComponent<Activator>();
-            if (activator == null)
-            {
-                Debug.LogError("Activator component not found on the same GameObject as opendoor script.");
-            }
-            
+            gameManager = GameManager.Instance;
         }
 
-        // Update is called once per frame
-        void Update()
+        public void Activate()
         {
-           activate();
-        }
-
-        private void activate()
-        {
-            if (activator != null)
+            foreach (var door in doors)
             {
-                OPENDOOR = activator.tutorial;
-                if (OPENDOOR == false)
-                {
-                    // DialogueContainerUnlock.SetActive(true);
-                    closedoor.SetActive(false);
-                    opendoor1.SetActive(true);
-
-                    StartCoroutine(GameManager.Instance.SetToolTipTextCoroutine("Puzzle Solved!", "Exit Unlocked!", 5f));
-                }
+                door.SetActive(false);
             }
+
+            StartCoroutine(gameManager.SetToolTipTextCoroutine("Puzzle Solved!", "Exit Unlocked!"));
         }
     }
 }
