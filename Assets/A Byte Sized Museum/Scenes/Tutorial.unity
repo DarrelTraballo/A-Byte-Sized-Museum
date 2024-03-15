@@ -254,7 +254,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
-  playerStartPosition: {x: 0, y: 0, z: 0}
   crosshairUI: {fileID: 1292856929}
   miniMapUI: {fileID: 1292856928}
   interpreterUI: {fileID: 530701687}
@@ -265,7 +264,7 @@ MonoBehaviour:
   remainingTimeInMinutes: 15
   secondsToAdd: 30
   puzzleExhibitAmount: 10
-  isGameOver: 0
+  isPaused: 0
   debugModeEnabled: 0
 --- !u!1001 &11742564
 PrefabInstance:
@@ -14020,51 +14019,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4, y: 0.19608502, z: 4}
   m_Center: {x: 0, y: 0.0940137, z: 0}
---- !u!1 &921065261
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 921065263}
-  - component: {fileID: 921065262}
-  m_Layer: 0
-  m_Name: Pause Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &921065262
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 921065261}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93185afa8a6b94d4198d0e4891f743d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PausePanel: {fileID: 1236340141}
---- !u!4 &921065263
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 921065261}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1003.83685, y: 526.52, z: -0.083984375}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &923372570 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 423118, guid: 964ef5212b7340f4cb5eff37c56177aa, type: 3}
@@ -30085,10 +30039,14 @@ PrefabInstance:
     - target: {fileID: 1381282363420585764, guid: 9fb25ec724aac51428316e04b2179333, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 921065262}
+      objectReference: {fileID: 10761388}
     - target: {fileID: 1381282363420585764, guid: 9fb25ec724aac51428316e04b2179333, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Continue
+      value: ResumeGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 1381282363420585764, guid: 9fb25ec724aac51428316e04b2179333, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: KaChow.AByteSizedMuseum.GameManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2321875323565295983, guid: 9fb25ec724aac51428316e04b2179333, type: 3}
       propertyPath: m_AnchorMax.y
@@ -30131,6 +30089,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5876548614698729427, guid: 9fb25ec724aac51428316e04b2179333, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5876548614698729427, guid: 9fb25ec724aac51428316e04b2179333, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5876548614698729427, guid: 9fb25ec724aac51428316e04b2179333, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 377017501}
@@ -30139,12 +30105,32 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 868195517}
     - target: {fileID: 5876548614698729427, guid: 9fb25ec724aac51428316e04b2179333, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 10761388}
+    - target: {fileID: 5876548614698729427, guid: 9fb25ec724aac51428316e04b2179333, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5876548614698729427, guid: 9fb25ec724aac51428316e04b2179333, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 5876548614698729427, guid: 9fb25ec724aac51428316e04b2179333, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: LoadScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 5876548614698729427, guid: 9fb25ec724aac51428316e04b2179333, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: MainMenuState
+      objectReference: {fileID: 0}
+    - target: {fileID: 5876548614698729427, guid: 9fb25ec724aac51428316e04b2179333, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: KaChow.AByteSizedMuseum.GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5876548614698729427, guid: 9fb25ec724aac51428316e04b2179333, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6859144625153951180, guid: 9fb25ec724aac51428316e04b2179333, type: 3}
       propertyPath: m_IsActive
@@ -32465,7 +32451,6 @@ SceneRoots:
   - {fileID: 10761387}
   - {fileID: 1113272430}
   - {fileID: 1648310747}
-  - {fileID: 921065263}
   - {fileID: 868195518}
   - {fileID: 97539120}
   - {fileID: 1292856923}

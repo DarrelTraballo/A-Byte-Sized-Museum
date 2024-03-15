@@ -23,7 +23,7 @@ public class PauseManager : MonoBehaviour
         if (inputManager.IsEscapeButtonPressed() && (gameManager.currentState == GameState.Playing || gameManager.currentState == GameState.Paused))
         {
             // Toggle the pause state
-            TogglePause();
+            // TogglePause();
         }
     }
 

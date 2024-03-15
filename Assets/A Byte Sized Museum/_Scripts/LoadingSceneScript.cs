@@ -12,6 +12,13 @@ namespace KaChow.AByteSizedMuseum
         public int LoadingSceneNumber;
         public float delayAfterLoad = 1.0f;
 
+        // private GameManager gameManager;
+
+        // private void Start()
+        // {
+        //     gameManager = GameManager.Instance;
+        // }
+
         public void callscene()
         {
             StartCoroutine(LoadSceneWithDelay(LoadingSceneNumber));
