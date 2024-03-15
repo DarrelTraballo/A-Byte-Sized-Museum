@@ -370,13 +370,10 @@ namespace KaChow.WFC
 
         public void CheckEdges()
         {
-
-
             for (int i = 0; i < gridComponents.Count; i++)
             {
                 int row = i / (int)museum.museumSize;
                 int col = i % (int)museum.museumSize;
-
 
                 bool isBottomEdge = row == 0;
                 bool isTopEdge = row == museum.museumSize - 1;
@@ -385,7 +382,6 @@ namespace KaChow.WFC
 
                 if (isTopEdge || isBottomEdge || isLeftEdge || isRightEdge)
                 {
-                    gridComponentsEdges.Add(gridComponents[i]);
                     Tile tile = gridComponents[i].GetComponentInChildren<Tile>();
 
                     if (tile.TryGetComponent(out Exhibit exhibit))
@@ -396,37 +392,30 @@ namespace KaChow.WFC
                         if (isTopEdge)
                         {
                             exhibit.topBlock.SetActive(true);
-                            position += "top ";
+                            position += "Top ";
                         }
                         if (isBottomEdge)
                         {
                             exhibit.bottomBlock.SetActive(true);
-                            position += "bottom ";
+                            position += "Bottom ";
                         }
                         if (isLeftEdge)
                         {
                             exhibit.leftBlock.SetActive(true);
-                            position += "left ";
+                            position += "Left ";
                         }
                         if (isRightEdge)
                         {
                             exhibit.rightBlock.SetActive(true);
-                            position += "right ";
+                            position += "Right ";
                         }
 
                         // for debugging purposes
                         position = position.Trim();
-                        position += position.Contains(" ") ? " corner" : " edge"; // Add "corner" if two edges are true, otherwise "edge"
-
+                        position += position.Contains(" ") ? " Corner" : " Edge"; // Add "corner" if two edges are true, otherwise "edge"
                         tile.gameObject.name = $"{position} " + tile.gameObject.name;
-                        // Debug.Log($"Exhibit found in {tile.gameObject.name}! \n {exhibit}", exhibit.gameObject);
                     }
                 }
-
-                // for (int j = 0; j < gridComponentsEdges.Count; j++)
-                // {
-
-                // }
             }
         }
     }
