@@ -26,7 +26,7 @@ namespace KaChow.AByteSizedMuseum
 
         private MuseumGenerator museumGenerator;
         private InputManager inputManager;
-        private DevConsoleManager devConsoleManager;
+        private DebugOverlayManager debugOverlayManager;
 
         public Player Player { get; private set; }
 
@@ -88,7 +88,7 @@ namespace KaChow.AByteSizedMuseum
         private void Start()
         {
             inputManager = InputManager.Instance;
-            devConsoleManager = DevConsoleManager.Instance;
+            debugOverlayManager = DebugOverlayManager.Instance;
 
             Scene currentScene = SceneManager.GetActiveScene();
             string sceneName = currentScene.name;
@@ -208,7 +208,7 @@ namespace KaChow.AByteSizedMuseum
 
                 case GameState.SolvePuzzle:
                     interpreterUICanvas.enabled = true;
-                    SetCursorState(devConsoleManager.CheatsEnabled ? CursorLockMode.None : CursorLockMode.Confined);
+                    SetCursorState(debugOverlayManager.CheatsEnabled ? CursorLockMode.None : CursorLockMode.Confined);
                     break;
 
                 case GameState.RunDialog:
