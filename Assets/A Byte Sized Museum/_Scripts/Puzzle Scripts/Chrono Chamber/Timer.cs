@@ -20,12 +20,12 @@ namespace KaChow.AByteSizedMuseum
         }
 
         private GameManager gameManager;
-        private DevConsoleManager devConsoleManager;
+        private DebugOverlayManager debugOverlayManager;
 
         private void Start()
         {
             gameManager = GameManager.Instance;
-            devConsoleManager = DevConsoleManager.Instance;
+            debugOverlayManager = DebugOverlayManager.Instance;
             RemainingTimeInSeconds = (gameManager.RemainingTimeInMinutes * 60) + 5f;
             totalFragments = gameManager.PuzzleExhibitAmount;
             secondsToAdd = gameManager.SecondsToAdd;
