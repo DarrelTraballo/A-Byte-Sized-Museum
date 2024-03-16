@@ -9,10 +9,10 @@ namespace KaChow.AByteSizedMuseum
     public class Collisionscript : MonoBehaviour
     {
         public GameObject DialogueContainer2;
-       // public GameObject Block;
+        // public GameObject Block;
 
         private GameManager gameManager;
-         private bool hasEntered = false;
+        private bool hasEntered = false;
 
         private void Start()
         {
@@ -23,35 +23,17 @@ namespace KaChow.AByteSizedMuseum
         {
             if (other.gameObject.tag == "Tutorialbox")
             {
-             //   Block.SetActive(true);
-                if(hasEntered == false)
+                //   Block.SetActive(true);
+                if (hasEntered == false)
                 {
-                    
+
                     DialogueContainer2.SetActive(true);
                     gameManager.SetGameState(GameState.RunDialog);
-                    print("Enter");
                     hasEntered = true;
                 }
-              
+
             }
 
-        }
-
-        void OnTriggerStay(Collider other)
-        {
-
-            if (other.gameObject.tag == "Tutorialbox")
-            {
-                print("Stay");
-            }
-        }
-
-        void OnTriggerExit(Collider other)
-        {
-            if (other.gameObject.tag == "Tutorialbox")
-            {
-                //Block.SetActive(false);
-            }
         }
 
 

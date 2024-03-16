@@ -20,7 +20,7 @@ namespace KaChow.AByteSizedMuseum
                 door.SetActive(false);
             }
 
-            StartCoroutine(gameManager.SetToolTipTextCoroutine("Puzzle Solved!", "Exit Unlocked!"));
+            StartCoroutine(gameManager.SetToolTipTextCoroutine("Puzzle Solved!", "<color=yellow>Exit Unlocked!</color>"));
         }
     }
 }

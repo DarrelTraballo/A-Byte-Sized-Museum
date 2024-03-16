@@ -89,7 +89,6 @@ namespace KaChow.AByteSizedMuseum
             {
                 images[i].gameObject.SetActive(false);
                 images[index].gameObject.SetActive(true);
-                Debug.Log(index);
             }
         }
 
@@ -165,7 +164,6 @@ namespace KaChow.AByteSizedMuseum
             //DialogueContainer.SetActive(false);
 
             gameManager.SetGameState(GameState.Playing);
-            Debug.Log("End of conversation");
 
 
         }
