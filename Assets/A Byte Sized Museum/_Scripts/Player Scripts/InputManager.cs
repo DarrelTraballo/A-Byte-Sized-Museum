@@ -27,10 +27,6 @@ namespace KaChow.AByteSizedMuseum
                 Instance = this;
         }
 
-        private void Start()
-        {
-        }
-
         private void OnEnable()
         {
             playerControls.Enable();
@@ -113,26 +109,45 @@ namespace KaChow.AByteSizedMuseum
             return playerControls.Cheats.ToggleCheats.triggered;
         }
 
+        /// <summary>
+        /// Checks if the "Give Fragment" cheat was activated in the current frame.
+        /// </summary>
+        /// <returns>True if the "Give Fragment" cheat was activated, otherwise false.</returns>
         public bool IsGiveFragmentPressed()
         {
             return playerControls.Cheats.GiveFragment.triggered;
         }
 
+        /// <summary>
+        /// Checks if the "Add Time" cheat was activated in the current frame.
+        /// </summary>
+        /// <returns>True if the "Add Time" cheat was activated, otherwise false.</returns>
         public bool IsAddTimePressed()
         {
             return playerControls.Cheats.AddTime.triggered;
         }
 
+        /// <summary>
+        /// Checks if the "Subtract Time" cheat was activated in the current frame.
+        /// </summary>
+        /// <returns>True if the "Subtract Time" cheat was activated, otherwise false.</returns>
         public bool IsSubtractTimePressed()
         {
             return playerControls.Cheats.SubtractTime.triggered;
         }
 
+        /// <summary>
+        /// Checks if the "Show Debug Overlay" cheat was activated in the current frame.
+        /// </summary>
+        /// <returns>True if the "Show Debug Overlay" cheat was activated, otherwise false.</returns>
         public bool IsShowDebugOverlayPressed()
         {
             return playerControls.Cheats.ShowDebugOverlay.triggered;
         }
 
+        /// <summary>
+        /// Stores all cheat bindings in a list for easy access and display.
+        /// </summary>
         private void StoreAllCheatBindings()
         {
             if (playerControls == null)
@@ -153,11 +168,15 @@ namespace KaChow.AByteSizedMuseum
                 // However, if you still need to adjust the format, you can apply your formatting here.
                 string formattedBinding = FormatBindingDisplayString(bindingDisplayString);
 
-                // Debug.Log($"{action.name}: {formattedBinding}");
                 allCheatsBindings.Add($"{action.name}: {formattedBinding}");
             }
         }
 
+        /// <summary>
+        /// Formats the display string of a binding for better readability.
+        /// </summary>
+        /// <param name="displayString">The original display string of the binding.</param>
+        /// <returns>The formatted display string.</returns>
         private string FormatBindingDisplayString(string displayString)
         {
             // Apply any custom formatting you need. For example, you might want to convert to uppercase or adjust the formatting of modifiers.
@@ -165,6 +184,11 @@ namespace KaChow.AByteSizedMuseum
             return displayString.ToUpper();
         }
 
+        /// <summary>
+        /// Formats the path of a binding to remove device prefixes and capitalize modifiers.
+        /// </summary>
+        /// <param name="path">The original path of the binding.</param>
+        /// <returns>The formatted path.</returns>
         private string FormatBindingPath(string path)
         {
             // Your existing method to format the binding path

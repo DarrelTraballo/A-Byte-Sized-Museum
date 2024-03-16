@@ -5,10 +5,10 @@ using UnityEngine;
 
 namespace KaChow.AByteSizedMuseum
 {
-    public class DevConsoleManager : MonoBehaviour
+    public class DebugOverlayManager : MonoBehaviour
     {
-        public static DevConsoleManager Instance { get; private set; }
-        private DevConsoleManager() { }
+        public static DebugOverlayManager Instance { get; private set; }
+        private DebugOverlayManager() { }
 
         private GameManager gameManager;
         private InputManager inputManager;
@@ -103,8 +103,6 @@ namespace KaChow.AByteSizedMuseum
 
         private void DisplayAllCheatBindings()
         {
-            Debug.Log("DisplayAllCheatBindings called");
-            Debug.Log($"DevConsoleManager length {inputManager.allCheatsBindings.Count}");
             foreach (var action in inputManager.allCheatsBindings)
             {
                 TMP_Text newCheat = Instantiate(cheatItem, cheatsPanel.transform);
