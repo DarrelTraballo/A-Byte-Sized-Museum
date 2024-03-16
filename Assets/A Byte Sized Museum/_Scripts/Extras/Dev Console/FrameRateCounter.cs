@@ -6,9 +6,6 @@ namespace KaChow.DebugUtils
 {
     public class FrameRateCounter : MonoBehaviour
     {
-        [SerializeField] private GameObject debugConsole;
-        private Canvas debugConsoleCanvas;
-
         [SerializeField] private TMP_Text display;
 
         public enum DisplayMode { FPS, MS }
@@ -22,9 +19,6 @@ namespace KaChow.DebugUtils
 
         private void Start()
         {
-            debugConsoleCanvas = debugConsole.GetComponentInChildren<Canvas>();
-            debugConsoleCanvas.enabled = false;
-
             ResetFrameData();
         }
 
@@ -39,8 +33,6 @@ namespace KaChow.DebugUtils
                 UpdateDisplay();
                 ResetFrameData();
             }
-
-            ToggleDebugConsole();
         }
 
         private void AccumulateFrameData(float frameDuration)
@@ -66,16 +58,6 @@ namespace KaChow.DebugUtils
             duration = 0f;
             bestDuration = float.MaxValue; // Initialize to MaxValue for FPS calculation
             worstDuration = 0f;
-        }
-
-        private void ToggleDebugConsole()
-        {
-            if (!GameManager.Instance.DebugModeEnabled) return;
-
-            if (Input.GetKeyDown(KeyCode.Z))
-            {
-                debugConsoleCanvas.enabled = !debugConsoleCanvas.enabled;
-            }
         }
     }
 }

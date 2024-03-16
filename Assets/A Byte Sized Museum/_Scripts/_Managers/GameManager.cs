@@ -26,6 +26,7 @@ namespace KaChow.AByteSizedMuseum
 
         private MuseumGenerator museumGenerator;
         private InputManager inputManager;
+        private DevConsoleManager devConsoleManager;
 
         public Player Player { get; private set; }
 
@@ -50,8 +51,8 @@ namespace KaChow.AByteSizedMuseum
         [SerializeField, Range(7, 12)] private int puzzleExhibitAmount = 10;
         [SerializeField] private bool isPaused = false;
 
-        [Header("Debug")]
-        [SerializeField] private bool debugModeEnabled = false;
+        // [Header("Debug")]
+        // [SerializeField] private bool debugModeEnabled = false;
 
 
         public int RemainingTimeInMinutes
@@ -74,16 +75,6 @@ namespace KaChow.AByteSizedMuseum
 
         public bool IsGameOver { get; private set; }
 
-        public bool DebugModeEnabled
-        {
-            get { return debugModeEnabled; }
-            private set
-            {
-                debugModeEnabled = value;
-                Debug.Log($"Debug Mode {(debugModeEnabled ? "Enabled" : "Disabled")}");
-            }
-        }
-
         private void Awake()
         {
             if (Instance != null && Instance != this)
@@ -97,6 +88,8 @@ namespace KaChow.AByteSizedMuseum
         private void Start()
         {
             inputManager = InputManager.Instance;
+            devConsoleManager = DevConsoleManager.Instance;
+
             Scene currentScene = SceneManager.GetActiveScene();
             string sceneName = currentScene.name;
 
@@ -123,18 +116,6 @@ namespace KaChow.AByteSizedMuseum
                (currentState == GameState.Playing ||
                 currentState == GameState.Paused))
                 HandlePause();
-
-            // ctrl + shit + t
-            if (inputManager.IsDebugModeToggled())
-            {
-                ToggleDebugMode();
-            }
-        }
-
-        private void ToggleDebugMode()
-        {
-            DebugModeEnabled = !DebugModeEnabled;
-            StartCoroutine(SetToolTipTextCoroutine("Cheats", $"{(debugModeEnabled ? "Enabled" : "Disabled")}"));
         }
 
         private void InitMuseum()
@@ -227,7 +208,7 @@ namespace KaChow.AByteSizedMuseum
 
                 case GameState.SolvePuzzle:
                     interpreterUICanvas.enabled = true;
-                    SetCursorState(DebugModeEnabled ? CursorLockMode.None : CursorLockMode.Confined);
+                    SetCursorState(devConsoleManager.CheatsEnabled ? CursorLockMode.None : CursorLockMode.Confined);
                     break;
 
                 case GameState.RunDialog:

@@ -24,9 +24,6 @@ GAMEPLAY
 - ~~[HIGH] Loop Block increment/decrement~~
 
 UI
-- [HIGH/MEDIUM] Cutscene and Dialogue Fonts
-   - Find a font similar to what real comics use
-   - Highlight important bits in dialogue texts
 - [HIGH/MEDIUM] Make Code Block tooltips appear OnMouseOver instead of OnPointerClick
 
 - [MEDIUM] Buttons in Dialogue system to go back sa previous dialogues
@@ -37,6 +34,9 @@ UI
    - Play => goes directly to A Byte-Sized Museum scene
    - Play Tutorial => goes to Tutorial scene first before A Byte-Sized Museum scene
 
+- ~~[HIGH/MEDIUM] Cutscene and Dialogue Fonts~~
+   - ~~Find a font similar to what real comics use~~
+   - ~~Highlight important bits in dialogue texts~~
 - ~~[MEDIUM] Make Dialog text start from the top instead of the center of UI~~
 - ~~[HIGH] Game Over screen~~
    - ~~Play again button~~

@@ -89,15 +89,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""DebugToggle"",
-                    ""type"": ""Button"",
-                    ""id"": ""dd120366-c1d1-4550-85a0-d83fb092fc47"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -243,48 +234,233 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Escape"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Cheats"",
+            ""id"": ""303d71d0-80a7-4c2e-9f11-a338934f640d"",
+            ""actions"": [
+                {
+                    ""name"": ""ToggleCheats"",
+                    ""type"": ""Button"",
+                    ""id"": ""2b2f1b2f-af58-4011-89b3-f7d08a0871f9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""GiveFragment"",
+                    ""type"": ""Button"",
+                    ""id"": ""c9aa0167-72e3-43e2-bcc2-dd1bd0a79742"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SubtractTime"",
+                    ""type"": ""Button"",
+                    ""id"": ""d7a60495-c30d-4f54-aecd-497f42b270bc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AddTime"",
+                    ""type"": ""Button"",
+                    ""id"": ""7ef37b7a-cac4-443b-b4a7-dc88fac2a5db"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ShowDebugOverlay"",
+                    ""type"": ""Button"",
+                    ""id"": ""8fc9d4b3-12db-496e-935e-ece71b2301c2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
                     ""name"": ""Two Modifiers"",
-                    ""id"": ""2d710c0d-4e76-4dd6-9ebc-9e0ed8ed25e1"",
+                    ""id"": ""7d46facb-647c-4e3b-8b5c-c2ae720df65d"",
                     ""path"": ""TwoModifiers"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""DebugToggle"",
+                    ""action"": ""ToggleCheats"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": ""modifier1"",
-                    ""id"": ""90b53637-0bab-4489-8112-fff798a43f6c"",
+                    ""id"": ""82a708d3-231b-48ad-9030-db7a0b997b5a"",
                     ""path"": ""<Keyboard>/leftCtrl"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""DebugToggle"",
+                    ""action"": ""ToggleCheats"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""modifier2"",
-                    ""id"": ""f9b9009a-113e-479f-9aeb-99dc4e560445"",
+                    ""id"": ""c59c3f6a-b38c-419b-af09-b57c2c6af641"",
                     ""path"": ""<Keyboard>/leftShift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""DebugToggle"",
+                    ""action"": ""ToggleCheats"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""binding"",
-                    ""id"": ""55cae955-5bb7-4bfb-afe3-e447fae977d7"",
+                    ""id"": ""588ad3b1-8c78-4541-8082-fc513ef772c1"",
                     ""path"": ""<Keyboard>/t"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""DebugToggle"",
+                    ""action"": ""ToggleCheats"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""One Modifier"",
+                    ""id"": ""67ed274c-3f06-424e-a294-fa0c44858712"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GiveFragment"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""4e3d5e4f-225c-4117-b1f2-5e69220b7bbc"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GiveFragment"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""3d7e4cd2-8d67-4f7a-8412-def0d9d0423b"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GiveFragment"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""One Modifier"",
+                    ""id"": ""075a3242-282f-4ef0-8e93-b369445e5f63"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SubtractTime"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""508fce84-c22f-435c-b5b7-728567a1d2ca"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SubtractTime"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""fe4a41db-0b82-4cc1-8bda-d3c076c5f05e"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SubtractTime"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""One Modifier"",
+                    ""id"": ""ef365772-fd6c-4a73-a905-22879e114922"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AddTime"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""9392e078-3227-40a4-941d-70141b3d6dc1"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AddTime"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""8e78e07e-27f1-40e1-8c17-c0dfc9b7fc73"",
+                    ""path"": ""<Keyboard>/h"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AddTime"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""One Modifier"",
+                    ""id"": ""bc1d23bb-1d5e-4653-90e0-53f760d206a9"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShowDebugOverlay"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""c903f58c-4ae8-498c-9451-17e83fdad5d1"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShowDebugOverlay"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""5fd840f8-463c-494f-bb9f-69cae76e33b3"",
+                    ""path"": ""<Keyboard>/b"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShowDebugOverlay"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 }
@@ -302,7 +478,13 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
         m_Player_Sneak = m_Player.FindAction("Sneak", throwIfNotFound: true);
         m_Player_Escape = m_Player.FindAction("Escape", throwIfNotFound: true);
-        m_Player_DebugToggle = m_Player.FindAction("DebugToggle", throwIfNotFound: true);
+        // Cheats
+        m_Cheats = asset.FindActionMap("Cheats", throwIfNotFound: true);
+        m_Cheats_ToggleCheats = m_Cheats.FindAction("ToggleCheats", throwIfNotFound: true);
+        m_Cheats_GiveFragment = m_Cheats.FindAction("GiveFragment", throwIfNotFound: true);
+        m_Cheats_SubtractTime = m_Cheats.FindAction("SubtractTime", throwIfNotFound: true);
+        m_Cheats_AddTime = m_Cheats.FindAction("AddTime", throwIfNotFound: true);
+        m_Cheats_ShowDebugOverlay = m_Cheats.FindAction("ShowDebugOverlay", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -371,7 +553,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Run;
     private readonly InputAction m_Player_Sneak;
     private readonly InputAction m_Player_Escape;
-    private readonly InputAction m_Player_DebugToggle;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -383,7 +564,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Run => m_Wrapper.m_Player_Run;
         public InputAction @Sneak => m_Wrapper.m_Player_Sneak;
         public InputAction @Escape => m_Wrapper.m_Player_Escape;
-        public InputAction @DebugToggle => m_Wrapper.m_Player_DebugToggle;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -414,9 +594,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Escape.started += instance.OnEscape;
             @Escape.performed += instance.OnEscape;
             @Escape.canceled += instance.OnEscape;
-            @DebugToggle.started += instance.OnDebugToggle;
-            @DebugToggle.performed += instance.OnDebugToggle;
-            @DebugToggle.canceled += instance.OnDebugToggle;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -442,9 +619,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Escape.started -= instance.OnEscape;
             @Escape.performed -= instance.OnEscape;
             @Escape.canceled -= instance.OnEscape;
-            @DebugToggle.started -= instance.OnDebugToggle;
-            @DebugToggle.performed -= instance.OnDebugToggle;
-            @DebugToggle.canceled -= instance.OnDebugToggle;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -462,6 +636,84 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Cheats
+    private readonly InputActionMap m_Cheats;
+    private List<ICheatsActions> m_CheatsActionsCallbackInterfaces = new List<ICheatsActions>();
+    private readonly InputAction m_Cheats_ToggleCheats;
+    private readonly InputAction m_Cheats_GiveFragment;
+    private readonly InputAction m_Cheats_SubtractTime;
+    private readonly InputAction m_Cheats_AddTime;
+    private readonly InputAction m_Cheats_ShowDebugOverlay;
+    public struct CheatsActions
+    {
+        private @PlayerControls m_Wrapper;
+        public CheatsActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ToggleCheats => m_Wrapper.m_Cheats_ToggleCheats;
+        public InputAction @GiveFragment => m_Wrapper.m_Cheats_GiveFragment;
+        public InputAction @SubtractTime => m_Wrapper.m_Cheats_SubtractTime;
+        public InputAction @AddTime => m_Wrapper.m_Cheats_AddTime;
+        public InputAction @ShowDebugOverlay => m_Wrapper.m_Cheats_ShowDebugOverlay;
+        public InputActionMap Get() { return m_Wrapper.m_Cheats; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CheatsActions set) { return set.Get(); }
+        public void AddCallbacks(ICheatsActions instance)
+        {
+            if (instance == null || m_Wrapper.m_CheatsActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_CheatsActionsCallbackInterfaces.Add(instance);
+            @ToggleCheats.started += instance.OnToggleCheats;
+            @ToggleCheats.performed += instance.OnToggleCheats;
+            @ToggleCheats.canceled += instance.OnToggleCheats;
+            @GiveFragment.started += instance.OnGiveFragment;
+            @GiveFragment.performed += instance.OnGiveFragment;
+            @GiveFragment.canceled += instance.OnGiveFragment;
+            @SubtractTime.started += instance.OnSubtractTime;
+            @SubtractTime.performed += instance.OnSubtractTime;
+            @SubtractTime.canceled += instance.OnSubtractTime;
+            @AddTime.started += instance.OnAddTime;
+            @AddTime.performed += instance.OnAddTime;
+            @AddTime.canceled += instance.OnAddTime;
+            @ShowDebugOverlay.started += instance.OnShowDebugOverlay;
+            @ShowDebugOverlay.performed += instance.OnShowDebugOverlay;
+            @ShowDebugOverlay.canceled += instance.OnShowDebugOverlay;
+        }
+
+        private void UnregisterCallbacks(ICheatsActions instance)
+        {
+            @ToggleCheats.started -= instance.OnToggleCheats;
+            @ToggleCheats.performed -= instance.OnToggleCheats;
+            @ToggleCheats.canceled -= instance.OnToggleCheats;
+            @GiveFragment.started -= instance.OnGiveFragment;
+            @GiveFragment.performed -= instance.OnGiveFragment;
+            @GiveFragment.canceled -= instance.OnGiveFragment;
+            @SubtractTime.started -= instance.OnSubtractTime;
+            @SubtractTime.performed -= instance.OnSubtractTime;
+            @SubtractTime.canceled -= instance.OnSubtractTime;
+            @AddTime.started -= instance.OnAddTime;
+            @AddTime.performed -= instance.OnAddTime;
+            @AddTime.canceled -= instance.OnAddTime;
+            @ShowDebugOverlay.started -= instance.OnShowDebugOverlay;
+            @ShowDebugOverlay.performed -= instance.OnShowDebugOverlay;
+            @ShowDebugOverlay.canceled -= instance.OnShowDebugOverlay;
+        }
+
+        public void RemoveCallbacks(ICheatsActions instance)
+        {
+            if (m_Wrapper.m_CheatsActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ICheatsActions instance)
+        {
+            foreach (var item in m_Wrapper.m_CheatsActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_CheatsActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public CheatsActions @Cheats => new CheatsActions(this);
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -471,6 +723,13 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnRun(InputAction.CallbackContext context);
         void OnSneak(InputAction.CallbackContext context);
         void OnEscape(InputAction.CallbackContext context);
-        void OnDebugToggle(InputAction.CallbackContext context);
+    }
+    public interface ICheatsActions
+    {
+        void OnToggleCheats(InputAction.CallbackContext context);
+        void OnGiveFragment(InputAction.CallbackContext context);
+        void OnSubtractTime(InputAction.CallbackContext context);
+        void OnAddTime(InputAction.CallbackContext context);
+        void OnShowDebugOverlay(InputAction.CallbackContext context);
     }
 }

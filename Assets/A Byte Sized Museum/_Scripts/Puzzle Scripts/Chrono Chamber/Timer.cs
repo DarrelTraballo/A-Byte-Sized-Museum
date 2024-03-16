@@ -20,10 +20,12 @@ namespace KaChow.AByteSizedMuseum
         }
 
         private GameManager gameManager;
+        private DevConsoleManager devConsoleManager;
 
         private void Start()
         {
             gameManager = GameManager.Instance;
+            devConsoleManager = DevConsoleManager.Instance;
             RemainingTimeInSeconds = (gameManager.RemainingTimeInMinutes * 60) + 5f;
             totalFragments = gameManager.PuzzleExhibitAmount;
             secondsToAdd = gameManager.SecondsToAdd;
@@ -47,8 +49,6 @@ namespace KaChow.AByteSizedMuseum
             int seconds = Mathf.FloorToInt(RemainingTimeInSeconds % 60);
 
             timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-
-            DebugCommands();
         }
 
         public void AddSecondsToTimer()
@@ -56,7 +56,7 @@ namespace KaChow.AByteSizedMuseum
             AddSecondsToTimer(secondsToAdd);
         }
 
-        private void AddSecondsToTimer(int secondsToAdd)
+        public void AddSecondsToTimer(int secondsToAdd)
         {
             StartCoroutine(gameManager.SetToolTipTextCoroutine($"Added {secondsToAdd}s", "to timer"));
             RemainingTimeInSeconds += secondsToAdd;
@@ -107,20 +107,6 @@ namespace KaChow.AByteSizedMuseum
         private void UpdateFragmentsText()
         {
             fragmentsAmountText.text = $"Fragments: {fragmentsAmount}/{totalFragments}";
-        }
-
-        private void DebugCommands()
-        {
-            if (!gameManager.DebugModeEnabled) return;
-
-            if (Input.GetKeyDown(KeyCode.F))
-                Debug.Log($"Time left : {RemainingTimeInSeconds}");
-
-            if (Input.GetKeyDown(KeyCode.G))
-                AddFragment();
-
-            if (Input.GetKeyDown(KeyCode.H))
-                RemoveSecondsToTimer(60);
         }
     }
 }
