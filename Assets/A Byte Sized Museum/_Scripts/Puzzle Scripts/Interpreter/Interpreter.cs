@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -92,17 +93,18 @@ namespace KaChow.AByteSizedMuseum
         private GameManager gameManager;
         private InputManager inputManager;
 
-        [Header("Interpreter Lines")]
-        public List<InterpreterLine> interpreterLines;
-        public float executeTime = 0.20f;
-
         [Header("Game Events")]
         public GameEvent onInterpreterClose;
         public GameEvent onResetPuzzle;
 
-        [Header("Bottom Right Panel")]
+        [Header("Left Panel")]
+        public List<InterpreterLine> interpreterLines;
+        public float executeTime = 0.20f;
+
+        [Header("Right Panel")]
         [SerializeField] private GameObject codeBlockDetailsPanel;
         [SerializeField] private GameObject puzzleCameraFeed;
+        [SerializeField] private GameObject deleteBlockPanel;
 
         [SerializeField] private GameObject closeIcon;
 
@@ -230,30 +232,31 @@ namespace KaChow.AByteSizedMuseum
 
         public void ShowCodeBlockDetails(Component sender, object data)
         {
-            if (data is CodeBlock codeBlock)
-            {
-                codeBlockDetailsPanel.SetActive(true);
-                puzzleCameraFeed.SetActive(false);
+            if (data is not Tuple<bool, Vector3> tupleData) return;
 
-                Transform codeBlockDetailsPanelTransform = codeBlockDetailsPanel.transform;
+            bool isActive = tupleData.Item1;
+            Vector3 mousePos = tupleData.Item2;
 
-                TextMeshProUGUI codeBlockName = codeBlockDetailsPanelTransform.Find("Code Block Name").GetComponent<TextMeshProUGUI>();
-                TextMeshProUGUI codeBlockDescription = codeBlockDetailsPanelTransform.Find("Code Block Description").GetComponent<TextMeshProUGUI>();
+            CodeBlock codeBlock = sender.gameObject.GetComponent<CodeBlock>();
+            codeBlockDetailsPanel.SetActive(isActive);
 
-                codeBlockName.text = codeBlock.codeBlockName;
-                codeBlockDescription.text = codeBlock.codeBlockDescription;
-            }
-        }
+            Transform codeBlockDetailsPanelTransform = codeBlockDetailsPanel.transform;
 
-        public void HideCodeBlockDetails()
-        {
-            codeBlockDetailsPanel.SetActive(false);
-            puzzleCameraFeed.SetActive(true);
+            codeBlockDetailsPanelTransform.position = mousePos;
+
+            TextMeshProUGUI codeBlockName = codeBlockDetailsPanelTransform.Find("Code Block Name").GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI codeBlockDescription = codeBlockDetailsPanelTransform.Find("Code Block Description").GetComponent<TextMeshProUGUI>();
+
+            codeBlockName.text = codeBlock.codeBlockName;
+            codeBlockDescription.text = codeBlock.codeBlockDescription;
+
+            Color codeBlockColor = codeBlock.image.color;
+            codeBlockDetailsPanel.GetComponent<Image>().color = codeBlockColor;
+
         }
 
         public void ResetPuzzle()
         {
-            Debug.Log($"Reset Called from {name}");
             onResetPuzzle.Raise(this, interpreterID);
         }
 

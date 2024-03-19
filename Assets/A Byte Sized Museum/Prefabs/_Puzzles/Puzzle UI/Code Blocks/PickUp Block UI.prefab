@@ -28,6 +28,54 @@ PrefabInstance:
       propertyPath: m_fontColor32.rgba
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 2511792923494664082, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2511792923494664082, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2511792923494664082, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2511792923494664082, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2511792923494664082, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2511792923494664082, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3570011449467140262, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3570011449467140262, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3570011449467140262, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3570011449467140262, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3570011449467140262, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3570011449467140262, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5720026959834240104, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -112,6 +160,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PickUp Block UI
       objectReference: {fileID: 0}
+    - target: {fileID: 7107367908105568885, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7291833404981967488, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -132,6 +184,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 8637917330424844697}
   m_SourcePrefab: {fileID: 100100000, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
+--- !u!1 &698854667327844787 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 811363144013417923, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
+  m_PrefabInstance: {fileID: 211773520352427120}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5899379667267119093 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5993886930896345989, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
@@ -155,8 +212,10 @@ MonoBehaviour:
 
 
     Helper Bot does nothing if there is no pick up-able object in front'
-  onCodeBlockClick: {fileID: 11400000, guid: f8d254c9d25edc546889d2feea2c7364, type: 2}
+  onCodeBlockHover: {fileID: 11400000, guid: f8d254c9d25edc546889d2feea2c7364, type: 2}
+  codeBlockDetails: {fileID: 698854667327844787}
   isInfinite: 0
+  parentBeforeDrag: {fileID: 0}
   parentAfterDrag: {fileID: 0}
   image: {fileID: 0}
   onPickUp: {fileID: 11400000, guid: a5d1c849962ee624788a37bcfeaaf40f, type: 2}

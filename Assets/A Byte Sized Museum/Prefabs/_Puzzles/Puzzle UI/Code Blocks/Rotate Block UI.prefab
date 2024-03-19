@@ -162,6 +162,54 @@ PrefabInstance:
       propertyPath: m_fontColor32.rgba
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 2511792923494664082, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2511792923494664082, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2511792923494664082, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2511792923494664082, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2511792923494664082, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2511792923494664082, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3570011449467140262, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3570011449467140262, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3570011449467140262, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3570011449467140262, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3570011449467140262, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3570011449467140262, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5720026959834240104, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -246,6 +294,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rotate Block UI
       objectReference: {fileID: 0}
+    - target: {fileID: 7107367908105568885, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7291833404981967488, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
       propertyPath: m_Color.g
       value: 0.2627451
@@ -258,13 +310,18 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5720026959834240104, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
-      insertIndex: -1
+      insertIndex: 2
       addedObject: {fileID: 3099077631863629849}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5993886930896345989, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
       insertIndex: -1
       addedObject: {fileID: -2091508941524388786}
   m_SourcePrefab: {fileID: 100100000, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
+--- !u!1 &4436473287030715389 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 811363144013417923, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
+  m_PrefabInstance: {fileID: 3950517283838377534}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7349204860133500347 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5993886930896345989, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
@@ -289,7 +346,8 @@ MonoBehaviour:
 
     Click on the Rotate Block to cycle between rotating Clockwise and
     Counterclockwise'
-  onCodeBlockClick: {fileID: 11400000, guid: f8d254c9d25edc546889d2feea2c7364, type: 2}
+  onCodeBlockHover: {fileID: 11400000, guid: f8d254c9d25edc546889d2feea2c7364, type: 2}
+  codeBlockDetails: {fileID: 4436473287030715389}
   isInfinite: 0
   parentBeforeDrag: {fileID: 0}
   parentAfterDrag: {fileID: 0}

@@ -26,11 +26,19 @@ namespace KaChow.AByteSizedMuseum
             yield return new WaitForSeconds(delay);
         }
 
+        public override void Start()
+        {
+            base.Start();
+            // TODO: currently does not fit the panel
+            // codeBlockName = $"Rotate Block \n({rotateDirection})";
+            SetDirection();
+        }
+
         public override void OnPointerClick(PointerEventData eventData)
         {
             base.OnPointerClick(eventData);
 
-            codeBlockName = $"Rotate Block ({rotateDirection})";
+            // codeBlockName = $"Rotate Block \n({rotateDirection})";
 
             SetDirection();
         }
