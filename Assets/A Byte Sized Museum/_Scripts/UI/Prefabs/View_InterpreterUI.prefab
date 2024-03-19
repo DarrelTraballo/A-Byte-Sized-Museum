@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8772952730567080435}
   - component: {fileID: 4298114321977344193}
   - component: {fileID: 1302278731969076683}
+  - component: {fileID: 1907840439060490282}
   m_Layer: 5
   m_Name: Delete Block
   m_TagString: Untagged
@@ -75,6 +76,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1907840439060490282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5111490956809856671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fde8d87ced6ca841a3610c954b92ce9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3313010632919722875
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -249,12 +262,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8284c81f8cf9f94e8270dcec394db1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interpreterLines: []
-  executeTime: 0.2
   onInterpreterClose: {fileID: 0}
   onResetPuzzle: {fileID: 0}
+  interpreterLines: []
+  executeTime: 0.2
   codeBlockDetailsPanel: {fileID: 0}
   puzzleCameraFeed: {fileID: 0}
+  deleteBlockPanel: {fileID: 0}
   closeIcon: {fileID: 0}
   interpreterButtons: []
   interpreterID: 0

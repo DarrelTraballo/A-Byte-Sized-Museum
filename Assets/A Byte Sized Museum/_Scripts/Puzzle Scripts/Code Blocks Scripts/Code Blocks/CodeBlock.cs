@@ -13,6 +13,8 @@ namespace KaChow.AByteSizedMuseum
         public string codeBlockName;
         [TextArea] public string codeBlockDescription;
         [SerializeField] protected GameEvent onCodeBlockHover;
+        [SerializeField] protected GameEvent onCodeBlockDragging;
+        // [SerializeField] protected GameEvent onCodeBlockDropped;
         [SerializeField] protected GameObject codeBlockDetails;
 
         protected float delay = 0.5f;
@@ -23,7 +25,7 @@ namespace KaChow.AByteSizedMuseum
 
         [HideInInspector] public Image image;
 
-        private CodeBlock movedBlock;
+        private CodeBlock heldCodeBlock;
 
         private InputManager inputManager;
 
@@ -34,59 +36,97 @@ namespace KaChow.AByteSizedMuseum
         public virtual void Start()
         {
             inputManager = InputManager.Instance;
-            image = GetComponentInChildren<Image>();
+            image = GetComponent<Image>();
             ToggleCodeBlockDetails(false);
         }
 
         public void OnBeginDrag(PointerEventData eventData)
         {
+            onCodeBlockDragging.Raise(this, true);
             inputManager.enabled = false;
+
             if (isInfinite)
             {
-                CodeBlock clone = Instantiate(this, transform.position, transform.rotation);
-                clone.name = gameObject.name;
-                movedBlock = clone.GetComponent<CodeBlock>();
-                movedBlock.isInfinite = false;
+                heldCodeBlock = CloneCodeBlock();
             }
             else
             {
-                movedBlock = this;
+                heldCodeBlock = this;
+                // movedBlock.parentAfterDrag = transform.parent;
+                // movedBlock.parentBeforeDrag = transform.parent;
             }
 
-            movedBlock.onCodeBlockHover.Raise(this, this);
-            movedBlock.parentBeforeDrag = transform.parent;
-            parentBeforeDrag = transform.parent;
-            movedBlock.parentAfterDrag = transform.parent;
-            movedBlock.transform.SetParent(GameObject.Find("ContainerCenter").transform);
-            movedBlock.image.raycastTarget = false;
-
+            heldCodeBlock.transform.SetParent(GameObject.Find("ContainerCenter").transform);
+            heldCodeBlock.image.raycastTarget = false;
         }
 
         public void OnDrag(PointerEventData eventData)
         {
-            movedBlock.gameObject.transform.position = Input.mousePosition;
+            heldCodeBlock.gameObject.transform.position = Input.mousePosition;
             ToggleCodeBlockDetails(false);
         }
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            if (parentAfterDrag == null)
-            {
-                Destroy(movedBlock.gameObject);
-                return;
-            }
-            movedBlock.transform.SetParent(parentAfterDrag);
-            movedBlock.image.raycastTarget = true;
-            movedBlock = null;
+            onCodeBlockDragging.Raise(this, false);
             inputManager.enabled = true;
-            parentAfterDrag = null;
-            // parentBeforeDrag = null;
+
+            GameObject dropTarget = eventData.pointerCurrentRaycast.gameObject;
+
+            // CODE BLOCK SWAPPING MECHANIC IDK
+            // if (dropTarget != null && dropTarget.TryGetComponent(out CodeBlock targetCodeBlock))
+            // {
+            //     // Debug.Log($"attempted to drop {heldCodeBlock.name} on {targetCodeBlock.name}", targetCodeBlock.gameObject);
+            //     if (targetCodeBlock != this)
+            //     {
+            //         // Debug.Log("if (targetCodeBlock != this) == true");
+            //         Transform originalParent = heldCodeBlock.parentAfterDrag;
+            //         Transform targetParent = targetCodeBlock.parentAfterDrag;
+
+            //         Debug.Log($"{heldCodeBlock.name} original parent: {originalParent.name}", originalParent);
+            //         Debug.Log($"{targetCodeBlock.name} target parent: {targetParent.name}", targetParent);
+
+            //         heldCodeBlock.transform.SetParent(targetParent);
+            //         targetCodeBlock.transform.SetParent(originalParent);
+            //     }
+            // }
+            if (dropTarget != null && dropTarget.TryGetComponent(out InterpreterLine targetInterpreterLine))
+            {
+                // Debug.Log($"attempted to drop {heldCodeBlock.name} on {targetInterpreterLine.name}", targetInterpreterLine.gameObject);
+                if (targetInterpreterLine.transform.childCount == 0)
+                {
+                    // Debug.Log($"no children inside {targetInterpreterLine.name}");
+                    heldCodeBlock.transform.SetParent(targetInterpreterLine.transform);
+                    heldCodeBlock.parentAfterDrag = targetInterpreterLine.transform;
+                }
+                else
+                {
+                    heldCodeBlock.transform.SetParent(heldCodeBlock.transform.parent);
+                }
+            }
+            else
+            {
+                Debug.Log("attempted to drop on neither codeblock or interpreterline. destroying held codeblock");
+                Destroy(heldCodeBlock.gameObject);
+            }
+
+            heldCodeBlock.image.raycastTarget = true;
+            heldCodeBlock = null;
         }
 
-        public virtual void OnPointerClick(PointerEventData eventData)
+        private CodeBlock CloneCodeBlock()
         {
+            CodeBlock clone = Instantiate(this, transform.position, transform.rotation);
+            clone.name = gameObject.name;
+            clone.isInfinite = false;
 
+            clone.parentBeforeDrag = transform.parent;
+            clone.parentAfterDrag = transform.parent;
+
+            return clone;
         }
+
+        public virtual void OnPointerClick(PointerEventData eventData) { }
 
         public void OnPointerEnter(PointerEventData eventData)
         {

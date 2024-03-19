@@ -142,6 +142,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2320272545365101701, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
+      propertyPath: m_Color.b
+      value: 0.036242522
+      objectReference: {fileID: 0}
+    - target: {fileID: 2320272545365101701, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
+      propertyPath: m_Color.g
+      value: 0.2264151
+      objectReference: {fileID: 0}
+    - target: {fileID: 2320272545365101701, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2454259127614891744, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
       propertyPath: m_text
       value: rotate
@@ -310,7 +322,7 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5720026959834240104, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
-      insertIndex: 2
+      insertIndex: -1
       addedObject: {fileID: 3099077631863629849}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5993886930896345989, guid: 5d9cc8dd3e0ff1a4db2aacbaba340a74, type: 3}
@@ -347,6 +359,7 @@ MonoBehaviour:
     Click on the Rotate Block to cycle between rotating Clockwise and
     Counterclockwise'
   onCodeBlockHover: {fileID: 11400000, guid: f8d254c9d25edc546889d2feea2c7364, type: 2}
+  onCodeBlockDragging: {fileID: 11400000, guid: 9d93be97db69dd740996c12977655a53, type: 2}
   codeBlockDetails: {fileID: 4436473287030715389}
   isInfinite: 0
   parentBeforeDrag: {fileID: 0}

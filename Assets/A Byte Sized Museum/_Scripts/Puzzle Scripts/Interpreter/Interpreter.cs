@@ -255,6 +255,13 @@ namespace KaChow.AByteSizedMuseum
 
         }
 
+        public void ToggleDeletePanel(Component sender, object data)
+        {
+            if (data is not bool isActive) return;
+
+            deleteBlockPanel.SetActive(isActive);
+        }
+
         public void ResetPuzzle()
         {
             onResetPuzzle.Raise(this, interpreterID);

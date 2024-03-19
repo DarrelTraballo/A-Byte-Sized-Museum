@@ -106,7 +106,6 @@ namespace KaChow.AByteSizedMuseum
             foreach (var action in inputManager.allCheatsBindings)
             {
                 TMP_Text newCheat = Instantiate(cheatItem, cheatsPanel.transform);
-                Debug.Log(action);
                 newCheat.text = action;
             }
         }
