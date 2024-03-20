@@ -34,7 +34,7 @@ namespace KaChow.AByteSizedMuseum
         {
             if (isPuzzleExhibit)
             {
-                SetPathColor(Color.blue);
+                SetPathColor(Color.red);
 
                 puzzleInterpreterAndCam.SetActive(true);
 
@@ -68,7 +68,7 @@ namespace KaChow.AByteSizedMuseum
 
             var exhibit = exhibitCell.GetComponentInChildren<Exhibit>();
 
-            exhibit.SetPathColor(Color.green);
+            exhibit.SetPathColor(Color.blue);
         }
     }
 }
