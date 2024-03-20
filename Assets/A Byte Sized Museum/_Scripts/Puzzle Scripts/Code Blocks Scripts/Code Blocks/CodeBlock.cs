@@ -101,7 +101,8 @@ namespace KaChow.AByteSizedMuseum
                 }
                 else
                 {
-                    heldCodeBlock.transform.SetParent(heldCodeBlock.transform.parent);
+                    // heldCodeBlock.transform.SetParent(heldCodeBlock.transform.parent);
+                    Destroy(heldCodeBlock.gameObject);
                 }
             }
             else

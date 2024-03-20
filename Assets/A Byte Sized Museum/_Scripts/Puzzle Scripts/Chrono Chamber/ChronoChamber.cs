@@ -7,11 +7,13 @@ namespace KaChow.AByteSizedMuseum
 {
     public class ChronoChamber : InteractableBase
     {
-        [SerializeField] private Timer timer;
+        private Timer timer;
 
         public override void Start()
         {
             base.Start();
+            timer = Timer.Instance;
+
             subtitleText = "Press E to REPAIR";
         }
 

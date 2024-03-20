@@ -5,6 +5,9 @@ namespace KaChow.AByteSizedMuseum
 {
     public class Timer : MonoBehaviour
     {
+        public static Timer Instance { get; private set; }
+        private Timer() { }
+
         [SerializeField] private TMP_Text timerText;
         [SerializeField] private TMP_Text fragmentsAmountText;
         private float remainingTimeInSeconds;
@@ -21,6 +24,14 @@ namespace KaChow.AByteSizedMuseum
 
         private GameManager gameManager;
         private DebugOverlayManager debugOverlayManager;
+
+        private void Awake()
+        {
+            if (Instance != this && Instance != null)
+                Destroy(this);
+            else
+                Instance = this;
+        }
 
         private void Start()
         {
@@ -65,6 +76,7 @@ namespace KaChow.AByteSizedMuseum
 
         public void RemoveSecondsToTimer(int secondsToRemove)
         {
+            StartCoroutine(gameManager.SetToolTipTextCoroutine($"Removed {secondsToAdd}s", "to timer"));
             RemainingTimeInSeconds -= secondsToRemove;
         }
 

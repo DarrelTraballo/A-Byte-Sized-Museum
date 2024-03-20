@@ -24,8 +24,8 @@ namespace KaChow.AByteSizedMuseum
         [SerializeField, Range(5, 60)] private int secondsToAdd = 30;
         [SerializeField, Range(5, 60)] private int secondsToRemove = 60;
 
-        [Header("References to Scripts")]
-        [SerializeField] private Timer timer;
+        // [Header("References to Scripts")]
+        private Timer timer;
 
         public bool CheatsEnabled
         {
@@ -49,6 +49,7 @@ namespace KaChow.AByteSizedMuseum
         {
             gameManager = GameManager.Instance;
             inputManager = InputManager.Instance;
+            timer = Timer.Instance;
 
             debugConsoleCanvas = debugConsole.GetComponentInChildren<Canvas>();
             debugConsoleCanvas.enabled = false;
