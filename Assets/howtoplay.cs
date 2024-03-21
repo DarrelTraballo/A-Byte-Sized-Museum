@@ -1,49 +1,51 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
-public class howtoplay : MonoBehaviour 
-{ 
-public GameObject[] background; 
-private int index;
- 
-void Start() 
-{ 
+using UnityEngine.UI;
 
-    index = PlayerPrefs.GetInt("index", 0); 
-    SetActiveBackground();
- 
- } 
- 
-public void Next() 
-{ 
+public class howtoplay : MonoBehaviour
+{
+    public Sprite[] backgrounds;
+    public string[] text;
+    public Image backgroundImage;
 
-  index++; 
-  
-  if (index >= background.Length) index = 0; 
-  SetActiveBackground(); 
-  
-} 
+    public TMPro.TextMeshProUGUI textcontent;
 
-public void Previous() 
-{ 
+    public int index;
 
-  index--; 
-  
-  if (index < 0) 
-  index = background.Length - 1; 
-  SetActiveBackground(); 
- 
- } 
- 
- void SetActiveBackground() 
- { 
- 
- for (int i = 0; i < background.Length; i++) 
- { 
-   background[i].SetActive(i == index); 
- } 
- 
- PlayerPrefs.SetInt("index", index); 
- PlayerPrefs.Save(); 
- } 
+    void Start()
+    {
+        // index = PlayerPrefs.GetInt("index", 0);
+        index =0;
+        SetActiveBackgroundandText();
+    }
+
+    public void Next()
+    {
+        index++;
+        if (index >= backgrounds.Length)
+        {
+             index = 0;
+        }
+        SetActiveBackgroundandText();
+    }
+
+    public void Previous()
+    {
+        index--;
+        if (index < 0)
+            index = backgrounds.Length - 1;
+        SetActiveBackgroundandText();
+    }
+    public void setIndex()
+    {
+        index = 0;
+    }
+
+    void SetActiveBackgroundandText()
+    {
+        backgroundImage.sprite = backgrounds[index];
+        textcontent.SetText(text[index]);
+        // PlayerPrefs.SetInt("index", index);
+        // PlayerPrefs.Save();
+    }
 }
