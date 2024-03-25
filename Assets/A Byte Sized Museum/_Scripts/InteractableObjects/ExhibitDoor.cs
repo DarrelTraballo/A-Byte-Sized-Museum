@@ -55,9 +55,13 @@ namespace KaChow.AByteSizedMuseum
                 Vector3 targetRotation = isOpen ? closeRotation : openRotation;
                 targetRotation = (i % 2 == 0) ? -targetRotation : targetRotation;
 
+                door.GetComponentInChildren<BoxCollider>().enabled = !isOpen;
+
                 door.DORotate(targetRotation, doorOpenSpeed, RotateMode.LocalAxisAdd)
                     .SetLoops(1)
-                    .SetEase(Ease.OutExpo);
+                    .SetEase(Ease.OutQuad);
+
+                door.GetComponentInChildren<BoxCollider>().enabled = isOpen;
             }
 
             isOpen = !isOpen; // Toggle the isOpen state

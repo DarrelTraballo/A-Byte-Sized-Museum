@@ -42,7 +42,6 @@ namespace KaChow.AByteSizedMuseum
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            onCodeBlockDragging.Raise(this, true);
             inputManager.enabled = false;
 
             if (isInfinite)
@@ -52,18 +51,24 @@ namespace KaChow.AByteSizedMuseum
             else
             {
                 heldCodeBlock = this;
-                // movedBlock.parentAfterDrag = transform.parent;
-                // movedBlock.parentBeforeDrag = transform.parent;
             }
 
+            Debug.Log(heldCodeBlock.image, image.gameObject);
+
+            heldCodeBlock.parentAfterDrag = transform.parent;
+            heldCodeBlock.parentBeforeDrag = transform.parent;
             heldCodeBlock.transform.SetParent(GameObject.Find("ContainerCenter").transform);
+            heldCodeBlock.image = heldCodeBlock.GetComponent<Image>();
             heldCodeBlock.image.raycastTarget = false;
+
+            LayoutRebuilder.MarkLayoutForRebuild(heldCodeBlock.GetComponent<RectTransform>());
+            onCodeBlockDragging.Raise(this, true);
         }
 
         public void OnDrag(PointerEventData eventData)
         {
             heldCodeBlock.gameObject.transform.position = Input.mousePosition;
-            ToggleCodeBlockDetails(false);
+            onCodeBlockHover.Raise(this, new Tuple<bool, Vector3>(false, mousePos));
         }
 
         public void OnEndDrag(PointerEventData eventData)
@@ -73,6 +78,7 @@ namespace KaChow.AByteSizedMuseum
 
             GameObject dropTarget = eventData.pointerCurrentRaycast.gameObject;
 
+            #region CODE BLOCK SWAPPING MECHANIC IDK
             // CODE BLOCK SWAPPING MECHANIC IDK
             // if (dropTarget != null && dropTarget.TryGetComponent(out CodeBlock targetCodeBlock))
             // {
@@ -90,6 +96,8 @@ namespace KaChow.AByteSizedMuseum
             //         targetCodeBlock.transform.SetParent(originalParent);
             //     }
             // }
+            #endregion
+
             if (dropTarget != null && dropTarget.TryGetComponent(out InterpreterLine targetInterpreterLine))
             {
                 // Debug.Log($"attempted to drop {heldCodeBlock.name} on {targetInterpreterLine.name}", targetInterpreterLine.gameObject);
@@ -121,8 +129,11 @@ namespace KaChow.AByteSizedMuseum
             clone.name = gameObject.name;
             clone.isInfinite = false;
 
-            clone.parentBeforeDrag = transform.parent;
-            clone.parentAfterDrag = transform.parent;
+            clone.image = clone.GetComponent<Image>();
+            clone.image.raycastTarget = false;
+
+            // clone.parentBeforeDrag = transform.parent;
+            // clone.parentAfterDrag = transform.parent;
 
             return clone;
         }
@@ -131,18 +142,18 @@ namespace KaChow.AByteSizedMuseum
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            // mousePos = Input.mousePosition;
-            // onCodeBlockHover.Raise(this, new Tuple<bool, Vector3>(true, mousePos));
+            mousePos = Input.mousePosition;
+            onCodeBlockHover.Raise(this, new Tuple<bool, Vector3>(true, mousePos));
 
-            ToggleCodeBlockDetails(true);
+            // ToggleCodeBlockDetails(true);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            // mousePos = Input.mousePosition;
-            // onCodeBlockHover.Raise(this, new Tuple<bool, Vector3>(false, mousePos));
+            mousePos = Input.mousePosition;
+            onCodeBlockHover.Raise(this, new Tuple<bool, Vector3>(false, mousePos));
 
-            ToggleCodeBlockDetails(false);
+            // ToggleCodeBlockDetails(false);
         }
 
         private void ToggleCodeBlockDetails(bool isActive)

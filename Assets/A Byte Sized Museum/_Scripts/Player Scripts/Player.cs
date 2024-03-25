@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace KaChow.AByteSizedMuseum
 {
@@ -42,7 +43,24 @@ namespace KaChow.AByteSizedMuseum
 
         private void OnEnable()
         {
-            playerIcon.transform.position += Vector3.up * 25f;
+            Scene currentScene = SceneManager.GetActiveScene();
+            string sceneName = currentScene.name;
+            float playerIconHeight = sceneName switch
+            {
+                "Tutorial" => 5f,
+                "A Byte Sized Museum" => 25f,
+                _ => 25f,
+            };
+
+            float playerIconScale = sceneName switch
+            {
+                "Tutorial" => 2f,
+                "A Byte Sized Museum" => 10f,
+                _ => 1f,
+            };
+
+            playerIcon.transform.position += Vector3.up * playerIconHeight;
+            playerIcon.transform.localScale = Vector3.one * playerIconScale;
             playerIcon.transform.GetChild(0).gameObject.SetActive(true);
             playerIcon.transform.GetChild(1).gameObject.SetActive(true);
         }
