@@ -1,5 +1,9 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace KaChow.AByteSizedMuseum
 {
@@ -10,20 +14,26 @@ namespace KaChow.AByteSizedMuseum
 
         [SerializeField] private TMP_Text timerText;
         [SerializeField] private TMP_Text fragmentsAmountText;
-        private float remainingTimeInSeconds;
+
+        private TimeSpan remainingTime;
+        private int timeAllowance;
         private int secondsToAdd;
 
         private int fragmentsAmount = 0;
         private int totalFragments;
 
-        public float RemainingTimeInSeconds
-        {
-            get { return remainingTimeInSeconds; }
-            set { remainingTimeInSeconds = Mathf.Max(value, 0); }
-        }
-
         private GameManager gameManager;
-        private DebugOverlayManager debugOverlayManager;
+
+
+        [SerializeField] private List<Schedule> schedules;
+
+        [Serializable]
+        private class Schedule
+        {
+            public int Minutes;
+            public int Seconds;
+            public UnityEvent action;
+        }
 
         private void Awake()
         {
@@ -36,9 +46,10 @@ namespace KaChow.AByteSizedMuseum
         private void Start()
         {
             gameManager = GameManager.Instance;
-            debugOverlayManager = DebugOverlayManager.Instance;
-            RemainingTimeInSeconds = (gameManager.RemainingTimeInMinutes * 60) + 5f;
             totalFragments = gameManager.PuzzleExhibitAmount;
+
+            timeAllowance = gameManager.TimeAllowance;
+            remainingTime = TimeSpan.FromSeconds((gameManager.RemainingTimeInMinutes * 60) + timeAllowance);
             secondsToAdd = gameManager.SecondsToAdd;
 
             UpdateFragmentsText();
@@ -46,9 +57,10 @@ namespace KaChow.AByteSizedMuseum
 
         private void Update()
         {
-            if (RemainingTimeInSeconds > 0)
+            if (remainingTime.TotalSeconds > 0)
             {
-                RemainingTimeInSeconds -= Time.deltaTime;
+                remainingTime = remainingTime.Subtract(TimeSpan.FromSeconds(Time.deltaTime));
+                CheckSchedule();
             }
             else
             {
@@ -56,10 +68,7 @@ namespace KaChow.AByteSizedMuseum
                     gameManager.SetGameState(GameState.GameOver);
             }
 
-            int minutes = Mathf.FloorToInt(RemainingTimeInSeconds / 60);
-            int seconds = Mathf.FloorToInt(RemainingTimeInSeconds % 60);
-
-            timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+            timerText.text = string.Format("{0:00}:{1:00}", remainingTime.Minutes, remainingTime.Seconds);
         }
 
         public void AddSecondsToTimer()
@@ -70,14 +79,23 @@ namespace KaChow.AByteSizedMuseum
         public void AddSecondsToTimer(int secondsToAdd)
         {
             StartCoroutine(gameManager.SetToolTipTextCoroutine($"Added {secondsToAdd}s", "to timer"));
-            RemainingTimeInSeconds += secondsToAdd;
+            remainingTime = remainingTime.Add(TimeSpan.FromSeconds(secondsToAdd));
             UpdateFragmentsText();
         }
 
         public void RemoveSecondsToTimer(int secondsToRemove)
         {
-            StartCoroutine(gameManager.SetToolTipTextCoroutine($"Removed {secondsToAdd}s", "to timer"));
-            RemainingTimeInSeconds -= secondsToRemove;
+            StartCoroutine(gameManager.SetToolTipTextCoroutine($"Removed {secondsToRemove}s", "to timer"));
+            remainingTime = remainingTime.Subtract(TimeSpan.FromSeconds(secondsToRemove));
+        }
+
+        private void CheckSchedule()
+        {
+            var schedule = schedules.FirstOrDefault(s =>
+                s.Minutes == remainingTime.Minutes &&
+                s.Seconds == remainingTime.Seconds);
+
+            schedule?.action?.Invoke();
         }
 
         public bool UseFragment()
@@ -119,6 +137,11 @@ namespace KaChow.AByteSizedMuseum
         private void UpdateFragmentsText()
         {
             fragmentsAmountText.text = $"Fragments: {fragmentsAmount}/{totalFragments}";
+        }
+
+        public void ScheduleTest(DialogueSO test)
+        {
+            StartCoroutine(gameManager.SetToolTipTextCoroutine("15:00 schedule", "Triggered!"));
         }
     }
 }

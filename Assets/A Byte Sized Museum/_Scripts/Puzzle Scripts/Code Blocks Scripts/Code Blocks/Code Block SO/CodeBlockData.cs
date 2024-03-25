@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace KaChow.AByteSizedMuseum
 {
-    [CreateAssetMenu(menuName = "Code Block", fileName = "CodeBlock")]
+    [CreateAssetMenu(menuName = "Scriptable Objects/Code Block", fileName = "CodeBlock")]
     public class CodeBlockData : ScriptableObject
     {
         public string codeBlockName;

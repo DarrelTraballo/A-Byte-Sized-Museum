@@ -14,7 +14,7 @@ namespace KaChow.AByteSizedMuseum
 
         void OnEnable()
         {
-            TriggerDialogue();
+            // TriggerDialogue();
 
 
 
@@ -22,7 +22,7 @@ namespace KaChow.AByteSizedMuseum
         void Start()
         {
             gameManager = GameManager.Instance;
-    
+
 
         }
 

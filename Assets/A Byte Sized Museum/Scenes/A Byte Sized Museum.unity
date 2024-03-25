@@ -177,6 +177,7 @@ MonoBehaviour:
   gameOverUI: {fileID: 992177699}
   playerWinUI: {fileID: 798843375985915922}
   remainingTimeInMinutes: 15
+  timeAllowance: 30
   secondsToAdd: 30
   puzzleExhibitAmount: 10
   isPaused: 0
@@ -3438,6 +3439,56 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8496931018364685782, guid: 3402d4a2ebfeca14aa9cc5a2791cd4ee, type: 3}
   m_PrefabInstance: {fileID: 498285353309214976}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1119652593
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1119652595}
+  - component: {fileID: 1119652594}
+  m_Layer: 0
+  m_Name: Dialogue Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1119652594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119652593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e0c69643bf6dc74c912958b47561aec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameText: {fileID: 41656922}
+  dialogueText: {fileID: 332279400}
+  DialogueContainer: {fileID: 1829836991}
+  button: {fileID: 145961717}
+  animator: {fileID: 82904690}
+  sentences_count: 0
+--- !u!4 &1119652595
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119652593}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1121134995
 GameObject:
   m_ObjectHideFlags: 0
@@ -3837,7 +3888,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -30, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1277029118
 MonoBehaviour:
@@ -3859,9 +3910,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Continue...
-
-'
+  m_text: press E to Continue
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e6ebe0071356eee4198886343f48014c, type: 2}
   m_sharedMaterial: {fileID: -2332376478081592637, guid: e6ebe0071356eee4198886343f48014c, type: 2}
@@ -4211,6 +4260,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerText: {fileID: 1015713068}
   fragmentsAmountText: {fileID: 1936823026}
+  schedules:
+  - Minutes: 15
+    Seconds: 29
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2021102519}
+          m_TargetAssemblyTypeName: KaChow.AByteSizedMuseum.Dialogmanager_Maingame,
+            Assembly-CSharp
+          m_MethodName: RunDialog
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: dca4a9bd5c219db4cabddc9bade24056, type: 2}
+            m_ObjectArgumentAssemblyTypeName: KaChow.AByteSizedMuseum.DialogueSO,
+              Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &1446073559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4771,7 +4840,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1829836993}
-  - component: {fileID: 1829836994}
   m_Layer: 5
   m_Name: DialogueContainer
   m_TagString: Untagged
@@ -4799,30 +4867,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1829836994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1829836991}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17de5b3eaa11830449c798157a60369a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogue:
-    name: Hi Player
-    sentences:
-    - We are having a problem.
-    - The chrono chamber collapses and needs to be repaired.
-    - You need to collect all the fragments across the museum and come back with
-      the fragments in order to fix the museum.
-    - Every time you come back to the chrono chamber to fix it, you will be granted
-      with more time.
-    - Good luck player! The fate of a Byte-Sized Museum is in your hand!
-    - You have to fix the chrono chamber before the time runs out!
-  Input_Manager: {fileID: 1113272428}
 --- !u!1 &1904690192
 GameObject:
   m_ObjectHideFlags: 0
@@ -5440,10 +5484,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameText: {fileID: 41656922}
   dialogueText: {fileID: 332279400}
-  Input_manager: {fileID: 1113272428}
   DialogueContainer: {fileID: 1829836991}
   button: {fileID: 145961717}
-  counter: 6
   animator: {fileID: 82904690}
   sentences_count: 0
 --- !u!1 &2098797317
@@ -7050,6 +7092,7 @@ SceneRoots:
   - {fileID: 830370059}
   - {fileID: 1154846449}
   - {fileID: 1446073557}
+  - {fileID: 1119652595}
   - {fileID: 1964287269}
   - {fileID: 97539120}
   - {fileID: 8474190671471583778}

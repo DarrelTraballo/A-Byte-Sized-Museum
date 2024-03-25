@@ -6,6 +6,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+using Random = UnityEngine.Random;
+
 namespace KaChow.AByteSizedMuseum
 {
     public class Dialogmanager_Maingame : MonoBehaviour
@@ -13,31 +15,38 @@ namespace KaChow.AByteSizedMuseum
 
         public TMP_Text nameText;
         public TMP_Text dialogueText;
-        public GameObject Input_manager;
         public GameObject DialogueContainer;
         public Button button;
-        private int count = 0;
-        public int counter;
         public Animator animator;
         public Queue<string> sentences = new Queue<string>();
         public int sentences_count;
 
         private GameManager gameManager;
+        private InputManager inputManager;
 
         int index;
+
+        private Dialogue previousDialogue;
 
         public void Start()
         {
             gameManager = GameManager.Instance;
-            DialogueContainer.SetActive(true);
-            sentences_count = sentences.Count + 1;
+            inputManager = InputManager.Instance;
 
 
         }
 
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+            if (gameManager.currentState == GameState.Playing && Input.GetKeyDown(KeyCode.P))
+            {
+                if (previousDialogue == null) return;
+                StartDialogue(previousDialogue);
+            }
+
+            if (gameManager.currentState != GameState.RunDialog) return;
+
+            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter) || inputManager.PlayerInteractedThisFrame())
             {
 
                 if (sentences.Count != 0)
@@ -53,7 +62,13 @@ namespace KaChow.AByteSizedMuseum
                 }
 
             }
+        }
 
+        public void RunDialog(DialogueSO dialogueSO)
+        {
+            // int selectedIndex = Random.Range(0, dialogueSO.Length);
+            previousDialogue = dialogueSO.dialogue;
+            StartDialogue(dialogueSO.dialogue);
         }
 
         void DelayedCode()
@@ -64,14 +79,16 @@ namespace KaChow.AByteSizedMuseum
         public void Next()
         {
             index += 1;
-           
+
         }
 
         public void StartDialogue(Dialogue dialogue)
         {
+            DialogueContainer.SetActive(true);
+            sentences_count = sentences.Count + 1;
+
             animator.SetBool("IsOpen", false);
             animator.SetBool("IsOpen", true);
-            
 
             nameText.text = dialogue.name;
             //Debug.Log("Starting conversation with " + dialogue.name);
@@ -92,12 +109,6 @@ namespace KaChow.AByteSizedMuseum
             AudioManager.Instance.sfxSource.Stop();
             AudioManager.Instance.PlaySFX("HelperBot");
             gameManager.SetGameState(GameState.RunDialog);
-
-            if (count == counter)
-            {
-                Input_manager.SetActive(true);
-            }
-            count++;
 
             if (sentences.Count == 0)
             {
@@ -134,7 +145,7 @@ namespace KaChow.AByteSizedMuseum
         }
         public void ResetData()
         {
-            
+
             sentences.Clear();
             ResetUIElements();
             DialogueContainer.SetActive(false);

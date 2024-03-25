@@ -45,8 +45,11 @@ namespace KaChow.AByteSizedMuseum
         private TMP_Text toolTipTitle;
         private TMP_Text toolTipSubtitle;
 
+        private Interpreter interpreter;
+
         [Header("Gameplay")]
-        [SerializeField, Range(5f, 20f)] public int remainingTimeInMinutes = 15;
+        [SerializeField, Range(10f, 30f)] private int remainingTimeInMinutes = 15;
+        [SerializeField, Range(10f, 30f)] private int timeAllowance = 30;
         [SerializeField, Range(10f, 30f)] private int secondsToAdd = 30;
         [SerializeField, Range(7, 12)] private int puzzleExhibitAmount = 10;
         [SerializeField] private bool isPaused = false;
@@ -54,11 +57,16 @@ namespace KaChow.AByteSizedMuseum
         // [Header("Debug")]
         // [SerializeField] private bool debugModeEnabled = false;
 
-
         public int RemainingTimeInMinutes
         {
             get { return remainingTimeInMinutes; }
             private set { remainingTimeInMinutes = Mathf.Clamp(value, 10, 30); }
+        }
+
+        public int TimeAllowance
+        {
+            get { return timeAllowance; }
+            private set { timeAllowance = Mathf.Clamp(value, 10, 30); }
         }
 
         public int SecondsToAdd
@@ -98,6 +106,7 @@ namespace KaChow.AByteSizedMuseum
             characterController = playerGO.GetComponent<CharacterController>();
 
             interpreterUICanvas = interpreterUI.GetComponentInChildren<Canvas>();
+            interpreter = interpreterUICanvas.GetComponentInChildren<Interpreter>();
 
             toolTipTitle = toolTipUI.transform.Find("ToolTip Text Title").GetComponent<TMP_Text>();
             toolTipSubtitle = toolTipUI.transform.Find("ToolTip Text Subtitle").GetComponent<TMP_Text>();
@@ -212,6 +221,9 @@ namespace KaChow.AByteSizedMuseum
                     break;
 
                 case GameState.RunDialog:
+                    crosshairUI.SetActive(true);
+                    miniMapUI.SetActive(true);
+                    Player.SetCanMove(true);
                     SetCursorState(CursorLockMode.Confined);
                     break;
 

@@ -68,7 +68,7 @@ namespace KaChow.AByteSizedMuseum
 
             var exhibit = exhibitCell.GetComponentInChildren<Exhibit>();
 
-            exhibit.SetPathColor(Color.blue);
+            exhibit.SetPathColor(Color.green);
         }
     }
 }

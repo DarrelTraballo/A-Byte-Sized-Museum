@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace KaChow.AByteSizedMuseum
 {
-    [CreateAssetMenu(fileName = "New Exhibit", menuName = "Exhibit")]
+    [CreateAssetMenu(fileName = "New Exhibit", menuName = "Scriptable Objects/Exhibit")]
     public class ExhibitData : ScriptableObject
     {
         [Header("Exhibit Information")]
