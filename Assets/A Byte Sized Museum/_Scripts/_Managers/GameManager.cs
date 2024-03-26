@@ -27,6 +27,7 @@ namespace KaChow.AByteSizedMuseum
         private MuseumGenerator museumGenerator;
         private InputManager inputManager;
         private DebugOverlayManager debugOverlayManager;
+        private Dialogmanager_Maingame dialogueManager;
 
         public Player Player { get; private set; }
 
@@ -40,7 +41,6 @@ namespace KaChow.AByteSizedMuseum
         [SerializeField] private GameObject toolTipUI;
         [SerializeField] private GameObject gameOverUI;
         [SerializeField] private GameObject playerWinUI; // TODO: Rename
-        [SerializeField] private GameObject dialogueUI; // TODO: Rename
 
         private Canvas interpreterUICanvas;
         private TMP_Text toolTipTitle;
@@ -115,7 +115,10 @@ namespace KaChow.AByteSizedMuseum
             toolTipUI.SetActive(false);
 
             SetGameState(GameState.Playing);
-            if (sceneName.Equals("Tutorial") || sceneName.Equals("MainMenu")) return;
+            if (sceneName.Equals("Tutorial") || sceneName.Equals("MainMenu") || sceneName.Equals("Cutscene")) return;
+
+            dialogueManager = Dialogmanager_Maingame.Instance;
+            dialogueManager.LoadDialogues();
 
             SetGameState(GameState.GenerateMuseum);
         }
@@ -224,7 +227,6 @@ namespace KaChow.AByteSizedMuseum
                 case GameState.RunDialog:
                     crosshairUI.SetActive(true);
                     miniMapUI.SetActive(true);
-                    dialogueUI.SetActive(true);
                     Player.SetCanMove(true);
                     SetCursorState(CursorLockMode.Confined);
                     break;
@@ -257,7 +259,6 @@ namespace KaChow.AByteSizedMuseum
             playerWinUI.SetActive(false);
             interpreterUICanvas.enabled = false;
             pauseUI.SetActive(false);
-            dialogueUI.SetActive(false);
             DisableToolTipText();
         }
 

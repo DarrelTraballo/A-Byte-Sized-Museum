@@ -12,6 +12,8 @@ namespace KaChow.AByteSizedMuseum
 {
     public class Dialogmanager_Maingame : MonoBehaviour
     {
+        public static Dialogmanager_Maingame Instance { get; private set; }
+        private Dialogmanager_Maingame() { }
 
         public TMP_Text nameText;
         public TMP_Text dialogueText;
@@ -29,11 +31,24 @@ namespace KaChow.AByteSizedMuseum
         private Dialogue previousDialogue;
         [SerializeField] private DialogueSO[] dialogues;
 
+        private void Awake()
+        {
+            if (Instance != this && Instance != null)
+                Destroy(this);
+            else
+                Instance = this;
+        }
+
         public void Start()
         {
             gameManager = GameManager.Instance;
             inputManager = InputManager.Instance;
 
+
+        }
+
+        public void LoadDialogues()
+        {
             if (dialogues != null)
             {
                 foreach (var dialogue in dialogues)
@@ -53,7 +68,7 @@ namespace KaChow.AByteSizedMuseum
 
             if (gameManager.currentState != GameState.RunDialog) return;
 
-            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter) || inputManager.PlayerInteractedThisFrame())
+            if (inputManager.PlayerInteractedThisFrame())
             {
 
                 if (sentences.Count != 0)
@@ -75,6 +90,7 @@ namespace KaChow.AByteSizedMuseum
         {
             // int selectedIndex = Random.Range(0, dialogueSO.Length);
             // dialogueSO.LoadDialogueFromFile();
+            DialogueContainer.SetActive(true);
             previousDialogue = dialogueSO.dialogue;
             StartDialogue(dialogueSO.dialogue);
         }

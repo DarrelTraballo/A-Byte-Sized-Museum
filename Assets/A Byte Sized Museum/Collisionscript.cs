@@ -21,7 +21,7 @@ namespace KaChow.AByteSizedMuseum
 
         void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.tag == "Tutorialbox")
+            if (other.gameObject.tag == "Player")
             {
                 //   Block.SetActive(true);
                 if (hasEntered == false)

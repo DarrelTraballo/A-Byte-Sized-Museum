@@ -12,6 +12,7 @@ namespace KaChow.AByteSizedMuseum
         public static Timer Instance { get; private set; }
         private Timer() { }
 
+        [Header("UI")]
         [SerializeField] private TMP_Text timerText;
         [SerializeField] private TMP_Text fragmentsAmountText;
 
@@ -26,12 +27,20 @@ namespace KaChow.AByteSizedMuseum
 
 
         [SerializeField] private List<Schedule> schedules;
+        [SerializeField] private List<FragmentEvents> fragmentEvents;
 
         [Serializable]
         private class Schedule
         {
             public int Minutes;
             public int Seconds;
+            public UnityEvent action;
+        }
+
+        [Serializable]
+        private class FragmentEvents
+        {
+            public int amount;
             public UnityEvent action;
         }
 
@@ -56,6 +65,11 @@ namespace KaChow.AByteSizedMuseum
         }
 
         private void Update()
+        {
+            RunTimer();
+        }
+
+        public void RunTimer()
         {
             if (remainingTime.TotalSeconds > 0)
             {
@@ -95,6 +109,8 @@ namespace KaChow.AByteSizedMuseum
                 s.Minutes == remainingTime.Minutes &&
                 s.Seconds == remainingTime.Seconds);
 
+            if (gameManager.currentState == GameState.SolvePuzzle) return;
+
             schedule?.action?.Invoke();
         }
 
@@ -119,10 +135,11 @@ namespace KaChow.AByteSizedMuseum
                 gameManager.SetGameState(GameState.PlayerWin);
             }
 
-            if (totalFragments == 5)
-            {
-                Debug.Log("We're Halfway there!!");
-            }
+            var fragmentEvent = fragmentEvents.FirstOrDefault(f => f.amount == totalFragments);
+
+            if (gameManager.currentState == GameState.SolvePuzzle) return;
+
+            fragmentEvent?.action?.Invoke();
         }
 
         public void AddFragment()
@@ -137,6 +154,11 @@ namespace KaChow.AByteSizedMuseum
             {
                 Debug.Log("Cannot add more fragments. Maximum reached.");
             }
+        }
+
+        public void PlayerWin()
+        {
+            gameManager.SetGameState(GameState.PlayerWin);
         }
 
         private void UpdateFragmentsText()

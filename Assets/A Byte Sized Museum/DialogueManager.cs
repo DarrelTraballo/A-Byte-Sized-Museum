@@ -15,7 +15,6 @@ namespace KaChow.AByteSizedMuseum
         [SerializeField] public bool unlock = false;
         public TMP_Text nameText;
         public TMP_Text dialogueText;
-        public GameObject Input_manager;
         public GameObject DialogueContainer;
         public GameObject DialogueContainer2;
         public GameObject Canvas_images;
@@ -59,11 +58,13 @@ namespace KaChow.AByteSizedMuseum
 
         void Update()
         {
-            if (gameManager.currentState == GameState.Playing && Input.GetKeyDown(KeyCode.P))
-            {
-                if (previousDialogue == null) return;
-                StartDialogue(previousDialogue);
-            }
+            // if (gameManager.currentState == GameState.Playing && Input.GetKeyDown(KeyCode.P))
+            // {
+            //     if (previousDialogue == null) return;
+            //     StartDialogue(previousDialogue);
+            // }
+
+            if (gameManager.currentState != GameState.RunDialog) return;
 
             if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter) || InputManager.Instance.PlayerInteractedThisFrame())
             {
@@ -129,11 +130,6 @@ namespace KaChow.AByteSizedMuseum
         {
             AudioManager.Instance.sfxSource.Stop();
             AudioManager.Instance.PlaySFX("HelperBot");
-
-            if (count == counter)
-            {
-                Input_manager.SetActive(true);
-            }
 
             if (helperbot_tutorial == true)
             {
