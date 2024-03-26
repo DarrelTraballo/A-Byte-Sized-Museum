@@ -12,7 +12,7 @@ using System;
 
 namespace KaChow.AByteSizedMuseum
 {
-    public class HelperBot : MonoBehaviour
+    public class HelperBot : InteractableBase
     {
         [Header("Helper Bot Variables")]
         [SerializeField] private int botID;
@@ -39,10 +39,13 @@ namespace KaChow.AByteSizedMuseum
         private Vector3 heldObjectInitialPosition;
         private Quaternion heldObjectInitialRotation;
 
-        private void Start()
+        public override void Start()
         {
+            base.Start();
             initialPosition = transform.position;
             initialRotation = transform.rotation;
+
+            subtitleText = "";
         }
 
         public void Move(Component sender, object data)

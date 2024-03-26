@@ -269,7 +269,8 @@ namespace KaChow.AByteSizedMuseum
 
         public void StopExecuting()
         {
-            StopAllCoroutines();
+            StopCoroutine(ExecuteAllLines());
+            StopCoroutine(ClearInterpreterLines());
         }
 
         public void SetInterpreterID(int interpreterID)

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace KaChow.AByteSizedMuseum
 {
-    public class Activator : MonoBehaviour
+    public class Activator : InteractableBase
     {
         [SerializeField] private Color activatedColor;
         [SerializeField] private Color deactivatedColor;
@@ -25,8 +25,10 @@ namespace KaChow.AByteSizedMuseum
 
         [SerializeField] private GameEvent onActivatorActivated;
 
-        private void Start()
+        public override void Start()
         {
+            base.Start();
+            subtitleText = "";
             rend = GetComponent<Renderer>();
             rend.material.color = deactivatedColor;
 

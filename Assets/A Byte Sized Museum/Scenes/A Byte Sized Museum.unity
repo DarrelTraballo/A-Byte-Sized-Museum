@@ -1995,11 +1995,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 695711140431275171, guid: 3179bdd4eae0471459e1c867eb2b1ec9, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 695711140431275171, guid: 3179bdd4eae0471459e1c867eb2b1ec9, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 695711140431275171, guid: 3179bdd4eae0471459e1c867eb2b1ec9, type: 3}
       propertyPath: m_SizeDelta.x
@@ -2715,11 +2715,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4958400231439858338, guid: 3179bdd4eae0471459e1c867eb2b1ec9, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4958400231439858338, guid: 3179bdd4eae0471459e1c867eb2b1ec9, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4958400231439858338, guid: 3179bdd4eae0471459e1c867eb2b1ec9, type: 3}
       propertyPath: m_SizeDelta.x
@@ -4620,6 +4620,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1119652594}
+        m_TargetAssemblyTypeName: KaChow.AByteSizedMuseum.Dialogmanager_Maingame,
+          Assembly-CSharp
+        m_MethodName: RunDialog
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 074e2f20ed0a5e04bba3ff1460aeb5f0, type: 2}
+          m_ObjectArgumentAssemblyTypeName: KaChow.AByteSizedMuseum.DialogueSO, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1448903277
 GameObject:
   m_ObjectHideFlags: 0
@@ -4790,7 +4803,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6449824064168666422, guid: 19ebec9dd7f91a3408a70564f3aae6c0, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6493599132287163581, guid: 19ebec9dd7f91a3408a70564f3aae6c0, type: 3}
       propertyPath: m_LocalPosition.x
