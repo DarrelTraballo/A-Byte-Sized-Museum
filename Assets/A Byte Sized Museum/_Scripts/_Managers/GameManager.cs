@@ -223,7 +223,7 @@ namespace KaChow.AByteSizedMuseum
                 case GameState.RunDialog:
                     crosshairUI.SetActive(true);
                     miniMapUI.SetActive(true);
-                    Player.SetCanMove(true);
+                    Player.SetCanMove(false);
                     SetCursorState(CursorLockMode.Confined);
                     break;
 
