@@ -118,6 +118,11 @@ namespace KaChow.AByteSizedMuseum
             {
                 gameManager.SetGameState(GameState.PlayerWin);
             }
+
+            if (totalFragments == 5)
+            {
+                Debug.Log("We're Halfway there!!");
+            }
         }
 
         public void AddFragment()

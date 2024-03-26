@@ -262,7 +262,9 @@ MonoBehaviour:
   toolTipUI: {fileID: 1292856927}
   gameOverUI: {fileID: 1292856926}
   playerWinUI: {fileID: 1292856925}
+  dialogueUI: {fileID: 666826736}
   remainingTimeInMinutes: 15
+  timeAllowance: 30
   secondsToAdd: 30
   puzzleExhibitAmount: 10
   isPaused: 0
@@ -279,8 +281,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugConsole: {fileID: 1653224276}
-  cheatsPanel: {fileID: 0}
-  cheatItem: {fileID: 0}
+  cheatsPanel: {fileID: 1653224277}
+  cheatItem: {fileID: 7013265936936083471, guid: 37c1bb6cad8cd8d4cbb82f688547b0cd, type: 3}
   debugModeEnabled: 0
   secondsToAdd: 30
   secondsToRemove: 60
@@ -3434,6 +3436,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerText: {fileID: 1212982550}
   fragmentsAmountText: {fileID: 1212982549}
+  schedules: []
 --- !u!4 &166082045
 Transform:
   m_ObjectHideFlags: 0
@@ -5495,19 +5498,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0da2e56eebf7a544bbb8f0b8ee9031a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  background:
-  - {fileID: 1245024885}
-  - {fileID: 988523240}
-  - {fileID: 298385012}
-  - {fileID: 2093418782}
-  - {fileID: 1348737361}
-  - {fileID: 2000393835}
-  - {fileID: 1194679016}
-  - {fileID: 631317974}
-  - {fileID: 699521316}
-  - {fileID: 1613365919}
-  - {fileID: 392082695}
-  - {fileID: 57802161}
+  backgrounds: []
+  text: []
+  backgroundImage: {fileID: 0}
+  textcontent: {fileID: 0}
+  index: 0
 --- !u!1 &336575834
 GameObject:
   m_ObjectHideFlags: 0
@@ -29012,6 +29007,11 @@ PrefabInstance:
 --- !u!1 &1653224276 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5435152732505218672, guid: 3402d4a2ebfeca14aa9cc5a2791cd4ee, type: 3}
+  m_PrefabInstance: {fileID: 1653224275}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1653224277 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8496931018364685782, guid: 3402d4a2ebfeca14aa9cc5a2791cd4ee, type: 3}
   m_PrefabInstance: {fileID: 1653224275}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1659883205

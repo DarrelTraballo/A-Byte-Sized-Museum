@@ -27,13 +27,20 @@ namespace KaChow.AByteSizedMuseum
         int index;
 
         private Dialogue previousDialogue;
+        [SerializeField] private DialogueSO[] dialogues;
 
         public void Start()
         {
             gameManager = GameManager.Instance;
             inputManager = InputManager.Instance;
 
-
+            if (dialogues != null)
+            {
+                foreach (var dialogue in dialogues)
+                {
+                    dialogue.LoadDialogueFromFile();
+                }
+            }
         }
 
         void Update()
@@ -67,6 +74,7 @@ namespace KaChow.AByteSizedMuseum
         public void RunDialog(DialogueSO dialogueSO)
         {
             // int selectedIndex = Random.Range(0, dialogueSO.Length);
+            // dialogueSO.LoadDialogueFromFile();
             previousDialogue = dialogueSO.dialogue;
             StartDialogue(dialogueSO.dialogue);
         }

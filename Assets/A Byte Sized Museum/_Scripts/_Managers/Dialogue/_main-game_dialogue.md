@@ -5,27 +5,27 @@ We have an emergency!
 
 The Museum's Chrono Chamber has collapsed!
 
-Someone must have been messing around with the Time Fragments again.
+Someone must have been messing around with the <color=red>Time Fragments</color> again.
 
 We still have the situation under control.
 
-All we have to do is retrieve these Fragments back so we can repair the Chamber.
+All we have to do is retrieve these <color=red>Time Fragments</color> back so we can repair the Chamber.
 
 The Exhibit you are in right now is the Museum's <color=green>Central Exhibit</color>, where the Chrono Chamber is Located.
 
 The Chrono Chamber is that massive device you see in the middle of the room.
 
-At the top-right of your screen, you can see a map, a timer, and a counter for the Time Fragments you've collected.
+At the top-right of your screen, you can see a map, a timer, and a counter for the <color=red>Time Fragments</color> you've collected.
 
 The timer tracks how much time you have left until the Chamber completely collapses.
 
-Time Fragments can be retrieved from puzzles scattered around this museum.
+<color=red>Time Fragments</color> can be retrieved from puzzles scattered around this museum.
 
 Exhibits highlighted in <color=red>Red</color> are <color=red>Puzzle Exhibits</color>
 
 You need to locate these and solve the puzzles located in them to retrieve a Time Fragment.
 
-Use these Time Fragments to repair the Chrono Chamber.
+Use these <color=red>Time Fragments</color> to repair the Chrono Chamber.
 
 You must fully repair the Chrono Chamber before the Chamber completely collapses.
 
@@ -46,3 +46,18 @@ Nicely Done!
 You've retrieved a fragment.
 
 You can either look for more or head back to repair the Chrono Chamber.
+
+# First Fragment Used
+## Triggers on the first time a fragment has been used
+
+Yep, that's it!
+
+Just keep doing that and the Chrono Chamber will be fixed!
+
+# Five Fragments Used
+## Triggers when 5 Fragments have been Used
+
+We're getting there!
+
+A few more and the Chrono Chamber will be fixed!
+

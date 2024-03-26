@@ -176,6 +176,7 @@ MonoBehaviour:
   toolTipUI: {fileID: 1491642765}
   gameOverUI: {fileID: 992177699}
   playerWinUI: {fileID: 798843375985915922}
+  dialogueUI: {fileID: 1829836991}
   remainingTimeInMinutes: 15
   timeAllowance: 30
   secondsToAdd: 30
@@ -973,7 +974,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2021102519}
+      - m_Target: {fileID: 1119652594}
         m_TargetAssemblyTypeName: KaChow.AByteSizedMuseum.Dialogmanager_Maingame,
           Assembly-CSharp
         m_MethodName: DisplayNextSentence
@@ -3455,7 +3456,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1119652594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3474,6 +3475,9 @@ MonoBehaviour:
   button: {fileID: 145961717}
   animator: {fileID: 82904690}
   sentences_count: 0
+  dialogues:
+  - {fileID: 11400000, guid: dca4a9bd5c219db4cabddc9bade24056, type: 2}
+  - {fileID: 11400000, guid: 074e2f20ed0a5e04bba3ff1460aeb5f0, type: 2}
 --- !u!4 &1119652595
 Transform:
   m_ObjectHideFlags: 0
@@ -4266,7 +4270,7 @@ MonoBehaviour:
     action:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 2021102519}
+        - m_Target: {fileID: 1119652594}
           m_TargetAssemblyTypeName: KaChow.AByteSizedMuseum.Dialogmanager_Maingame,
             Assembly-CSharp
           m_MethodName: RunDialog
@@ -5434,60 +5438,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2011970174}
   m_CullTransparentMesh: 1
---- !u!1 &2021102517
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2021102518}
-  - component: {fileID: 2021102519}
-  m_Layer: 5
-  m_Name: Dialogue Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &2021102518
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2021102517}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8474190671471583779}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2021102519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2021102517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e0c69643bf6dc74c912958b47561aec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nameText: {fileID: 41656922}
-  dialogueText: {fileID: 332279400}
-  DialogueContainer: {fileID: 1829836991}
-  button: {fileID: 145961717}
-  animator: {fileID: 82904690}
-  sentences_count: 0
 --- !u!1 &2098797317
 GameObject:
   m_ObjectHideFlags: 0
@@ -7072,9 +7022,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3112495628829333054, guid: b0ca3dfa25369a240b7c00f113c21bad, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1829836993}
-    - targetCorrespondingSourceObject: {fileID: 3112495628829333054, guid: b0ca3dfa25369a240b7c00f113c21bad, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2021102518}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0ca3dfa25369a240b7c00f113c21bad, type: 3}
 --- !u!224 &8474190671471583779 stripped

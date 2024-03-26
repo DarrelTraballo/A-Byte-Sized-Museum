@@ -40,6 +40,7 @@ namespace KaChow.AByteSizedMuseum
         [SerializeField] private GameObject toolTipUI;
         [SerializeField] private GameObject gameOverUI;
         [SerializeField] private GameObject playerWinUI; // TODO: Rename
+        [SerializeField] private GameObject dialogueUI; // TODO: Rename
 
         private Canvas interpreterUICanvas;
         private TMP_Text toolTipTitle;
@@ -223,6 +224,7 @@ namespace KaChow.AByteSizedMuseum
                 case GameState.RunDialog:
                     crosshairUI.SetActive(true);
                     miniMapUI.SetActive(true);
+                    dialogueUI.SetActive(true);
                     Player.SetCanMove(true);
                     SetCursorState(CursorLockMode.Confined);
                     break;
@@ -255,6 +257,7 @@ namespace KaChow.AByteSizedMuseum
             playerWinUI.SetActive(false);
             interpreterUICanvas.enabled = false;
             pauseUI.SetActive(false);
+            dialogueUI.SetActive(false);
             DisableToolTipText();
         }
 

@@ -30,6 +30,8 @@ namespace KaChow.AByteSizedMuseum
 
         private GameManager gameManager;
 
+        private Dialogue previousDialogue;
+
         // private bool firstrun = true;
 
 
@@ -57,7 +59,13 @@ namespace KaChow.AByteSizedMuseum
 
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+            if (gameManager.currentState == GameState.Playing && Input.GetKeyDown(KeyCode.P))
+            {
+                if (previousDialogue == null) return;
+                StartDialogue(previousDialogue);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter) || InputManager.Instance.PlayerInteractedThisFrame())
             {
 
                 if (sentences.Count != 0)
@@ -94,6 +102,7 @@ namespace KaChow.AByteSizedMuseum
 
         public void StartDialogue(Dialogue dialogue)
         {
+            previousDialogue = dialogue;
             animator.SetBool("IsOpen", false);
             animator.SetBool("IsOpen", true);
             gameManager.SetGameState(GameState.RunDialog);
