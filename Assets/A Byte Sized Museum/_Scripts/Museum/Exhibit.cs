@@ -43,7 +43,7 @@ namespace KaChow.AByteSizedMuseum
             {
                 SetPathColor(Color.red);
 
-                puzzleInterpreterAndCam.SetActive(true);
+                // puzzleInterpreterAndCam.SetActive(true);
 
                 int selectedPuzzleSet = Random.Range(0, puzzles.puzzleSets.Count);
                 Instantiate(puzzles.puzzleSets[selectedPuzzleSet], puzzleHolder);
