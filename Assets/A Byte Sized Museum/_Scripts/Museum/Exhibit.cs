@@ -23,6 +23,13 @@ namespace KaChow.AByteSizedMuseum
         public GameObject leftBlock;
 
         private bool isPuzzleSolved;
+        private static bool hasEnteredAPuzzleExhibit = false;
+        [SerializeField] private GameEvent onFirstPuzzleExhibitEnter;
+
+        private void Start()
+        {
+            hasEnteredAPuzzleExhibit = false;
+        }
 
         public void InitializePuzzleExhibit()
         {
@@ -57,6 +64,16 @@ namespace KaChow.AByteSizedMuseum
                 {
                     renderer.material.color = color;
                 }
+            }
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player") && isPuzzleExhibit && !hasEnteredAPuzzleExhibit)
+            {
+                onFirstPuzzleExhibitEnter.Raise(this, this);
+
+                hasEnteredAPuzzleExhibit = true;
             }
         }
 

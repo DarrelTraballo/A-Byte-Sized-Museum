@@ -3699,6 +3699,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1119652595}
   - component: {fileID: 1119652594}
+  - component: {fileID: 1119652596}
   m_Layer: 0
   m_Name: Dialogue Manager
   m_TagString: Untagged
@@ -3730,6 +3731,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a4450b5f6476a4f40a6184d7a7470668, type: 2}
   - {fileID: 11400000, guid: 074e2f20ed0a5e04bba3ff1460aeb5f0, type: 2}
   - {fileID: 11400000, guid: af4ac4b847cd2b040b7c875d0a719bb4, type: 2}
+  - {fileID: 11400000, guid: 05a1b7e8a8f6b7a40880bab1329e12c1, type: 2}
 --- !u!4 &1119652595
 Transform:
   m_ObjectHideFlags: 0
@@ -3745,6 +3747,35 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1119652596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119652593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86e171c6f8676ee42a4585aa2f52c4e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 4382dab6d5ecc104794b342e41896686, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1119652594}
+        m_TargetAssemblyTypeName: KaChow.AByteSizedMuseum.Dialogmanager_Maingame,
+          Assembly-CSharp
+        m_MethodName: RunDialog
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 05a1b7e8a8f6b7a40880bab1329e12c1, type: 2}
+          m_ObjectArgumentAssemblyTypeName: KaChow.AByteSizedMuseum.DialogueSO, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1121134995
 GameObject:
   m_ObjectHideFlags: 0
