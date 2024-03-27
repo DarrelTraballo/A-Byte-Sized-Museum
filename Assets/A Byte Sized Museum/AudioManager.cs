@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 namespace KaChow.AByteSizedMuseum
 {
@@ -18,6 +19,8 @@ namespace KaChow.AByteSizedMuseum
             {
                 Instance = this;
                 DontDestroyOnLoad(gameObject);
+
+                SceneManager.sceneLoaded += OnSceneLoaded;
             }
 
             else
@@ -26,9 +29,26 @@ namespace KaChow.AByteSizedMuseum
             }
         }
 
-        private void Start()
+        // private void Start()
+        // {
+        //     PlayMusic("Theme");
+        // }
+
+        private void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
         {
-            PlayMusic("Theme");
+            switch (scene.name)
+            {
+                case "MainMenu":
+                case "Tutorial":
+                case "A Byte Sized Museum":
+                    PlayMusic("Theme");
+                    break;
+                case "Cutscene":
+                    PlayMusic("ThemeCutscene");
+                    break;
+                default:
+                    break;
+            }
         }
 
         public void PlayMusic(string name)
@@ -81,6 +101,11 @@ namespace KaChow.AByteSizedMuseum
         public void SFXVolume(float volume)
         {
             sfxSource.volume = volume;
+        }
+
+        private void OnDestroy()
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
         }
     }
 }

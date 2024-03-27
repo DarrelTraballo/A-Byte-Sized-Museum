@@ -15,14 +15,14 @@ namespace KaChow.AByteSizedMuseum
         public TMP_Dropdown resolutionDropdown;
         Resolution[] resolutions;
 
-        void Start ()
+        void Start()
         {
             resolutions = Screen.resolutions;
-            
+
             resolutionDropdown.ClearOptions();
 
             List<string> options = new List<string>();
-            
+
             int currentResolutionIndex = 0;
 
             for (int i = 0; i < resolutions.Length; i++)
@@ -41,17 +41,17 @@ namespace KaChow.AByteSizedMuseum
             resolutionDropdown.value = currentResolutionIndex;
             resolutionDropdown.RefreshShownValue();
         }
-        public void SetVolume (float volume)
+        public void SetVolume(float volume)
         {
-           // Debug.Log(volume);
+            // Debug.Log(volume);
 
-           audioMixer.SetFloat("volume",volume);
+            audioMixer.SetFloat("volume", volume);
         }
-        public void SetQuality (int qualityIndex)
+        public void SetQuality(int qualityIndex)
         {
             QualitySettings.SetQualityLevel(qualityIndex);
         }
-        
+
         public void SetFullscreen(bool isFullscreen)
         {
             Screen.fullScreen = isFullscreen;
