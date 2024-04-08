@@ -339,10 +339,12 @@ namespace KaChow.WFC
             Tile tile = gridComponent.GetComponentInChildren<Tile>();
 
             var tileContents = tile.transform.Find("Contents");
+            var pathways = tile.transform.Find("Debug");
 
             var exhibitCollider = tile.transform.Find("ExhibitCollider");
             exhibitCollider.gameObject.SetActive(isActive);
             tileContents.gameObject.SetActive(isActive);
+            pathways.gameObject.SetActive(isActive);
         }
 
         public void DisableExhibits()
@@ -392,21 +394,25 @@ namespace KaChow.WFC
                         if (isTopEdge)
                         {
                             exhibit.topBlock.SetActive(true);
+                            exhibit.topPath.SetActive(false);
                             position += "Top ";
                         }
                         if (isBottomEdge)
                         {
                             exhibit.bottomBlock.SetActive(true);
+                            exhibit.bottomPath.SetActive(false);
                             position += "Bottom ";
                         }
                         if (isLeftEdge)
                         {
                             exhibit.leftBlock.SetActive(true);
+                            exhibit.leftPath.SetActive(false);
                             position += "Left ";
                         }
                         if (isRightEdge)
                         {
                             exhibit.rightBlock.SetActive(true);
+                            exhibit.rightPath.SetActive(false);
                             position += "Right ";
                         }
 

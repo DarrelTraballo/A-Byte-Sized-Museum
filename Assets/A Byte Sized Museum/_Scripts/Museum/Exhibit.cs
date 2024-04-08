@@ -18,9 +18,16 @@ namespace KaChow.AByteSizedMuseum
 
         [Space]
         public GameObject topBlock;
+        public GameObject topPath;
+
         public GameObject rightBlock;
+        public GameObject rightPath;
+
         public GameObject bottomBlock;
+        public GameObject bottomPath;
+
         public GameObject leftBlock;
+        public GameObject leftPath;
 
         private bool isPuzzleSolved;
         private static bool hasEnteredAPuzzleExhibit = false;
