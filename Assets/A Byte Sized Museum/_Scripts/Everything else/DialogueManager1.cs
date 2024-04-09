@@ -30,9 +30,6 @@ namespace KaChow.AByteSizedMuseum
 
         private GameManager gameManager;
 
-        private bool firstrun = true;
-
-
         int index;
 
 
@@ -160,7 +157,6 @@ namespace KaChow.AByteSizedMuseum
         void EndDialogue()
         {
             AudioManager.Instance.sfxSource.Stop();
-            firstrun = false;
             ResetData();
             Canvas_images.SetActive(false);
             animator.SetBool("IsOpen", false);
