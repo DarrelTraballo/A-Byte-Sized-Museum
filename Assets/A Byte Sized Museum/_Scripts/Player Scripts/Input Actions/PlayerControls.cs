@@ -285,6 +285,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleUI"",
+                    ""type"": ""Button"",
+                    ""id"": ""641a1930-d3d8-4b8c-9e34-9eb4c66a1cc5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -463,6 +472,39 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""ShowDebugOverlay"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""One Modifier"",
+                    ""id"": ""f47cbe32-62fb-4725-91e0-f96323903146"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleUI"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""4a87fa6b-0daf-4577-a819-5f1e92e71e4a"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleUI"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""7a4d8e2a-46d2-4778-8bd1-168e85193601"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleUI"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -485,6 +527,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Cheats_SubtractTime = m_Cheats.FindAction("SubtractTime", throwIfNotFound: true);
         m_Cheats_AddTime = m_Cheats.FindAction("AddTime", throwIfNotFound: true);
         m_Cheats_ShowDebugOverlay = m_Cheats.FindAction("ShowDebugOverlay", throwIfNotFound: true);
+        m_Cheats_ToggleUI = m_Cheats.FindAction("ToggleUI", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -645,6 +688,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Cheats_SubtractTime;
     private readonly InputAction m_Cheats_AddTime;
     private readonly InputAction m_Cheats_ShowDebugOverlay;
+    private readonly InputAction m_Cheats_ToggleUI;
     public struct CheatsActions
     {
         private @PlayerControls m_Wrapper;
@@ -654,6 +698,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @SubtractTime => m_Wrapper.m_Cheats_SubtractTime;
         public InputAction @AddTime => m_Wrapper.m_Cheats_AddTime;
         public InputAction @ShowDebugOverlay => m_Wrapper.m_Cheats_ShowDebugOverlay;
+        public InputAction @ToggleUI => m_Wrapper.m_Cheats_ToggleUI;
         public InputActionMap Get() { return m_Wrapper.m_Cheats; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -678,6 +723,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @ShowDebugOverlay.started += instance.OnShowDebugOverlay;
             @ShowDebugOverlay.performed += instance.OnShowDebugOverlay;
             @ShowDebugOverlay.canceled += instance.OnShowDebugOverlay;
+            @ToggleUI.started += instance.OnToggleUI;
+            @ToggleUI.performed += instance.OnToggleUI;
+            @ToggleUI.canceled += instance.OnToggleUI;
         }
 
         private void UnregisterCallbacks(ICheatsActions instance)
@@ -697,6 +745,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @ShowDebugOverlay.started -= instance.OnShowDebugOverlay;
             @ShowDebugOverlay.performed -= instance.OnShowDebugOverlay;
             @ShowDebugOverlay.canceled -= instance.OnShowDebugOverlay;
+            @ToggleUI.started -= instance.OnToggleUI;
+            @ToggleUI.performed -= instance.OnToggleUI;
+            @ToggleUI.canceled -= instance.OnToggleUI;
         }
 
         public void RemoveCallbacks(ICheatsActions instance)
@@ -731,5 +782,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnSubtractTime(InputAction.CallbackContext context);
         void OnAddTime(InputAction.CallbackContext context);
         void OnShowDebugOverlay(InputAction.CallbackContext context);
+        void OnToggleUI(InputAction.CallbackContext context);
     }
 }

@@ -55,6 +55,8 @@ namespace KaChow.AByteSizedMuseum
         [SerializeField, Range(7, 12)] private int puzzleExhibitAmount = 10;
         [SerializeField] private bool isPaused = false;
 
+        private bool isUIActive = true;
+
         // [Header("Debug")]
         // [SerializeField] private bool debugModeEnabled = false;
 
@@ -265,6 +267,26 @@ namespace KaChow.AByteSizedMuseum
         private void ResetPlayerState()
         {
             Player.SetCanMove(false);
+        }
+
+        public void ToggleUI()
+        {
+            isUIActive = !isUIActive;
+
+            if (isUIActive)
+            {
+                SetGameState(currentState);
+            }
+            else
+            {
+                crosshairUI.SetActive(isUIActive);
+                miniMapUI.SetActive(isUIActive);
+                gameOverUI.SetActive(isUIActive);
+                playerWinUI.SetActive(isUIActive);
+                interpreterUICanvas.enabled = isUIActive;
+                pauseUI.SetActive(isUIActive);
+                DisableToolTipText();
+            }
         }
 
         public void Quit()

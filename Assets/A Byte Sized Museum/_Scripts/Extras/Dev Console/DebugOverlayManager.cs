@@ -81,6 +81,12 @@ namespace KaChow.AByteSizedMuseum
 
             if (inputManager.IsSubtractTimePressed())
                 timer.RemoveSecondsToTimer(secondsToRemove);
+
+            if (inputManager.IsToggleUIPressed())
+            {
+                gameManager.ToggleUI();
+                debugConsoleCanvas.enabled = !debugConsoleCanvas.enabled;
+            }
         }
 
         private void ShowDebugOverlay()

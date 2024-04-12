@@ -2089,6 +2089,7 @@ MonoBehaviour:
   - {fileID: 1716784351}
   - {fileID: 1770541958}
   - {fileID: 1770541958}
+  bgImage: {fileID: 115110473}
 --- !u!1001 &93537013
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12441,11 +12442,11 @@ MonoBehaviour:
     - Navigate and Explore the Museum's different exhibits where you might encounter
       puzzles along the way.
     - But first, let's learn how to control your character.
-    - "Press the WASD keys to move around,\r"
-    - Press Spacebar to Jump,
-    - and E to Interact with certain objects.
-    - Use your mouse to look around.
-    - You can press the ESC key to Pause the game.
+    - "Press the <color=yellow>WASD</color> keys to move around,\r"
+    - Press <color=yellow>Spacebar</color> to Jump,
+    - and <color=yellow>E</color> to Interact with certain objects.
+    - Use your <color=yellow>Mouse</color> to look around.
+    - You can press the <color=yellow>ESC</color> key to Pause the game.
     - If you have any more questions, you can find me there!
     - We look forward for you to explore the depths of our interactive museum!
     - Let's dive into expidition!
@@ -20247,11 +20248,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 695711140431275171, guid: 3179bdd4eae0471459e1c867eb2b1ec9, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 695711140431275171, guid: 3179bdd4eae0471459e1c867eb2b1ec9, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 695711140431275171, guid: 3179bdd4eae0471459e1c867eb2b1ec9, type: 3}
       propertyPath: m_SizeDelta.x
@@ -20683,11 +20684,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4958400231439858338, guid: 3179bdd4eae0471459e1c867eb2b1ec9, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4958400231439858338, guid: 3179bdd4eae0471459e1c867eb2b1ec9, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4958400231439858338, guid: 3179bdd4eae0471459e1c867eb2b1ec9, type: 3}
       propertyPath: m_SizeDelta.x
@@ -26771,6 +26772,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 296523450025530732, guid: b0ca3dfa25369a240b7c00f113c21bad, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1168081513542069711, guid: b0ca3dfa25369a240b7c00f113c21bad, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -26853,6 +26858,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3112495628829333054, guid: b0ca3dfa25369a240b7c00f113c21bad, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6591488524751986534, guid: b0ca3dfa25369a240b7c00f113c21bad, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7695817129392477564, guid: b0ca3dfa25369a240b7c00f113c21bad, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8299246839789569581, guid: b0ca3dfa25369a240b7c00f113c21bad, type: 3}

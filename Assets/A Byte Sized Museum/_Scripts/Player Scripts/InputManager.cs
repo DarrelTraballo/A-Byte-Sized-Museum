@@ -145,6 +145,11 @@ namespace KaChow.AByteSizedMuseum
             return playerControls.Cheats.ShowDebugOverlay.triggered;
         }
 
+        public bool IsToggleUIPressed()
+        {
+            return playerControls.Cheats.ToggleUI.triggered;
+        }
+
         /// <summary>
         /// Stores all cheat bindings in a list for easy access and display.
         /// </summary>

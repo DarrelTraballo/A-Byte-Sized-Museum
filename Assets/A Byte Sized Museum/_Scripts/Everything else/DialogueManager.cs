@@ -25,6 +25,7 @@ namespace KaChow.AByteSizedMuseum
         public Queue<string> sentences = new Queue<string>();
         public int sentences_count;
         public GameObject[] images;
+        public GameObject bgImage;
 
 
         private GameManager gameManager;
@@ -119,6 +120,7 @@ namespace KaChow.AByteSizedMuseum
             }
             if (helperbot_tutorial == true)
             {
+                bgImage.SetActive(true);
                 images[0].gameObject.SetActive(true);
             }
 
@@ -167,6 +169,7 @@ namespace KaChow.AByteSizedMuseum
             Canvas_images.SetActive(false);
             animator.SetBool("IsOpen", false);
             //DialogueContainer.SetActive(false);
+            bgImage.SetActive(false);
 
             gameManager.SetGameState(GameState.Playing);
 
