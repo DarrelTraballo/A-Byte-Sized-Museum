@@ -36,25 +36,14 @@ namespace KaChow.AByteSizedMuseum
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
         {
-            Debug.Log($"{scene.name} Loaded");
-            switch (scene.name)
+            string music = scene.name switch
             {
-                case "MainMenu":
-                    PlayMusic("Theme");
-                    break;
-                case "Tutorial":
-                    PlayMusic("ThemeTutorial");
-                    break;
-                case "A Byte Sized Museum":
-                    PlayMusic("ThemeAByteSizedMuseum");
-                    break;
-                case "Cutscene":
-                    PlayMusic("ThemeCutscene");
-                    break;
-                default:
-                    PlayMusic("Theme");
-                    break;
-            }
+                "MainMenu" or "Tutorial" or "A Byte Sized Museum" => "Theme",
+                "Cutscene" => "ThemeCutscene",
+                _ => "Theme",
+            };
+
+            PlayMusic(music);
         }
 
         public void PlayMusic(string name)

@@ -90,6 +90,7 @@ namespace KaChow.AByteSizedMuseum
         {
             if (!isPuzzleExhibit || data is not Cell exhibitCell) return;
 
+            Debug.LogWarning("Set Path Color");
             var exhibit = exhibitCell.GetComponentInChildren<Exhibit>();
 
             exhibit.SetPathColor(Color.green);
