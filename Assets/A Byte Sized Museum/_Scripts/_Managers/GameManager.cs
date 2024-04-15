@@ -50,8 +50,8 @@ namespace KaChow.AByteSizedMuseum
 
         [Header("Gameplay")]
         [SerializeField, Range(10f, 30f)] private int remainingTimeInMinutes = 15;
-        [SerializeField, Range(10f, 30f)] private int timeAllowance = 30;
-        [SerializeField, Range(10f, 30f)] private int secondsToAdd = 30;
+        [SerializeField, Range(10f, 60f)] private int timeAllowance = 30;
+        [SerializeField, Range(10f, 60f)] private int secondsToAdd = 30;
         [SerializeField, Range(7, 12)] private int puzzleExhibitAmount = 10;
         [SerializeField] private bool isPaused = false;
 
@@ -69,13 +69,13 @@ namespace KaChow.AByteSizedMuseum
         public int TimeAllowance
         {
             get { return timeAllowance; }
-            private set { timeAllowance = Mathf.Clamp(value, 10, 30); }
+            private set { timeAllowance = Mathf.Clamp(value, 10, 60); }
         }
 
         public int SecondsToAdd
         {
             get { return secondsToAdd; }
-            private set { secondsToAdd = Mathf.Clamp(value, 10, 30); }
+            private set { secondsToAdd = Mathf.Clamp(value, 10, 60); }
         }
 
         public int PuzzleExhibitAmount

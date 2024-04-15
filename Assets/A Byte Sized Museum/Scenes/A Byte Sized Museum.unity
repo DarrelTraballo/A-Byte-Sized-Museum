@@ -176,9 +176,9 @@ MonoBehaviour:
   toolTipUI: {fileID: 1491642765}
   gameOverUI: {fileID: 992177699}
   playerWinUI: {fileID: 798843375985915922}
-  remainingTimeInMinutes: 15
-  timeAllowance: 30
-  secondsToAdd: 30
+  remainingTimeInMinutes: 20
+  timeAllowance: 60
+  secondsToAdd: 60
   puzzleExhibitAmount: 10
   isPaused: 0
 --- !u!114 &10761390
@@ -3726,12 +3726,15 @@ MonoBehaviour:
   animator: {fileID: 82904690}
   sentences_count: 0
   dialogues:
+  - {fileID: 11400000, guid: 05a1b7e8a8f6b7a40880bab1329e12c1, type: 2}
+  - {fileID: 11400000, guid: 819d9f94a4a3a0a428809350abab6684, type: 2}
   - {fileID: 11400000, guid: dca4a9bd5c219db4cabddc9bade24056, type: 2}
   - {fileID: 11400000, guid: d0322cd2af72c614f99812f75567826d, type: 2}
   - {fileID: 11400000, guid: a4450b5f6476a4f40a6184d7a7470668, type: 2}
+  - {fileID: 11400000, guid: 82e9581d0b9905344a539c9c9d6d0bea, type: 2}
   - {fileID: 11400000, guid: 074e2f20ed0a5e04bba3ff1460aeb5f0, type: 2}
   - {fileID: 11400000, guid: af4ac4b847cd2b040b7c875d0a719bb4, type: 2}
-  - {fileID: 11400000, guid: 05a1b7e8a8f6b7a40880bab1329e12c1, type: 2}
+  - {fileID: 11400000, guid: 29ef048cb42b5364f9849b9fbdaaac9b, type: 2}
 --- !u!4 &1119652595
 Transform:
   m_ObjectHideFlags: 0
@@ -4548,8 +4551,8 @@ MonoBehaviour:
   timerText: {fileID: 1015713068}
   fragmentsAmountText: {fileID: 1936823026}
   schedules:
-  - Minutes: 15
-    Seconds: 29
+  - Minutes: 20
+    Seconds: 59
     action:
       m_PersistentCalls:
         m_Calls:
@@ -4560,6 +4563,25 @@ MonoBehaviour:
           m_Mode: 2
           m_Arguments:
             m_ObjectArgument: {fileID: 11400000, guid: dca4a9bd5c219db4cabddc9bade24056, type: 2}
+            m_ObjectArgumentAssemblyTypeName: KaChow.AByteSizedMuseum.DialogueSO,
+              Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - Minutes: 15
+    Seconds: 0
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1119652594}
+          m_TargetAssemblyTypeName: KaChow.AByteSizedMuseum.Dialogmanager_Maingame,
+            Assembly-CSharp
+          m_MethodName: RunDialog
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: 819d9f94a4a3a0a428809350abab6684, type: 2}
             m_ObjectArgumentAssemblyTypeName: KaChow.AByteSizedMuseum.DialogueSO,
               Assembly-CSharp
             m_IntArgument: 0
@@ -4586,8 +4608,8 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  fragmentEvents:
-  - amount: 5
+  - Minutes: 5
+    Seconds: 0
     action:
       m_PersistentCalls:
         m_Calls:
@@ -4597,7 +4619,7 @@ MonoBehaviour:
           m_MethodName: RunDialog
           m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 11400000, guid: a4450b5f6476a4f40a6184d7a7470668, type: 2}
+            m_ObjectArgument: {fileID: 11400000, guid: 82e9581d0b9905344a539c9c9d6d0bea, type: 2}
             m_ObjectArgumentAssemblyTypeName: KaChow.AByteSizedMuseum.DialogueSO,
               Assembly-CSharp
             m_IntArgument: 0
@@ -4605,6 +4627,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  fragmentEvents:
   - amount: 9
     action:
       m_PersistentCalls:
@@ -4623,6 +4646,24 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - amount: 5
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1119652594}
+          m_TargetAssemblyTypeName: KaChow.AByteSizedMuseum.Dialogmanager_Maingame,
+            Assembly-CSharp
+          m_MethodName: RunDialog
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: a4450b5f6476a4f40a6184d7a7470668, type: 2}
+            m_ObjectArgumentAssemblyTypeName: KaChow.AByteSizedMuseum.DialogueSO,
+              Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - amount: 3
     action:
       m_PersistentCalls:
@@ -4633,7 +4674,7 @@ MonoBehaviour:
           m_MethodName: RunDialog
           m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 11400000, guid: d0322cd2af72c614f99812f75567826d, type: 2}
+            m_ObjectArgument: {fileID: 11400000, guid: 29ef048cb42b5364f9849b9fbdaaac9b, type: 2}
             m_ObjectArgumentAssemblyTypeName: KaChow.AByteSizedMuseum.DialogueSO,
               Assembly-CSharp
             m_IntArgument: 0
