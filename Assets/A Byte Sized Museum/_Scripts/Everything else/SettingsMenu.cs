@@ -43,7 +43,6 @@ namespace KaChow.AByteSizedMuseum
         }
         public void SetVolume(float volume)
         {
-            // Debug.Log(volume);
 
             audioMixer.SetFloat("volume", volume);
         }

@@ -49,7 +49,7 @@ public class AnimationController : MonoBehaviour
 
     public void ShowCanvas()
     {
-        gamemanager.SetGameState(GameState.GameOver);
+        // gamemanager.SetGameState(GameState.GameOver);
 
         SetBackgroundColor();
         Gameovertext.SetActive(true);

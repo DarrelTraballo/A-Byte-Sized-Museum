@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -20,11 +21,12 @@ namespace KaChow.AByteSizedMuseum
         private int timeAllowance;
         private int secondsToAdd;
 
+        [SerializeField] private bool timerEnded = false;
+
         private int fragmentsAmount = 0;
         private int totalFragments;
 
         private GameManager gameManager;
-
 
         [SerializeField] private List<Schedule> schedules;
         [SerializeField] private List<FragmentEvents> fragmentEvents;
@@ -55,6 +57,7 @@ namespace KaChow.AByteSizedMuseum
         private void Start()
         {
             gameManager = GameManager.Instance;
+
             totalFragments = gameManager.PuzzleExhibitAmount;
 
             timeAllowance = gameManager.TimeAllowance;
@@ -76,10 +79,11 @@ namespace KaChow.AByteSizedMuseum
                 remainingTime = remainingTime.Subtract(TimeSpan.FromSeconds(Time.deltaTime));
                 CheckSchedule();
             }
-            else
+            else if (!timerEnded)
             {
-                if (gameManager.currentState != GameState.GameOver)
-                    gameManager.SetGameState(GameState.GameOver);
+                Debug.Log("Timer Ended");
+                timerEnded = true;
+                gameManager.SetGameState(GameState.GameOver);
             }
 
             timerText.text = string.Format("{0:00}:{1:00}", remainingTime.Minutes, remainingTime.Seconds);
@@ -116,7 +120,6 @@ namespace KaChow.AByteSizedMuseum
 
         public bool UseFragment()
         {
-            Debug.Log("Called");
             if (fragmentsAmount > 0 && totalFragments > 0)
             {
                 fragmentsAmount--;

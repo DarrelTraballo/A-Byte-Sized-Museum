@@ -151,6 +151,36 @@ namespace KaChow.AByteSizedMuseum
         }
 
         /// <summary>
+        /// Enables the InputManager and its PlayerControls.
+        /// </summary>
+        public void EnableInputManager()
+        {
+            if (playerControls != null)
+            {
+                playerControls.Enable();
+            }
+            else
+            {
+                Debug.LogError("PlayerControls is not initialized.");
+            }
+        }
+
+        /// <summary>
+        /// Disables the InputManager and its PlayerControls.
+        /// </summary>
+        public void DisableInputManager()
+        {
+            if (playerControls != null)
+            {
+                playerControls.Disable();
+            }
+            else
+            {
+                Debug.LogError("PlayerControls is not initialized.");
+            }
+        }
+
+        /// <summary>
         /// Stores all cheat bindings in a list for easy access and display.
         /// </summary>
         private void StoreAllCheatBindings()

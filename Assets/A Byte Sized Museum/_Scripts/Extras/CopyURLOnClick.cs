@@ -22,7 +22,6 @@ namespace KaChow.AByteSizedMuseum
 
             promptText.enabled = true;
 
-            Debug.Log("Survey Link Copied to Clipboard!");
         }
     }
 }

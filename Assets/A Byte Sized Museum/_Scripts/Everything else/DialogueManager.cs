@@ -110,7 +110,6 @@ namespace KaChow.AByteSizedMuseum
             gameManager.SetGameState(GameState.RunDialog);
 
             nameText.text = dialogue.name;
-            //Debug.Log("Starting conversation with " + dialogue.name);
 
             sentences.Clear();
 
@@ -146,7 +145,6 @@ namespace KaChow.AByteSizedMuseum
                 return;
             }
             string sentence = sentences.Dequeue();
-            // Debug.Log(sentence);
             StopAllCoroutines();
             StartCoroutine(TypeSentence(sentence));
         }

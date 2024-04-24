@@ -55,6 +55,10 @@ namespace KaChow.AByteSizedMuseum
         [SerializeField, Range(7, 12)] private int puzzleExhibitAmount = 10;
         [SerializeField] private bool isPaused = false;
 
+        [Header("Win/Lose Dialogue")]
+        [SerializeField] private DialogueSO winDialogue;
+        [SerializeField] private DialogueSO loseDialogue;
+
         private bool isUIActive = true;
 
         // [Header("Debug")]
@@ -234,13 +238,11 @@ namespace KaChow.AByteSizedMuseum
                     break;
 
                 case GameState.PlayerWin:
-                    playerWinUI.SetActive(true);
-                    SetCursorState(CursorLockMode.Confined);
+                    StartCoroutine(HandleWinCondition());
                     break;
 
                 case GameState.GameOver:
-                    gameOverUI.SetActive(true);
-                    SetCursorState(CursorLockMode.Confined);
+                    StartCoroutine(HandleLoseCondition());
                     break;
 
                 case GameState.MainMenu:
@@ -267,6 +269,32 @@ namespace KaChow.AByteSizedMuseum
         private void ResetPlayerState()
         {
             Player.SetCanMove(false);
+        }
+
+        private IEnumerator HandleWinCondition()
+        {
+            dialogueManager.RunDialog(winDialogue);
+
+            yield return new WaitUntil(() => dialogueManager.isDialogFinished);
+
+            ResetUI();
+            playerWinUI.SetActive(true);
+            SetCursorState(CursorLockMode.Confined);
+            Player.SetCanMove(false);
+            InputManager.Instance.DisableInputManager();
+        }
+
+        private IEnumerator HandleLoseCondition()
+        {
+            dialogueManager.RunDialog(loseDialogue);
+
+            yield return new WaitUntil(() => dialogueManager.isDialogFinished);
+
+            ResetUI();
+            gameOverUI.SetActive(true);
+            SetCursorState(CursorLockMode.Confined);
+            Player.SetCanMove(false);
+            InputManager.Instance.DisableInputManager();
         }
 
         public void ToggleUI()

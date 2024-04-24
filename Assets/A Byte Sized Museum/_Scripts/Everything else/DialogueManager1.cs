@@ -86,7 +86,6 @@ namespace KaChow.AByteSizedMuseum
             {
                 images[i].gameObject.SetActive(false);
                 images[index].gameObject.SetActive(true);
-                Debug.Log(index);
             }
         }
 
@@ -97,7 +96,6 @@ namespace KaChow.AByteSizedMuseum
             gameManager.SetGameState(GameState.RunDialog);
 
             nameText.text = dialogue.name;
-            //Debug.Log("Starting conversation with " + dialogue.name);
 
             sentences.Clear();
 
@@ -130,7 +128,6 @@ namespace KaChow.AByteSizedMuseum
                 Next();
             }
 
-            Debug.Log(count);
             count++;
 
             if (sentences.Count == 0)
@@ -139,7 +136,6 @@ namespace KaChow.AByteSizedMuseum
                 return;
             }
             string sentence = sentences.Dequeue();
-            // Debug.Log(sentence);
             StopAllCoroutines();
             StartCoroutine(TypeSentence(sentence));
         }
@@ -163,7 +159,6 @@ namespace KaChow.AByteSizedMuseum
             //DialogueContainer.SetActive(false);
 
             gameManager.SetGameState(GameState.Playing);
-            Debug.Log("End of conversation");
 
 
         }

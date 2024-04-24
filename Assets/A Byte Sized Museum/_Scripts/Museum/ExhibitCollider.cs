@@ -4,8 +4,8 @@ namespace KaChow.AByteSizedMuseum
 {
     public class ExhibitCollider : MonoBehaviour
     {
-        [SerializeField]
-        private GameObject tileContents;
+        [SerializeField] private GameObject tileContents;
+        [SerializeField] private GameObject miniMapTiles;
 
         public bool hasPlayerEntered;
 
@@ -14,6 +14,7 @@ namespace KaChow.AByteSizedMuseum
             if (other.CompareTag("Player"))
             {
                 tileContents.SetActive(true);
+                miniMapTiles.SetActive(true);
                 hasPlayerEntered = true;
             }
         }

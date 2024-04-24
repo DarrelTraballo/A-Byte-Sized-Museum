@@ -12,9 +12,11 @@ namespace KaChow.AByteSizedMuseum
         [SerializeField] private PuzzleSetData puzzles;
         [SerializeField] private Transform puzzleHolder;
         private GameObject puzzleInterpreterAndCam;
+        [SerializeField] private GameObject miniMapTiles;
 
         [HideInInspector] public bool isPuzzleExhibit = false;
         public GameObject pathwayGuide;
+        public GameObject sign;
 
         [Space]
         public GameObject topBlock;
@@ -33,22 +35,30 @@ namespace KaChow.AByteSizedMuseum
         private static bool hasEnteredAPuzzleExhibit = false;
         [SerializeField] private GameEvent onFirstPuzzleExhibitEnter;
 
+        [Space]
+        [SerializeField] private Color baseColor;
+        [SerializeField] private Color puzzleColor;
+        [SerializeField] private Color solvedColor;
+
         private void Start()
         {
             hasEnteredAPuzzleExhibit = false;
+            miniMapTiles.SetActive(false);
         }
 
         public void InitializePuzzleExhibit()
         {
             puzzleInterpreterAndCam = puzzleHolder.GetChild(0).gameObject;
             puzzleInterpreterAndCam.SetActive(false);
+            // sign.SetActive(true);
         }
 
         public void TogglePuzzleExhibit()
         {
             if (isPuzzleExhibit)
             {
-                SetPathColor(Color.red);
+                SetPathColor(puzzleColor);
+                sign.SetActive(true);
 
                 // puzzleInterpreterAndCam.SetActive(true);
 
@@ -66,8 +76,7 @@ namespace KaChow.AByteSizedMuseum
             for (int i = 0; i < pathwayGuide.transform.childCount; i++)
             {
                 GameObject pathwayObject = pathwayGuide.transform.GetChild(i).gameObject;
-                Renderer renderer = pathwayObject.GetComponent<Renderer>();
-                if (renderer != null)
+                if (pathwayObject.TryGetComponent<Renderer>(out var renderer))
                 {
                     renderer.material.color = color;
                 }
@@ -92,8 +101,10 @@ namespace KaChow.AByteSizedMuseum
 
             Debug.LogWarning("Set Path Color");
             var exhibit = exhibitCell.GetComponentInChildren<Exhibit>();
+            Debug.Log("Here");
+            sign.GetComponent<MeshRenderer>().enabled = false;
 
-            exhibit.SetPathColor(Color.green);
+            exhibit.SetPathColor(solvedColor);
         }
     }
 }

@@ -28,6 +28,8 @@ namespace KaChow.AByteSizedMuseum
 
         int index;
 
+        public bool isDialogFinished = false;
+
         private Dialogue previousDialogue;
         [SerializeField] private DialogueSO[] dialogues;
 
@@ -70,7 +72,6 @@ namespace KaChow.AByteSizedMuseum
 
             if (inputManager.PlayerInteractedThisFrame())
             {
-
                 if (sentences.Count != 0)
                 {
                     if (button != null)
@@ -88,6 +89,7 @@ namespace KaChow.AByteSizedMuseum
 
         public void RunDialog(DialogueSO dialogueSO)
         {
+            isDialogFinished = false;
             // int selectedIndex = Random.Range(0, dialogueSO.Length);
             // dialogueSO.LoadDialogueFromFile();
             DialogueContainer.SetActive(true);
@@ -108,14 +110,14 @@ namespace KaChow.AByteSizedMuseum
 
         public void StartDialogue(Dialogue dialogue)
         {
+            gameManager.SetGameState(GameState.RunDialog);
             DialogueContainer.SetActive(true);
-            sentences_count = sentences.Count + 1;
+            // sentences_count = sentences.Count + 1;
 
             animator.SetBool("IsOpen", false);
             animator.SetBool("IsOpen", true);
 
             nameText.text = dialogue.name;
-            //Debug.Log("Starting conversation with " + dialogue.name);
 
             sentences.Clear();
 
@@ -132,7 +134,6 @@ namespace KaChow.AByteSizedMuseum
         {
             AudioManager.Instance.sfxSource.Stop();
             AudioManager.Instance.PlaySFX("HelperBot");
-            gameManager.SetGameState(GameState.RunDialog);
 
             if (sentences.Count == 0)
             {
@@ -147,15 +148,17 @@ namespace KaChow.AByteSizedMuseum
         IEnumerator TypeSentence(String sentence)
         {
             dialogueText.text = "";
+            yield return new WaitForSeconds(0.001f);
             foreach (char letter in sentence.ToCharArray())
             {
                 dialogueText.text += letter;
-                yield return null;
+                yield return new WaitForSeconds(0.001f);
             }
 
         }
         void EndDialogue()
         {
+            isDialogFinished = true;
             AudioManager.Instance.sfxSource.Stop();
             // firstrun = false;
             ResetData();
@@ -163,9 +166,6 @@ namespace KaChow.AByteSizedMuseum
             //DialogueContainer.SetActive(false);
 
             gameManager.SetGameState(GameState.Playing);
-            Debug.Log("End of conversation");
-
-
         }
         public void ResetData()
         {
