@@ -4,36 +4,53 @@ using UnityEngine.UI;
 
 public class howtoplay : MonoBehaviour
 {
-    public Sprite[] backgrounds;
+    public GameObject[] Panel;
+    public GameObject Disablebutton;
+    public GameObject imagecanvas;
+    public GameObject Cutscene;
     public string[] text;
-    public Image backgroundImage;
-
-    public TMPro.TextMeshProUGUI textcontent;
 
     public int index;
 
     void Start()
     {
-        // index = PlayerPrefs.GetInt("index", 0);
         index =0;
+ 
         SetActiveBackgroundandText();
+    }
+    void Update()
+    {
+       if (index == 0)
+        {
+            Disablebutton.SetActive(false);
+        }
+        else
+        {
+            Disablebutton.SetActive(true);
+        }
     }
 
     public void Next()
     {
+        Panel[index].SetActive(false);
         index++;
-        if (index >= backgrounds.Length)
+        if (index >= Panel.Length)
         {
-             index = 0;
+             Cutscene.SetActive(true);
+             imagecanvas.SetActive(false);
         }
-        SetActiveBackgroundandText();
+        else{
+            SetActiveBackgroundandText();
+        }
+        
     }
 
     public void Previous()
     {
+        Panel[index].SetActive(false);
         index--;
         if (index < 0)
-            index = backgrounds.Length - 1;
+            index = Panel.Length - 1;
         SetActiveBackgroundandText();
     }
     public void setIndex()
@@ -43,8 +60,10 @@ public class howtoplay : MonoBehaviour
 
     void SetActiveBackgroundandText()
     {
-        backgroundImage.sprite = backgrounds[index];
-        textcontent.SetText(text[index]);
+        Panel[index].SetActive(true);
+        //textcontent.SetText(text[index]);
+        
+        // This line saves the player preference
         // PlayerPrefs.SetInt("index", index);
         // PlayerPrefs.Save();
     }
