@@ -6,9 +6,6 @@ namespace KaChow.AByteSizedMuseum
 {
     public class Exhibit : MonoBehaviour
     {
-        [SerializeField] private ExhibitDoor[] doors;
-        [SerializeField] private bool isExhibitLocked;
-
         [SerializeField] private PuzzleSetData puzzles;
         [SerializeField] private Transform puzzleHolder;
         private GameObject puzzleInterpreterAndCam;

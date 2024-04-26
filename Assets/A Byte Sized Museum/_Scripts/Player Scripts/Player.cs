@@ -54,8 +54,8 @@ namespace KaChow.AByteSizedMuseum
 
             float playerIconScale = sceneName switch
             {
-                "Tutorial" => 2f,
-                "A Byte Sized Museum" => 10f,
+                "Tutorial" => 3.5f,
+                "A Byte Sized Museum" => 7.5f,
                 _ => 1f,
             };
 
