@@ -8,12 +8,12 @@ namespace KaChow.AByteSizedMuseum
     {
         [SerializeField] private PuzzleSetData puzzles;
         [SerializeField] private Transform puzzleHolder;
-        private GameObject puzzleInterpreterAndCam;
         [SerializeField] private GameObject miniMapTiles;
 
-        [HideInInspector] public bool isPuzzleExhibit = false;
+        public bool isPuzzleExhibit = false;
         public GameObject pathwayGuide;
         public GameObject sign;
+        private MeshRenderer signMesh;
 
         [Space]
         public GameObject topBlock;
@@ -28,7 +28,7 @@ namespace KaChow.AByteSizedMuseum
         public GameObject leftBlock;
         public GameObject leftPath;
 
-        private bool isPuzzleSolved;
+        private bool isPuzzleSolved = false;
         private static bool hasEnteredAPuzzleExhibit = false;
         [SerializeField] private GameEvent onFirstPuzzleExhibitEnter;
 
@@ -36,6 +36,23 @@ namespace KaChow.AByteSizedMuseum
         [SerializeField] private Color baseColor;
         [SerializeField] private Color puzzleColor;
         [SerializeField] private Color solvedColor;
+
+        private void Awake()
+        {
+            sign.SetActive(isPuzzleExhibit);
+            signMesh = sign.GetComponent<MeshRenderer>();
+            // signMesh.GetComponent<MeshRenderer>().enabled = false;
+        }
+
+        private void Update()
+        {
+            if (isPuzzleSolved && sign.activeSelf)
+            {
+                Debug.Log("This should run");
+                sign.SetActive(false);
+                return;
+            }
+        }
 
         private void Start()
         {
@@ -45,8 +62,8 @@ namespace KaChow.AByteSizedMuseum
 
         public void InitializePuzzleExhibit()
         {
-            puzzleInterpreterAndCam = puzzleHolder.GetChild(0).gameObject;
-            puzzleInterpreterAndCam.SetActive(false);
+            // puzzleInterpreterAndCam = puzzleHolder.GetChild(0).gameObject;
+            // puzzleInterpreterAndCam.SetActive(false);
             // sign.SetActive(true);
         }
 
@@ -56,6 +73,8 @@ namespace KaChow.AByteSizedMuseum
             {
                 SetPathColor(puzzleColor);
                 sign.SetActive(true);
+                // signMesh.GetComponent<MeshRenderer>().enabled = true;
+
 
                 // puzzleInterpreterAndCam.SetActive(true);
 
@@ -96,12 +115,32 @@ namespace KaChow.AByteSizedMuseum
         {
             if (!isPuzzleExhibit || data is not Cell exhibitCell) return;
 
+            isPuzzleSolved = true;
+
             Debug.LogWarning("Set Path Color");
             var exhibit = exhibitCell.GetComponentInChildren<Exhibit>();
-            Debug.Log("Here");
-            sign.GetComponent<MeshRenderer>().enabled = false;
+            ToggleSign();
+            // signMesh.GetComponent<MeshRenderer>().enabled = false;
 
             exhibit.SetPathColor(solvedColor);
+        }
+
+        public void SetExhibitSolved()
+        {
+            isPuzzleSolved = true;
+
+            ToggleSign();
+            SetPathColor(solvedColor);
+        }
+
+        private void ToggleSign()
+        {
+            if (isPuzzleSolved)
+            {
+                Debug.Log("This should run");
+                // signMesh.GetComponent<MeshRenderer>().enabled = false;
+                sign.SetActive(false);
+            }
         }
     }
 }

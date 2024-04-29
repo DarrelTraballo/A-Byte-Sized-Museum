@@ -62,7 +62,7 @@ namespace KaChow.AByteSizedMuseum
 
         void Update()
         {
-            if (gameManager.currentState == GameState.Playing && Input.GetKeyDown(KeyCode.P))
+            if (gameManager.currentState == GameState.Playing && Input.GetKeyDown(KeyCode.L))
             {
                 if (previousDialogue == null) return;
                 StartDialogue(previousDialogue);

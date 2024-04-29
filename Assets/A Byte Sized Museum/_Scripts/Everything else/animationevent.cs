@@ -8,6 +8,7 @@ public class AnimationController : MonoBehaviour
     private Image imageComponent; // Use Image instead of Renderer
 
     public GameObject Gameovertext;
+    public GameObject Gameovertext2;
     private GameManager gamemanager;
     public GameObject Exit;
     public GameObject Tryagain;
@@ -53,6 +54,7 @@ public class AnimationController : MonoBehaviour
 
         SetBackgroundColor();
         Gameovertext.SetActive(true);
+        Gameovertext2.SetActive(true);
         Exit.SetActive(true);
         Tryagain.SetActive(true);
 

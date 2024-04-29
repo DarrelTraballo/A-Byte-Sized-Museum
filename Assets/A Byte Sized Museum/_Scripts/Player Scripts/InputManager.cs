@@ -100,6 +100,11 @@ namespace KaChow.AByteSizedMuseum
             return playerControls.Player.Escape.triggered;
         }
 
+        public bool IsDebugPausedPressed()
+        {
+            return playerControls.Cheats.DebugPause.triggered;
+        }
+
         /// <summary>
         /// Checks if debug mode was toggled in the current frame.
         /// </summary>
@@ -143,6 +148,11 @@ namespace KaChow.AByteSizedMuseum
         public bool IsShowDebugOverlayPressed()
         {
             return playerControls.Cheats.ShowDebugOverlay.triggered;
+        }
+
+        public bool IsGoFastPressed()
+        {
+            return playerControls.Cheats.GoFast.triggered;
         }
 
         public bool IsToggleUIPressed()

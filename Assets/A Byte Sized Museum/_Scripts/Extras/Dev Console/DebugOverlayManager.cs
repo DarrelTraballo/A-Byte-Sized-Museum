@@ -24,6 +24,8 @@ namespace KaChow.AByteSizedMuseum
         [SerializeField, Range(5, 60)] private int secondsToAdd = 30;
         [SerializeField, Range(5, 60)] private int secondsToRemove = 60;
 
+        private bool isDebugPaused = false;
+
         // [Header("References to Scripts")]
         private Timer timer;
 
@@ -87,6 +89,14 @@ namespace KaChow.AByteSizedMuseum
                 gameManager.ToggleUI();
                 debugConsoleCanvas.enabled = !debugConsoleCanvas.enabled;
             }
+
+            if (inputManager.IsDebugPausedPressed() &&
+                (gameManager.currentState == GameState.Playing ||
+                gameManager.currentState == GameState.DebugPaused))
+                HandleDebugPause();
+
+            if (inputManager.IsGoFastPressed())
+                gameManager.GoFast();
         }
 
         private void ShowDebugOverlay()
@@ -115,6 +125,14 @@ namespace KaChow.AByteSizedMuseum
                 TMP_Text newCheat = Instantiate(cheatItem, cheatsPanel.transform);
                 newCheat.text = action;
             }
+        }
+
+        private void HandleDebugPause()
+        {
+            GameState state = isDebugPaused ? GameState.Playing : GameState.DebugPaused;
+            gameManager.SetGameState(state);
+
+            isDebugPaused = !isDebugPaused;
         }
     }
 }

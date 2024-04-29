@@ -50,8 +50,11 @@ namespace KaChow.AByteSizedMuseum
                     AudioManager.Instance.PlaySFX("Completed");
 
                     var cell = GetComponentInParent<Cell>();
-
                     onActivatorActivated.Raise(this, cell);
+
+                    var exhibit = GetComponentInParent<Exhibit>();
+                    exhibit.SetExhibitSolved();
+
                     IsSolved = true;
                 }
             }

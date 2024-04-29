@@ -9,6 +9,7 @@ namespace KaChow.AByteSizedMuseum
     {
         GenerateMuseum,
         Paused,
+        DebugPaused,
         Playing,
         SolvePuzzle,
         RunDialog,
@@ -30,6 +31,7 @@ namespace KaChow.AByteSizedMuseum
         private Dialogmanager_Maingame dialogueManager;
 
         public Player Player { get; private set; }
+        private bool isFast = false;
 
         private CharacterController characterController;
 
@@ -38,6 +40,7 @@ namespace KaChow.AByteSizedMuseum
         [SerializeField] private GameObject miniMapUI;
         [SerializeField] private GameObject interpreterUI;
         [SerializeField] private GameObject pauseUI;
+        [SerializeField] private GameObject debugPauseUI;
         [SerializeField] private GameObject toolTipUI;
         [SerializeField] private GameObject gameOverUI;
         [SerializeField] private GameObject playerWinUI; // TODO: Rename
@@ -225,6 +228,14 @@ namespace KaChow.AByteSizedMuseum
                     Time.timeScale = 0;
                     break;
 
+                case GameState.DebugPaused:
+                    debugPauseUI.SetActive(true);
+                    crosshairUI.SetActive(true);
+                    miniMapUI.SetActive(true);
+                    SetCursorState(CursorLockMode.Confined);
+                    Time.timeScale = 0;
+                    break;
+
                 case GameState.SolvePuzzle:
                     interpreterUICanvas.enabled = true;
                     SetCursorState(debugOverlayManager.CheatsEnabled ? CursorLockMode.None : CursorLockMode.Confined);
@@ -263,6 +274,7 @@ namespace KaChow.AByteSizedMuseum
             playerWinUI.SetActive(false);
             interpreterUICanvas.enabled = false;
             pauseUI.SetActive(false);
+            debugPauseUI.SetActive(false);
             DisableToolTipText();
         }
 
@@ -315,6 +327,13 @@ namespace KaChow.AByteSizedMuseum
                 pauseUI.SetActive(isUIActive);
                 DisableToolTipText();
             }
+        }
+
+        public void GoFast()
+        {
+            isFast = !isFast;
+
+            Player.walkingSpeed = isFast ? Player.walkingSpeed * 2f : Player.walkingSpeed / 2f;
         }
 
         public void Quit()

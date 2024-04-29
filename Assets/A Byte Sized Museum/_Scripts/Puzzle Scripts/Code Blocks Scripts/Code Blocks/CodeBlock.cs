@@ -53,8 +53,6 @@ namespace KaChow.AByteSizedMuseum
                 heldCodeBlock = this;
             }
 
-            Debug.Log(heldCodeBlock.image, image.gameObject);
-
             heldCodeBlock.parentAfterDrag = transform.parent;
             heldCodeBlock.parentBeforeDrag = transform.parent;
             heldCodeBlock.transform.SetParent(GameObject.Find("ContainerCenter").transform);
@@ -100,22 +98,18 @@ namespace KaChow.AByteSizedMuseum
 
             if (dropTarget != null && dropTarget.TryGetComponent(out InterpreterLine targetInterpreterLine))
             {
-                // Debug.Log($"attempted to drop {heldCodeBlock.name} on {targetInterpreterLine.name}", targetInterpreterLine.gameObject);
                 if (targetInterpreterLine.transform.childCount == 0)
                 {
-                    // Debug.Log($"no children inside {targetInterpreterLine.name}");
                     heldCodeBlock.transform.SetParent(targetInterpreterLine.transform);
                     heldCodeBlock.parentAfterDrag = targetInterpreterLine.transform;
                 }
                 else
                 {
-                    // heldCodeBlock.transform.SetParent(heldCodeBlock.transform.parent);
                     Destroy(heldCodeBlock.gameObject);
                 }
             }
             else
             {
-                Debug.Log("attempted to drop on neither codeblock or interpreterline. destroying held codeblock");
                 Destroy(heldCodeBlock.gameObject);
             }
 

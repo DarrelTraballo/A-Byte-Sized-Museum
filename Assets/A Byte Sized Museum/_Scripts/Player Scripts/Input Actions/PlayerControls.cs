@@ -294,6 +294,24 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DebugPause"",
+                    ""type"": ""Button"",
+                    ""id"": ""e99954bc-aa68-43e1-92cb-3f43525a39be"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""GoFast"",
+                    ""type"": ""Button"",
+                    ""id"": ""caf83c31-ff31-4f18-a73f-33293c2a02e9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -505,6 +523,83 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""ToggleUI"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""One Modifier"",
+                    ""id"": ""567782c2-db28-4e72-b93c-d4456b3ef23f"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DebugPause"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""408c04d2-dbfd-4d96-a812-0b7d8ceaf7b7"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DebugPause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""de1fedc6-0a2d-4e72-8360-f7b053404897"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DebugPause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Two Modifiers"",
+                    ""id"": ""79047749-4312-4e28-a404-caddf72b7d4f"",
+                    ""path"": ""TwoModifiers"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GoFast"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier1"",
+                    ""id"": ""7e692562-283c-4618-9019-7395b363a53d"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GoFast"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""modifier2"",
+                    ""id"": ""425b67fb-e7dc-4bf2-93d3-2ad382304320"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GoFast"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""0160c639-d5e1-4368-9352-f19b9a24d9b5"",
+                    ""path"": ""<Keyboard>/n"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GoFast"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -528,6 +623,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Cheats_AddTime = m_Cheats.FindAction("AddTime", throwIfNotFound: true);
         m_Cheats_ShowDebugOverlay = m_Cheats.FindAction("ShowDebugOverlay", throwIfNotFound: true);
         m_Cheats_ToggleUI = m_Cheats.FindAction("ToggleUI", throwIfNotFound: true);
+        m_Cheats_DebugPause = m_Cheats.FindAction("DebugPause", throwIfNotFound: true);
+        m_Cheats_GoFast = m_Cheats.FindAction("GoFast", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -689,6 +786,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Cheats_AddTime;
     private readonly InputAction m_Cheats_ShowDebugOverlay;
     private readonly InputAction m_Cheats_ToggleUI;
+    private readonly InputAction m_Cheats_DebugPause;
+    private readonly InputAction m_Cheats_GoFast;
     public struct CheatsActions
     {
         private @PlayerControls m_Wrapper;
@@ -699,6 +798,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @AddTime => m_Wrapper.m_Cheats_AddTime;
         public InputAction @ShowDebugOverlay => m_Wrapper.m_Cheats_ShowDebugOverlay;
         public InputAction @ToggleUI => m_Wrapper.m_Cheats_ToggleUI;
+        public InputAction @DebugPause => m_Wrapper.m_Cheats_DebugPause;
+        public InputAction @GoFast => m_Wrapper.m_Cheats_GoFast;
         public InputActionMap Get() { return m_Wrapper.m_Cheats; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -726,6 +827,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @ToggleUI.started += instance.OnToggleUI;
             @ToggleUI.performed += instance.OnToggleUI;
             @ToggleUI.canceled += instance.OnToggleUI;
+            @DebugPause.started += instance.OnDebugPause;
+            @DebugPause.performed += instance.OnDebugPause;
+            @DebugPause.canceled += instance.OnDebugPause;
+            @GoFast.started += instance.OnGoFast;
+            @GoFast.performed += instance.OnGoFast;
+            @GoFast.canceled += instance.OnGoFast;
         }
 
         private void UnregisterCallbacks(ICheatsActions instance)
@@ -748,6 +855,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @ToggleUI.started -= instance.OnToggleUI;
             @ToggleUI.performed -= instance.OnToggleUI;
             @ToggleUI.canceled -= instance.OnToggleUI;
+            @DebugPause.started -= instance.OnDebugPause;
+            @DebugPause.performed -= instance.OnDebugPause;
+            @DebugPause.canceled -= instance.OnDebugPause;
+            @GoFast.started -= instance.OnGoFast;
+            @GoFast.performed -= instance.OnGoFast;
+            @GoFast.canceled -= instance.OnGoFast;
         }
 
         public void RemoveCallbacks(ICheatsActions instance)
@@ -783,5 +896,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnAddTime(InputAction.CallbackContext context);
         void OnShowDebugOverlay(InputAction.CallbackContext context);
         void OnToggleUI(InputAction.CallbackContext context);
+        void OnDebugPause(InputAction.CallbackContext context);
+        void OnGoFast(InputAction.CallbackContext context);
     }
 }
